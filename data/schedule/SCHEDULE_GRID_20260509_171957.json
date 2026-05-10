@@ -1,0 +1,4872 @@
+[
+  {
+    "sport": {
+      "id": "Taekwondo",
+      "english_name": "Taekwondo",
+      "arabic_name": "التايكوندو",
+      "pictogram": "/files/taekwando.svg"
+    },
+    "competitions": [
+      {
+        "id": "COM-2026-0166",
+        "full_title": "Men’s -58 kg - رجال -58 كجم",
+        "title": "Men’s -58 kg",
+        "title_ar": "رجال -58 كجم",
+        "date": "2026-05-12",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0167",
+        "full_title": "Men’s -80 kg - رجال -80 كجم",
+        "title": "Men’s -80 kg",
+        "title_ar": "رجال -80 كجم",
+        "date": "2026-05-12",
+        "time": "10:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0168",
+        "full_title": "Women’s -49 kg - سيدات -49 كجم",
+        "title": "Women’s -49 kg",
+        "title_ar": "سيدات -49 كجم",
+        "date": "2026-05-12",
+        "time": "11:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0169",
+        "full_title": "Women’s -67 kg - سيدات -67 كجم",
+        "title": "Women’s -67 kg",
+        "title_ar": "سيدات -67 كجم",
+        "date": "2026-05-12",
+        "time": "11:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0170",
+        "full_title": "Men’s -58 kg - رجال -58 كجم",
+        "title": "Men’s -58 kg",
+        "title_ar": "رجال -58 كجم",
+        "date": "2026-05-12",
+        "time": "13:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0171",
+        "full_title": "Men’s -80 kg - رجال -80 كجم",
+        "title": "Men’s -80 kg",
+        "title_ar": "رجال -80 كجم",
+        "date": "2026-05-12",
+        "time": "13:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0172",
+        "full_title": "Women’s -49 kg - سيدات -49 كجم",
+        "title": "Women’s -49 kg",
+        "title_ar": "سيدات -49 كجم",
+        "date": "2026-05-12",
+        "time": "14:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0173",
+        "full_title": "Women’s -67 kg - سيدات -67 كجم",
+        "title": "Women’s -67 kg",
+        "title_ar": "سيدات -67 كجم",
+        "date": "2026-05-12",
+        "time": "14:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0174",
+        "full_title": "Men’s -58 kg - رجال -58 كجم",
+        "title": "Men’s -58 kg",
+        "title_ar": "رجال -58 كجم",
+        "date": "2026-05-12",
+        "time": "15:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0175",
+        "full_title": "Men’s -80 kg - رجال -80 كجم",
+        "title": "Men’s -80 kg",
+        "title_ar": "رجال -80 كجم",
+        "date": "2026-05-12",
+        "time": "15:30:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0176",
+        "full_title": "Women’s -49 kg - سيدات -49 كجم",
+        "title": "Women’s -49 kg",
+        "title_ar": "سيدات -49 كجم",
+        "date": "2026-05-12",
+        "time": "16:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0177",
+        "full_title": "Women’s -67 kg - سيدات -67 كجم",
+        "title": "Women’s -67 kg",
+        "title_ar": "سيدات -67 كجم",
+        "date": "2026-05-12",
+        "time": "16:30:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0178",
+        "full_title": "Men’s -68 kg - رجال -68 كجم",
+        "title": "Men’s -68 kg",
+        "title_ar": "رجال -68 كجم",
+        "date": "2026-05-13",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0179",
+        "full_title": "Men’s +80 kg - رجال +80 كجم",
+        "title": "Men’s +80 kg",
+        "title_ar": "رجال +80 كجم",
+        "date": "2026-05-13",
+        "time": "10:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0180",
+        "full_title": "Women’s -57 kg - سيدات -57 كجم",
+        "title": "Women’s -57 kg",
+        "title_ar": "سيدات -57 كجم",
+        "date": "2026-05-13",
+        "time": "11:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0181",
+        "full_title": "Women’s +67 kg - سيدات +67 كجم",
+        "title": "Women’s +67 kg",
+        "title_ar": "سيدات +67 كجم",
+        "date": "2026-05-13",
+        "time": "11:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0182",
+        "full_title": "Men’s -68 kg - رجال -68 كجم",
+        "title": "Men’s -68 kg",
+        "title_ar": "رجال -68 كجم",
+        "date": "2026-05-13",
+        "time": "13:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0183",
+        "full_title": "Men’s +80 kg - رجال +80 كجم",
+        "title": "Men’s +80 kg",
+        "title_ar": "رجال +80 كجم",
+        "date": "2026-05-13",
+        "time": "13:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0184",
+        "full_title": "Women’s -57 kg - سيدات -57 كجم",
+        "title": "Women’s -57 kg",
+        "title_ar": "سيدات -57 كجم",
+        "date": "2026-05-13",
+        "time": "14:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0185",
+        "full_title": "Women’s +67 kg - سيدات +67 كجم",
+        "title": "Women’s +67 kg",
+        "title_ar": "سيدات +67 كجم",
+        "date": "2026-05-13",
+        "time": "14:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0186",
+        "full_title": "Men’s -68 kg - رجال -68 كجم",
+        "title": "Men’s -68 kg",
+        "title_ar": "رجال -68 كجم",
+        "date": "2026-05-13",
+        "time": "15:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0187",
+        "full_title": "Men’s +80 kg - رجال +80 كجم",
+        "title": "Men’s +80 kg",
+        "title_ar": "رجال +80 كجم",
+        "date": "2026-05-13",
+        "time": "15:30:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0188",
+        "full_title": "Women’s -57 kg - سيدات -57 كجم",
+        "title": "Women’s -57 kg",
+        "title_ar": "سيدات -57 كجم",
+        "date": "2026-05-13",
+        "time": "16:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0189",
+        "full_title": "Women’s +67 kg - سيدات +67 كجم",
+        "title": "Women’s +67 kg",
+        "title_ar": "سيدات +67 كجم",
+        "date": "2026-05-13",
+        "time": "16:30:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      }
+    ]
+  },
+  {
+    "sport": {
+      "id": "Billiards",
+      "english_name": "Billiards",
+      "arabic_name": "البلياردو",
+      "pictogram": "/files/billiards and snooker.svg"
+    },
+    "competitions": [
+      {
+        "id": "COM-2026-0190",
+        "full_title": "Men’s 10-Ball Singles - 10 كرات فردي رجال",
+        "title": "Men’s 10-Ball Singles",
+        "title_ar": "10 كرات فردي رجال",
+        "date": "2026-05-12",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0191",
+        "full_title": "Men’s 10-Ball Singles - 10 كرات فردي رجال",
+        "title": "Men’s 10-Ball Singles",
+        "title_ar": "10 كرات فردي رجال",
+        "date": "2026-05-12",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0192",
+        "full_title": "Men’s 10-Ball Singles - 10 كرات فردي رجال",
+        "title": "Men’s 10-Ball Singles",
+        "title_ar": "10 كرات فردي رجال",
+        "date": "2026-05-12",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0193",
+        "full_title": "Men’s 10-Ball Singles - 10 كرات فردي رجال",
+        "title": "Men’s 10-Ball Singles",
+        "title_ar": "10 كرات فردي رجال",
+        "date": "2026-05-12",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0194",
+        "full_title": "Men’s 10-Ball Singles - 10 كرات فردي رجال",
+        "title": "Men’s 10-Ball Singles",
+        "title_ar": "10 كرات فردي رجال",
+        "date": "2026-05-12",
+        "time": "11:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0195",
+        "full_title": "Men’s 10-Ball Singles - 10 كرات فردي رجال",
+        "title": "Men’s 10-Ball Singles",
+        "title_ar": "10 كرات فردي رجال",
+        "date": "2026-05-12",
+        "time": "11:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0196",
+        "full_title": "Men’s 10-Ball Singles - 10 كرات فردي رجال",
+        "title": "Men’s 10-Ball Singles",
+        "title_ar": "10 كرات فردي رجال",
+        "date": "2026-05-12",
+        "time": "11:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0197",
+        "full_title": "Men’s 10-Ball Singles - 10 كرات فردي رجال",
+        "title": "Men’s 10-Ball Singles",
+        "title_ar": "10 كرات فردي رجال",
+        "date": "2026-05-12",
+        "time": "11:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0198",
+        "full_title": "Men’s 10-Ball Singles - 10 كرات فردي رجال",
+        "title": "Men’s 10-Ball Singles",
+        "title_ar": "10 كرات فردي رجال",
+        "date": "2026-05-12",
+        "time": "13:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0199",
+        "full_title": "Men’s 10-Ball Singles - 10 كرات فردي رجال",
+        "title": "Men’s 10-Ball Singles",
+        "title_ar": "10 كرات فردي رجال",
+        "date": "2026-05-12",
+        "time": "13:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0200",
+        "full_title": "Men’s 10-Ball Singles - 10 كرات فردي رجال",
+        "title": "Men’s 10-Ball Singles",
+        "title_ar": "10 كرات فردي رجال",
+        "date": "2026-05-12",
+        "time": "13:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0201",
+        "full_title": "Men’s 10-Ball Singles - 10 كرات فردي رجال",
+        "title": "Men’s 10-Ball Singles",
+        "title_ar": "10 كرات فردي رجال",
+        "date": "2026-05-12",
+        "time": "13:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0202",
+        "full_title": "Men’s 10-Ball Singles - 10 كرات فردي رجال",
+        "title": "Men’s 10-Ball Singles",
+        "title_ar": "10 كرات فردي رجال",
+        "date": "2026-05-12",
+        "time": "14:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0203",
+        "full_title": "Men’s 10-Ball Singles - 10 كرات فردي رجال",
+        "title": "Men’s 10-Ball Singles",
+        "title_ar": "10 كرات فردي رجال",
+        "date": "2026-05-12",
+        "time": "14:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0204",
+        "full_title": "Men’s 10-Ball Singles - 10 كرات فردي رجال",
+        "title": "Men’s 10-Ball Singles",
+        "title_ar": "10 كرات فردي رجال",
+        "date": "2026-05-12",
+        "time": "14:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0205",
+        "full_title": "Men’s 10-Ball Singles - 10 كرات فردي رجال",
+        "title": "Men’s 10-Ball Singles",
+        "title_ar": "10 كرات فردي رجال",
+        "date": "2026-05-12",
+        "time": "14:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0206",
+        "full_title": "Men’s 10-Ball Singles - 10 كرات فردي رجال",
+        "title": "Men’s 10-Ball Singles",
+        "title_ar": "10 كرات فردي رجال",
+        "date": "2026-05-12",
+        "time": "16:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0207",
+        "full_title": "Men’s 10-Ball Singles - 10 كرات فردي رجال",
+        "title": "Men’s 10-Ball Singles",
+        "title_ar": "10 كرات فردي رجال",
+        "date": "2026-05-12",
+        "time": "16:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0208",
+        "full_title": "Men’s 10-Ball Singles - 10 كرات فردي رجال",
+        "title": "Men’s 10-Ball Singles",
+        "title_ar": "10 كرات فردي رجال",
+        "date": "2026-05-13",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0209",
+        "full_title": "Men’s 10-Ball Singles - 10 كرات فردي رجال",
+        "title": "Men’s 10-Ball Singles",
+        "title_ar": "10 كرات فردي رجال",
+        "date": "2026-05-13",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0210",
+        "full_title": "Men’s 10-Ball Singles - 10 كرات فردي رجال",
+        "title": "Men’s 10-Ball Singles",
+        "title_ar": "10 كرات فردي رجال",
+        "date": "2026-05-13",
+        "time": "12:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0211",
+        "full_title": "Men’s 10-Ball Doubles - 10 كرات زوجي رجال",
+        "title": "Men’s 10-Ball Doubles",
+        "title_ar": "10 كرات زوجي رجال",
+        "date": "2026-05-13",
+        "time": "15:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0212",
+        "full_title": "Men’s 10-Ball Doubles - 10 كرات زوجي رجال",
+        "title": "Men’s 10-Ball Doubles",
+        "title_ar": "10 كرات زوجي رجال",
+        "date": "2026-05-13",
+        "time": "15:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0213",
+        "full_title": "Men’s 10-Ball Doubles - 10 كرات زوجي رجال",
+        "title": "Men’s 10-Ball Doubles",
+        "title_ar": "10 كرات زوجي رجال",
+        "date": "2026-05-13",
+        "time": "17:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0214",
+        "full_title": "Men’s 10-Ball Doubles - 10 كرات زوجي رجال",
+        "title": "Men’s 10-Ball Doubles",
+        "title_ar": "10 كرات زوجي رجال",
+        "date": "2026-05-13",
+        "time": "17:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0215",
+        "full_title": "Men’s 10-Ball Doubles - 10 كرات زوجي رجال",
+        "title": "Men’s 10-Ball Doubles",
+        "title_ar": "10 كرات زوجي رجال",
+        "date": "2026-05-13",
+        "time": "19:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0216",
+        "full_title": "Men’s 10-Ball Doubles - 10 كرات زوجي رجال",
+        "title": "Men’s 10-Ball Doubles",
+        "title_ar": "10 كرات زوجي رجال",
+        "date": "2026-05-13",
+        "time": "19:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0217",
+        "full_title": "Men’s 10-Ball Doubles - 10 كرات زوجي رجال",
+        "title": "Men’s 10-Ball Doubles",
+        "title_ar": "10 كرات زوجي رجال",
+        "date": "2026-05-14",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0218",
+        "full_title": "Men’s 10-Ball Doubles - 10 كرات زوجي رجال",
+        "title": "Men’s 10-Ball Doubles",
+        "title_ar": "10 كرات زوجي رجال",
+        "date": "2026-05-14",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0219",
+        "full_title": "Men’s 10-Ball Doubles - 10 كرات زوجي رجال",
+        "title": "Men’s 10-Ball Doubles",
+        "title_ar": "10 كرات زوجي رجال",
+        "date": "2026-05-14",
+        "time": "13:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0220",
+        "full_title": "Men’s 9-Ball Singles - 9 كرات فردي رجال",
+        "title": "Men’s 9-Ball Singles",
+        "title_ar": "9 كرات فردي رجال",
+        "date": "2026-05-14",
+        "time": "15:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0221",
+        "full_title": "Men’s 9-Ball Singles - 9 كرات فردي رجال",
+        "title": "Men’s 9-Ball Singles",
+        "title_ar": "9 كرات فردي رجال",
+        "date": "2026-05-14",
+        "time": "15:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0222",
+        "full_title": "Men’s 9-Ball Singles - 9 كرات فردي رجال",
+        "title": "Men’s 9-Ball Singles",
+        "title_ar": "9 كرات فردي رجال",
+        "date": "2026-05-14",
+        "time": "15:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0223",
+        "full_title": "Men’s 9-Ball Singles - 9 كرات فردي رجال",
+        "title": "Men’s 9-Ball Singles",
+        "title_ar": "9 كرات فردي رجال",
+        "date": "2026-05-14",
+        "time": "15:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0224",
+        "full_title": "Men’s 9-Ball Singles - 9 كرات فردي رجال",
+        "title": "Men’s 9-Ball Singles",
+        "title_ar": "9 كرات فردي رجال",
+        "date": "2026-05-14",
+        "time": "16:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0225",
+        "full_title": "Men’s 9-Ball Singles - 9 كرات فردي رجال",
+        "title": "Men’s 9-Ball Singles",
+        "title_ar": "9 كرات فردي رجال",
+        "date": "2026-05-14",
+        "time": "16:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0226",
+        "full_title": "Men’s 9-Ball Singles - 9 كرات فردي رجال",
+        "title": "Men’s 9-Ball Singles",
+        "title_ar": "9 كرات فردي رجال",
+        "date": "2026-05-14",
+        "time": "16:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0227",
+        "full_title": "Men’s 9-Ball Singles - 9 كرات فردي رجال",
+        "title": "Men’s 9-Ball Singles",
+        "title_ar": "9 كرات فردي رجال",
+        "date": "2026-05-14",
+        "time": "16:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0228",
+        "full_title": "Men’s 9-Ball Singles - 9 كرات فردي رجال",
+        "title": "Men’s 9-Ball Singles",
+        "title_ar": "9 كرات فردي رجال",
+        "date": "2026-05-14",
+        "time": "18:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0229",
+        "full_title": "Men’s 9-Ball Singles - 9 كرات فردي رجال",
+        "title": "Men’s 9-Ball Singles",
+        "title_ar": "9 كرات فردي رجال",
+        "date": "2026-05-14",
+        "time": "18:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0230",
+        "full_title": "Men’s 9-Ball Singles - 9 كرات فردي رجال",
+        "title": "Men’s 9-Ball Singles",
+        "title_ar": "9 كرات فردي رجال",
+        "date": "2026-05-14",
+        "time": "18:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0231",
+        "full_title": "Men’s 9-Ball Singles - 9 كرات فردي رجال",
+        "title": "Men’s 9-Ball Singles",
+        "title_ar": "9 كرات فردي رجال",
+        "date": "2026-05-14",
+        "time": "18:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0232",
+        "full_title": "Men’s 9-Ball Singles - 9 كرات فردي رجال",
+        "title": "Men’s 9-Ball Singles",
+        "title_ar": "9 كرات فردي رجال",
+        "date": "2026-05-15",
+        "time": "13:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0233",
+        "full_title": "Men’s 9-Ball Singles - 9 كرات فردي رجال",
+        "title": "Men’s 9-Ball Singles",
+        "title_ar": "9 كرات فردي رجال",
+        "date": "2026-05-15",
+        "time": "13:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0234",
+        "full_title": "Men’s 9-Ball Singles - 9 كرات فردي رجال",
+        "title": "Men’s 9-Ball Singles",
+        "title_ar": "9 كرات فردي رجال",
+        "date": "2026-05-15",
+        "time": "13:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0235",
+        "full_title": "Men’s 9-Ball Singles - 9 كرات فردي رجال",
+        "title": "Men’s 9-Ball Singles",
+        "title_ar": "9 كرات فردي رجال",
+        "date": "2026-05-15",
+        "time": "13:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0236",
+        "full_title": "Men’s 9-Ball Singles - 9 كرات فردي رجال",
+        "title": "Men’s 9-Ball Singles",
+        "title_ar": "9 كرات فردي رجال",
+        "date": "2026-05-15",
+        "time": "14:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0237",
+        "full_title": "Men’s 9-Ball Singles - 9 كرات فردي رجال",
+        "title": "Men’s 9-Ball Singles",
+        "title_ar": "9 كرات فردي رجال",
+        "date": "2026-05-15",
+        "time": "14:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0238",
+        "full_title": "Men’s 9-Ball Singles - 9 كرات فردي رجال",
+        "title": "Men’s 9-Ball Singles",
+        "title_ar": "9 كرات فردي رجال",
+        "date": "2026-05-15",
+        "time": "16:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0239",
+        "full_title": "Men’s 9-Ball Singles - 9 كرات فردي رجال",
+        "title": "Men’s 9-Ball Singles",
+        "title_ar": "9 كرات فردي رجال",
+        "date": "2026-05-15",
+        "time": "16:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0240",
+        "full_title": "Men’s 9-Ball Singles - 9 كرات فردي رجال",
+        "title": "Men’s 9-Ball Singles",
+        "title_ar": "9 كرات فردي رجال",
+        "date": "2026-05-15",
+        "time": "18:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      }
+    ]
+  },
+  {
+    "sport": {
+      "id": "Table Tennis",
+      "english_name": "Table Tennis",
+      "arabic_name": "كرة الطاولة",
+      "pictogram": "/files/table tennis.svg"
+    },
+    "competitions": [
+      {
+        "id": "COM-2026-0288",
+        "full_title": "Women’s Team Qualification - فرق سيدات",
+        "title": "Women’s Team Qualification",
+        "title_ar": "فرق سيدات",
+        "date": "2026-05-12",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0289",
+        "full_title": "Women’s Team Qualification - فرق سيدات",
+        "title": "Women’s Team Qualification",
+        "title_ar": "فرق سيدات",
+        "date": "2026-05-12",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0290",
+        "full_title": "Women’s Team Qualification - فرق سيدات",
+        "title": "Women’s Team Qualification",
+        "title_ar": "فرق سيدات",
+        "date": "2026-05-12",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0291",
+        "full_title": "Men’s Team Qualification - فرق رجال",
+        "title": "Men’s Team Qualification",
+        "title_ar": "فرق رجال",
+        "date": "2026-05-12",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0292",
+        "full_title": "Men’s Team Qualification - فرق رجال",
+        "title": "Men’s Team Qualification",
+        "title_ar": "فرق رجال",
+        "date": "2026-05-12",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0293",
+        "full_title": "Men’s Team Qualification - فرق رجال",
+        "title": "Men’s Team Qualification",
+        "title_ar": "فرق رجال",
+        "date": "2026-05-12",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0294",
+        "full_title": "Women’s Team Qualification - فرق سيدات",
+        "title": "Women’s Team Qualification",
+        "title_ar": "فرق سيدات",
+        "date": "2026-05-12",
+        "time": "15:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0295",
+        "full_title": "Women’s Team Qualification - فرق سيدات",
+        "title": "Women’s Team Qualification",
+        "title_ar": "فرق سيدات",
+        "date": "2026-05-12",
+        "time": "15:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0296",
+        "full_title": "Women’s Team Qualification - فرق سيدات",
+        "title": "Women’s Team Qualification",
+        "title_ar": "فرق سيدات",
+        "date": "2026-05-12",
+        "time": "15:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0297",
+        "full_title": "Men’s Team Qualification - فرق رجال",
+        "title": "Men’s Team Qualification",
+        "title_ar": "فرق رجال",
+        "date": "2026-05-12",
+        "time": "15:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0298",
+        "full_title": "Men’s Team Qualification - فرق رجال",
+        "title": "Men’s Team Qualification",
+        "title_ar": "فرق رجال",
+        "date": "2026-05-12",
+        "time": "15:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0299",
+        "full_title": "Men’s Team Qualification - فرق رجال",
+        "title": "Men’s Team Qualification",
+        "title_ar": "فرق رجال",
+        "date": "2026-05-12",
+        "time": "15:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0300",
+        "full_title": "Women’s Team Qualification - فرق سيدات",
+        "title": "Women’s Team Qualification",
+        "title_ar": "فرق سيدات",
+        "date": "2026-05-12",
+        "time": "19:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0301",
+        "full_title": "Women’s Team Qualification - فرق سيدات",
+        "title": "Women’s Team Qualification",
+        "title_ar": "فرق سيدات",
+        "date": "2026-05-12",
+        "time": "19:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0302",
+        "full_title": "Women’s Team Qualification - فرق سيدات",
+        "title": "Women’s Team Qualification",
+        "title_ar": "فرق سيدات",
+        "date": "2026-05-12",
+        "time": "19:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0303",
+        "full_title": "Men’s Team Qualification - فرق رجال",
+        "title": "Men’s Team Qualification",
+        "title_ar": "فرق رجال",
+        "date": "2026-05-12",
+        "time": "19:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0304",
+        "full_title": "Men’s Team Qualification - فرق رجال",
+        "title": "Men’s Team Qualification",
+        "title_ar": "فرق رجال",
+        "date": "2026-05-12",
+        "time": "19:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0305",
+        "full_title": "Men’s Team Qualification - فرق رجال",
+        "title": "Men’s Team Qualification",
+        "title_ar": "فرق رجال",
+        "date": "2026-05-12",
+        "time": "19:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0306",
+        "full_title": "Mixed Doubles Round of 16 - زوجي مختلط دور 16",
+        "title": "Mixed Doubles Round of 16",
+        "title_ar": "زوجي مختلط دور 16",
+        "date": "2026-05-13",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0307",
+        "full_title": "Mixed Doubles Round of 16 - زوجي مختلط دور 16",
+        "title": "Mixed Doubles Round of 16",
+        "title_ar": "زوجي مختلط دور 16",
+        "date": "2026-05-13",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0308",
+        "full_title": "Mixed Doubles Round of 16 - زوجي مختلط دور 16",
+        "title": "Mixed Doubles Round of 16",
+        "title_ar": "زوجي مختلط دور 16",
+        "date": "2026-05-13",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0309",
+        "full_title": "Mixed Doubles Round of 16 - زوجي مختلط دور 16",
+        "title": "Mixed Doubles Round of 16",
+        "title_ar": "زوجي مختلط دور 16",
+        "date": "2026-05-13",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0310",
+        "full_title": "Women’s Doubles Round of 16 - زوجي سيدات دور 16",
+        "title": "Women’s Doubles Round of 16",
+        "title_ar": "زوجي سيدات دور 16",
+        "date": "2026-05-13",
+        "time": "10:50:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0311",
+        "full_title": "Women’s Doubles Round of 16 - زوجي سيدات دور 16",
+        "title": "Women’s Doubles Round of 16",
+        "title_ar": "زوجي سيدات دور 16",
+        "date": "2026-05-13",
+        "time": "10:50:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0312",
+        "full_title": "Women’s Doubles Round of 16 - زوجي سيدات دور 16",
+        "title": "Women’s Doubles Round of 16",
+        "title_ar": "زوجي سيدات دور 16",
+        "date": "2026-05-13",
+        "time": "10:50:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0313",
+        "full_title": "Men’s Doubles Round of 16 - زوجي رجال دور 16",
+        "title": "Men’s Doubles Round of 16",
+        "title_ar": "زوجي رجال دور 16",
+        "date": "2026-05-13",
+        "time": "10:50:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0314",
+        "full_title": "Men’s Doubles Round of 16 - زوجي رجال دور 16",
+        "title": "Men’s Doubles Round of 16",
+        "title_ar": "زوجي رجال دور 16",
+        "date": "2026-05-13",
+        "time": "10:50:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0315",
+        "full_title": "Men’s Doubles Round of 16 - زوجي رجال دور 16",
+        "title": "Men’s Doubles Round of 16",
+        "title_ar": "زوجي رجال دور 16",
+        "date": "2026-05-13",
+        "time": "10:50:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0316",
+        "full_title": "Men’s Doubles Round of 16 - زوجي رجال دور 16",
+        "title": "Men’s Doubles Round of 16",
+        "title_ar": "زوجي رجال دور 16",
+        "date": "2026-05-13",
+        "time": "10:50:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0317",
+        "full_title": "Men’s Doubles Round of 16 - زوجي رجال دور 16",
+        "title": "Men’s Doubles Round of 16",
+        "title_ar": "زوجي رجال دور 16",
+        "date": "2026-05-13",
+        "time": "10:50:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0318",
+        "full_title": "Mixed Doubles Quarterfinal - زوجي مختلط ربع نهائي",
+        "title": "Mixed Doubles Quarterfinal",
+        "title_ar": "زوجي مختلط ربع نهائي",
+        "date": "2026-05-13",
+        "time": "11:40:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0319",
+        "full_title": "Mixed Doubles Quarterfinal - زوجي مختلط ربع نهائي",
+        "title": "Mixed Doubles Quarterfinal",
+        "title_ar": "زوجي مختلط ربع نهائي",
+        "date": "2026-05-13",
+        "time": "11:40:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0320",
+        "full_title": "Mixed Doubles Quarterfinal - زوجي مختلط ربع نهائي",
+        "title": "Mixed Doubles Quarterfinal",
+        "title_ar": "زوجي مختلط ربع نهائي",
+        "date": "2026-05-13",
+        "time": "11:40:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0321",
+        "full_title": "Mixed Doubles Quarterfinal - زوجي مختلط ربع نهائي",
+        "title": "Mixed Doubles Quarterfinal",
+        "title_ar": "زوجي مختلط ربع نهائي",
+        "date": "2026-05-13",
+        "time": "11:40:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0322",
+        "full_title": "Women’s Team Qualification - فرق سيدات",
+        "title": "Women’s Team Qualification",
+        "title_ar": "فرق سيدات",
+        "date": "2026-05-13",
+        "time": "15:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0323",
+        "full_title": "Women’s Team Qualification - فرق سيدات",
+        "title": "Women’s Team Qualification",
+        "title_ar": "فرق سيدات",
+        "date": "2026-05-13",
+        "time": "15:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0324",
+        "full_title": "Women’s Team Qualification - فرق سيدات",
+        "title": "Women’s Team Qualification",
+        "title_ar": "فرق سيدات",
+        "date": "2026-05-13",
+        "time": "15:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0325",
+        "full_title": "Men’s Team Qualification - فرق رجال",
+        "title": "Men’s Team Qualification",
+        "title_ar": "فرق رجال",
+        "date": "2026-05-13",
+        "time": "15:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0326",
+        "full_title": "Men’s Team Qualification - فرق رجال",
+        "title": "Men’s Team Qualification",
+        "title_ar": "فرق رجال",
+        "date": "2026-05-13",
+        "time": "15:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0327",
+        "full_title": "Men’s Team Qualification - فرق رجال",
+        "title": "Men’s Team Qualification",
+        "title_ar": "فرق رجال",
+        "date": "2026-05-13",
+        "time": "15:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0328",
+        "full_title": "Women’s Team Qualification - فرق سيدات",
+        "title": "Women’s Team Qualification",
+        "title_ar": "فرق سيدات",
+        "date": "2026-05-13",
+        "time": "19:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0329",
+        "full_title": "Women’s Team Qualification - فرق سيدات",
+        "title": "Women’s Team Qualification",
+        "title_ar": "فرق سيدات",
+        "date": "2026-05-13",
+        "time": "19:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0330",
+        "full_title": "Women’s Team Qualification - فرق سيدات",
+        "title": "Women’s Team Qualification",
+        "title_ar": "فرق سيدات",
+        "date": "2026-05-13",
+        "time": "19:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0331",
+        "full_title": "Men’s Team Qualification - فرق رجال",
+        "title": "Men’s Team Qualification",
+        "title_ar": "فرق رجال",
+        "date": "2026-05-13",
+        "time": "19:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0332",
+        "full_title": "Men’s Team Qualification - فرق رجال",
+        "title": "Men’s Team Qualification",
+        "title_ar": "فرق رجال",
+        "date": "2026-05-13",
+        "time": "19:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0333",
+        "full_title": "Men’s Team Qualification - فرق رجال",
+        "title": "Men’s Team Qualification",
+        "title_ar": "فرق رجال",
+        "date": "2026-05-13",
+        "time": "19:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0334",
+        "full_title": "Men’s Singles Round of 32 - فردي رجال دور 32",
+        "title": "Men’s Singles Round of 32",
+        "title_ar": "فردي رجال دور 32",
+        "date": "2026-05-14",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0335",
+        "full_title": "Men’s Singles Round of 32 - فردي رجال دور 32",
+        "title": "Men’s Singles Round of 32",
+        "title_ar": "فردي رجال دور 32",
+        "date": "2026-05-14",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0336",
+        "full_title": "Women’s Singles Round of 32 - فردي سيدات دور 32",
+        "title": "Women’s Singles Round of 32",
+        "title_ar": "فردي سيدات دور 32",
+        "date": "2026-05-14",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0337",
+        "full_title": "Women’s Singles Round of 32 - فردي سيدات دور 32",
+        "title": "Women’s Singles Round of 32",
+        "title_ar": "فردي سيدات دور 32",
+        "date": "2026-05-14",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0338",
+        "full_title": "Mixed Doubles Semifinal - زوجي مختلط نصف نهائي",
+        "title": "Mixed Doubles Semifinal",
+        "title_ar": "زوجي مختلط نصف نهائي",
+        "date": "2026-05-14",
+        "time": "10:50:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0339",
+        "full_title": "Mixed Doubles Semifinal - زوجي مختلط نصف نهائي",
+        "title": "Mixed Doubles Semifinal",
+        "title_ar": "زوجي مختلط نصف نهائي",
+        "date": "2026-05-14",
+        "time": "10:50:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0340",
+        "full_title": "Women’s Singles Round of 16 - فردي سيدات دور 16",
+        "title": "Women’s Singles Round of 16",
+        "title_ar": "فردي سيدات دور 16",
+        "date": "2026-05-14",
+        "time": "11:40:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0341",
+        "full_title": "Women’s Singles Round of 16 - فردي سيدات دور 16",
+        "title": "Women’s Singles Round of 16",
+        "title_ar": "فردي سيدات دور 16",
+        "date": "2026-05-14",
+        "time": "11:40:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0342",
+        "full_title": "Women’s Singles Round of 16 - فردي سيدات دور 16",
+        "title": "Women’s Singles Round of 16",
+        "title_ar": "فردي سيدات دور 16",
+        "date": "2026-05-14",
+        "time": "11:40:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0343",
+        "full_title": "Women’s Singles Round of 16 - فردي سيدات دور 16",
+        "title": "Women’s Singles Round of 16",
+        "title_ar": "فردي سيدات دور 16",
+        "date": "2026-05-14",
+        "time": "11:40:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0344",
+        "full_title": "Women’s Singles Round of 16 - فردي سيدات دور 16",
+        "title": "Women’s Singles Round of 16",
+        "title_ar": "فردي سيدات دور 16",
+        "date": "2026-05-14",
+        "time": "11:40:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0345",
+        "full_title": "Women’s Singles Round of 16 - فردي سيدات دور 16",
+        "title": "Women’s Singles Round of 16",
+        "title_ar": "فردي سيدات دور 16",
+        "date": "2026-05-14",
+        "time": "11:40:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0346",
+        "full_title": "Women’s Singles Round of 16 - فردي سيدات دور 16",
+        "title": "Women’s Singles Round of 16",
+        "title_ar": "فردي سيدات دور 16",
+        "date": "2026-05-14",
+        "time": "11:40:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0347",
+        "full_title": "Women’s Singles Round of 16 - فردي سيدات دور 16",
+        "title": "Women’s Singles Round of 16",
+        "title_ar": "فردي سيدات دور 16",
+        "date": "2026-05-14",
+        "time": "11:40:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0348",
+        "full_title": "Men’s Singles Round of 16 - فردي رجال دور 16",
+        "title": "Men’s Singles Round of 16",
+        "title_ar": "فردي رجال دور 16",
+        "date": "2026-05-14",
+        "time": "12:15:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0349",
+        "full_title": "Men’s Singles Round of 16 - فردي رجال دور 16",
+        "title": "Men’s Singles Round of 16",
+        "title_ar": "فردي رجال دور 16",
+        "date": "2026-05-14",
+        "time": "12:15:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0350",
+        "full_title": "Men’s Singles Round of 16 - فردي رجال دور 16",
+        "title": "Men’s Singles Round of 16",
+        "title_ar": "فردي رجال دور 16",
+        "date": "2026-05-14",
+        "time": "12:15:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0351",
+        "full_title": "Men’s Singles Round of 16 - فردي رجال دور 16",
+        "title": "Men’s Singles Round of 16",
+        "title_ar": "فردي رجال دور 16",
+        "date": "2026-05-14",
+        "time": "12:15:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0352",
+        "full_title": "Men’s Singles Round of 16 - فردي رجال دور 16",
+        "title": "Men’s Singles Round of 16",
+        "title_ar": "فردي رجال دور 16",
+        "date": "2026-05-14",
+        "time": "12:15:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0353",
+        "full_title": "Men’s Singles Round of 16 - فردي رجال دور 16",
+        "title": "Men’s Singles Round of 16",
+        "title_ar": "فردي رجال دور 16",
+        "date": "2026-05-14",
+        "time": "12:15:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0354",
+        "full_title": "Men’s Singles Round of 16 - فردي رجال دور 16",
+        "title": "Men’s Singles Round of 16",
+        "title_ar": "فردي رجال دور 16",
+        "date": "2026-05-14",
+        "time": "12:15:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0355",
+        "full_title": "Men’s Singles Round of 16 - فردي رجال دور 16",
+        "title": "Men’s Singles Round of 16",
+        "title_ar": "فردي رجال دور 16",
+        "date": "2026-05-14",
+        "time": "12:15:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0356",
+        "full_title": "Women’s Doubles Quarterfinal - زوجي سيدات ربع نهائي",
+        "title": "Women’s Doubles Quarterfinal",
+        "title_ar": "زوجي سيدات ربع نهائي",
+        "date": "2026-05-14",
+        "time": "16:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0357",
+        "full_title": "Women’s Doubles Quarterfinal - زوجي سيدات ربع نهائي",
+        "title": "Women’s Doubles Quarterfinal",
+        "title_ar": "زوجي سيدات ربع نهائي",
+        "date": "2026-05-14",
+        "time": "16:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0358",
+        "full_title": "Women’s Doubles Quarterfinal - زوجي سيدات ربع نهائي",
+        "title": "Women’s Doubles Quarterfinal",
+        "title_ar": "زوجي سيدات ربع نهائي",
+        "date": "2026-05-14",
+        "time": "16:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0359",
+        "full_title": "Women’s Doubles Quarterfinal - زوجي سيدات ربع نهائي",
+        "title": "Women’s Doubles Quarterfinal",
+        "title_ar": "زوجي سيدات ربع نهائي",
+        "date": "2026-05-14",
+        "time": "16:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0360",
+        "full_title": "Men’s Doubles Quarterfinal - زوجي رجال ربع نهائي",
+        "title": "Men’s Doubles Quarterfinal",
+        "title_ar": "زوجي رجال ربع نهائي",
+        "date": "2026-05-14",
+        "time": "16:35:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0361",
+        "full_title": "Men’s Doubles Quarterfinal - زوجي رجال ربع نهائي",
+        "title": "Men’s Doubles Quarterfinal",
+        "title_ar": "زوجي رجال ربع نهائي",
+        "date": "2026-05-14",
+        "time": "16:35:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0362",
+        "full_title": "Men’s Doubles Quarterfinal - زوجي رجال ربع نهائي",
+        "title": "Men’s Doubles Quarterfinal",
+        "title_ar": "زوجي رجال ربع نهائي",
+        "date": "2026-05-14",
+        "time": "16:35:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0363",
+        "full_title": "Men’s Doubles Quarterfinal - زوجي رجال ربع نهائي",
+        "title": "Men’s Doubles Quarterfinal",
+        "title_ar": "زوجي رجال ربع نهائي",
+        "date": "2026-05-14",
+        "time": "16:35:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0364",
+        "full_title": "Women’s Singles Quarterfinal - فردي سيدات ربع نهائي",
+        "title": "Women’s Singles Quarterfinal",
+        "title_ar": "فردي سيدات ربع نهائي",
+        "date": "2026-05-14",
+        "time": "17:25:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0365",
+        "full_title": "Women’s Singles Quarterfinal - فردي سيدات ربع نهائي",
+        "title": "Women’s Singles Quarterfinal",
+        "title_ar": "فردي سيدات ربع نهائي",
+        "date": "2026-05-14",
+        "time": "17:25:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0366",
+        "full_title": "Women’s Singles Quarterfinal - فردي سيدات ربع نهائي",
+        "title": "Women’s Singles Quarterfinal",
+        "title_ar": "فردي سيدات ربع نهائي",
+        "date": "2026-05-14",
+        "time": "17:25:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0367",
+        "full_title": "Women’s Singles Quarterfinal - فردي سيدات ربع نهائي",
+        "title": "Women’s Singles Quarterfinal",
+        "title_ar": "فردي سيدات ربع نهائي",
+        "date": "2026-05-14",
+        "time": "17:25:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0368",
+        "full_title": "Men’s Singles Quarterfinal - فردي رجال ربع نهائي",
+        "title": "Men’s Singles Quarterfinal",
+        "title_ar": "فردي رجال ربع نهائي",
+        "date": "2026-05-14",
+        "time": "18:10:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0369",
+        "full_title": "Men’s Singles Quarterfinal - فردي رجال ربع نهائي",
+        "title": "Men’s Singles Quarterfinal",
+        "title_ar": "فردي رجال ربع نهائي",
+        "date": "2026-05-14",
+        "time": "18:10:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0370",
+        "full_title": "Men’s Singles Quarterfinal - فردي رجال ربع نهائي",
+        "title": "Men’s Singles Quarterfinal",
+        "title_ar": "فردي رجال ربع نهائي",
+        "date": "2026-05-14",
+        "time": "18:10:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0371",
+        "full_title": "Men’s Singles Quarterfinal - فردي رجال ربع نهائي",
+        "title": "Men’s Singles Quarterfinal",
+        "title_ar": "فردي رجال ربع نهائي",
+        "date": "2026-05-14",
+        "time": "18:10:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0372",
+        "full_title": "Women’s Doubles Semifinal - زوجي سيدات نصف نهائي",
+        "title": "Women’s Doubles Semifinal",
+        "title_ar": "زوجي سيدات نصف نهائي",
+        "date": "2026-05-15",
+        "time": "15:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0373",
+        "full_title": "Women’s Doubles Semifinal - زوجي سيدات نصف نهائي",
+        "title": "Women’s Doubles Semifinal",
+        "title_ar": "زوجي سيدات نصف نهائي",
+        "date": "2026-05-15",
+        "time": "15:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0374",
+        "full_title": "Men’s Doubles Semifinal - زوجي رجال نصف نهائي",
+        "title": "Men’s Doubles Semifinal",
+        "title_ar": "زوجي رجال نصف نهائي",
+        "date": "2026-05-15",
+        "time": "15:45:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0375",
+        "full_title": "Men’s Doubles Semifinal - زوجي رجال نصف نهائي",
+        "title": "Men’s Doubles Semifinal",
+        "title_ar": "زوجي رجال نصف نهائي",
+        "date": "2026-05-15",
+        "time": "15:45:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0376",
+        "full_title": "Women’s Singles Semifinal - فردي سيدات نصف نهائي",
+        "title": "Women’s Singles Semifinal",
+        "title_ar": "فردي سيدات نصف نهائي",
+        "date": "2026-05-15",
+        "time": "17:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0377",
+        "full_title": "Women’s Singles Semifinal - فردي سيدات نصف نهائي",
+        "title": "Women’s Singles Semifinal",
+        "title_ar": "فردي سيدات نصف نهائي",
+        "date": "2026-05-15",
+        "time": "17:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0378",
+        "full_title": "Men’s Singles Semifinal - فردي رجال نصف نهائي",
+        "title": "Men’s Singles Semifinal",
+        "title_ar": "فردي رجال نصف نهائي",
+        "date": "2026-05-15",
+        "time": "17:45:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0379",
+        "full_title": "Men’s Singles Semifinal - فردي رجال نصف نهائي",
+        "title": "Men’s Singles Semifinal",
+        "title_ar": "فردي رجال نصف نهائي",
+        "date": "2026-05-15",
+        "time": "17:45:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0380",
+        "full_title": "Mixed Doubles Final - زوجي مختلط نهائي",
+        "title": "Mixed Doubles Final",
+        "title_ar": "زوجي مختلط نهائي",
+        "date": "2026-05-15",
+        "time": "18:45:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0381",
+        "full_title": "Women’s Doubles Final - زوجي سيدات نهائي",
+        "title": "Women’s Doubles Final",
+        "title_ar": "زوجي سيدات نهائي",
+        "date": "2026-05-17",
+        "time": "15:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0382",
+        "full_title": "Men’s Doubles Final - زوجي رجال نهائي",
+        "title": "Men’s Doubles Final",
+        "title_ar": "زوجي رجال نهائي",
+        "date": "2026-05-17",
+        "time": "15:45:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0383",
+        "full_title": "Women’s Singles Final - فردي سيدات نهائي",
+        "title": "Women’s Singles Final",
+        "title_ar": "فردي سيدات نهائي",
+        "date": "2026-05-17",
+        "time": "17:30:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0384",
+        "full_title": "Men’s Singles Final - فردي رجال نهائي",
+        "title": "Men’s Singles Final",
+        "title_ar": "فردي رجال نهائي",
+        "date": "2026-05-17",
+        "time": "18:30:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      }
+    ]
+  },
+  {
+    "sport": {
+      "id": "Basketball 3x3",
+      "english_name": "Basketball 3x3",
+      "arabic_name": "كرة السلة",
+      "pictogram": "/files/basketball.svg"
+    },
+    "competitions": [
+      {
+        "id": "COM-2026-0120",
+        "full_title": "Women’s Preliminary - Match 1 - سيدات تمهيدي - المباراة 1",
+        "title": "Women’s Preliminary - Match 1",
+        "title_ar": "سيدات تمهيدي - المباراة 1",
+        "date": "2026-05-12",
+        "time": "11:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0121",
+        "full_title": "Women’s Preliminary - Match 2 - سيدات تمهيدي - المباراة 2",
+        "title": "Women’s Preliminary - Match 2",
+        "title_ar": "سيدات تمهيدي - المباراة 2",
+        "date": "2026-05-12",
+        "time": "11:25:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0122",
+        "full_title": "Women’s Preliminary - Match 3 - سيدات تمهيدي - المباراة 3",
+        "title": "Women’s Preliminary - Match 3",
+        "title_ar": "سيدات تمهيدي - المباراة 3",
+        "date": "2026-05-12",
+        "time": "11:50:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0123",
+        "full_title": "Men’s Preliminary - Match 4 - رجال تمهيدي - المباراة 4",
+        "title": "Men’s Preliminary - Match 4",
+        "title_ar": "رجال تمهيدي - المباراة 4",
+        "date": "2026-05-12",
+        "time": "12:15:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0124",
+        "full_title": "Men’s Preliminary - Match 5 - رجال تمهيدي - المباراة 5",
+        "title": "Men’s Preliminary - Match 5",
+        "title_ar": "رجال تمهيدي - المباراة 5",
+        "date": "2026-05-12",
+        "time": "12:40:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0125",
+        "full_title": "Women’s Preliminary - Match 6 - سيدات تمهيدي - المباراة 6",
+        "title": "Women’s Preliminary - Match 6",
+        "title_ar": "سيدات تمهيدي - المباراة 6",
+        "date": "2026-05-12",
+        "time": "14:05:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0126",
+        "full_title": "Women’s Preliminary - Match 7 - سيدات تمهيدي - المباراة 7",
+        "title": "Women’s Preliminary - Match 7",
+        "title_ar": "سيدات تمهيدي - المباراة 7",
+        "date": "2026-05-12",
+        "time": "14:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0127",
+        "full_title": "Women’s Preliminary - Match 8 - سيدات تمهيدي - المباراة 8",
+        "title": "Women’s Preliminary - Match 8",
+        "title_ar": "سيدات تمهيدي - المباراة 8",
+        "date": "2026-05-12",
+        "time": "14:55:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0128",
+        "full_title": "Men’s Preliminary - Match 9 - رجال تمهيدي - المباراة 9",
+        "title": "Men’s Preliminary - Match 9",
+        "title_ar": "رجال تمهيدي - المباراة 9",
+        "date": "2026-05-12",
+        "time": "15:20:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0129",
+        "full_title": "Men’s Preliminary - Match 10 - رجال تمهيدي - المباراة 10",
+        "title": "Men’s Preliminary - Match 10",
+        "title_ar": "رجال تمهيدي - المباراة 10",
+        "date": "2026-05-12",
+        "time": "15:45:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0130",
+        "full_title": "Women’s Preliminary - Match 11 - سيدات تمهيدي - المباراة 11",
+        "title": "Women’s Preliminary - Match 11",
+        "title_ar": "سيدات تمهيدي - المباراة 11",
+        "date": "2026-05-12",
+        "time": "16:10:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0131",
+        "full_title": "Women’s Preliminary - Match 12 - سيدات تمهيدي - المباراة 12",
+        "title": "Women’s Preliminary - Match 12",
+        "title_ar": "سيدات تمهيدي - المباراة 12",
+        "date": "2026-05-12",
+        "time": "16:35:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0132",
+        "full_title": "Women’s Preliminary - Match 13 - سيدات تمهيدي - المباراة 13",
+        "title": "Women’s Preliminary - Match 13",
+        "title_ar": "سيدات تمهيدي - المباراة 13",
+        "date": "2026-05-12",
+        "time": "17:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0133",
+        "full_title": "Men’s Preliminary - Match 14 - رجال تمهيدي - المباراة 14",
+        "title": "Men’s Preliminary - Match 14",
+        "title_ar": "رجال تمهيدي - المباراة 14",
+        "date": "2026-05-12",
+        "time": "17:25:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0134",
+        "full_title": "Men’s Preliminary - Match 15 - رجال تمهيدي - المباراة 15",
+        "title": "Men’s Preliminary - Match 15",
+        "title_ar": "رجال تمهيدي - المباراة 15",
+        "date": "2026-05-12",
+        "time": "17:50:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0135",
+        "full_title": "Women’s Preliminary - Match 16 - سيدات تمهيدي - المباراة 16",
+        "title": "Women’s Preliminary - Match 16",
+        "title_ar": "سيدات تمهيدي - المباراة 16",
+        "date": "2026-05-12",
+        "time": "18:15:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0136",
+        "full_title": "Women’s Semi Final - Match 17 - سيدات نصف النهائي - المباراة 17",
+        "title": "Women’s Semi Final - Match 17",
+        "title_ar": "سيدات نصف النهائي - المباراة 17",
+        "date": "2026-05-13",
+        "time": "15:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0137",
+        "full_title": "Women’s Semi Final - Match 18 - سيدات نصف النهائي - المباراة 18",
+        "title": "Women’s Semi Final - Match 18",
+        "title_ar": "سيدات نصف النهائي - المباراة 18",
+        "date": "2026-05-13",
+        "time": "15:25:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0138",
+        "full_title": "Men’s Semi Final - Match 19 - رجال نصف النهائي - المباراة 19",
+        "title": "Men’s Semi Final - Match 19",
+        "title_ar": "رجال نصف النهائي - المباراة 19",
+        "date": "2026-05-13",
+        "time": "15:50:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0139",
+        "full_title": "Men’s Semi Final - Match 20 - رجال نصف النهائي - المباراة 20",
+        "title": "Men’s Semi Final - Match 20",
+        "title_ar": "رجال نصف النهائي - المباراة 20",
+        "date": "2026-05-13",
+        "time": "16:15:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0140",
+        "full_title": "Women’s Bronze Medal Match - مباراة الميدالية البرونزية سيدات",
+        "title": "Women’s Bronze Medal Match",
+        "title_ar": "مباراة الميدالية البرونزية سيدات",
+        "date": "2026-05-13",
+        "time": "16:40:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0141",
+        "full_title": "Women’s Bronze Medal Match - مباراة الميدالية البرونزية سيدات",
+        "title": "Women’s Bronze Medal Match",
+        "title_ar": "مباراة الميدالية البرونزية سيدات",
+        "date": "2026-05-13",
+        "time": "17:05:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0142",
+        "full_title": "Men’s Final - النهائي رجال",
+        "title": "Men’s Final",
+        "title_ar": "النهائي رجال",
+        "date": "2026-05-13",
+        "time": "17:30:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0143",
+        "full_title": "Men’s Final - النهائي رجال",
+        "title": "Men’s Final",
+        "title_ar": "النهائي رجال",
+        "date": "2026-05-13",
+        "time": "17:55:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      }
+    ]
+  },
+  {
+    "sport": {
+      "id": "Bowling",
+      "english_name": "Bowling",
+      "arabic_name": "البولينغ",
+      "pictogram": "/files/billiards and snooker.svg"
+    },
+    "competitions": [
+      {
+        "id": "COM-2026-0425",
+        "full_title": "Men’s Singles – Group A - فردي رجال - المجموعة أ",
+        "title": "Men’s Singles – Group A",
+        "title_ar": "فردي رجال - المجموعة أ",
+        "date": "2026-05-12",
+        "time": "12:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0426",
+        "full_title": "Men’s Singles – Group B - فردي رجال - المجموعة ب",
+        "title": "Men’s Singles – Group B",
+        "title_ar": "فردي رجال - المجموعة ب",
+        "date": "2026-05-12",
+        "time": "16:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0427",
+        "full_title": "Men’s Doubles – Group A - زوجي رجال - المجموعة أ",
+        "title": "Men’s Doubles – Group A",
+        "title_ar": "زوجي رجال - المجموعة أ",
+        "date": "2026-05-13",
+        "time": "12:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0428",
+        "full_title": "Men’s Doubles – Group B - زوجي رجال - المجموعة ب",
+        "title": "Men’s Doubles – Group B",
+        "title_ar": "زوجي رجال - المجموعة ب",
+        "date": "2026-05-13",
+        "time": "16:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0429",
+        "full_title": "Men’s Trios – Preliminary - ثلاثي رجال - تمهيدي",
+        "title": "Men’s Trios – Preliminary",
+        "title_ar": "ثلاثي رجال - تمهيدي",
+        "date": "2026-05-14",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0430",
+        "full_title": "Men’s Trios Final - نهائي ثلاثي رجال",
+        "title": "Men’s Trios Final",
+        "title_ar": "نهائي ثلاثي رجال",
+        "date": "2026-05-14",
+        "time": "16:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0431",
+        "full_title": "Men’s Team – Preliminary - فرق رجال - تمهيدي",
+        "title": "Men’s Team – Preliminary",
+        "title_ar": "فرق رجال - تمهيدي",
+        "date": "2026-05-15",
+        "time": "16:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0432",
+        "full_title": "Men’s Team Final - نهائي فرق رجال",
+        "title": "Men’s Team Final",
+        "title_ar": "نهائي فرق رجال",
+        "date": "2026-05-16",
+        "time": "16:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0433",
+        "full_title": "Men’s Masters – Preliminary - أساتذة رجال - تمهيدي",
+        "title": "Men’s Masters – Preliminary",
+        "title_ar": "أساتذة رجال - تمهيدي",
+        "date": "2026-05-17",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0434",
+        "full_title": "Men’s Masters – Preliminary - أساتذة رجال - تمهيدي",
+        "title": "Men’s Masters – Preliminary",
+        "title_ar": "أساتذة رجال - تمهيدي",
+        "date": "2026-05-17",
+        "time": "15:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0435",
+        "full_title": "Men’s Masters – Semi Final - أساتذة رجال - نصف نهائي",
+        "title": "Men’s Masters – Semi Final",
+        "title_ar": "أساتذة رجال - نصف نهائي",
+        "date": "2026-05-17",
+        "time": "18:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0436",
+        "full_title": "Men’s Masters Final - نهائي الأساتذة رجال",
+        "title": "Men’s Masters Final",
+        "title_ar": "نهائي الأساتذة رجال",
+        "date": "2026-05-17",
+        "time": "19:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      }
+    ]
+  },
+  {
+    "sport": {
+      "id": "Swimming",
+      "english_name": "Swimming",
+      "arabic_name": "السباحة",
+      "pictogram": "/files/swimming.svg"
+    },
+    "competitions": [
+      {
+        "id": "COM-2026-0001",
+        "full_title": "Men’s 800m Freestyle - 800 متر حرة رجال",
+        "title": "Men’s 800m Freestyle",
+        "title_ar": "800 متر حرة رجال",
+        "date": "2026-05-12",
+        "time": "17:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0002",
+        "full_title": "Men’s 200m Individual Medley - 200 متر متنوع رجال",
+        "title": "Men’s 200m Individual Medley",
+        "title_ar": "200 متر متنوع رجال",
+        "date": "2026-05-12",
+        "time": "17:25:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0003",
+        "full_title": "Men’s 50m Freestyle - 50 متر حرة رجال",
+        "title": "Men’s 50m Freestyle",
+        "title_ar": "50 متر حرة رجال",
+        "date": "2026-05-12",
+        "time": "17:50:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0004",
+        "full_title": "Men’s 100m Backstroke - 100 متر ظهر رجال",
+        "title": "Men’s 100m Backstroke",
+        "title_ar": "100 متر ظهر رجال",
+        "date": "2026-05-12",
+        "time": "18:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0005",
+        "full_title": "Men’s 200m Butterfly - 200 متر فراشة رجال",
+        "title": "Men’s 200m Butterfly",
+        "title_ar": "200 متر فراشة رجال",
+        "date": "2026-05-12",
+        "time": "18:10:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0006",
+        "full_title": "Men’s 400m Freestyle - 400 متر حرة رجال",
+        "title": "Men’s 400m Freestyle",
+        "title_ar": "400 متر حرة رجال",
+        "date": "2026-05-13",
+        "time": "17:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0007",
+        "full_title": "Men’s 50m Breaststroke - 50 متر صدر رجال",
+        "title": "Men’s 50m Breaststroke",
+        "title_ar": "50 متر صدر رجال",
+        "date": "2026-05-13",
+        "time": "17:20:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0008",
+        "full_title": "Men’s 100m Freestyle - 100 متر حرة رجال",
+        "title": "Men’s 100m Freestyle",
+        "title_ar": "100 متر حرة رجال",
+        "date": "2026-05-13",
+        "time": "17:45:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0009",
+        "full_title": "Men’s 200m Backstroke - 200 متر ظهر رجال",
+        "title": "Men’s 200m Backstroke",
+        "title_ar": "200 متر ظهر رجال",
+        "date": "2026-05-13",
+        "time": "17:55:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0010",
+        "full_title": "Men’s 4x100m Freestyle Relay - 4×100 متر حرة تتابع رجال",
+        "title": "Men’s 4x100m Freestyle Relay",
+        "title_ar": "4×100 متر حرة تتابع رجال",
+        "date": "2026-05-13",
+        "time": "18:20:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0011",
+        "full_title": "Men’s 400m Individual Medley - 400 متر متنوع رجال",
+        "title": "Men’s 400m Individual Medley",
+        "title_ar": "400 متر متنوع رجال",
+        "date": "2026-05-14",
+        "time": "17:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0012",
+        "full_title": "Men’s 100m Breaststroke - 100 متر صدر رجال",
+        "title": "Men’s 100m Breaststroke",
+        "title_ar": "100 متر صدر رجال",
+        "date": "2026-05-14",
+        "time": "17:10:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0013",
+        "full_title": "Men’s 200m Freestyle - 200 متر حرة رجال",
+        "title": "Men’s 200m Freestyle",
+        "title_ar": "200 متر حرة رجال",
+        "date": "2026-05-14",
+        "time": "17:35:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0014",
+        "full_title": "Men’s 50m Butterfly - 50 متر فراشة رجال",
+        "title": "Men’s 50m Butterfly",
+        "title_ar": "50 متر فراشة رجال",
+        "date": "2026-05-14",
+        "time": "17:45:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0015",
+        "full_title": "Men’s 4x200m Freestyle Relay - 4×200 متر حرة تتابع رجال",
+        "title": "Men’s 4x200m Freestyle Relay",
+        "title_ar": "4×200 متر حرة تتابع رجال",
+        "date": "2026-05-14",
+        "time": "18:10:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0016",
+        "full_title": "Men’s 1500m Freestyle - 1500 متر حرة رجال",
+        "title": "Men’s 1500m Freestyle",
+        "title_ar": "1500 متر حرة رجال",
+        "date": "2026-05-15",
+        "time": "17:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0017",
+        "full_title": "Men’s 50m Backstroke - 50 متر ظهر رجال",
+        "title": "Men’s 50m Backstroke",
+        "title_ar": "50 متر ظهر رجال",
+        "date": "2026-05-15",
+        "time": "17:30:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0018",
+        "full_title": "Men’s 100m Butterfly - 100 متر فراشة رجال",
+        "title": "Men’s 100m Butterfly",
+        "title_ar": "100 متر فراشة رجال",
+        "date": "2026-05-15",
+        "time": "17:55:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0019",
+        "full_title": "Men’s 200m Breaststroke - 200 متر صدر رجال",
+        "title": "Men’s 200m Breaststroke",
+        "title_ar": "200 متر صدر رجال",
+        "date": "2026-05-15",
+        "time": "18:10:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0020",
+        "full_title": "Men’s 4x100m Medley Relay - 4×100 متر متنوع تتابع رجال",
+        "title": "Men’s 4x100m Medley Relay",
+        "title_ar": "4×100 متر متنوع تتابع رجال",
+        "date": "2026-05-15",
+        "time": "18:40:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      }
+    ]
+  },
+  {
+    "sport": {
+      "id": "Shooting",
+      "english_name": "Shooting",
+      "arabic_name": "الرماية",
+      "pictogram": "/files/shooting.svg"
+    },
+    "competitions": [
+      {
+        "id": "COM-2026-0444",
+        "full_title": "Shotgun Official Training - التدريب الرسمي للشوزن",
+        "title": "Shotgun Official Training",
+        "title_ar": "التدريب الرسمي للشوزن",
+        "date": "2026-05-13",
+        "time": "8:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0445",
+        "full_title": "Men’s Skeet 75 Targets Qualification - سكيت 75 طبق فردي رجال - تمهيدي",
+        "title": "Men’s Skeet 75 Targets Qualification",
+        "title_ar": "سكيت 75 طبق فردي رجال - تمهيدي",
+        "date": "2026-05-14",
+        "time": "8:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0446",
+        "full_title": "Women’s Skeet 75 Targets Qualification - سكيت 75 طبق فردي سيدات - تمهيدي",
+        "title": "Women’s Skeet 75 Targets Qualification",
+        "title_ar": "سكيت 75 طبق فردي سيدات - تمهيدي",
+        "date": "2026-05-14",
+        "time": "8:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0456",
+        "full_title": "10m Air Rifle Official Training - التدريب الرسمي بندقية 10م",
+        "title": "10m Air Rifle Official Training",
+        "title_ar": "التدريب الرسمي بندقية 10م",
+        "date": "2026-05-14",
+        "time": "9:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0457",
+        "full_title": "Men’s 10m Air Rifle Qualification - البندقية 10م هوائي رجال - تصفيات",
+        "title": "Men’s 10m Air Rifle Qualification",
+        "title_ar": "البندقية 10م هوائي رجال - تصفيات",
+        "date": "2026-05-15",
+        "time": "9:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0458",
+        "full_title": "Women’s 10m Air Rifle Qualification - البندقية 10م هوائي سيدات - تصفيات",
+        "title": "Women’s 10m Air Rifle Qualification",
+        "title_ar": "البندقية 10م هوائي سيدات - تصفيات",
+        "date": "2026-05-15",
+        "time": "11:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0459",
+        "full_title": "Men’s 10m Air Rifle Final - نهائي البندقية 10م هوائي رجال",
+        "title": "Men’s 10m Air Rifle Final",
+        "title_ar": "نهائي البندقية 10م هوائي رجال",
+        "date": "2026-05-15",
+        "time": "12:15:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0447",
+        "full_title": "Women’s Skeet Final - نهائي سكيت فردي سيدات",
+        "title": "Women’s Skeet Final",
+        "title_ar": "نهائي سكيت فردي سيدات",
+        "date": "2026-05-15",
+        "time": "13:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0448",
+        "full_title": "Men’s Skeet Final - نهائي سكيت فردي رجال",
+        "title": "Men’s Skeet Final",
+        "title_ar": "نهائي سكيت فردي رجال",
+        "date": "2026-05-15",
+        "time": "14:15:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0460",
+        "full_title": "Women’s 10m Air Rifle Final - نهائي البندقية 10م هوائي سيدات",
+        "title": "Women’s 10m Air Rifle Final",
+        "title_ar": "نهائي البندقية 10م هوائي سيدات",
+        "date": "2026-05-15",
+        "time": "14:15:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0461",
+        "full_title": "Mixed 10m Air Rifle Qualification - البندقية 10م هوائي مختلط - تصفيات",
+        "title": "Mixed 10m Air Rifle Qualification",
+        "title_ar": "البندقية 10م هوائي مختلط - تصفيات",
+        "date": "2026-05-16",
+        "time": "9:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0462",
+        "full_title": "Mixed 10m Air Rifle Final - نهائي البندقية 10م هوائي مختلط",
+        "title": "Mixed 10m Air Rifle Final",
+        "title_ar": "نهائي البندقية 10م هوائي مختلط",
+        "date": "2026-05-16",
+        "time": "11:45:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0449",
+        "full_title": "Mixed Skeet Team Final - نهائي سكيت فرق مختلط",
+        "title": "Mixed Skeet Team Final",
+        "title_ar": "نهائي سكيت فرق مختلط",
+        "date": "2026-05-16",
+        "time": "12:45:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0450",
+        "full_title": "Shotgun Official Training - تدريب رسمي للشوزن",
+        "title": "Shotgun Official Training",
+        "title_ar": "تدريب رسمي للشوزن",
+        "date": "2026-05-17",
+        "time": "8:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0451",
+        "full_title": "Men’s Trap 75 Targets Qualification - تراب 75 طبق فردي رجال - تمهيدي",
+        "title": "Men’s Trap 75 Targets Qualification",
+        "title_ar": "تراب 75 طبق فردي رجال - تمهيدي",
+        "date": "2026-05-18",
+        "time": "8:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0452",
+        "full_title": "Women’s Trap 75 Targets Qualification - تراب 75 طبق فردي سيدات - تمهيدي",
+        "title": "Women’s Trap 75 Targets Qualification",
+        "title_ar": "تراب 75 طبق فردي سيدات - تمهيدي",
+        "date": "2026-05-18",
+        "time": "8:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0463",
+        "full_title": "10m Air Pistol Official Training - التدريب الرسمي مسدس 10م",
+        "title": "10m Air Pistol Official Training",
+        "title_ar": "التدريب الرسمي مسدس 10م",
+        "date": "2026-05-18",
+        "time": "9:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0464",
+        "full_title": "Men’s 10m Air Pistol Qualification - المسدس 10م هوائي رجال - تصفيات",
+        "title": "Men’s 10m Air Pistol Qualification",
+        "title_ar": "المسدس 10م هوائي رجال - تصفيات",
+        "date": "2026-05-19",
+        "time": "9:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0465",
+        "full_title": "Women’s 10m Air Pistol Qualification - المسدس 10م هوائي سيدات - تصفيات",
+        "title": "Women’s 10m Air Pistol Qualification",
+        "title_ar": "المسدس 10م هوائي سيدات - تصفيات",
+        "date": "2026-05-19",
+        "time": "11:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0453",
+        "full_title": "Women’s Trap Final - نهائي تراب فردي سيدات",
+        "title": "Women’s Trap Final",
+        "title_ar": "نهائي تراب فردي سيدات",
+        "date": "2026-05-19",
+        "time": "12:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0466",
+        "full_title": "Men’s 10m Air Pistol Final - نهائي المسدس 10م هوائي رجال",
+        "title": "Men’s 10m Air Pistol Final",
+        "title_ar": "نهائي المسدس 10م هوائي رجال",
+        "date": "2026-05-19",
+        "time": "12:15:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0454",
+        "full_title": "Men’s Trap Final - نهائي تراب فردي رجال",
+        "title": "Men’s Trap Final",
+        "title_ar": "نهائي تراب فردي رجال",
+        "date": "2026-05-19",
+        "time": "13:15:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0467",
+        "full_title": "Women’s 10m Air Pistol Final - نهائي المسدس 10م هوائي سيدات",
+        "title": "Women’s 10m Air Pistol Final",
+        "title_ar": "نهائي المسدس 10م هوائي سيدات",
+        "date": "2026-05-19",
+        "time": "14:15:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0468",
+        "full_title": "Mixed 10m Air Pistol Qualification - المسدس 10م هوائي مختلط - تصفيات",
+        "title": "Mixed 10m Air Pistol Qualification",
+        "title_ar": "المسدس 10م هوائي مختلط - تصفيات",
+        "date": "2026-05-20",
+        "time": "9:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0469",
+        "full_title": "Mixed 10m Air Pistol Final - نهائي المسدس 10م هوائي مختلط",
+        "title": "Mixed 10m Air Pistol Final",
+        "title_ar": "نهائي المسدس 10م هوائي مختلط",
+        "date": "2026-05-20",
+        "time": "11:45:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0455",
+        "full_title": "Mixed Trap Team Final - نهائي تراب فرق مختلط",
+        "title": "Mixed Trap Team Final",
+        "title_ar": "نهائي تراب فرق مختلط",
+        "date": "2026-05-20",
+        "time": "12:45:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      }
+    ]
+  },
+  {
+    "sport": {
+      "id": "Fencing",
+      "english_name": "Fencing",
+      "arabic_name": "المبارزة",
+      "pictogram": "/files/fencing.svg"
+    },
+    "competitions": [
+      {
+        "id": "COM-2026-0405",
+        "full_title": "Women’s Épée Individual – Group Stage - إيبيه فردي سيدات - دور المجموعات",
+        "title": "Women’s Épée Individual – Group Stage",
+        "title_ar": "إيبيه فردي سيدات - دور المجموعات",
+        "date": "2026-05-13",
+        "time": "9:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0406",
+        "full_title": "Women’s Épée Individual – Knockout - إيبيه فردي سيدات - خروج المغلوب",
+        "title": "Women’s Épée Individual – Knockout",
+        "title_ar": "إيبيه فردي سيدات - خروج المغلوب",
+        "date": "2026-05-13",
+        "time": "10:40:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0407",
+        "full_title": "Men’s Foil Individual – Group Stage - فلوريه فردي رجال - دور المجموعات",
+        "title": "Men’s Foil Individual – Group Stage",
+        "title_ar": "فلوريه فردي رجال - دور المجموعات",
+        "date": "2026-05-13",
+        "time": "13:45:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0408",
+        "full_title": "Men’s Foil Individual – Knockout - فلوريه فردي رجال - خروج المغلوب",
+        "title": "Men’s Foil Individual – Knockout",
+        "title_ar": "فلوريه فردي رجال - خروج المغلوب",
+        "date": "2026-05-13",
+        "time": "15:40:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0409",
+        "full_title": "Women’s Épée Individual Final - نهائي إيبيه فردي سيدات",
+        "title": "Women’s Épée Individual Final",
+        "title_ar": "نهائي إيبيه فردي سيدات",
+        "date": "2026-05-13",
+        "time": "18:10:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0410",
+        "full_title": "Men’s Foil Individual Final - نهائي فلوريه فردي رجال",
+        "title": "Men’s Foil Individual Final",
+        "title_ar": "نهائي فلوريه فردي رجال",
+        "date": "2026-05-13",
+        "time": "18:40:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0411",
+        "full_title": "Men’s Épée Individual – Group Stage - إيبيه فردي رجال - دور المجموعات",
+        "title": "Men’s Épée Individual – Group Stage",
+        "title_ar": "إيبيه فردي رجال - دور المجموعات",
+        "date": "2026-05-14",
+        "time": "9:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0412",
+        "full_title": "Men’s Épée Individual – Knockout - إيبيه فردي رجال - خروج المغلوب",
+        "title": "Men’s Épée Individual – Knockout",
+        "title_ar": "إيبيه فردي رجال - خروج المغلوب",
+        "date": "2026-05-14",
+        "time": "10:40:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0413",
+        "full_title": "Women’s Foil Individual – Group Stage - فلوريه فردي سيدات - دور المجموعات",
+        "title": "Women’s Foil Individual – Group Stage",
+        "title_ar": "فلوريه فردي سيدات - دور المجموعات",
+        "date": "2026-05-14",
+        "time": "13:45:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0414",
+        "full_title": "Women’s Foil Individual – Knockout - فلوريه فردي سيدات - خروج المغلوب",
+        "title": "Women’s Foil Individual – Knockout",
+        "title_ar": "فلوريه فردي سيدات - خروج المغلوب",
+        "date": "2026-05-14",
+        "time": "15:40:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0415",
+        "full_title": "Men’s Épée Individual Final - نهائي إيبيه فردي رجال",
+        "title": "Men’s Épée Individual Final",
+        "title_ar": "نهائي إيبيه فردي رجال",
+        "date": "2026-05-14",
+        "time": "18:10:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0416",
+        "full_title": "Women’s Foil Individual Final - نهائي فلوريه فردي سيدات",
+        "title": "Women’s Foil Individual Final",
+        "title_ar": "نهائي فلوريه فردي سيدات",
+        "date": "2026-05-14",
+        "time": "18:40:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0417",
+        "full_title": "Women’s Épée Team – Knockout - إيبيه فرق سيدات - خروج المغلوب",
+        "title": "Women’s Épée Team – Knockout",
+        "title_ar": "إيبيه فرق سيدات - خروج المغلوب",
+        "date": "2026-05-15",
+        "time": "9:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0418",
+        "full_title": "Men’s Foil Team – Knockout - فلوريه فرق رجال - خروج المغلوب",
+        "title": "Men’s Foil Team – Knockout",
+        "title_ar": "فلوريه فرق رجال - خروج المغلوب",
+        "date": "2026-05-15",
+        "time": "9:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0421",
+        "full_title": "Women’s Épée Team Final - نهائي إيبيه فرق سيدات",
+        "title": "Women’s Épée Team Final",
+        "title_ar": "نهائي إيبيه فرق سيدات",
+        "date": "2026-05-15",
+        "time": "11:40:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0419",
+        "full_title": "Men’s Épée Team – Knockout - إيبيه فرق رجال - خروج المغلوب",
+        "title": "Men’s Épée Team – Knockout",
+        "title_ar": "إيبيه فرق رجال - خروج المغلوب",
+        "date": "2026-05-15",
+        "time": "12:50:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0420",
+        "full_title": "Women’s Foil Team – Knockout - فلوريه فرق سيدات - خروج المغلوب",
+        "title": "Women’s Foil Team – Knockout",
+        "title_ar": "فلوريه فرق سيدات - خروج المغلوب",
+        "date": "2026-05-15",
+        "time": "12:50:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0422",
+        "full_title": "Men’s Épée Team Final - نهائي إيبيه فرق رجال",
+        "title": "Men’s Épée Team Final",
+        "title_ar": "نهائي إيبيه فرق رجال",
+        "date": "2026-05-15",
+        "time": "15:30:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0423",
+        "full_title": "Women’s Foil Team Final - نهائي فلوريه فرق سيدات",
+        "title": "Women’s Foil Team Final",
+        "title_ar": "نهائي فلوريه فرق سيدات",
+        "date": "2026-05-15",
+        "time": "15:30:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0424",
+        "full_title": "Men’s Foil Team Final - نهائي فلوريه فرق رجال",
+        "title": "Men’s Foil Team Final",
+        "title_ar": "نهائي فلوريه فرق رجال",
+        "date": "2026-05-15",
+        "time": "16:40:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      }
+    ]
+  },
+  {
+    "sport": {
+      "id": "Equestrian",
+      "english_name": "Equestrian",
+      "arabic_name": "الفروسية",
+      "pictogram": "/files/equestrian.png"
+    },
+    "competitions": [
+      {
+        "id": "COM-2026-0088",
+        "full_title": "Team Show Jumping - قفز الحواجز فرق",
+        "title": "Team Show Jumping",
+        "title_ar": "قفز الحواجز فرق",
+        "date": "2026-05-13",
+        "time": "17:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0089",
+        "full_title": "Team Show Jumping - قفز الحواجز فرق",
+        "title": "Team Show Jumping",
+        "title_ar": "قفز الحواجز فرق",
+        "date": "2026-05-13",
+        "time": "19:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0090",
+        "full_title": "Team Show Jumping - قفز الحواجز فرق",
+        "title": "Team Show Jumping",
+        "title_ar": "قفز الحواجز فرق",
+        "date": "2026-05-13",
+        "time": "20:15:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0091",
+        "full_title": "Individual Show Jumping - قفز الحواجز فردي",
+        "title": "Individual Show Jumping",
+        "title_ar": "قفز الحواجز فردي",
+        "date": "2026-05-15",
+        "time": "17:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0092",
+        "full_title": "Individual Show Jumping - قفز الحواجز فردي",
+        "title": "Individual Show Jumping",
+        "title_ar": "قفز الحواجز فردي",
+        "date": "2026-05-15",
+        "time": "19:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0093",
+        "full_title": "Individual Show Jumping - قفز الحواجز فردي",
+        "title": "Individual Show Jumping",
+        "title_ar": "قفز الحواجز فردي",
+        "date": "2026-05-15",
+        "time": "20:15:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      }
+    ]
+  },
+  {
+    "sport": {
+      "id": "Boxing",
+      "english_name": "Boxing",
+      "arabic_name": "الملاكمة",
+      "pictogram": "/files/boxing.svg"
+    },
+    "competitions": [
+      {
+        "id": "COM-2026-0154",
+        "full_title": "Men’s 55 kg - 55 كجم رجال",
+        "title": "Men’s 55 kg",
+        "title_ar": "55 كجم رجال",
+        "date": "2026-05-13",
+        "time": "17:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0155",
+        "full_title": "Men’s 55 kg - 55 كجم رجال",
+        "title": "Men’s 55 kg",
+        "title_ar": "55 كجم رجال",
+        "date": "2026-05-13",
+        "time": "17:15:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0156",
+        "full_title": "Men’s 60 kg - 60 كجم رجال",
+        "title": "Men’s 60 kg",
+        "title_ar": "60 كجم رجال",
+        "date": "2026-05-13",
+        "time": "17:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0157",
+        "full_title": "Men’s 60 kg - 60 كجم رجال",
+        "title": "Men’s 60 kg",
+        "title_ar": "60 كجم رجال",
+        "date": "2026-05-13",
+        "time": "17:45:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0158",
+        "full_title": "Men’s 75 kg - 75 كجم رجال",
+        "title": "Men’s 75 kg",
+        "title_ar": "75 كجم رجال",
+        "date": "2026-05-13",
+        "time": "18:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0159",
+        "full_title": "Men’s 75 kg - 75 كجم رجال",
+        "title": "Men’s 75 kg",
+        "title_ar": "75 كجم رجال",
+        "date": "2026-05-13",
+        "time": "18:15:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0160",
+        "full_title": "Men’s 80 kg - 80 كجم رجال",
+        "title": "Men’s 80 kg",
+        "title_ar": "80 كجم رجال",
+        "date": "2026-05-13",
+        "time": "18:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0161",
+        "full_title": "Men’s 80 kg - 80 كجم رجال",
+        "title": "Men’s 80 kg",
+        "title_ar": "80 كجم رجال",
+        "date": "2026-05-13",
+        "time": "18:45:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0162",
+        "full_title": "Men’s 55 kg - 55 كجم رجال",
+        "title": "Men’s 55 kg",
+        "title_ar": "55 كجم رجال",
+        "date": "2026-05-14",
+        "time": "17:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0163",
+        "full_title": "Men’s 60 kg - 60 كجم رجال",
+        "title": "Men’s 60 kg",
+        "title_ar": "60 كجم رجال",
+        "date": "2026-05-14",
+        "time": "17:15:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0164",
+        "full_title": "Men’s 75 kg - 75 كجم رجال",
+        "title": "Men’s 75 kg",
+        "title_ar": "75 كجم رجال",
+        "date": "2026-05-14",
+        "time": "17:45:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0165",
+        "full_title": "Men’s 80 kg - 80 كجم رجال",
+        "title": "Men’s 80 kg",
+        "title_ar": "80 كجم رجال",
+        "date": "2026-05-14",
+        "time": "18:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      }
+    ]
+  },
+  {
+    "sport": {
+      "id": "Athletics",
+      "english_name": "Athletics",
+      "arabic_name": "ألعاب القوى",
+      "pictogram": "/files/athletics.svg"
+    },
+    "competitions": [
+      {
+        "id": "COM-2026-0021",
+        "full_title": "Men’s 5000m Race Walk - 5000 متر مشي رجال",
+        "title": "Men’s 5000m Race Walk",
+        "title_ar": "5000 متر مشي رجال",
+        "date": "2026-05-14",
+        "time": "8:30:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0022",
+        "full_title": "Women’s Heptathlon - سباعي سيدات",
+        "title": "Women’s Heptathlon",
+        "title_ar": "سباعي سيدات",
+        "date": "2026-05-14",
+        "time": "9:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0023",
+        "full_title": "Women’s Heptathlon - سباعي سيدات",
+        "title": "Women’s Heptathlon",
+        "title_ar": "سباعي سيدات",
+        "date": "2026-05-14",
+        "time": "10:15:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0024",
+        "full_title": "Women’s Heptathlon - سباعي سيدات",
+        "title": "Women’s Heptathlon",
+        "title_ar": "سباعي سيدات",
+        "date": "2026-05-14",
+        "time": "17:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0025",
+        "full_title": "Women’s 100 Metres Hurdles - 100 متر حواجز سيدات",
+        "title": "Women’s 100 Metres Hurdles",
+        "title_ar": "100 متر حواجز سيدات",
+        "date": "2026-05-14",
+        "time": "17:10:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0026",
+        "full_title": "Women’s Long Jump - الوثب الطويل سيدات",
+        "title": "Women’s Long Jump",
+        "title_ar": "الوثب الطويل سيدات",
+        "date": "2026-05-14",
+        "time": "17:15:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0027",
+        "full_title": "Women’s Discus Throw - قذف القرص سيدات",
+        "title": "Women’s Discus Throw",
+        "title_ar": "قذف القرص سيدات",
+        "date": "2026-05-14",
+        "time": "17:20:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0028",
+        "full_title": "Men’s 100 Metres - 100 متر رجال",
+        "title": "Men’s 100 Metres",
+        "title_ar": "100 متر رجال",
+        "date": "2026-05-14",
+        "time": "17:25:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0029",
+        "full_title": "Men’s High Jump - الوثب العالي رجال",
+        "title": "Men’s High Jump",
+        "title_ar": "الوثب العالي رجال",
+        "date": "2026-05-14",
+        "time": "17:30:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0030",
+        "full_title": "Women’s 100 Metres - 100 متر سيدات",
+        "title": "Women’s 100 Metres",
+        "title_ar": "100 متر سيدات",
+        "date": "2026-05-14",
+        "time": "17:35:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0031",
+        "full_title": "Men’s 400 Metres - 400 متر رجال",
+        "title": "Men’s 400 Metres",
+        "title_ar": "400 متر رجال",
+        "date": "2026-05-14",
+        "time": "17:50:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0032",
+        "full_title": "Men’s Shot Put - دفع الجلة رجال",
+        "title": "Men’s Shot Put",
+        "title_ar": "دفع الجلة رجال",
+        "date": "2026-05-14",
+        "time": "18:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0033",
+        "full_title": "Women’s 400 Metres - 400 متر سيدات",
+        "title": "Women’s 400 Metres",
+        "title_ar": "400 متر سيدات",
+        "date": "2026-05-14",
+        "time": "18:10:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0034",
+        "full_title": "Men’s 800 Metres - 800 متر رجال",
+        "title": "Men’s 800 Metres",
+        "title_ar": "800 متر رجال",
+        "date": "2026-05-14",
+        "time": "18:30:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0035",
+        "full_title": "Women’s 800 Metres - 800 متر سيدات",
+        "title": "Women’s 800 Metres",
+        "title_ar": "800 متر سيدات",
+        "date": "2026-05-14",
+        "time": "18:40:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0036",
+        "full_title": "Women’s Heptathlon - سباعي سيدات",
+        "title": "Women’s Heptathlon",
+        "title_ar": "سباعي سيدات",
+        "date": "2026-05-14",
+        "time": "18:45:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0037",
+        "full_title": "Men’s 3000m Steeplechase - 3000 متر موانع رجال",
+        "title": "Men’s 3000m Steeplechase",
+        "title_ar": "3000 متر موانع رجال",
+        "date": "2026-05-14",
+        "time": "19:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0038",
+        "full_title": "Women’s 10000 Metres - 10000 متر سيدات",
+        "title": "Women’s 10000 Metres",
+        "title_ar": "10000 متر سيدات",
+        "date": "2026-05-14",
+        "time": "19:30:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0039",
+        "full_title": "Men’s 100 Metres - 100 متر رجال",
+        "title": "Men’s 100 Metres",
+        "title_ar": "100 متر رجال",
+        "date": "2026-05-14",
+        "time": "20:05:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0040",
+        "full_title": "Women’s 100 Metres - 100 متر سيدات",
+        "title": "Women’s 100 Metres",
+        "title_ar": "100 متر سيدات",
+        "date": "2026-05-14",
+        "time": "20:15:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0041",
+        "full_title": "Women’s Heptathlon - سباعي سيدات",
+        "title": "Women’s Heptathlon",
+        "title_ar": "سباعي سيدات",
+        "date": "2026-05-15",
+        "time": "9:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0042",
+        "full_title": "Women’s Heptathlon - سباعي سيدات",
+        "title": "Women’s Heptathlon",
+        "title_ar": "سباعي سيدات",
+        "date": "2026-05-15",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0043",
+        "full_title": "Women’s Pole Vault - القفز بالزانة سيدات",
+        "title": "Women’s Pole Vault",
+        "title_ar": "القفز بالزانة سيدات",
+        "date": "2026-05-15",
+        "time": "17:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0044",
+        "full_title": "Women’s Hammer Throw - إطاحة المطرقة سيدات",
+        "title": "Women’s Hammer Throw",
+        "title_ar": "إطاحة المطرقة سيدات",
+        "date": "2026-05-15",
+        "time": "17:05:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0045",
+        "full_title": "Men’s 110 Metres Hurdles - 110 متر حواجز رجال",
+        "title": "Men’s 110 Metres Hurdles",
+        "title_ar": "110 متر حواجز رجال",
+        "date": "2026-05-15",
+        "time": "17:10:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0046",
+        "full_title": "Men’s Long Jump - الوثب الطويل رجال",
+        "title": "Men’s Long Jump",
+        "title_ar": "الوثب الطويل رجال",
+        "date": "2026-05-15",
+        "time": "17:15:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0047",
+        "full_title": "Men’s 400 Metres Hurdles - 400 متر حواجز رجال",
+        "title": "Men’s 400 Metres Hurdles",
+        "title_ar": "400 متر حواجز رجال",
+        "date": "2026-05-15",
+        "time": "17:25:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0048",
+        "full_title": "Women’s 400 Metres Hurdles - 400 متر حواجز سيدات",
+        "title": "Women’s 400 Metres Hurdles",
+        "title_ar": "400 متر حواجز سيدات",
+        "date": "2026-05-15",
+        "time": "17:40:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0049",
+        "full_title": "Men’s 400 Metres - 400 متر رجال",
+        "title": "Men’s 400 Metres",
+        "title_ar": "400 متر رجال",
+        "date": "2026-05-15",
+        "time": "17:55:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0050",
+        "full_title": "Women’s 400 Metres - 400 متر سيدات",
+        "title": "Women’s 400 Metres",
+        "title_ar": "400 متر سيدات",
+        "date": "2026-05-15",
+        "time": "18:10:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0051",
+        "full_title": "Men’s Javelin Throw - رمي الرمح رجال",
+        "title": "Men’s Javelin Throw",
+        "title_ar": "رمي الرمح رجال",
+        "date": "2026-05-15",
+        "time": "18:15:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0052",
+        "full_title": "Men’s 110 Metres Hurdles - 110 متر حواجز رجال",
+        "title": "Men’s 110 Metres Hurdles",
+        "title_ar": "110 متر حواجز رجال",
+        "date": "2026-05-15",
+        "time": "18:20:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0053",
+        "full_title": "Women’s Heptathlon - سباعي سيدات",
+        "title": "Women’s Heptathlon",
+        "title_ar": "سباعي سيدات",
+        "date": "2026-05-15",
+        "time": "18:25:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0054",
+        "full_title": "Men’s 10000 Metres - 10000 متر رجال",
+        "title": "Men’s 10000 Metres",
+        "title_ar": "10000 متر رجال",
+        "date": "2026-05-15",
+        "time": "18:40:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0055",
+        "full_title": "Men’s 4x100 Metres Relay - 4×100 متر تتابع رجال",
+        "title": "Men’s 4x100 Metres Relay",
+        "title_ar": "4×100 متر تتابع رجال",
+        "date": "2026-05-15",
+        "time": "19:25:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0056",
+        "full_title": "Women’s 4x100 Metres Relay - 4×100 متر تتابع سيدات",
+        "title": "Women’s 4x100 Metres Relay",
+        "title_ar": "4×100 متر تتابع سيدات",
+        "date": "2026-05-15",
+        "time": "19:45:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0057",
+        "full_title": "Men’s Decathlon - العشاري رجال",
+        "title": "Men’s Decathlon",
+        "title_ar": "العشاري رجال",
+        "date": "2026-05-16",
+        "time": "9:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0058",
+        "full_title": "Men’s Decathlon - العشاري رجال",
+        "title": "Men’s Decathlon",
+        "title_ar": "العشاري رجال",
+        "date": "2026-05-16",
+        "time": "9:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0059",
+        "full_title": "Men’s Decathlon - العشاري رجال",
+        "title": "Men’s Decathlon",
+        "title_ar": "العشاري رجال",
+        "date": "2026-05-16",
+        "time": "10:45:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0060",
+        "full_title": "Men’s Decathlon - العشاري رجال",
+        "title": "Men’s Decathlon",
+        "title_ar": "العشاري رجال",
+        "date": "2026-05-16",
+        "time": "17:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0061",
+        "full_title": "Women’s Triple Jump - الوثب الثلاثي سيدات",
+        "title": "Women’s Triple Jump",
+        "title_ar": "الوثب الثلاثي سيدات",
+        "date": "2026-05-16",
+        "time": "17:05:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0062",
+        "full_title": "Men’s Hammer Throw - إطاحة المطرقة رجال",
+        "title": "Men’s Hammer Throw",
+        "title_ar": "إطاحة المطرقة رجال",
+        "date": "2026-05-16",
+        "time": "17:10:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0063",
+        "full_title": "Men’s 400 Metres Hurdles - 400 متر حواجز رجال",
+        "title": "Men’s 400 Metres Hurdles",
+        "title_ar": "400 متر حواجز رجال",
+        "date": "2026-05-16",
+        "time": "17:15:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0064",
+        "full_title": "Women’s 400 Metres Hurdles - 400 متر حواجز سيدات",
+        "title": "Women’s 400 Metres Hurdles",
+        "title_ar": "400 متر حواجز سيدات",
+        "date": "2026-05-16",
+        "time": "17:30:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0065",
+        "full_title": "Men’s 200 Metres - 200 متر رجال",
+        "title": "Men’s 200 Metres",
+        "title_ar": "200 متر رجال",
+        "date": "2026-05-16",
+        "time": "17:40:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0066",
+        "full_title": "Women’s 200 Metres - 200 متر سيدات",
+        "title": "Women’s 200 Metres",
+        "title_ar": "200 متر سيدات",
+        "date": "2026-05-16",
+        "time": "18:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0067",
+        "full_title": "Women’s 5000m Race Walk - 5000 متر مشي سيدات",
+        "title": "Women’s 5000m Race Walk",
+        "title_ar": "5000 متر مشي سيدات",
+        "date": "2026-05-16",
+        "time": "18:15:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0068",
+        "full_title": "Men’s Decathlon - العشاري رجال",
+        "title": "Men’s Decathlon",
+        "title_ar": "العشاري رجال",
+        "date": "2026-05-16",
+        "time": "18:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0069",
+        "full_title": "Women’s 3000m Steeplechase - 3000 متر موانع سيدات",
+        "title": "Women’s 3000m Steeplechase",
+        "title_ar": "3000 متر موانع سيدات",
+        "date": "2026-05-16",
+        "time": "18:45:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0070",
+        "full_title": "Men’s Triple Jump - الوثب الثلاثي رجال",
+        "title": "Men’s Triple Jump",
+        "title_ar": "الوثب الثلاثي رجال",
+        "date": "2026-05-16",
+        "time": "18:50:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0071",
+        "full_title": "Women’s Javelin Throw - رمي الرمح سيدات",
+        "title": "Women’s Javelin Throw",
+        "title_ar": "رمي الرمح سيدات",
+        "date": "2026-05-16",
+        "time": "18:55:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0072",
+        "full_title": "Mixed 4x400 Metres Relay - 4×400 متر تتابع مختلط",
+        "title": "Mixed 4x400 Metres Relay",
+        "title_ar": "4×400 متر تتابع مختلط",
+        "date": "2026-05-16",
+        "time": "19:10:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0073",
+        "full_title": "Men’s Decathlon - العشاري رجال",
+        "title": "Men’s Decathlon",
+        "title_ar": "العشاري رجال",
+        "date": "2026-05-17",
+        "time": "9:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0074",
+        "full_title": "Men’s Decathlon - العشاري رجال",
+        "title": "Men’s Decathlon",
+        "title_ar": "العشاري رجال",
+        "date": "2026-05-17",
+        "time": "9:45:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0075",
+        "full_title": "Men’s Decathlon - العشاري رجال",
+        "title": "Men’s Decathlon",
+        "title_ar": "العشاري رجال",
+        "date": "2026-05-17",
+        "time": "11:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0076",
+        "full_title": "Men’s Decathlon - العشاري رجال",
+        "title": "Men’s Decathlon",
+        "title_ar": "العشاري رجال",
+        "date": "2026-05-17",
+        "time": "17:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0077",
+        "full_title": "Women’s High Jump - الوثب العالي سيدات",
+        "title": "Women’s High Jump",
+        "title_ar": "الوثب العالي سيدات",
+        "date": "2026-05-17",
+        "time": "17:05:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0078",
+        "full_title": "Men’s 200 Metres - 200 متر رجال",
+        "title": "Men’s 200 Metres",
+        "title_ar": "200 متر رجال",
+        "date": "2026-05-17",
+        "time": "17:15:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0079",
+        "full_title": "Women’s Shot Put - دفع الجلة سيدات",
+        "title": "Women’s Shot Put",
+        "title_ar": "دفع الجلة سيدات",
+        "date": "2026-05-17",
+        "time": "17:20:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0080",
+        "full_title": "Women’s 200 Metres - 200 متر سيدات",
+        "title": "Women’s 200 Metres",
+        "title_ar": "200 متر سيدات",
+        "date": "2026-05-17",
+        "time": "17:30:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0081",
+        "full_title": "Men’s 5000 Metres - 5000 متر رجال",
+        "title": "Men’s 5000 Metres",
+        "title_ar": "5000 متر رجال",
+        "date": "2026-05-17",
+        "time": "17:40:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0082",
+        "full_title": "Women’s 1500 Metres - 1500 متر سيدات",
+        "title": "Women’s 1500 Metres",
+        "title_ar": "1500 متر سيدات",
+        "date": "2026-05-17",
+        "time": "18:05:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0083",
+        "full_title": "Men’s 1500 Metres - 1500 متر رجال",
+        "title": "Men’s 1500 Metres",
+        "title_ar": "1500 متر رجال",
+        "date": "2026-05-17",
+        "time": "18:20:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0084",
+        "full_title": "Men’s Discus Throw - قذف القرص رجال",
+        "title": "Men’s Discus Throw",
+        "title_ar": "قذف القرص رجال",
+        "date": "2026-05-17",
+        "time": "18:25:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0085",
+        "full_title": "Men’s Decathlon - العشاري رجال",
+        "title": "Men’s Decathlon",
+        "title_ar": "العشاري رجال",
+        "date": "2026-05-17",
+        "time": "18:30:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0086",
+        "full_title": "Women’s 4x400 Metres Relay - 4×400 متر تتابع سيدات",
+        "title": "Women’s 4x400 Metres Relay",
+        "title_ar": "4×400 متر تتابع سيدات",
+        "date": "2026-05-17",
+        "time": "18:45:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0087",
+        "full_title": "Men’s 4x400 Metres Relay - 4×400 متر تتابع رجال",
+        "title": "Men’s 4x400 Metres Relay",
+        "title_ar": "4×400 متر تتابع رجال",
+        "date": "2026-05-17",
+        "time": "19:05:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      }
+    ]
+  },
+  {
+    "sport": {
+      "id": "Handball",
+      "english_name": "Handball",
+      "arabic_name": "كرة اليد",
+      "pictogram": "/files/handball.svg"
+    },
+    "competitions": [
+      {
+        "id": "COM-2026-0094",
+        "full_title": "Men’s Preliminary - Match 1 - رجال تمهيدي - المباراة 1",
+        "title": "Men’s Preliminary - Match 1",
+        "title_ar": "رجال تمهيدي - المباراة 1",
+        "date": "2026-05-14",
+        "time": "18:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0095",
+        "full_title": "Men’s Preliminary - Match 2 - رجال تمهيدي - المباراة 2",
+        "title": "Men’s Preliminary - Match 2",
+        "title_ar": "رجال تمهيدي - المباراة 2",
+        "date": "2026-05-15",
+        "time": "18:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0096",
+        "full_title": "Men’s Preliminary - Match 3 - رجال تمهيدي - المباراة 3",
+        "title": "Men’s Preliminary - Match 3",
+        "title_ar": "رجال تمهيدي - المباراة 3",
+        "date": "2026-05-16",
+        "time": "16:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0097",
+        "full_title": "Men’s Preliminary - Match 4 - رجال تمهيدي - المباراة 4",
+        "title": "Men’s Preliminary - Match 4",
+        "title_ar": "رجال تمهيدي - المباراة 4",
+        "date": "2026-05-16",
+        "time": "18:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0098",
+        "full_title": "Men’s Preliminary - Match 5 - رجال تمهيدي - المباراة 5",
+        "title": "Men’s Preliminary - Match 5",
+        "title_ar": "رجال تمهيدي - المباراة 5",
+        "date": "2026-05-18",
+        "time": "16:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0099",
+        "full_title": "Men’s Preliminary - Match 6 - رجال تمهيدي - المباراة 6",
+        "title": "Men’s Preliminary - Match 6",
+        "title_ar": "رجال تمهيدي - المباراة 6",
+        "date": "2026-05-18",
+        "time": "18:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0100",
+        "full_title": "Men’s Preliminary - Match 7 - رجال تمهيدي - المباراة 7",
+        "title": "Men’s Preliminary - Match 7",
+        "title_ar": "رجال تمهيدي - المباراة 7",
+        "date": "2026-05-19",
+        "time": "16:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0101",
+        "full_title": "Men’s Preliminary - Match 8 - رجال تمهيدي - المباراة 8",
+        "title": "Men’s Preliminary - Match 8",
+        "title_ar": "رجال تمهيدي - المباراة 8",
+        "date": "2026-05-19",
+        "time": "18:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0102",
+        "full_title": "Men’s Preliminary - Match 9 - رجال تمهيدي - المباراة 9",
+        "title": "Men’s Preliminary - Match 9",
+        "title_ar": "رجال تمهيدي - المباراة 9",
+        "date": "2026-05-21",
+        "time": "18:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0103",
+        "full_title": "Men’s Preliminary - Match 10 - رجال تمهيدي - المباراة 10",
+        "title": "Men’s Preliminary - Match 10",
+        "title_ar": "رجال تمهيدي - المباراة 10",
+        "date": "2026-05-22",
+        "time": "18:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      }
+    ]
+  },
+  {
+    "sport": {
+      "id": "Snooker",
+      "english_name": "Snooker",
+      "arabic_name": "السنوكر",
+      "pictogram": "/files/billiards and snooker.svg"
+    },
+    "competitions": [
+      {
+        "id": "COM-2026-0241",
+        "full_title": "Men’s 6-Red Singles - 6 كرات فردي رجال",
+        "title": "Men’s 6-Red Singles",
+        "title_ar": "6 كرات فردي رجال",
+        "date": "2026-05-15",
+        "time": "13:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0242",
+        "full_title": "Men’s 6-Red Singles - 6 كرات فردي رجال",
+        "title": "Men’s 6-Red Singles",
+        "title_ar": "6 كرات فردي رجال",
+        "date": "2026-05-15",
+        "time": "13:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0243",
+        "full_title": "Men’s 6-Red Singles - 6 كرات فردي رجال",
+        "title": "Men’s 6-Red Singles",
+        "title_ar": "6 كرات فردي رجال",
+        "date": "2026-05-15",
+        "time": "13:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0244",
+        "full_title": "Men’s 6-Red Singles - 6 كرات فردي رجال",
+        "title": "Men’s 6-Red Singles",
+        "title_ar": "6 كرات فردي رجال",
+        "date": "2026-05-15",
+        "time": "13:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0245",
+        "full_title": "Men’s 6-Red Singles - 6 كرات فردي رجال",
+        "title": "Men’s 6-Red Singles",
+        "title_ar": "6 كرات فردي رجال",
+        "date": "2026-05-15",
+        "time": "15:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0246",
+        "full_title": "Men’s 6-Red Singles - 6 كرات فردي رجال",
+        "title": "Men’s 6-Red Singles",
+        "title_ar": "6 كرات فردي رجال",
+        "date": "2026-05-15",
+        "time": "15:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0247",
+        "full_title": "Men’s 6-Red Singles - 6 كرات فردي رجال",
+        "title": "Men’s 6-Red Singles",
+        "title_ar": "6 كرات فردي رجال",
+        "date": "2026-05-15",
+        "time": "15:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0248",
+        "full_title": "Men’s 6-Red Singles - 6 كرات فردي رجال",
+        "title": "Men’s 6-Red Singles",
+        "title_ar": "6 كرات فردي رجال",
+        "date": "2026-05-15",
+        "time": "15:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0249",
+        "full_title": "Men’s 6-Red Singles - 6 كرات فردي رجال",
+        "title": "Men’s 6-Red Singles",
+        "title_ar": "6 كرات فردي رجال",
+        "date": "2026-05-15",
+        "time": "17:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0250",
+        "full_title": "Men’s 6-Red Singles - 6 كرات فردي رجال",
+        "title": "Men’s 6-Red Singles",
+        "title_ar": "6 كرات فردي رجال",
+        "date": "2026-05-15",
+        "time": "17:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0251",
+        "full_title": "Men’s 6-Red Singles - 6 كرات فردي رجال",
+        "title": "Men’s 6-Red Singles",
+        "title_ar": "6 كرات فردي رجال",
+        "date": "2026-05-15",
+        "time": "17:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0252",
+        "full_title": "Men’s 6-Red Singles - 6 كرات فردي رجال",
+        "title": "Men’s 6-Red Singles",
+        "title_ar": "6 كرات فردي رجال",
+        "date": "2026-05-15",
+        "time": "17:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0253",
+        "full_title": "Men’s 6-Red Singles - 6 كرات فردي رجال",
+        "title": "Men’s 6-Red Singles",
+        "title_ar": "6 كرات فردي رجال",
+        "date": "2026-05-16",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0254",
+        "full_title": "Men’s 6-Red Singles - 6 كرات فردي رجال",
+        "title": "Men’s 6-Red Singles",
+        "title_ar": "6 كرات فردي رجال",
+        "date": "2026-05-16",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0255",
+        "full_title": "Men’s 6-Red Singles - 6 كرات فردي رجال",
+        "title": "Men’s 6-Red Singles",
+        "title_ar": "6 كرات فردي رجال",
+        "date": "2026-05-16",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0256",
+        "full_title": "Men’s 6-Red Singles - 6 كرات فردي رجال",
+        "title": "Men’s 6-Red Singles",
+        "title_ar": "6 كرات فردي رجال",
+        "date": "2026-05-16",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0257",
+        "full_title": "Men’s 6-Red Singles - 6 كرات فردي رجال",
+        "title": "Men’s 6-Red Singles",
+        "title_ar": "6 كرات فردي رجال",
+        "date": "2026-05-16",
+        "time": "13:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0258",
+        "full_title": "Men’s 6-Red Singles - 6 كرات فردي رجال",
+        "title": "Men’s 6-Red Singles",
+        "title_ar": "6 كرات فردي رجال",
+        "date": "2026-05-16",
+        "time": "13:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0259",
+        "full_title": "Men’s 6-Red Singles - 6 كرات فردي رجال",
+        "title": "Men’s 6-Red Singles",
+        "title_ar": "6 كرات فردي رجال",
+        "date": "2026-05-16",
+        "time": "17:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0260",
+        "full_title": "Men’s Singles - فردي رجال",
+        "title": "Men’s Singles",
+        "title_ar": "فردي رجال",
+        "date": "2026-05-17",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0261",
+        "full_title": "Men’s Singles - فردي رجال",
+        "title": "Men’s Singles",
+        "title_ar": "فردي رجال",
+        "date": "2026-05-17",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0262",
+        "full_title": "Men’s Singles - فردي رجال",
+        "title": "Men’s Singles",
+        "title_ar": "فردي رجال",
+        "date": "2026-05-17",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0263",
+        "full_title": "Men’s Singles - فردي رجال",
+        "title": "Men’s Singles",
+        "title_ar": "فردي رجال",
+        "date": "2026-05-17",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0264",
+        "full_title": "Men’s Singles - فردي رجال",
+        "title": "Men’s Singles",
+        "title_ar": "فردي رجال",
+        "date": "2026-05-17",
+        "time": "13:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0265",
+        "full_title": "Men’s Singles - فردي رجال",
+        "title": "Men’s Singles",
+        "title_ar": "فردي رجال",
+        "date": "2026-05-17",
+        "time": "13:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0266",
+        "full_title": "Men’s Singles - فردي رجال",
+        "title": "Men’s Singles",
+        "title_ar": "فردي رجال",
+        "date": "2026-05-17",
+        "time": "13:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0267",
+        "full_title": "Men’s Singles - فردي رجال",
+        "title": "Men’s Singles",
+        "title_ar": "فردي رجال",
+        "date": "2026-05-17",
+        "time": "13:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0268",
+        "full_title": "Men’s Singles - فردي رجال",
+        "title": "Men’s Singles",
+        "title_ar": "فردي رجال",
+        "date": "2026-05-17",
+        "time": "15:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0269",
+        "full_title": "Men’s Singles - فردي رجال",
+        "title": "Men’s Singles",
+        "title_ar": "فردي رجال",
+        "date": "2026-05-17",
+        "time": "15:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0270",
+        "full_title": "Men’s Singles - فردي رجال",
+        "title": "Men’s Singles",
+        "title_ar": "فردي رجال",
+        "date": "2026-05-17",
+        "time": "15:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0271",
+        "full_title": "Men’s Singles - فردي رجال",
+        "title": "Men’s Singles",
+        "title_ar": "فردي رجال",
+        "date": "2026-05-17",
+        "time": "15:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0272",
+        "full_title": "Men’s Singles - فردي رجال",
+        "title": "Men’s Singles",
+        "title_ar": "فردي رجال",
+        "date": "2026-05-17",
+        "time": "18:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0273",
+        "full_title": "Men’s Singles - فردي رجال",
+        "title": "Men’s Singles",
+        "title_ar": "فردي رجال",
+        "date": "2026-05-17",
+        "time": "18:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0274",
+        "full_title": "Men’s Singles - فردي رجال",
+        "title": "Men’s Singles",
+        "title_ar": "فردي رجال",
+        "date": "2026-05-17",
+        "time": "18:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0275",
+        "full_title": "Men’s Singles - فردي رجال",
+        "title": "Men’s Singles",
+        "title_ar": "فردي رجال",
+        "date": "2026-05-17",
+        "time": "18:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0276",
+        "full_title": "Men’s Singles - فردي رجال",
+        "title": "Men’s Singles",
+        "title_ar": "فردي رجال",
+        "date": "2026-05-18",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0277",
+        "full_title": "Men’s Singles - فردي رجال",
+        "title": "Men’s Singles",
+        "title_ar": "فردي رجال",
+        "date": "2026-05-18",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0279",
+        "full_title": "Men’s Team - فرق رجال",
+        "title": "Men’s Team",
+        "title_ar": "فرق رجال",
+        "date": "2026-05-18",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0280",
+        "full_title": "Men’s Team - فرق رجال",
+        "title": "Men’s Team",
+        "title_ar": "فرق رجال",
+        "date": "2026-05-18",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0281",
+        "full_title": "Men’s Team - فرق رجال",
+        "title": "Men’s Team",
+        "title_ar": "فرق رجال",
+        "date": "2026-05-18",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0282",
+        "full_title": "Men’s Team - فرق رجال",
+        "title": "Men’s Team",
+        "title_ar": "فرق رجال",
+        "date": "2026-05-18",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0278",
+        "full_title": "Men’s Singles - فردي رجال",
+        "title": "Men’s Singles",
+        "title_ar": "فردي رجال",
+        "date": "2026-05-18",
+        "time": "13:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0283",
+        "full_title": "Men’s Team - فرق رجال",
+        "title": "Men’s Team",
+        "title_ar": "فرق رجال",
+        "date": "2026-05-18",
+        "time": "13:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0284",
+        "full_title": "Men’s Team - فرق رجال",
+        "title": "Men’s Team",
+        "title_ar": "فرق رجال",
+        "date": "2026-05-18",
+        "time": "13:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0285",
+        "full_title": "Men’s Team - فرق رجال",
+        "title": "Men’s Team",
+        "title_ar": "فرق رجال",
+        "date": "2026-05-19",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0286",
+        "full_title": "Men’s Team - فرق رجال",
+        "title": "Men’s Team",
+        "title_ar": "فرق رجال",
+        "date": "2026-05-19",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0287",
+        "full_title": "Men’s Team - فرق رجال",
+        "title": "Men’s Team",
+        "title_ar": "فرق رجال",
+        "date": "2026-05-19",
+        "time": "13:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      }
+    ]
+  },
+  {
+    "sport": {
+      "id": "Basketball 5x5",
+      "english_name": "Basketball 5x5",
+      "arabic_name": "كرة السلة",
+      "pictogram": "/files/basketball.svg"
+    },
+    "competitions": [
+      {
+        "id": "COM-2026-0110",
+        "full_title": "Men’s Preliminary - Match 1 - رجال تمهيدي - المباراة 1",
+        "title": "Men’s Preliminary - Match 1",
+        "title_ar": "رجال تمهيدي - المباراة 1",
+        "date": "2026-05-15",
+        "time": "16:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0111",
+        "full_title": "Men’s Preliminary - Match 2 - رجال تمهيدي - المباراة 2",
+        "title": "Men’s Preliminary - Match 2",
+        "title_ar": "رجال تمهيدي - المباراة 2",
+        "date": "2026-05-15",
+        "time": "18:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0112",
+        "full_title": "Men’s Preliminary - Match 3 - رجال تمهيدي - المباراة 3",
+        "title": "Men’s Preliminary - Match 3",
+        "title_ar": "رجال تمهيدي - المباراة 3",
+        "date": "2026-05-16",
+        "time": "16:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0113",
+        "full_title": "Men’s Preliminary - Match 4 - رجال تمهيدي - المباراة 4",
+        "title": "Men’s Preliminary - Match 4",
+        "title_ar": "رجال تمهيدي - المباراة 4",
+        "date": "2026-05-16",
+        "time": "18:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0114",
+        "full_title": "Men’s Preliminary - Match 5 - رجال تمهيدي - المباراة 5",
+        "title": "Men’s Preliminary - Match 5",
+        "title_ar": "رجال تمهيدي - المباراة 5",
+        "date": "2026-05-17",
+        "time": "16:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0115",
+        "full_title": "Men’s Preliminary - Match 6 - رجال تمهيدي - المباراة 6",
+        "title": "Men’s Preliminary - Match 6",
+        "title_ar": "رجال تمهيدي - المباراة 6",
+        "date": "2026-05-17",
+        "time": "18:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0116",
+        "full_title": "Men’s Semi Final - Match 7 - رجال نصف النهائي - المباراة 7",
+        "title": "Men’s Semi Final - Match 7",
+        "title_ar": "رجال نصف النهائي - المباراة 7",
+        "date": "2026-05-19",
+        "time": "16:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0117",
+        "full_title": "Men’s Semi Final - Match 8 - رجال نصف النهائي - المباراة 8",
+        "title": "Men’s Semi Final - Match 8",
+        "title_ar": "رجال نصف النهائي - المباراة 8",
+        "date": "2026-05-19",
+        "time": "18:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0118",
+        "full_title": "Men’s Bronze Medal Match - مباراة الميدالية البرونزية رجال",
+        "title": "Men’s Bronze Medal Match",
+        "title_ar": "مباراة الميدالية البرونزية رجال",
+        "date": "2026-05-20",
+        "time": "16:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0119",
+        "full_title": "Men’s Final - النهائي رجال",
+        "title": "Men’s Final",
+        "title_ar": "النهائي رجال",
+        "date": "2026-05-20",
+        "time": "18:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      }
+    ]
+  },
+  {
+    "sport": {
+      "id": "Padel",
+      "english_name": "Padel",
+      "arabic_name": "البادل",
+      "pictogram": "/files/padel.svg"
+    },
+    "competitions": [
+      {
+        "id": "COM-2026-0401",
+        "full_title": "Women’s Preliminary Match - مباراة تمهيدية سيدات",
+        "title": "Women’s Preliminary Match",
+        "title_ar": "مباراة تمهيدية سيدات",
+        "date": "2026-05-16",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0402",
+        "full_title": "Women’s Preliminary Match - مباراة تمهيدية سيدات",
+        "title": "Women’s Preliminary Match",
+        "title_ar": "مباراة تمهيدية سيدات",
+        "date": "2026-05-16",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0403",
+        "full_title": "Men’s Preliminary Match - مباراة تمهيدية رجال",
+        "title": "Men’s Preliminary Match",
+        "title_ar": "مباراة تمهيدية رجال",
+        "date": "2026-05-16",
+        "time": "16:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0404",
+        "full_title": "Men’s Preliminary Match - مباراة تمهيدية رجال",
+        "title": "Men’s Preliminary Match",
+        "title_ar": "مباراة تمهيدية رجال",
+        "date": "2026-05-16",
+        "time": "16:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0385",
+        "full_title": "Women’s Preliminary Match - مباراة تمهيدية سيدات",
+        "title": "Women’s Preliminary Match",
+        "title_ar": "مباراة تمهيدية سيدات",
+        "date": "2026-05-17",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0386",
+        "full_title": "Women’s Preliminary Match - مباراة تمهيدية سيدات",
+        "title": "Women’s Preliminary Match",
+        "title_ar": "مباراة تمهيدية سيدات",
+        "date": "2026-05-17",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0387",
+        "full_title": "Men’s Preliminary Match - مباراة تمهيدية رجال",
+        "title": "Men’s Preliminary Match",
+        "title_ar": "مباراة تمهيدية رجال",
+        "date": "2026-05-17",
+        "time": "16:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0388",
+        "full_title": "Men’s Preliminary Match - مباراة تمهيدية رجال",
+        "title": "Men’s Preliminary Match",
+        "title_ar": "مباراة تمهيدية رجال",
+        "date": "2026-05-17",
+        "time": "16:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0389",
+        "full_title": "Women’s Preliminary Match - مباراة تمهيدية سيدات",
+        "title": "Women’s Preliminary Match",
+        "title_ar": "مباراة تمهيدية سيدات",
+        "date": "2026-05-18",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0390",
+        "full_title": "Women’s Preliminary Match - مباراة تمهيدية سيدات",
+        "title": "Women’s Preliminary Match",
+        "title_ar": "مباراة تمهيدية سيدات",
+        "date": "2026-05-18",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0391",
+        "full_title": "Men’s Preliminary Match - مباراة تمهيدية رجال",
+        "title": "Men’s Preliminary Match",
+        "title_ar": "مباراة تمهيدية رجال",
+        "date": "2026-05-18",
+        "time": "16:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0392",
+        "full_title": "Men’s Preliminary Match - مباراة تمهيدية رجال",
+        "title": "Men’s Preliminary Match",
+        "title_ar": "مباراة تمهيدية رجال",
+        "date": "2026-05-18",
+        "time": "16:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0393",
+        "full_title": "Women’s Preliminary Match - مباراة تمهيدية سيدات",
+        "title": "Women’s Preliminary Match",
+        "title_ar": "مباراة تمهيدية سيدات",
+        "date": "2026-05-19",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0394",
+        "full_title": "Women’s Preliminary Match - مباراة تمهيدية سيدات",
+        "title": "Women’s Preliminary Match",
+        "title_ar": "مباراة تمهيدية سيدات",
+        "date": "2026-05-19",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0395",
+        "full_title": "Men’s Preliminary Match - مباراة تمهيدية رجال",
+        "title": "Men’s Preliminary Match",
+        "title_ar": "مباراة تمهيدية رجال",
+        "date": "2026-05-19",
+        "time": "16:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0396",
+        "full_title": "Men’s Preliminary Match - مباراة تمهيدية رجال",
+        "title": "Men’s Preliminary Match",
+        "title_ar": "مباراة تمهيدية رجال",
+        "date": "2026-05-19",
+        "time": "16:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0397",
+        "full_title": "Women’s Preliminary Match - مباراة تمهيدية سيدات",
+        "title": "Women’s Preliminary Match",
+        "title_ar": "مباراة تمهيدية سيدات",
+        "date": "2026-05-20",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0398",
+        "full_title": "Women’s Preliminary Match - مباراة تمهيدية سيدات",
+        "title": "Women’s Preliminary Match",
+        "title_ar": "مباراة تمهيدية سيدات",
+        "date": "2026-05-20",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0399",
+        "full_title": "Men’s Preliminary Match - مباراة تمهيدية رجال",
+        "title": "Men’s Preliminary Match",
+        "title_ar": "مباراة تمهيدية رجال",
+        "date": "2026-05-20",
+        "time": "16:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0400",
+        "full_title": "Men’s Preliminary Match - مباراة تمهيدية رجال",
+        "title": "Men’s Preliminary Match",
+        "title_ar": "مباراة تمهيدية رجال",
+        "date": "2026-05-20",
+        "time": "16:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      }
+    ]
+  },
+  {
+    "sport": {
+      "id": "Volleyball",
+      "english_name": "Volleyball",
+      "arabic_name": "كرة الطائرة",
+      "pictogram": "/files/volleyball.svg"
+    },
+    "competitions": [
+      {
+        "id": "COM-2026-0104",
+        "full_title": "Men’s Preliminary - Match 1 - رجال تمهيدي - المباراة 1",
+        "title": "Men’s Preliminary - Match 1",
+        "title_ar": "رجال تمهيدي - المباراة 1",
+        "date": "2026-05-16",
+        "time": "16:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0105",
+        "full_title": "Men’s Preliminary - Match 2 - رجال تمهيدي - المباراة 2",
+        "title": "Men’s Preliminary - Match 2",
+        "title_ar": "رجال تمهيدي - المباراة 2",
+        "date": "2026-05-16",
+        "time": "18:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0106",
+        "full_title": "Men’s Preliminary - Match 3 - رجال تمهيدي - المباراة 3",
+        "title": "Men’s Preliminary - Match 3",
+        "title_ar": "رجال تمهيدي - المباراة 3",
+        "date": "2026-05-17",
+        "time": "16:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0107",
+        "full_title": "Men’s Preliminary - Match 4 - رجال تمهيدي - المباراة 4",
+        "title": "Men’s Preliminary - Match 4",
+        "title_ar": "رجال تمهيدي - المباراة 4",
+        "date": "2026-05-17",
+        "time": "18:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0108",
+        "full_title": "Men’s Preliminary - Match 5 - رجال تمهيدي - المباراة 5",
+        "title": "Men’s Preliminary - Match 5",
+        "title_ar": "رجال تمهيدي - المباراة 5",
+        "date": "2026-05-19",
+        "time": "16:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0109",
+        "full_title": "Men’s Preliminary - Match 6 - رجال تمهيدي - المباراة 6",
+        "title": "Men’s Preliminary - Match 6",
+        "title_ar": "رجال تمهيدي - المباراة 6",
+        "date": "2026-05-19",
+        "time": "18:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      }
+    ]
+  },
+  {
+    "sport": {
+      "id": "Archery",
+      "english_name": "Archery",
+      "arabic_name": "الرماية بالقوس",
+      "pictogram": "/files/archery.svg"
+    },
+    "competitions": [
+      {
+        "id": "COM-2026-0437",
+        "full_title": "Official Training – Recurve & Compound - التدريب الرسمي - القوس الأولمبي والمركب",
+        "title": "Official Training – Recurve & Compound",
+        "title_ar": "التدريب الرسمي - القوس الأولمبي والمركب",
+        "date": "2026-05-17",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0438",
+        "full_title": "Individual Qualification – Recurve & Compound - الدور التأهيلي فردي - القوس الأولمبي والمركب",
+        "title": "Individual Qualification – Recurve & Compound",
+        "title_ar": "الدور التأهيلي فردي - القوس الأولمبي والمركب",
+        "date": "2026-05-18",
+        "time": "10:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0439",
+        "full_title": "Team Qualification – Recurve & Compound - الدور التأهيلي فرق - القوس الأولمبي والمركب",
+        "title": "Team Qualification – Recurve & Compound",
+        "title_ar": "الدور التأهيلي فرق - القوس الأولمبي والمركب",
+        "date": "2026-05-19",
+        "time": "9:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0440",
+        "full_title": "Mixed Team Qualification – Recurve & Compound - الدور التأهيلي فرق مختلط - القوس الأولمبي والمركب",
+        "title": "Mixed Team Qualification – Recurve & Compound",
+        "title_ar": "الدور التأهيلي فرق مختلط - القوس الأولمبي والمركب",
+        "date": "2026-05-19",
+        "time": "11:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0441",
+        "full_title": "Individual Qualification – Recurve & Compound - الدور التأهيلي فردي - القوس الأولمبي والمركب",
+        "title": "Individual Qualification – Recurve & Compound",
+        "title_ar": "الدور التأهيلي فردي - القوس الأولمبي والمركب",
+        "date": "2026-05-20",
+        "time": "9:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0442",
+        "full_title": "Compound Finals – Individual & Team - نهائيات القوس المركب فردي وفرق",
+        "title": "Compound Finals – Individual & Team",
+        "title_ar": "نهائيات القوس المركب فردي وفرق",
+        "date": "2026-05-21",
+        "time": "9:30:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0443",
+        "full_title": "Recurve Finals – Individual & Team - نهائيات القوس الأولمبي فردي وفرق",
+        "title": "Recurve Finals – Individual & Team",
+        "title_ar": "نهائيات القوس الأولمبي فردي وفرق",
+        "date": "2026-05-21",
+        "time": "14:00:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      }
+    ]
+  },
+  {
+    "sport": {
+      "id": "Karate",
+      "english_name": "Karate",
+      "arabic_name": "الكاراتيه",
+      "pictogram": "/files/karate.svg"
+    },
+    "competitions": [
+      {
+        "id": "COM-2026-0144",
+        "full_title": "Men’s Kumite -60 kg - كوميتيه رجال -60 كجم",
+        "title": "Men’s Kumite -60 kg",
+        "title_ar": "كوميتيه رجال -60 كجم",
+        "date": "2026-05-21",
+        "time": "11:00:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0145",
+        "full_title": "Men’s Kumite -67 kg - كوميتيه رجال -67 كجم",
+        "title": "Men’s Kumite -67 kg",
+        "title_ar": "كوميتيه رجال -67 كجم",
+        "date": "2026-05-21",
+        "time": "11:40:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0146",
+        "full_title": "Men’s Kumite -75 kg - كوميتيه رجال -75 كجم",
+        "title": "Men’s Kumite -75 kg",
+        "title_ar": "كوميتيه رجال -75 كجم",
+        "date": "2026-05-21",
+        "time": "15:30:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0147",
+        "full_title": "Men’s Kumite -84 kg - كوميتيه رجال -84 كجم",
+        "title": "Men’s Kumite -84 kg",
+        "title_ar": "كوميتيه رجال -84 كجم",
+        "date": "2026-05-21",
+        "time": "16:10:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0148",
+        "full_title": "Men’s Kumite +84 kg - كوميتيه رجال +84 كجم",
+        "title": "Men’s Kumite +84 kg",
+        "title_ar": "كوميتيه رجال +84 كجم",
+        "date": "2026-05-21",
+        "time": "16:50:00",
+        "status": "Scheduled",
+        "medal_day": 0
+      },
+      {
+        "id": "COM-2026-0149",
+        "full_title": "Men’s Kumite -60 kg - كوميتيه رجال -60 كجم",
+        "title": "Men’s Kumite -60 kg",
+        "title_ar": "كوميتيه رجال -60 كجم",
+        "date": "2026-05-21",
+        "time": "18:30:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0150",
+        "full_title": "Men’s Kumite -67 kg - كوميتيه رجال -67 كجم",
+        "title": "Men’s Kumite -67 kg",
+        "title_ar": "كوميتيه رجال -67 كجم",
+        "date": "2026-05-21",
+        "time": "18:35:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0151",
+        "full_title": "Men’s Kumite -75 kg - كوميتيه رجال -75 كجم",
+        "title": "Men’s Kumite -75 kg",
+        "title_ar": "كوميتيه رجال -75 كجم",
+        "date": "2026-05-21",
+        "time": "18:40:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0152",
+        "full_title": "Men’s Kumite -84 kg - كوميتيه رجال -84 كجم",
+        "title": "Men’s Kumite -84 kg",
+        "title_ar": "كوميتيه رجال -84 كجم",
+        "date": "2026-05-21",
+        "time": "18:45:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      },
+      {
+        "id": "COM-2026-0153",
+        "full_title": "Men’s Kumite +84 kg - كوميتيه رجال +84 كجم",
+        "title": "Men’s Kumite +84 kg",
+        "title_ar": "كوميتيه رجال +84 كجم",
+        "date": "2026-05-21",
+        "time": "18:50:00",
+        "status": "Scheduled",
+        "medal_day": 1
+      }
+    ]
+  }
+]
