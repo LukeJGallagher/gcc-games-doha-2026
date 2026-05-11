@@ -769,8 +769,9 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-tab_overview, tab_daily, tab_plan, tab_history, tab_fix = st.tabs([
-    "📊 Overview", "📆 Daily Plan", "📅 PA Coverage Plan", "📈 vs 2022", "🛠 Fix List"
+tab_overview, tab_daily, tab_plan, tab_history, tab_audit, tab_fix = st.tabs([
+    "📊 Overview", "📆 Daily Plan", "📅 PA Coverage Plan",
+    "📈 vs 2022", "🔍 Audit", "🛠 Fix List",
 ])
 
 
@@ -1857,6 +1858,71 @@ with tab_history:
         # ---- Realistic 2026 baseline calculation ----
         target = int(hist_ksa[hist_ksa["In_2026"]!="no"]["Total"].sum())
         st.info(f"💡 Like-for-like 2022 → 2026 baseline (sports in both games): **{target} medals**.")
+
+
+# ===========================================================================
+# TAB: AUDIT
+# ===========================================================================
+with tab_audit:
+    st.subheader("Per-sport audit")
+    st.caption("Cross-checks our KSA data against the live GCC API. Run sport-by-sport "
+               "to find missing entries, name mismatches, phase oddities. "
+               "Re-run after each scrape to track drift.")
+
+    AUDIT_DIR = HERE / "data" / "audit"
+    AUDIT_DIR.mkdir(parents=True, exist_ok=True)
+
+    cA, cB = st.columns([1, 3])
+    with cA:
+        if st.button("🔄 Run audit now", key="run_audit_btn"):
+            try:
+                from audit_sports import run_audit
+                out = run_audit()
+                st.success(f"Audit saved → {out.name}")
+            except Exception as e:
+                st.error(f"Audit failed: {e}")
+
+    audit_files = sorted(AUDIT_DIR.glob("AUDIT_*.csv"))
+    if not audit_files:
+        st.info("No audits yet — click 'Run audit now' to generate one.")
+    else:
+        latest = audit_files[-1]
+        with cB:
+            st.caption(f"Latest: **{latest.name}** ({file_age(AUDIT_DIR, 'AUDIT_*.csv')})")
+
+        df_audit = pd.read_csv(latest, encoding="utf-8-sig").fillna("")
+
+        # Summary tile row
+        sev_counts = df_audit["Severity"].value_counts().to_dict()
+        s1, s2, s3, s4 = st.columns(4)
+        s1.markdown(f"<div class='metric-card'><div class='label'>HIGH</div><div class='value' style='color:#c53030;'>{sev_counts.get('HIGH',0)}</div></div>", unsafe_allow_html=True)
+        s2.markdown(f"<div class='metric-card'><div class='label'>MEDIUM</div><div class='value' style='color:#d97706;'>{sev_counts.get('MEDIUM',0)}</div></div>", unsafe_allow_html=True)
+        s3.markdown(f"<div class='metric-card'><div class='label'>LOW</div><div class='value' style='color:#6b7280;'>{sev_counts.get('LOW',0)}</div></div>", unsafe_allow_html=True)
+        s4.markdown(f"<div class='metric-card'><div class='label'>INFO (sports)</div><div class='value'>{sev_counts.get('INFO',0)}</div></div>", unsafe_allow_html=True)
+        st.write("")
+
+        # Sport-by-sport expanders
+        st.markdown("### Sport-by-sport breakdown")
+        sport_filter = st.selectbox("Filter to sport",
+                                     options=["(all sports)"] + sorted(df_audit["Sport"].unique()),
+                                     key="audit_sport_filter")
+        view_df = df_audit if sport_filter == "(all sports)" else df_audit[df_audit["Sport"] == sport_filter]
+
+        # Stats row first
+        info_rows = view_df[view_df["Severity"] == "INFO"]
+        if not info_rows.empty:
+            st.markdown("**Coverage**")
+            st.dataframe(info_rows[["Sport","Detail"]], hide_index=True, use_container_width=True)
+
+        # Then findings by severity
+        for sev, colour in [("HIGH","#c53030"), ("MEDIUM","#d97706"), ("LOW","#6b7280")]:
+            sev_rows = view_df[view_df["Severity"] == sev]
+            if sev_rows.empty: continue
+            st.markdown(f"<h4 style='color:{colour}'>{sev} ({len(sev_rows)})</h4>", unsafe_allow_html=True)
+            st.dataframe(sev_rows[["Sport","Issue","Detail","Suggested_action"]],
+                         hide_index=True, use_container_width=True)
+
+        csv_download_button("Audit", df_audit, key="csv_audit")
 
 
 # ===========================================================================

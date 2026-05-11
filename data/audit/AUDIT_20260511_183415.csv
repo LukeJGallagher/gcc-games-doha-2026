@@ -1,0 +1,38 @@
+﻿Severity,Sport,Issue,Detail,Suggested_action
+INFO,Archery,Coverage summary,"7 comps, 0 with entries, 0 with KSA",
+INFO,Athletics,Coverage summary,"67 comps, 0 with entries, 0 with KSA",
+INFO,Basketball 3x3,Coverage summary,"24 comps, 16 with entries, 6 with KSA",
+INFO,Billiards,Coverage summary,"51 comps, 0 with entries, 0 with KSA",
+INFO,Bowling,Coverage summary,"12 comps, 0 with entries, 0 with KSA",
+INFO,Boxing,Coverage summary,"12 comps, 0 with entries, 0 with KSA",
+INFO,Equestrian,Coverage summary,"6 comps, 0 with entries, 0 with KSA",
+INFO,Fencing,Coverage summary,"20 comps, 0 with entries, 0 with KSA",
+INFO,Handball,Coverage summary,"10 comps, 10 with entries, 4 with KSA",
+INFO,Karate,Coverage summary,"10 comps, 0 with entries, 0 with KSA",
+INFO,Padel,Coverage summary,"20 comps, 0 with entries, 0 with KSA",
+INFO,Shooting,Coverage summary,"26 comps, 0 with entries, 0 with KSA",
+INFO,Snooker,Coverage summary,"47 comps, 0 with entries, 0 with KSA",
+LOW,Swimming,Unrecognised phase name,Phase='Event 1' on COM-2026-0494 - Boys 800m Freestyle Heat 1,Update PHASE_PRIORITY / PHASE_COLOURS in dashboard if rendering oddly
+LOW,Swimming,Unrecognised phase name,Phase='Event 2' on COM-2026-0495 - Boys 200m Individual Medley Heat 1,Update PHASE_PRIORITY / PHASE_COLOURS in dashboard if rendering oddly
+LOW,Swimming,Unrecognised phase name,Phase='Event 3' on COM-2026-0496 - Boys 50m Freestyle Heat 1,Update PHASE_PRIORITY / PHASE_COLOURS in dashboard if rendering oddly
+LOW,Swimming,Unrecognised phase name,Phase='Event 4' on COM-2026-0497 - Boys 100m Backstroke Heat 1,Update PHASE_PRIORITY / PHASE_COLOURS in dashboard if rendering oddly
+LOW,Swimming,Unrecognised phase name,Phase='Event 5' on COM-2026-0498 - Boys 200م Butterfly Heat 1,Update PHASE_PRIORITY / PHASE_COLOURS in dashboard if rendering oddly
+LOW,Swimming,Unrecognised phase name,Phase='Event 6' on COM-2026-0499 - Boys 400m Freestyle Heat 1,Update PHASE_PRIORITY / PHASE_COLOURS in dashboard if rendering oddly
+LOW,Swimming,Unrecognised phase name,Phase='Event 7' on COM-2026-0500 - Boys 50m Breaststroke Heat 1,Update PHASE_PRIORITY / PHASE_COLOURS in dashboard if rendering oddly
+LOW,Swimming,Unrecognised phase name,Phase='Event 8' on COM-2026-0501 - Boys 100m Freestyle Heat 1,Update PHASE_PRIORITY / PHASE_COLOURS in dashboard if rendering oddly
+LOW,Swimming,Unrecognised phase name,Phase='Event 9' on COM-2026-0502 - Boys 200m Backstroke Heat 1,Update PHASE_PRIORITY / PHASE_COLOURS in dashboard if rendering oddly
+LOW,Swimming,Unrecognised phase name,Phase='Event 10' on COM-2026-0503 - Boys 400m Freestyle Relay Heat 1,Update PHASE_PRIORITY / PHASE_COLOURS in dashboard if rendering oddly
+LOW,Swimming,Unrecognised phase name,Phase='Event 11' on COM-2026-0504 - Boys 400m Individual Medley Heat 1,Update PHASE_PRIORITY / PHASE_COLOURS in dashboard if rendering oddly
+LOW,Swimming,Unrecognised phase name,Phase='Event 12' on COM-2026-0505 - Boys 100m Breaststroke Heat 1,Update PHASE_PRIORITY / PHASE_COLOURS in dashboard if rendering oddly
+LOW,Swimming,Unrecognised phase name,Phase='Event 13' on COM-2026-0506 - Boys 200m Freestyle Heat 1,Update PHASE_PRIORITY / PHASE_COLOURS in dashboard if rendering oddly
+LOW,Swimming,Unrecognised phase name,Phase='Event 14' on COM-2026-0507 - Boys 50m Butterfly Heat 1,Update PHASE_PRIORITY / PHASE_COLOURS in dashboard if rendering oddly
+LOW,Swimming,Unrecognised phase name,Phase='Event 14' on COM-2026-0508 - Boys 50m Butterfly Heat 2,Update PHASE_PRIORITY / PHASE_COLOURS in dashboard if rendering oddly
+LOW,Swimming,Unrecognised phase name,Phase='Event 15' on COM-2026-0509 - Boys 800m Freestyle Relay Heat 1,Update PHASE_PRIORITY / PHASE_COLOURS in dashboard if rendering oddly
+LOW,Swimming,Unrecognised phase name,Phase='Event 16' on COM-2026-0510 - Boys 1500m Freestyle Heat 1,Update PHASE_PRIORITY / PHASE_COLOURS in dashboard if rendering oddly
+LOW,Swimming,Unrecognised phase name,Phase='Event 17' on COM-2026-0511 - Boys 50m Backstroke Heat 1,Update PHASE_PRIORITY / PHASE_COLOURS in dashboard if rendering oddly
+LOW,Swimming,Unrecognised phase name,Phase='Event 18' on COM-2026-0512 - Boys 100m Butterfly Heat 1,Update PHASE_PRIORITY / PHASE_COLOURS in dashboard if rendering oddly
+LOW,Swimming,Unrecognised phase name,Phase='Event 19' on COM-2026-0513 - Boys 200m Breaststroke Heat 1,Update PHASE_PRIORITY / PHASE_COLOURS in dashboard if rendering oddly
+LOW,Swimming,Unrecognised phase name,Phase='Event 20' on COM-2026-0514 - Boys 400m Medley Relay Heat 1,Update PHASE_PRIORITY / PHASE_COLOURS in dashboard if rendering oddly
+INFO,Swimming,Coverage summary,"21 comps, 21 with entries, 20 with KSA",
+INFO,Table Tennis,Coverage summary,"97 comps, 0 with entries, 0 with KSA",
+INFO,Taekwondo,Coverage summary,"24 comps, 0 with entries, 0 with KSA",

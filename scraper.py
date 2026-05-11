@@ -104,7 +104,7 @@ def _participant_rows(comp: dict, sport: str) -> list[dict]:
         "Class":            "",
         "Discipline":       title_en,
         "Discipline_AR":    title_ar,
-        "Phase":            comp.get("stage_name", ""),
+        "Phase":            _normalise_phase(comp.get("stage_name", ""), comp.get("title", "")),
         "Gender":           comp.get("gender_category", ""),
         "Age":              "",
         "Wind":             "",
@@ -141,11 +141,25 @@ def _participant_rows(comp: dict, sport: str) -> list[dict]:
     return out
 
 
+def _normalise_phase(stage_name: str, title: str) -> str:
+    """Some sports' API stage_name is non-standard (e.g. Swimming uses 'Event N').
+    Derive a usable phase from the title when stage_name is opaque."""
+    s = (stage_name or "").strip()
+    t = (title or "").lower()
+    # Swimming's 'Event N' isn't a real phase. Look at the title.
+    if s.lower().startswith("event"):
+        if "final" in t: return "Final"
+        if "semi"  in t: return "Semi Final"
+        if "heat"  in t: return "Heats"
+        return s
+    return s
+
+
 def _schedule_row(comp: dict, sport: str, country_entries: list[str]) -> dict:
     title_en, title_ar = _split_bilingual(comp.get("title", ""))
     if not title_ar:
         title_ar = comp.get("title_ar", "")
-    phase    = comp.get("stage_name", "")
+    phase    = _normalise_phase(comp.get("stage_name", ""), comp.get("title", ""))
     start    = comp.get("time", "")
     duration = estimate_duration_minutes(sport, title_en, phase)
     return {
