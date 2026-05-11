@@ -1040,6 +1040,45 @@ with tab_history:
     hist_table = load_history_medal_table()
     hist_ksa   = load_history_ksa_sport()
 
+    # ---- TARGET TRACKER (linear extrapolation) ----
+    games_start  = pd.Timestamp("2026-05-12").date()
+    games_end    = pd.Timestamp("2026-05-22").date()
+    games_total  = (games_end - games_start).days + 1
+    today_d      = pd.Timestamp.today().date()
+
+    g_live = silver = bronze = total_live = 0
+    if not medals_df.empty:
+        kr = medals_df[medals_df["NOC"]=="KSA"]
+        if not kr.empty:
+            g_live   = int(kr.iloc[0]["Gold"])
+            silver   = int(kr.iloc[0]["Silver"])
+            bronze   = int(kr.iloc[0]["Bronze"])
+            total_live = g_live + silver + bronze
+
+    if today_d < games_start:
+        elapsed = 0
+        days_until = (games_start - today_d).days
+        track_status = f"Games begin in {days_until} day{'s' if days_until!=1 else ''}"
+        projection = "—"
+    elif today_d > games_end:
+        elapsed = games_total
+        track_status = "Games complete"
+        projection = total_live
+    else:
+        elapsed = (today_d - games_start).days + 1
+        projection = int(round(total_live / elapsed * games_total)) if elapsed else 0
+        track_status = f"Day {elapsed} of {games_total}"
+
+    target_2022_like_for_like = int(hist_ksa[hist_ksa["In_2026"]!="no"]["Total"].sum()) if not hist_ksa.empty else 51
+
+    tt1, tt2, tt3, tt4 = st.columns(4)
+    tt1.markdown(f"<div class='metric-card'><div class='label'>Status</div><div class='value' style='font-size:1.05rem;'>{track_status}</div></div>", unsafe_allow_html=True)
+    tt2.markdown(f"<div class='metric-card'><div class='label'>Medals so far (2026)</div><div class='value'>{total_live}</div></div>", unsafe_allow_html=True)
+    proj_colour = "#235036" if isinstance(projection, int) and projection >= target_2022_like_for_like else "#c53030"
+    tt3.markdown(f"<div class='metric-card'><div class='label'>Projected total at this pace</div><div class='value' style='color:{proj_colour};'>{projection}</div></div>", unsafe_allow_html=True)
+    tt4.markdown(f"<div class='metric-card'><div class='label'>Like-for-like 2022 target</div><div class='value'>{target_2022_like_for_like}</div></div>", unsafe_allow_html=True)
+    st.write("")
+
     # ---- Medal table comparison ----
     if not medals_df.empty and not hist_table.empty:
         live = medals_df.set_index("NOC")[["Gold","Silver","Bronze","Total","Rank"]]
@@ -1112,10 +1151,44 @@ with tab_history:
         st.metric("Bronze",  bronze,   delta=bronze - 29)
         st.metric("Total",   total_live, delta=total_live - 67)
 
-    # ---- KSA medals by sport: 2022 baseline vs 2026 live ----
+    # ---- KSA medals by sport: 2022 baseline vs 2026 live, with delta ----
     st.divider()
-    st.markdown("### KSA medals by sport — 2022 baseline")
+    st.markdown("### KSA medals by sport — 2022 vs live 2026")
+
+    # Build 2026 per-sport KSA medals from results_df (deduped at team level)
+    live_by_sport = pd.DataFrame(columns=["Sport", "G_26", "S_26", "B_26", "Total_26"])
+    if not results_df.empty and "Medal" in results_df.columns:
+        live = results_df.copy()
+        live["Medal"] = live["Medal"].astype(str).str.strip().str.upper().str[:1]
+        live = live[live["Medal"].isin(["G","S","B"])]
+        # Dedupe team rows: 1 per (Sport, Discipline, Medal)
+        live = live.drop_duplicates(subset=["Sport","Discipline","Medal"], keep="first")
+        if not live.empty:
+            live_by_sport = (live.groupby(["Sport","Medal"]).size().unstack(fill_value=0)
+                             .reindex(columns=["G","S","B"], fill_value=0)
+                             .rename(columns={"G":"G_26","S":"S_26","B":"B_26"})
+                             .reset_index())
+            live_by_sport["Total_26"] = live_by_sport[["G_26","S_26","B_26"]].sum(axis=1)
+
     if not hist_ksa.empty:
+        # Merge 2022 ↔ 2026 by Sport
+        compare_sport = hist_ksa.rename(columns={"Gold":"G_22","Silver":"S_22","Bronze":"B_22","Total":"Total_22"})
+        compare_sport = compare_sport.merge(live_by_sport, on="Sport", how="left").fillna(0)
+        for c in ("G_26","S_26","B_26","Total_26"):
+            compare_sport[c] = compare_sport[c].astype(int)
+        compare_sport["Δ Total"] = compare_sport["Total_26"] - compare_sport["Total_22"]
+
+        cols_show = ["Sport","In_2026",
+                     "G_22","S_22","B_22","Total_22",
+                     "G_26","S_26","B_26","Total_26","Δ Total"]
+        st.dataframe(compare_sport[cols_show], hide_index=True, use_container_width=True,
+                     column_config={
+                         "Δ Total": st.column_config.NumberColumn("Δ Total", format="%+d"),
+                         "In_2026": st.column_config.TextColumn("In 2026?"),
+                     })
+
+        # ---- 2022 bar (kept for visual)
+        st.markdown("**2022 KSA medals by sport (visual)**")
         fig_sport = go.Figure()
         h = hist_ksa.sort_values("Total")
         fig_sport.add_trace(go.Bar(y=h["Sport"], x=h["Gold"],
