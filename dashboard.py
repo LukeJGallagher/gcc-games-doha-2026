@@ -40,7 +40,7 @@ STAMINA    = "#c3d9d1"   # light
 VICTORY    = "#ebce83"   # gold
 LAVENDER   = "#9263aa"   # secondary
 MALE_COL   = ELITE
-FEMALE_COL = "#e69aaa"
+FEMALE_COL = LAVENDER   # Team Saudi secondary — no pink
 
 SPORT_COLOURS = {
     "Athletics": ELITE,
@@ -777,6 +777,13 @@ with tab_daily:
             if day_df.empty:
                 st.info(f"No events on {fmt_date(pick)} matching the filters.")
             else:
+                # Compute time columns BEFORE building the PPT export sections
+                day_df["TS"] = pd.to_datetime(day_df["Date"].dt.strftime("%Y-%m-%d") + " " + day_df["Time Start"], errors="coerce")
+                day_df["TE"] = pd.to_datetime(day_df["Date"].dt.strftime("%Y-%m-%d") + " " + day_df["Time End"],   errors="coerce")
+                miss = day_df["TE"].isna() & day_df["TS"].notna()
+                day_df.loc[miss, "TE"] = day_df.loc[miss, "TS"] + pd.to_timedelta(day_df.loc[miss, "Duration_Min"], unit="min")
+                day_df = day_df.dropna(subset=["TS","TE"]).sort_values("TS")
+
                 # ---- PPT export for this day ----
                 daily_sections = []
                 team_matches_today = day_df[day_df["Match_Type"]=="team"].copy()
@@ -802,11 +809,6 @@ with tab_daily:
                                     daily_sections,
                                     subtitle="Athletes, events and venues for this competition day",
                                     key="ppt_daily")
-                day_df["TS"] = pd.to_datetime(day_df["Date"].dt.strftime("%Y-%m-%d") + " " + day_df["Time Start"], errors="coerce")
-                day_df["TE"] = pd.to_datetime(day_df["Date"].dt.strftime("%Y-%m-%d") + " " + day_df["Time End"],   errors="coerce")
-                miss = day_df["TE"].isna() & day_df["TS"].notna()
-                day_df.loc[miss, "TE"] = day_df.loc[miss, "TS"] + pd.to_timedelta(day_df.loc[miss, "Duration_Min"], unit="min")
-                day_df = day_df.dropna(subset=["TS","TE"]).sort_values("TS")
 
                 day_df["Priority"] = day_df.apply(event_priority, axis=1)
 
