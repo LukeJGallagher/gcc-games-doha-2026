@@ -1,0 +1,59 @@
+name: GCC scrape every 2h
+
+on:
+  # Manual run button in the Actions tab
+  workflow_dispatch:
+
+  # Auto-fire every 2h on the hour (UTC)
+  # Riyadh = UTC+3, so 03/05/07/09... local
+  schedule:
+    - cron: "0 */2 * * *"
+
+# Allow the workflow to push CSVs back to the repo
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: gcc-scrape
+      cancel-in-progress: false
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Need full token so the commit can be pushed back
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run full pipeline
+        run: python run_scrape.py --full
+        env:
+          PYTHONIOENCODING: utf-8
+
+      - name: Commit new CSVs
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add data/
+          # only commit if there's something new
+          if git diff --cached --quiet; then
+            echo "::notice::No data changes this run."
+          else
+            STAMP=$(date -u +%Y-%m-%dT%H:%MZ)
+            git commit -m "Auto-scrape ${STAMP}"
+            git push
+            echo "::notice::Pushed new CSVs at ${STAMP}"
+          fi
