@@ -263,6 +263,72 @@ else:
     st.info("No athlete data.")
 
 # ---------------------------------------------------------------------------
+# Row 2b: SOTC vs Non-SOTC (only if SOTC column populated)
+# ---------------------------------------------------------------------------
+if not sched_df.empty and "SOTC" in sched_df.columns and (sched_df["SOTC"] != "").any():
+    unique = sched_df.groupby(["Given Name", "Family Name"]).first().reset_index()
+    unique["SOTC_norm"] = unique["SOTC"].fillna("").astype(str).str.upper().eq("YES")
+    n_sotc    = int(unique["SOTC_norm"].sum())
+    n_non     = int((~unique["SOTC_norm"]).sum())
+    total     = n_sotc + n_non
+
+    c4, c5 = st.columns([1, 2])
+    with c4:
+        st.subheader("SOTC vs Non-SOTC")
+        fig = go.Figure(go.Pie(
+            labels=["SOTC", "Non-SOTC"],
+            values=[n_sotc, n_non],
+            hole=0.65,
+            marker=dict(colors=[ENABLER, ELITE]),
+            sort=False,
+            textinfo="label+value",
+            textfont=dict(size=14, color="white"),
+        ))
+        fig.update_layout(
+            showlegend=False,
+            annotations=[dict(text=f"<b>{total}</b><br>Athletes", x=0.5, y=0.5,
+                              font_size=18, showarrow=False)],
+            margin=dict(t=10, b=10, l=10, r=10),
+            height=320,
+        )
+        st.plotly_chart(fig, use_container_width=True)
+        st.caption(f"SOTC {n_sotc} ({n_sotc/max(total,1)*100:.0f}%) · Non-SOTC {n_non} ({n_non/max(total,1)*100:.0f}%)")
+
+    with c5:
+        st.subheader("SOTC Athletes by Sport")
+        unique["Sport_norm"] = unique["Sport"]
+        by_sport_sotc = (
+            unique.groupby(["Sport", "SOTC_norm"]).size().reset_index(name="n")
+        )
+        pv = by_sport_sotc.pivot(index="Sport", columns="SOTC_norm", values="n").fillna(0)
+        pv.columns = ["Non-SOTC" if c is False else "SOTC" for c in pv.columns]
+        pv["Total"] = pv.sum(axis=1)
+        pv = pv[pv.get("SOTC", 0) > 0].sort_values("Total", ascending=True)
+
+        if not pv.empty:
+            fig = go.Figure()
+            fig.add_trace(go.Bar(
+                y=pv.index, x=pv["SOTC"], name="SOTC",
+                orientation="h", marker_color=ENABLER,
+                text=pv["SOTC"].astype(int), textposition="inside"))
+            if "Non-SOTC" in pv.columns:
+                fig.add_trace(go.Bar(
+                    y=pv.index, x=pv["Non-SOTC"], name="Non-SOTC",
+                    orientation="h", marker_color=ELITE,
+                    text=pv["Non-SOTC"].astype(int), textposition="inside"))
+            fig.update_layout(
+                barmode="stack", height=320, margin=dict(t=10, b=10, l=10, r=10),
+                legend=dict(orientation="h", y=1.08),
+                xaxis_title="", yaxis_title="",
+                plot_bgcolor="white",
+            )
+            st.plotly_chart(fig, use_container_width=True)
+        else:
+            st.info("No SOTC athletes flagged in current data.")
+
+    st.divider()
+
+# ---------------------------------------------------------------------------
 # Row 3: schedule heatmap (Sport × Date)
 # ---------------------------------------------------------------------------
 st.subheader("KSA Schedule — Sport × Date")

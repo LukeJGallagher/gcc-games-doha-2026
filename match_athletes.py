@@ -30,6 +30,7 @@ from config import RESULTS_DIR, SCHEDULE_DIR
 
 DEFAULT_ROSTER_GLOB     = "KSA_GCC2026_Athletes_Events*.xlsx"
 DEFAULT_REGREQUEST_GLOB = "GCC2026_REG_RegRequest_*.xlsx"
+DEFAULT_SHORTLIST_GLOB  = "Athletes Details*.xlsx"
 
 OUTPUT_COLUMNS = [
     "Given Name", "Family Name", "Date of Birth",
@@ -39,6 +40,8 @@ OUTPUT_COLUMNS = [
     # RegRequest enrichment
     "Person_Key", "Photo_URL", "Photo_Stale",
     "Reg_Disciplines", "Reg_Status", "Reg_Created", "Reg_In_Bornan",
+    # Shortlist enrichment
+    "SOTC",
 ]
 
 # ---------------------------------------------------------------------------
@@ -169,9 +172,55 @@ def load_regrequest(path: Path) -> dict:
     return enriched
 
 
-def enrich_row(out_row: dict, reg_lookup: dict) -> dict:
+def _tokenise_name(name: str) -> frozenset:
+    """Lowercase tokens with non-alpha stripped. 'ALI, MOHAMED A' → {'ali','mohamed','a'}."""
+    if not name:
+        return frozenset()
+    t = re.sub(r"[^a-z\s]", " ", str(name).lower())
+    return frozenset(w for w in t.split() if len(w) > 1)
+
+
+def load_shortlist(path: Path) -> tuple[dict, dict]:
+    """Return (by_dob, by_nameset) lookups: each → SOTC 'Yes'/'No'.
+
+    Shortlist uses CAPS LAST, FIRST format; events file uses separate
+    Given/Family columns. DoBs are reliable for ~70% of athletes; the
+    remainder need a name-token fallback (event 'Abdulaziz Aljadani'
+    matches Shortlist 'Abdulaziz ALJADANI').
+    """
+    df = pd.read_excel(path, sheet_name="Shortlist")
+    ath = df.groupby("Full Name").agg({"SOTC": "first", "Date Of Birth": "first"}).reset_index()
+    by_dob: dict = {}
+    by_name: dict = {}
+    for _, row in ath.iterrows():
+        sotc = "Yes" if str(row.get("SOTC", "")).strip().upper() == "YES" else "No"
+        dob  = str(row.get("Date Of Birth", "") or "")[:10]
+        if dob and by_dob.get(dob) != "Yes":
+            by_dob[dob] = sotc
+        tokens = _tokenise_name(row.get("Full Name", ""))
+        if tokens and by_name.get(tokens) != "Yes":
+            by_name[tokens] = sotc
+    return by_dob, by_name
+
+
+def enrich_row(out_row: dict, reg_lookup: dict,
+               sotc_dob: dict | None = None, sotc_name: dict | None = None) -> dict:
     key = _name_key(out_row.get("Family Name"), out_row.get("Given Name"), out_row.get("Date of Birth"))
     info = reg_lookup.get(key)
+    # SOTC: try DoB first, then full-name token-set superset match
+    sotc_val = ""
+    dob = str(out_row.get("Date of Birth", "") or "")[:10]
+    if sotc_dob and dob in sotc_dob:
+        sotc_val = sotc_dob[dob]
+    elif sotc_name:
+        event_tokens = _tokenise_name(
+            f"{out_row.get('Given Name', '')} {out_row.get('Family Name', '')}")
+        # match if event's tokens are a subset of any shortlist entry's tokens
+        for tokens, val in sotc_name.items():
+            if event_tokens and event_tokens.issubset(tokens):
+                sotc_val = val
+                break
+    out_row["SOTC"] = sotc_val
     if not info:
         out_row.update({
             "Person_Key": "", "Photo_URL": "", "Photo_Stale": "",
@@ -307,6 +356,16 @@ def main():
     else:
         print(f"[REGREQ]   no file matching {DEFAULT_REGREQUEST_GLOB} - skipping enrichment")
 
+    # Shortlist (SOTC flag) - optional enricher
+    sl_path = next(iter(sorted(Path(".").glob(DEFAULT_SHORTLIST_GLOB))), None)
+    sotc_dob: dict = {}
+    sotc_name: dict = {}
+    if sl_path:
+        print(f"[SHORTLIST] {sl_path.name}")
+        sotc_dob, sotc_name = load_shortlist(sl_path)
+        n_sotc = sum(1 for v in sotc_dob.values() if v == "Yes")
+        print(f"  {len(sotc_dob)} athletes, {n_sotc} flagged SOTC")
+
     # Match
     out_rows: list[dict] = []
     unmatched: list[dict] = []
@@ -339,7 +398,7 @@ def main():
                 "Gender":         s.get("Gender", ""),
                 "Match_Type":     "team" if "Team" in str(ath.get("Event","")) else "individual",
                 "Source_URL":     s.get("Source_URL", ""),
-            }, reg_lookup))
+            }, reg_lookup, sotc_dob, sotc_name))
 
     # Write
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
