@@ -336,6 +336,20 @@ def load_results_ksa() -> pd.DataFrame:
     return df
 
 
+@st.cache_data(ttl=3600)
+def load_history_medal_table() -> pd.DataFrame:
+    f = HERE / "data" / "history" / "gcc_2022_medal_table.csv"
+    if not f.exists(): return pd.DataFrame()
+    return pd.read_csv(f)
+
+
+@st.cache_data(ttl=3600)
+def load_history_ksa_sport() -> pd.DataFrame:
+    f = HERE / "data" / "history" / "gcc_2022_ksa_by_sport.csv"
+    if not f.exists(): return pd.DataFrame()
+    return pd.read_csv(f)
+
+
 @st.cache_data(ttl=600)
 def load_venues() -> dict:
     """Venue → {lat, lon, district} from venues.json."""
@@ -443,8 +457,8 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-tab_overview, tab_daily, tab_plan, tab_fix = st.tabs([
-    "📊 Overview", "📆 Daily Plan", "📅 PA Coverage Plan", "🛠 Fix List"
+tab_overview, tab_daily, tab_plan, tab_history, tab_fix = st.tabs([
+    "📊 Overview", "📆 Daily Plan", "📅 PA Coverage Plan", "📈 vs 2022", "🛠 Fix List"
 ])
 
 
@@ -1014,6 +1028,127 @@ with tab_plan:
         st.caption("Each cell = number of phases (e.g. 3 = Qual + Semi + Final on the same day).")
     else:
         st.info("Select at least one target sport to build the plan.")
+
+
+# ===========================================================================
+# TAB: vs 2022
+# ===========================================================================
+with tab_history:
+    st.subheader("Performance vs GCC Games 2022 (Kuwait)")
+    st.caption("Reference baseline: KSA finished 4th at Kuwait 2022 with 67 medals (16G · 22S · 29B).")
+
+    hist_table = load_history_medal_table()
+    hist_ksa   = load_history_ksa_sport()
+
+    # ---- Medal table comparison ----
+    if not medals_df.empty and not hist_table.empty:
+        live = medals_df.set_index("NOC")[["Gold","Silver","Bronze","Total","Rank"]]
+        hist = hist_table.set_index("NOC")[["Gold","Silver","Bronze","Total","Rank"]].rename(
+            columns=lambda c: c + "_2022")
+
+        compare = hist.join(live, how="outer").reset_index()
+        # Add country names
+        compare = compare.merge(hist_table[["NOC","Country"]], on="NOC", how="left")
+        # Compute deltas (2026 vs 2022)
+        for col in ("Gold","Silver","Bronze","Total"):
+            compare[f"Δ {col}"] = (compare[col].fillna(0).astype(int) - compare[f"{col}_2022"].fillna(0).astype(int))
+
+        cols_show = ["Rank","NOC","Country",
+                     "Gold","Silver","Bronze","Total",
+                     "Gold_2022","Silver_2022","Bronze_2022","Total_2022",
+                     "Δ Total"]
+        st.markdown("### Medal table — live vs 2022")
+        st.dataframe(
+            compare[cols_show].rename(columns={"Rank":"Rank_2026","Total":"Total_2026",
+                                                "Gold":"G_26","Silver":"S_26","Bronze":"B_26",
+                                                "Gold_2022":"G_22","Silver_2022":"S_22","Bronze_2022":"B_22",
+                                                "Total_2022":"Total_22"}),
+            hide_index=True, use_container_width=True,
+        )
+
+    # ---- KSA total vs 2022 (donut comparison) ----
+    st.divider()
+    st.markdown("### KSA totals — live vs 2022")
+    c_live, c_22, c_delta = st.columns(3)
+
+    g_live = silver = bronze = total_live = 0
+    if not medals_df.empty:
+        kr = medals_df[medals_df["NOC"]=="KSA"]
+        if not kr.empty:
+            g_live   = int(kr.iloc[0]["Gold"])
+            silver   = int(kr.iloc[0]["Silver"])
+            bronze   = int(kr.iloc[0]["Bronze"])
+            total_live = g_live + silver + bronze
+
+    with c_live:
+        st.markdown("**Live 2026**")
+        if total_live > 0:
+            fig = go.Figure(go.Pie(labels=["Gold","Silver","Bronze"],
+                                    values=[g_live,silver,bronze], hole=0.65,
+                                    marker=dict(colors=[MEDAL_COLOURS["G"], MEDAL_COLOURS["S"], MEDAL_COLOURS["B"]]),
+                                    sort=False, textinfo="label+value"))
+            fig.update_layout(showlegend=False, height=240,
+                              annotations=[dict(text=f"<b>{total_live}</b><br>Medals", x=0.5, y=0.5, font_size=18, showarrow=False)],
+                              margin=dict(t=10,b=10,l=10,r=10))
+            st.plotly_chart(fig, use_container_width=True)
+        else:
+            st.info("0 medals · games not yet started")
+
+    with c_22:
+        st.markdown("**Kuwait 2022**")
+        fig = go.Figure(go.Pie(labels=["Gold","Silver","Bronze"],
+                                values=[16, 22, 29], hole=0.65,
+                                marker=dict(colors=[MEDAL_COLOURS["G"], MEDAL_COLOURS["S"], MEDAL_COLOURS["B"]]),
+                                sort=False, textinfo="label+value"))
+        fig.update_layout(showlegend=False, height=240,
+                          annotations=[dict(text="<b>67</b><br>Medals", x=0.5, y=0.5, font_size=18, showarrow=False)],
+                          margin=dict(t=10,b=10,l=10,r=10))
+        st.plotly_chart(fig, use_container_width=True)
+
+    with c_delta:
+        st.markdown("**Delta**")
+        st.metric("Gold",    g_live,   delta=g_live - 16)
+        st.metric("Silver",  silver,   delta=silver - 22)
+        st.metric("Bronze",  bronze,   delta=bronze - 29)
+        st.metric("Total",   total_live, delta=total_live - 67)
+
+    # ---- KSA medals by sport: 2022 baseline vs 2026 live ----
+    st.divider()
+    st.markdown("### KSA medals by sport — 2022 baseline")
+    if not hist_ksa.empty:
+        fig_sport = go.Figure()
+        h = hist_ksa.sort_values("Total")
+        fig_sport.add_trace(go.Bar(y=h["Sport"], x=h["Gold"],
+                                    name="Gold",   orientation="h",
+                                    marker_color=MEDAL_COLOURS["G"],
+                                    text=h["Gold"], textposition="inside"))
+        fig_sport.add_trace(go.Bar(y=h["Sport"], x=h["Silver"],
+                                    name="Silver", orientation="h",
+                                    marker_color=MEDAL_COLOURS["S"],
+                                    text=h["Silver"], textposition="inside"))
+        fig_sport.add_trace(go.Bar(y=h["Sport"], x=h["Bronze"],
+                                    name="Bronze", orientation="h",
+                                    marker_color=MEDAL_COLOURS["B"],
+                                    text=h["Bronze"], textposition="inside"))
+        fig_sport.update_layout(barmode="stack", height=max(280, 22 * len(h)),
+                                margin=dict(t=10,b=10,l=10,r=10),
+                                plot_bgcolor="white", xaxis_title="Medals (2022)",
+                                legend=dict(orientation="h", y=1.1))
+        st.plotly_chart(fig_sport, use_container_width=True)
+
+        # ---- Sports flagged: in 2022 KSA medal book but NOT in this Games ----
+        not_in_2026 = hist_ksa[hist_ksa["In_2026"]=="no"]
+        if not not_in_2026.empty:
+            lost_total = int(not_in_2026["Total"].sum())
+            st.warning(
+                f"⚠ **{lost_total} medals from sports not in this Games**: "
+                + ", ".join(f"{r['Sport']} ({r['Total']})" for _, r in not_in_2026.iterrows())
+                + ". Realistic 2026 target should account for these."
+            )
+
+        # ---- Realistic 2026 baseline calculation ----
+        target = int(hist_ksa[hist_ksa["In_2026"]!="no"]["Total"].sum())
+        st.info(f"💡 Like-for-like 2022 → 2026 baseline (sports in both games): **{target} medals**.")
 
 
 # ===========================================================================
