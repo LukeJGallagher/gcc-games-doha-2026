@@ -757,15 +757,15 @@ with tab_daily:
                 st.markdown("### Daily athlete schedule")
 
                 phase_colours = {
-                    "Final": VICTORY,
-                    "Semi Final": ENABLER,
-                    "Quarter Final": "#76b6d8",
-                    "Qualification": "#d49595",  # salmon, like ISG
-                    "Preliminary":   "#d49595",
-                    "Heats":         "#d49595",
-                    "Heat":          "#d49595",
-                    "Group Stage":   STAMINA,
-                    "Group":         STAMINA,
+                    "Final":         VICTORY,    # gold
+                    "Semi Final":    ENABLER,    # accent green
+                    "Quarter Final": "#76b6d8",  # light blue
+                    "Qualification": STAMINA,    # light Team Saudi green
+                    "Preliminary":   STAMINA,
+                    "Heats":         STAMINA,
+                    "Heat":          STAMINA,
+                    "Group Stage":   ELITE,      # primary dark green
+                    "Group":         ELITE,
                     "Round of 16":   LAVENDER,
                     "Round of 32":   LAVENDER,
                     "Round of 64":   LAVENDER,
@@ -881,8 +881,8 @@ with tab_daily:
                     ("Final", VICTORY),
                     ("Semi Final", ENABLER),
                     ("Quarter Final", "#76b6d8"),
-                    ("Qualification / Heats", "#d49595"),
-                    ("Group Stage", STAMINA),
+                    ("Qualification / Heats", STAMINA),
+                    ("Group Stage", ELITE),
                     ("Knockout / R16/R32", LAVENDER),
                     ("Training", "#cccccc"),
                 ]
