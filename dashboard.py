@@ -499,12 +499,28 @@ def render_isg_schedule(df: pd.DataFrame, include_camera: bool = False,
                         title: str | None = None):
     """Render an ISG-style HTML schedule for one day's events.
 
+    Team-sport rows (Match_Type == 'team') are collapsed: one row per match,
+    labelled 'KSA Team', so the 16-athlete handball squad doesn't fill the
+    schedule with 16 identical rows per match.
+
     df expected to have: Sport, Family Name, Given Name, Athlete, Gender,
     SOTC, Phase, Event, Time Start, Time End, TS, TE, Match_Type, Opponent,
     Venue. If include_camera=True, also expects a 'Camera' column.
     """
     if df.empty:
         return
+
+    df = df.copy()
+    is_team = df["Match_Type"].astype(str).str.lower() == "team"
+    if is_team.any():
+        team_rows  = df[is_team].drop_duplicates(
+            subset=["Sport", "Event_ID", "Phase", "Date"], keep="first").copy()
+        team_rows["Athlete"]     = team_rows.apply(
+            lambda r: f"KSA TEAM (vs {r['Opponent']})" if r.get("Opponent") else "KSA TEAM", axis=1)
+        team_rows["Given Name"]  = "KSA"
+        team_rows["Family Name"] = "Team"
+        team_rows["Gender"]      = team_rows["Gender"].fillna("").replace("", "Team")
+        df = pd.concat([df[~is_team], team_rows], ignore_index=True)
 
     ath_view = df.sort_values(["Sport","Family Name","Given Name","TS"]).copy()
     day_min = ath_view["TS"].min(); day_max = ath_view["TE"].max()
