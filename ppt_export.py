@@ -18,18 +18,39 @@ from io import BytesIO
 from pathlib import Path
 
 import pandas as pd
-from pptx import Presentation
-from pptx.dml.color import RGBColor
-from pptx.enum.shapes import MSO_SHAPE
-from pptx.util import Emu, Inches, Pt
+
+# pptx imports are deferred so this module can be imported even when
+# python-pptx isn't installed yet (e.g. fresh Streamlit Cloud deploy).
+# Helpers raise RuntimeError when actually called without the lib.
+try:
+    from pptx import Presentation
+    from pptx.dml.color import RGBColor
+    from pptx.enum.shapes import MSO_SHAPE
+    from pptx.util import Emu, Inches, Pt
+    _PPTX_AVAILABLE = True
+except Exception:
+    _PPTX_AVAILABLE = False
+    RGBColor = MSO_SHAPE = None  # type: ignore
+    def Inches(x): return None   # type: ignore
+    def Pt(x):    return None    # type: ignore
+    Presentation = None          # type: ignore
 
 
-ELITE      = RGBColor(0x23, 0x50, 0x36)
-ENABLER    = RGBColor(0x69, 0xc3, 0x99)
-DISCIPLINE = RGBColor(0x18, 0x34, 0x2a)
-STAMINA    = RGBColor(0xc3, 0xd9, 0xd1)
-VICTORY    = RGBColor(0xeb, 0xce, 0x83)
-WHITE      = RGBColor(0xff, 0xff, 0xff)
+def _require_pptx():
+    if not _PPTX_AVAILABLE:
+        raise RuntimeError(
+            "python-pptx is not installed. Run `pip install python-pptx kaleido` "
+            "or wait for Streamlit Cloud to pick up the updated requirements.txt."
+        )
+
+
+# These RGB colours are only used after _require_pptx() so they're safe to gate.
+ELITE      = RGBColor(0x23, 0x50, 0x36) if _PPTX_AVAILABLE else None
+ENABLER    = RGBColor(0x69, 0xc3, 0x99) if _PPTX_AVAILABLE else None
+DISCIPLINE = RGBColor(0x18, 0x34, 0x2a) if _PPTX_AVAILABLE else None
+STAMINA    = RGBColor(0xc3, 0xd9, 0xd1) if _PPTX_AVAILABLE else None
+VICTORY    = RGBColor(0xeb, 0xce, 0x83) if _PPTX_AVAILABLE else None
+WHITE      = RGBColor(0xff, 0xff, 0xff) if _PPTX_AVAILABLE else None
 
 SLIDE_W = Inches(13.333)   # 16:9 widescreen
 SLIDE_H = Inches(7.5)
@@ -229,6 +250,7 @@ def build_pptx(deck_title: str, sections: list[dict],
     Section dict shape:
       {"title": str, "kind": "table"|"chart"|"text"|"metric", ...kind-specific...}
     """
+    _require_pptx()
     prs = Presentation()
     prs.slide_width  = SLIDE_W
     prs.slide_height = SLIDE_H
