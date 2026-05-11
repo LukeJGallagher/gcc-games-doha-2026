@@ -709,6 +709,57 @@ with tab_daily:
                 t4.markdown(f"<div class='metric-card'><div class='label'>Uncovered</div><div class='value' style='color:{un_colour};'>{n_un}</div></div>", unsafe_allow_html=True)
                 st.write("")
 
+                # ---- Athlete-grouped daily schedule (ISG style) ----
+                st.markdown("### Daily athlete schedule")
+                ath_view = day_df.copy()
+                ath_view["Y_Label"] = ath_view["Sport"] + " · " + ath_view["Athlete"]
+                # Stable sort: Sport then Athlete name so rows group logically
+                ath_view = ath_view.sort_values(["Sport", "Family Name", "Given Name", "TS"])
+                # Color by Phase so heats/semis/finals visually distinguish
+                phase_colours = {
+                    "Final": VICTORY,
+                    "Semi Final": ENABLER,
+                    "Quarter Final": "#76b6d8",
+                    "Qualification": ELITE,
+                    "Preliminary": ELITE,
+                    "Group Stage": STAMINA,
+                    "Round of 16": LAVENDER,
+                    "Round of 32": LAVENDER,
+                    "Round of 64": LAVENDER,
+                    "Knockout": LAVENDER,
+                    "Training": "#aaaaaa",
+                }
+                ath_view["Event Short"] = ath_view["Event"] + " (" + ath_view["Phase"] + ")"
+                fig_ath = px.timeline(
+                    ath_view, x_start="TS", x_end="TE",
+                    y="Y_Label", color="Phase",
+                    color_discrete_map=phase_colours,
+                    text="Event Short",
+                    hover_data={"Phase": True, "Event": True, "Venue": True,
+                                "SOTC": True, "Time Start": True, "Time End": True,
+                                "TS": False, "TE": False, "Y_Label": False,
+                                "Event Short": False, "Family Name": False, "Given Name": False},
+                )
+                fig_ath.update_yaxes(autorange="reversed", title="",
+                                     tickfont=dict(size=11))
+                fig_ath.update_xaxes(title="", tickformat="%H:%M",
+                                     dtick=2*60*60*1000)  # 2h ticks
+                fig_ath.update_traces(textposition="inside", textfont_size=10,
+                                      insidetextanchor="start")
+                fig_ath.update_layout(
+                    height=max(280, 28 * ath_view["Y_Label"].nunique() + 80),
+                    margin=dict(t=10, b=10, l=10, r=10), plot_bgcolor="white",
+                    legend=dict(orientation="h", y=1.06, yanchor="bottom"),
+                )
+                st.plotly_chart(fig_ath, use_container_width=True)
+
+                # Venue list (side info, replacing the map we don't have coords for yet)
+                venues = sorted(set(v.strip() for v in ath_view["Venue"].dropna().astype(str) if v.strip()))
+                if venues:
+                    st.caption(f"📍 **Venues today:** {' · '.join(venues)}")
+
+                # ---- Camera-lane Gantt (operational view) ----
+                st.markdown("### Camera plan")
                 # Gantt for this day
                 day_df["Label"] = day_df["Sport"] + " · " + day_df["Athlete"] + " (" + day_df["Phase"] + ")"
                 lane_order = [f"Cam {i}" for i in range(1, cams_today+1)] + (["UNCOVERED"] if n_un else [])
