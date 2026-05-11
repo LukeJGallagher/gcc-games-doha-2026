@@ -1,13 +1,13 @@
-name: GCC scrape every 2h
+name: GCC scrape hourly
 
 on:
   # Manual run button in the Actions tab
   workflow_dispatch:
 
-  # Auto-fire every 2h on the hour (UTC)
-  # Riyadh = UTC+3, so 03/05/07/09... local
+  # Auto-fire every hour on the hour (UTC)
+  # Riyadh = UTC+3
   schedule:
-    - cron: "0 */2 * * *"
+    - cron: "0 * * * *"
 
 # Allow the workflow to push CSVs back to the repo
 permissions:
