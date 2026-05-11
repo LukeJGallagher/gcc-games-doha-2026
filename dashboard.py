@@ -321,7 +321,9 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-tab_overview, tab_plan, tab_fix = st.tabs(["📊 Overview", "📅 PA Coverage Plan", "🛠 Fix List"])
+tab_overview, tab_daily, tab_plan, tab_fix = st.tabs([
+    "📊 Overview", "📆 Daily Plan", "📅 PA Coverage Plan", "🛠 Fix List"
+])
 
 
 # ---------------------------------------------------------------------------
@@ -523,6 +525,131 @@ with tab_overview:
             texttemplate="%{text}", textfont={"color":"white","size":12}))
         fig.update_layout(height=max(280, 28*len(sports)), margin=dict(t=10, b=10, l=10, r=10), xaxis_side="top")
         st.plotly_chart(fig, use_container_width=True)
+
+
+# ===========================================================================
+# TAB: DAILY PLAN
+# ===========================================================================
+with tab_daily:
+    st.subheader("Daily Plan")
+    if sched_df.empty:
+        st.info("No schedule data.")
+    else:
+        # Date picker: limit to competition window
+        comp_dates = sorted(sched_df["Date"].dropna().unique())
+        if not comp_dates:
+            st.info("No competition dates in schedule.")
+        else:
+            min_d, max_d = pd.Timestamp(comp_dates[0]).date(), pd.Timestamp(comp_dates[-1]).date()
+            today_d = pd.Timestamp.today().date()
+            default_d = today_d if min_d <= today_d <= max_d else min_d
+
+            sel_col, target_col = st.columns([1, 3])
+            with sel_col:
+                pick = st.date_input("Pick a day", value=default_d,
+                                     min_value=min_d, max_value=max_d, key="daily_pick")
+            with target_col:
+                daily_sports = st.multiselect(
+                    "Sports filter",
+                    options=sorted(sched_df["Sport"].unique()),
+                    default=sorted(sched_df["Sport"].unique()),
+                    key="daily_sports",
+                )
+            sotc_filter = st.checkbox("SOTC athletes only", value=False, key="daily_sotc")
+
+            day_df = sched_df[
+                (sched_df["Date"].dt.date == pick)
+                & (sched_df["Sport"].isin(daily_sports))
+            ].copy()
+            if sotc_filter:
+                day_df = day_df[day_df["SOTC"].astype(str).str.upper() == "YES"]
+
+            if day_df.empty:
+                st.info(f"No events on {fmt_date(pick)} matching the filters.")
+            else:
+                day_df["TS"] = pd.to_datetime(day_df["Date"].dt.strftime("%Y-%m-%d") + " " + day_df["Time Start"], errors="coerce")
+                day_df["TE"] = pd.to_datetime(day_df["Date"].dt.strftime("%Y-%m-%d") + " " + day_df["Time End"],   errors="coerce")
+                miss = day_df["TE"].isna() & day_df["TS"].notna()
+                day_df.loc[miss, "TE"] = day_df.loc[miss, "TS"] + pd.to_timedelta(day_df.loc[miss, "Duration_Min"], unit="min")
+                day_df = day_df.dropna(subset=["TS","TE"]).sort_values("TS")
+
+                day_df["Priority"] = day_df.apply(event_priority, axis=1)
+                cams_today = 3 if pd.Timestamp(pick) >= pd.Timestamp("2026-05-14") else 2
+
+                # Allocate cameras for this day (priority desc)
+                ends = {}
+                cams = []
+                for _, ev in day_df.sort_values(["Priority","TS"], ascending=[False, True]).iterrows():
+                    slot = None
+                    for cam in range(1, cams_today + 1):
+                        if cam not in ends or ends[cam] <= ev["TS"]:
+                            slot = cam; break
+                    if slot is None:
+                        cams.append((ev.name, 0))
+                    else:
+                        ends[slot] = ev["TE"]; cams.append((ev.name, slot))
+                day_df["Camera"] = pd.Series(dict(cams))
+                day_df["Lane"]   = day_df["Camera"].apply(lambda c: "UNCOVERED" if c == 0 else f"Cam {c}")
+
+                # Tile row
+                t1, t2, t3, t4 = st.columns(4)
+                t1.markdown(f"<div class='metric-card'><div class='label'>Date</div><div class='value' style='font-size:1.1rem;'>{fmt_date(pick)}</div></div>", unsafe_allow_html=True)
+                t2.markdown(f"<div class='metric-card'><div class='label'>Events</div><div class='value'>{len(day_df)}</div></div>", unsafe_allow_html=True)
+                n_un = int((day_df['Camera']==0).sum())
+                un_colour = "#c53030" if n_un else DISCIPLINE
+                t3.markdown(f"<div class='metric-card'><div class='label'>Cameras available</div><div class='value'>{cams_today}</div></div>", unsafe_allow_html=True)
+                t4.markdown(f"<div class='metric-card'><div class='label'>Uncovered</div><div class='value' style='color:{un_colour};'>{n_un}</div></div>", unsafe_allow_html=True)
+                st.write("")
+
+                # Gantt for this day
+                day_df["Label"] = day_df["Sport"] + " · " + day_df["Athlete"] + " (" + day_df["Phase"] + ")"
+                lane_order = [f"Cam {i}" for i in range(1, cams_today+1)] + (["UNCOVERED"] if n_un else [])
+                day_df["Lane"] = pd.Categorical(day_df["Lane"], categories=lane_order, ordered=True)
+                fig = px.timeline(
+                    day_df, x_start="TS", x_end="TE", y="Lane",
+                    color="Sport", color_discrete_map=SPORT_COLOURS, text="Label",
+                    hover_data={"Athlete": True, "Phase": True, "Venue": True,
+                                "Time Start": True, "Time End": True, "Time_Source": True,
+                                "TS": False, "TE": False, "Lane": False},
+                )
+                fig.update_yaxes(autorange="reversed", title="")
+                fig.update_xaxes(title="", tickformat="%H:%M")
+                fig.update_traces(textposition="inside", textfont_size=11)
+                fig.update_layout(height=max(280, 60 * len(lane_order)),
+                                  margin=dict(t=10, b=10, l=10, r=10), plot_bgcolor="white",
+                                  legend=dict(orientation="h", y=1.05))
+                st.plotly_chart(fig, use_container_width=True)
+
+                # Per-sport summary table for this day
+                st.markdown("### Sport summary")
+                summ = []
+                for sp, g in day_df.groupby("Sport"):
+                    summ.append({
+                        "Sport":       sp,
+                        "Events":      len(g),
+                        "Athletes":    g.groupby(["Given Name","Family Name"]).ngroups,
+                        "SOTC":        int((g["SOTC"].astype(str).str.upper()=="YES").sum() and
+                                            g[g["SOTC"].astype(str).str.upper()=="YES"].groupby(["Given Name","Family Name"]).ngroups),
+                        "First":       fmt_time(g.sort_values("TS").iloc[0]["Time Start"]),
+                        "Last":        fmt_time(g.sort_values("TS").iloc[-1]["Time End"]),
+                        "Phases":      ", ".join(sorted(set(g["Phase"].astype(str)))),
+                        "Venues":      ", ".join(sorted(set(g["Venue"].astype(str).str.strip()))),
+                    })
+                st.dataframe(pd.DataFrame(summ), hide_index=True, use_container_width=True)
+
+                # Per-camera coverage list
+                st.markdown("### Camera plan")
+                for lane in lane_order:
+                    g_lane = day_df[day_df["Lane"] == lane].sort_values("TS")
+                    if g_lane.empty:
+                        continue
+                    n = len(g_lane)
+                    head = lane if lane == "UNCOVERED" else f"{lane} · {n} event{'s' if n!=1 else ''}"
+                    with st.expander(f"**{head}**", expanded=(lane == "UNCOVERED")):
+                        show = g_lane[["Time Start","Time End","Sport","Athlete","Event","Phase","Venue","SOTC"]].copy()
+                        show["Time Start"] = show["Time Start"].apply(fmt_time)
+                        show["Time End"]   = show["Time End"].apply(fmt_time)
+                        st.dataframe(show, hide_index=True, use_container_width=True)
 
 
 # ===========================================================================
