@@ -78,6 +78,8 @@ def normalise(text: str) -> str:
     if not text:
         return ""
     t = text.lower()
+    # Arabic 'م' (metre) used as a Latin 'm' replacement in some titles
+    t = t.replace("م", "m")
     t = _PUNCT.sub(" ", t)
     t = re.sub(r"\bmetres?\b", "m", t)
     t = re.sub(r"\bmeters?\b", "m", t)
@@ -87,9 +89,23 @@ def normalise(text: str) -> str:
     t = re.sub(r"(\d+)\s*m\b", r"\1m", t)
     # "4 x 100m" → "4x100m"
     t = re.sub(r"(\d+)\s*x\s*(\d+)", r"\1x\2", t)
-    # parenthetical heights etc. - already gone via _PUNCT
+    # API uses "Boys"/"Girls" instead of "Men's"/"Women's" in some titles
+    # (most visible in Swimming). Treat the categories as equivalent.
+    t = re.sub(r"\bboys?\b", "men", t)
+    t = re.sub(r"\bgirls?\b", "women", t)
+    # Strip per-heat suffixes — "heat 1", "heat 2", "h1" — they're noise for matching
+    t = re.sub(r"\bheat\s*\d+\b", "", t)
     t = _WS.sub(" ", t).strip()
     return t
+
+
+# Swimming relay: Excel uses leg-by-leg notation ("4 x 100m") but API
+# uses total distance ("400m"). Map Excel→API equivalents at keyword level.
+_SWIM_RELAY_MAP = {
+    "4x100m": "400m",
+    "4x200m": "800m",
+    "4x50m":  "200m",
+}
 
 
 def alias_sport(sport: str) -> str:
@@ -98,17 +114,23 @@ def alias_sport(sport: str) -> str:
 
 def gender_token(event: str) -> str:
     e = event.lower()
-    if "women" in e:  return "Women"
-    if "mixed" in e:  return "Mixed"
-    if "men" in e:    return "Men"
+    if "women" in e or "girls" in e: return "Women"
+    if "mixed" in e:                 return "Mixed"
+    if "men" in e or "boys" in e:    return "Men"
     return ""
 
 
 def event_keywords(event: str) -> list[str]:
     n = normalise(event)
-    n = re.sub(r"\b(men s|women s|men|women|mixed)\b", " ", n)
+    n = re.sub(r"\b(men s|women s|men|women|mixed|boys|girls)\b", " ", n)
     n = _WS.sub(" ", n).strip()
-    return [k for k in n.split() if len(k) > 1 and k not in NOISE_WORDS]
+    out = []
+    for k in n.split():
+        if len(k) <= 1 or k in NOISE_WORDS:
+            continue
+        # Swimming relay token: 4x100m → also accept its total-distance equivalent
+        out.append(_SWIM_RELAY_MAP.get(k, k))
+    return out
 
 
 # ---------------------------------------------------------------------------
