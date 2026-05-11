@@ -116,6 +116,79 @@ def event_priority(row) -> int:
     return score
 
 
+def group_into_sessions(df: pd.DataFrame, gap_min: int = 30) -> pd.DataFrame:
+    """Group events at the same (Date, Sport, Venue) into sessions.
+
+    If your crew is already parked at the pool covering one swim event, every
+    other swim event in the same session at that venue is "free" — same camera,
+    no extra cost. So for camera planning we count each session as ONE slot,
+    not one slot per event.
+
+    A session = events at same Date+Sport+Venue where each event starts
+    within `gap_min` minutes of the previous one ending (so contiguous or
+    near-contiguous events merge into one session).
+
+    Returns a session-level dataframe with columns:
+        Date, Sport, Venue, TS (earliest start), TE (latest end),
+        Priority (max), Athletes (semicolon-list), ev_indices (list)
+    """
+    sessions = []
+    if df.empty: return pd.DataFrame()
+    for (date, sport, venue), g in df.groupby(["Date", "Sport", "Venue"], dropna=False):
+        g = g.sort_values("TS")
+        current = None
+        for _, ev in g.iterrows():
+            if current is None:
+                current = {
+                    "Date": date, "Sport": sport, "Venue": venue,
+                    "TS": ev["TS"], "TE": ev["TE"],
+                    "Priority": ev["Priority"],
+                    "Athletes": [str(ev.get("Athlete", ""))],
+                    "ev_indices": [ev.name],
+                }
+            elif pd.notna(ev["TS"]) and pd.notna(current["TE"]) and \
+                 ev["TS"] <= current["TE"] + pd.Timedelta(minutes=gap_min):
+                # Extend the current session
+                current["TE"]       = max(current["TE"], ev["TE"])
+                current["Priority"] = max(current["Priority"], ev["Priority"])
+                current["Athletes"].append(str(ev.get("Athlete", "")))
+                current["ev_indices"].append(ev.name)
+            else:
+                sessions.append(current)
+                current = {
+                    "Date": date, "Sport": sport, "Venue": venue,
+                    "TS": ev["TS"], "TE": ev["TE"],
+                    "Priority": ev["Priority"],
+                    "Athletes": [str(ev.get("Athlete", ""))],
+                    "ev_indices": [ev.name],
+                }
+        if current:
+            sessions.append(current)
+    out = pd.DataFrame(sessions)
+    if not out.empty:
+        out["Athletes"] = out["Athletes"].apply(lambda lst: "; ".join(sorted(set(lst))))
+    return out
+
+
+def allocate_cameras_by_session(events_df: pd.DataFrame, cams_available: int) -> pd.Series:
+    """Allocate cameras per session, then propagate the camera number to all
+    events within each session. Each event row gets a Camera value (0 = UNCOVERED)."""
+    if events_df.empty:
+        return pd.Series(dtype=int)
+    sessions = group_into_sessions(events_df)
+    sessions["__row_id"] = range(len(sessions))
+    # The allocator works on a generic dataframe with TS/TE/Priority and a unique index
+    sessions_idx = sessions.set_index("__row_id")
+    session_cams = allocate_cameras(sessions_idx, cams_available)
+    # Map back: each event in session i gets session i's camera
+    out: dict = {}
+    for sid, row in sessions.iterrows():
+        cam = int(session_cams.get(row["__row_id"], 0))
+        for ev_idx in row["ev_indices"]:
+            out[ev_idx] = cam
+    return pd.Series(out)
+
+
 def allocate_cameras(events_df, cams_available: int) -> pd.Series:
     """Time-ordered camera allocator with priority-based bumping.
 
@@ -621,8 +694,9 @@ with tab_daily:
 
                 day_df["Priority"] = day_df.apply(event_priority, axis=1)
 
-                # Time-ordered allocator with priority bumping on real overlaps
-                day_df["Camera"] = allocate_cameras(day_df, int(cams_today))
+                # Session-aware allocator: one camera covers a whole session
+                # at the same venue, not one camera per individual event.
+                day_df["Camera"] = allocate_cameras_by_session(day_df, int(cams_today))
                 day_df["Lane"]   = day_df["Camera"].apply(lambda c: "UNCOVERED" if c == 0 else f"Cam {c}")
 
                 # Tile row
@@ -765,14 +839,15 @@ with tab_plan:
         # Priority score per event (SOTC + phase + target sport)
         plan_df["Priority"] = plan_df.apply(event_priority, axis=1)
 
-        # Time-ordered allocator with priority bumping (per day, real shortage = UNCOVERED)
+        # Session-aware allocator (per day): one camera covers a whole session
+        # at the same venue. Real shortage = UNCOVERED.
         cam_series = pd.Series(dtype=int)
         for d, g in plan_df.groupby("Date"):
             if use_3rd_cam:
                 cams_available = 3 if d >= pd.Timestamp("2026-05-14") else 2
             else:
                 cams_available = 2
-            cam_series = pd.concat([cam_series, allocate_cameras(g, cams_available)])
+            cam_series = pd.concat([cam_series, allocate_cameras_by_session(g, cams_available)])
         plan_df["Camera"]   = cam_series
         plan_df["Overflow"] = plan_df["Camera"] == 0
 
