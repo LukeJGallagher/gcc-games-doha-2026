@@ -358,6 +358,15 @@ with tab_plan:
         c2.markdown(f"<div class='metric-card'><div class='label'>Events</div><div class='value'>{n_events}</div></div>", unsafe_allow_html=True)
         c3.markdown(f"<div class='metric-card'><div class='label'>Competition days</div><div class='value'>{n_days}</div></div>", unsafe_allow_html=True)
         c4.markdown(f"<div class='metric-card'><div class='label'>Time conflicts</div><div class='value'>{conflicts}</div></div>", unsafe_allow_html=True)
+
+        # Manual vs estimated times indicator
+        if "Time_Source" in plan_df.columns:
+            n_manual    = int((plan_df["Time_Source"] == "Manual (Shortlist)").sum())
+            n_estimated = int((plan_df["Time_Source"] != "Manual (Shortlist)").sum())
+            st.caption(
+                f"⏱ **{n_manual}** of {len(plan_df)} events use your verified times from the Shortlist · "
+                f"{n_estimated} still use API + duration estimate. Fill more Time Start/End cells in the Shortlist to improve accuracy."
+            )
         st.write("")
 
         # ---- Gantt chart
@@ -394,7 +403,7 @@ with tab_plan:
             text="Label",
             color_discrete_map=SPORT_COLOURS,
             hover_data={"Athlete": True, "Phase": True, "Venue": True, "Time Start": True, "Time End": True,
-                        "TS": False, "TE": False, "GanttRow": False},
+                        "Time_Source": True, "TS": False, "TE": False, "GanttRow": False},
         )
         fig.update_yaxes(autorange="reversed", title="")
         fig.update_xaxes(title="")

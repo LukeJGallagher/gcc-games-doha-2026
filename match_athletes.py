@@ -41,7 +41,7 @@ OUTPUT_COLUMNS = [
     "Person_Key", "Photo_URL", "Photo_Stale",
     "Reg_Disciplines", "Reg_Status", "Reg_Created", "Reg_In_Bornan",
     # Shortlist enrichment
-    "SOTC",
+    "SOTC", "Time_Source",
 ]
 
 # ---------------------------------------------------------------------------
@@ -196,6 +196,37 @@ def _tokenise_name(name: str) -> frozenset:
     return frozenset(w for w in t.split() if len(w) > 1)
 
 
+def load_shortlist_times(path: Path) -> dict:
+    """Return {(dob, date_iso, phase_lower): (start, end)} from the Shortlist.
+
+    Lets us override scraper time estimates with user-verified competition
+    times whenever they exist.
+    """
+    df = pd.read_excel(path, sheet_name="Shortlist")
+    out: dict = {}
+    for _, row in df.iterrows():
+        dob   = _coerce_dob(row.get("Date Of Birth"))
+        date  = pd.to_datetime(row.get("Date"), errors="coerce")
+        phase = str(row.get("Stage", "")).strip().lower()
+        ts    = row.get("Time Start")
+        te    = row.get("Time End")
+        if pd.isna(date) or not dob:
+            continue
+        # Coerce times to HH:MM:SS strings
+        def _fmt(t) -> str:
+            if t is None or pd.isna(t):
+                return ""
+            if hasattr(t, "strftime"):
+                return t.strftime("%H:%M:%S")
+            return str(t)[:8]
+        ts_s, te_s = _fmt(ts), _fmt(te)
+        if not ts_s and not te_s:
+            continue
+        key = (dob, date.strftime("%Y-%m-%d"), phase)
+        out[key] = (ts_s, te_s)
+    return out
+
+
 def load_shortlist(path: Path) -> tuple[dict, dict]:
     """Return (by_dob, by_nameset) lookups: each → SOTC 'Yes'/'No'.
 
@@ -220,7 +251,26 @@ def load_shortlist(path: Path) -> tuple[dict, dict]:
 
 
 def enrich_row(out_row: dict, reg_lookup: dict,
-               sotc_dob: dict | None = None, sotc_name: dict | None = None) -> dict:
+               sotc_dob: dict | None = None, sotc_name: dict | None = None,
+               time_lookup: dict | None = None) -> dict:
+    # Manual time override from Shortlist
+    if time_lookup is not None:
+        dob   = str(out_row.get("Date of Birth", "") or "")[:10]
+        date  = str(out_row.get("Date", "") or "")[:10]
+        phase = str(out_row.get("Phase", "") or "").strip().lower()
+        key   = (dob, date, phase)
+        manual = time_lookup.get(key)
+        if manual:
+            ts_m, te_m = manual
+            if ts_m: out_row["Time Start"] = ts_m
+            if te_m: out_row["Time End"]   = te_m
+            out_row["Time_Source"] = "Manual (Shortlist)"
+        else:
+            out_row["Time_Source"] = "API + estimate"
+    else:
+        out_row["Time_Source"] = "API + estimate"
+
+
     key = _name_key(out_row.get("Family Name"), out_row.get("Given Name"), out_row.get("Date of Birth"))
     info = reg_lookup.get(key)
     # SOTC: try DoB first, then full-name token-set superset match
@@ -372,15 +422,17 @@ def main():
     else:
         print(f"[REGREQ]   no file matching {DEFAULT_REGREQUEST_GLOB} - skipping enrichment")
 
-    # Shortlist (SOTC flag) - optional enricher
+    # Shortlist (SOTC flag + manual times) - optional enricher
     sl_path = next(iter(sorted(Path(".").glob(DEFAULT_SHORTLIST_GLOB))), None)
     sotc_dob: dict = {}
     sotc_name: dict = {}
+    time_lookup: dict = {}
     if sl_path:
         print(f"[SHORTLIST] {sl_path.name}")
         sotc_dob, sotc_name = load_shortlist(sl_path)
+        time_lookup = load_shortlist_times(sl_path)
         n_sotc = sum(1 for v in sotc_dob.values() if v == "Yes")
-        print(f"  {len(sotc_dob)} athletes, {n_sotc} flagged SOTC")
+        print(f"  {len(sotc_dob)} athletes, {n_sotc} flagged SOTC, {len(time_lookup)} manual time entries")
 
     # Match
     out_rows: list[dict] = []
@@ -414,7 +466,7 @@ def main():
                 "Gender":         s.get("Gender", ""),
                 "Match_Type":     "team" if "Team" in str(ath.get("Event","")) else "individual",
                 "Source_URL":     s.get("Source_URL", ""),
-            }, reg_lookup, sotc_dob, sotc_name))
+            }, reg_lookup, sotc_dob, sotc_name, time_lookup))
 
     # Write
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
