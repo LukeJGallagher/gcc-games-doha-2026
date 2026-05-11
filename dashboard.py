@@ -251,22 +251,81 @@ st.set_page_config(
 # ---------------------------------------------------------------------------
 # CSS
 # ---------------------------------------------------------------------------
+# Team Saudi gradients (matching the Jiu-Jitsu dashboard style)
+HEADER_GRADIENT = f"linear-gradient(135deg, {ELITE} 0%, {DISCIPLINE} 100%)"
+GOLD_BAR        = f"linear-gradient(90deg, {ELITE} 0%, {VICTORY} 50%, {DISCIPLINE} 100%)"
+
 st.markdown(f"""
 <style>
 .block-container {{padding-top: 1rem; padding-bottom: 1rem; max-width: 1600px;}}
 h1, h2, h3 {{color: {DISCIPLINE};}}
+
+/* Header banner: gradient + gold accent stripe */
 .header-bar {{
-    background: {ELITE}; color: white; padding: 1rem 1.5rem;
-    border-radius: 6px; margin-bottom: 1rem;
+    background: {HEADER_GRADIENT};
+    color: white;
+    padding: 1.2rem 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    box-shadow: 0 8px 25px rgba(35, 80, 54, 0.25);
+    position: relative; overflow: hidden;
 }}
-.header-bar h1 {{color: white; margin: 0; font-size: 1.6rem;}}
+.header-bar::after {{
+    content:""; position:absolute; bottom:0; left:0; right:0; height:4px;
+    background: {GOLD_BAR};
+}}
+.header-bar h1 {{color: white; margin: 0; font-size: 1.7rem;}}
+.header-bar .subline {{color: {VICTORY}; font-size: 0.9rem; margin-top: 0.25rem;}}
+
+/* Metric cards */
 .metric-card {{
-    background: #f8f9f8; padding: 0.8rem 1rem; border-radius: 6px;
+    background: white; padding: 0.85rem 1rem; border-radius: 8px;
     border-left: 4px solid {ENABLER};
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
 }}
-.metric-card .label {{font-size: 0.8rem; color: #555;}}
-.metric-card .value {{font-size: 1.5rem; color: {DISCIPLINE}; font-weight: 600;}}
-[data-baseweb="tab"] {{font-weight: 600;}}
+.metric-card .label {{font-size: 0.78rem; color: #555; text-transform: uppercase; letter-spacing: 0.5px;}}
+.metric-card .value {{font-size: 1.55rem; color: {DISCIPLINE}; font-weight: 700; margin-top: 0.15rem;}}
+
+/* Tabs styling */
+[data-baseweb="tab"] {{
+    font-weight: 600;
+    color: {DISCIPLINE} !important;
+}}
+[data-baseweb="tab"][aria-selected="true"] {{
+    color: {ELITE} !important;
+    border-bottom: 3px solid {VICTORY} !important;
+}}
+
+/* Primary buttons in Team Saudi green */
+.stButton > button, .stDownloadButton > button {{
+    background: {ELITE}; color: white; font-weight: 600;
+    border: none; border-radius: 6px;
+    padding: 0.45rem 1.1rem; transition: all 0.18s ease;
+    box-shadow: 0 2px 4px rgba(35, 80, 54, 0.2);
+}}
+.stButton > button:hover, .stDownloadButton > button:hover {{
+    background: {DISCIPLINE}; color: {VICTORY};
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(35, 80, 54, 0.32);
+}}
+
+/* Radio pills (date picker) */
+div[role="radiogroup"] > label {{
+    background: {STAMINA}; color: {DISCIPLINE};
+    padding: 0.35rem 0.85rem; margin-right: 0.4rem !important;
+    border-radius: 16px; font-weight: 500; cursor: pointer;
+    transition: all 0.15s ease;
+}}
+div[role="radiogroup"] > label:has(input:checked) {{
+    background: {ELITE}; color: white;
+}}
+div[role="radiogroup"] > label > div:first-child {{ display: none; }}  /* hide radio bullet */
+
+/* Subheader accent stripe */
+h3 {{
+    border-left: 4px solid {VICTORY};
+    padding-left: 0.6rem;
+}}
 </style>
 """, unsafe_allow_html=True)
 
@@ -605,13 +664,11 @@ _logo_html = (
     f'<img src="{_logo}" style="height:60px;margin-right:1.2rem;">' if _logo else "🇸🇦"
 )
 st.markdown(f"""
-<div class="header-bar" style="display:flex;align-items:center;gap:1rem;">
+<div class="header-bar" style="display:flex;align-items:center;gap:1.2rem;">
   {_logo_html}
   <div style="flex:1;">
-    <h1 style="margin:0;font-size:1.5rem;">GCC Games Doha 2026</h1>
-    <div style="opacity:0.9;font-size:0.85rem;margin-top:0.1rem;">
-      Team Saudi · Performance Analysis · Last data refresh: {file_age(RESULTS_DIR, 'KSA_ATHLETE_SCHEDULE_*.csv')}
-    </div>
+    <h1>GCC Games Doha 2026</h1>
+    <div class="subline">Team Saudi · Performance Analysis · Last refresh: {file_age(RESULTS_DIR, 'KSA_ATHLETE_SCHEDULE_*.csv')}</div>
   </div>
 </div>
 """, unsafe_allow_html=True)
