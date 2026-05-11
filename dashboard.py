@@ -41,6 +41,80 @@ SPORT_COLOURS = {
     "Karate":    VICTORY,
 }
 
+# Phase importance for conflict-resolution priority (higher = more important)
+PHASE_PRIORITY = {
+    "final":         100,
+    "gold medal":    100,
+    "bronze medal":   95,
+    "semi final":     80,
+    "semifinal":      80,
+    "quarter final":  60,
+    "quarterfinal":   60,
+    "round of 16":    50,
+    "round of 32":    40,
+    "round of 64":    30,
+    "preliminary":    25,
+    "qualification":  20,
+    "group stage":    20,
+    "knockout":       70,
+    "training":        5,
+}
+
+TARGET_SPORT_BONUS = {"Athletics": 10, "Swimming": 10, "Taekwondo": 10, "Karate": 10}
+
+
+MEDAL_COLOURS = {
+    "G": "#d4af37",  # gold
+    "S": "#c0c0c0",  # silver
+    "B": "#cd7f32",  # bronze
+}
+MEDAL_NAMES = {"G": "GOLD", "S": "SILVER", "B": "BRONZE"}
+
+
+def athlete_photo_path(person_key: str | None) -> Path | None:
+    if not person_key:
+        return None
+    p = PHOTOS_DIR / f"{person_key}.jpg"
+    return p if p.exists() else None
+
+
+def initials_svg(name: str, bg: str = ELITE) -> str:
+    """Return inline SVG showing initials in a coloured circle (data URI)."""
+    parts = [p for p in (name or "").split() if p]
+    initials = "".join(p[0].upper() for p in parts[:2]) or "??"
+    svg = (
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">'
+        f'<rect width="100" height="100" rx="50" fill="{bg}"/>'
+        f'<text x="50" y="60" font-size="40" font-family="Arial" fill="white" '
+        f'text-anchor="middle" font-weight="700">{initials}</text>'
+        f'</svg>'
+    )
+    import base64
+    return "data:image/svg+xml;base64," + base64.b64encode(svg.encode()).decode()
+
+
+def lookup_person_key(athlete_full: str) -> str:
+    """Find Person_Key from athlete-schedule by full name."""
+    if sched_df.empty: return ""
+    parts = (athlete_full or "").split()
+    if len(parts) < 2: return ""
+    mask = (sched_df["Given Name"].str.lower() == parts[0].lower()) & \
+           (sched_df["Family Name"].str.lower() == " ".join(parts[1:]).lower())
+    rows = sched_df[mask]
+    if rows.empty: return ""
+    return str(rows.iloc[0].get("Person_Key", "") or "")
+
+
+def event_priority(row) -> int:
+    """Priority score for conflict resolution: higher = keep, lower = drop."""
+    score = 0
+    if str(row.get("SOTC", "")).upper() == "YES":
+        score += 50
+    phase = str(row.get("Phase", "")).lower().strip()
+    score += PHASE_PRIORITY.get(phase, 0)
+    score += TARGET_SPORT_BONUS.get(row.get("Sport", ""), 0)
+    return score
+
 HERE         = Path(__file__).parent
 DATA         = HERE / "data"
 RESULTS_DIR  = DATA / "results"
@@ -101,6 +175,44 @@ def load_medals() -> pd.DataFrame:
     f = _latest(RESULTS_DIR, "MEDALS_*.csv")
     if not f: return pd.DataFrame()
     return pd.read_csv(f, encoding="utf-8-sig")
+
+
+@st.cache_data(ttl=60)
+def load_medal_diff() -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Return (latest, previous) medal tables for delta comparison."""
+    files = sorted(RESULTS_DIR.glob("MEDALS_*.csv"))
+    if len(files) < 2:
+        return load_medals(), pd.DataFrame()
+    latest = pd.read_csv(files[-1], encoding="utf-8-sig")
+    prev   = pd.read_csv(files[-2], encoding="utf-8-sig")
+    return latest, prev
+
+
+def detect_medal_changes() -> list[dict]:
+    """Return list of {NOC, Country, before, after, delta} for any nation
+    whose Gold/Silver/Bronze totals changed between the two latest pulls."""
+    latest, prev = load_medal_diff()
+    if prev.empty or latest.empty:
+        return []
+    out = []
+    for _, row in latest.iterrows():
+        noc = row["NOC"]
+        prev_row = prev[prev["NOC"] == noc]
+        if prev_row.empty:
+            continue
+        p = prev_row.iloc[0]
+        for col in ("Gold", "Silver", "Bronze"):
+            delta = int(row[col]) - int(p[col])
+            if delta != 0:
+                out.append({
+                    "NOC":     noc,
+                    "Country": row["Country"],
+                    "Medal":   col,
+                    "Before":  int(p[col]),
+                    "After":   int(row[col]),
+                    "Delta":   delta,
+                })
+    return out
 
 
 @st.cache_data(ttl=60)
@@ -172,10 +284,83 @@ st.markdown(f"""
 tab_overview, tab_plan, tab_fix = st.tabs(["📊 Overview", "📅 PA Coverage Plan", "🛠 Fix List"])
 
 
+# ---------------------------------------------------------------------------
+# Medal change alert (across all KSA scrapes today)
+# ---------------------------------------------------------------------------
+medal_changes = detect_medal_changes()
+ksa_changes   = [c for c in medal_changes if c["NOC"] == "KSA" and c["Delta"] > 0]
+if ksa_changes:
+    for ch in ksa_changes:
+        st.toast(f"🇸🇦 New {ch['Medal']} medal for KSA! ({ch['Before']} → {ch['After']})", icon="🎉")
+    msg = " · ".join(f"+{c['Delta']} {c['Medal']}" for c in ksa_changes)
+    st.markdown(f"""
+    <div style="background:{VICTORY};color:{DISCIPLINE};padding:1rem 1.5rem;border-radius:6px;
+                margin-bottom:1rem;font-weight:700;font-size:1.2rem;border-left:6px solid #d4af37;">
+        🏅 NEW MEDAL{('S' if len(ksa_changes)>1 else '')} for Team Saudi: {msg}
+    </div>
+    """, unsafe_allow_html=True)
+
+
+def render_medal_card(row) -> str:
+    """Return inline HTML for one medal moment card."""
+    medal       = str(row.get("Medal", "")).strip().upper()[:1]
+    colour      = MEDAL_COLOURS.get(medal, ELITE)
+    medal_name  = MEDAL_NAMES.get(medal, "")
+    athlete     = str(row.get("Athlete", ""))
+    sport       = str(row.get("Sport", ""))
+    event       = str(row.get("Discipline", "")) or str(row.get("Event", ""))
+    phase       = str(row.get("Phase", ""))
+    result      = str(row.get("Result", "")).strip() or "—"
+    date_obj    = row.get("Date")
+    date_str    = pd.Timestamp(date_obj).strftime("%a %d %b") if pd.notna(date_obj) else ""
+
+    is_team = "Team" in athlete or "Saudi" in athlete
+    if is_team:
+        # large flag emoji
+        avatar = "<div style='font-size:62px;line-height:1;'>🇸🇦</div>"
+    else:
+        pk = lookup_person_key(athlete)
+        photo = athlete_photo_path(pk)
+        if photo:
+            import base64
+            data = base64.b64encode(photo.read_bytes()).decode()
+            avatar = f'<img src="data:image/jpeg;base64,{data}" style="width:72px;height:72px;border-radius:50%;object-fit:cover;border:3px solid {colour};"/>'
+        else:
+            avatar = f'<img src="{initials_svg(athlete, ELITE)}" style="width:72px;height:72px;border-radius:50%;border:3px solid {colour};"/>'
+
+    return f"""
+    <div style="background:white;border-radius:8px;padding:1rem;
+                box-shadow:0 2px 6px rgba(0,0,0,0.08);border-top:4px solid {colour};
+                display:flex;gap:0.9rem;align-items:center;height:100%;">
+        {avatar}
+        <div style="flex:1;min-width:0;">
+            <div style="font-size:0.75rem;font-weight:700;color:{colour};letter-spacing:1px;">{medal_name} · {date_str}</div>
+            <div style="font-size:1.05rem;font-weight:700;color:{DISCIPLINE};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{athlete}</div>
+            <div style="font-size:0.85rem;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{sport} — {event}</div>
+            <div style="font-size:0.9rem;color:{ELITE};font-weight:600;margin-top:0.2rem;">{result} <span style="color:#999;font-weight:400;font-size:0.8rem;">{phase}</span></div>
+        </div>
+    </div>
+    """
+
+
 # ===========================================================================
 # TAB 1: OVERVIEW
 # ===========================================================================
 with tab_overview:
+    # Medal moments — KSA podium finishes
+    if not results_df.empty and "Medal" in results_df.columns:
+        ksa_medals_rows = results_df[
+            results_df["Medal"].astype(str).str.strip().str.upper().isin(["G","S","B","GOLD","SILVER","BRONZE"])
+        ].copy()
+        if not ksa_medals_rows.empty:
+            ksa_medals_rows = ksa_medals_rows.sort_values("Date", ascending=False).head(6)
+            st.subheader("🏅 Medal Moments")
+            cards_html = '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem;">'
+            for _, r in ksa_medals_rows.iterrows():
+                cards_html += render_medal_card(r)
+            cards_html += "</div>"
+            st.markdown(cards_html, unsafe_allow_html=True)
+
     m1, m2, m3, m4, m5 = st.columns(5)
     m1.markdown(f"<div class='metric-card'><div class='label'>Gold</div><div class='value'>🥇 {gold}</div></div>", unsafe_allow_html=True)
     m2.markdown(f"<div class='metric-card'><div class='label'>Silver</div><div class='value'>🥈 {silver}</div></div>", unsafe_allow_html=True)
@@ -373,23 +558,27 @@ with tab_plan:
         plan_df["Label"]  = plan_df["Sport"] + " — " + plan_df["Athlete"] + " (" + plan_df["Phase"] + ")"
         plan_df["DayStr"] = plan_df["Date"].dt.strftime("%a %d %b")
 
-        # Allocate to "Camera 1/2/3" greedily per day so the Gantt rows = camera rows
+        # Priority score per event (SOTC + phase + target sport)
+        plan_df["Priority"] = plan_df.apply(event_priority, axis=1)
+
+        # Allocate cameras: high-priority events get slots first; conflicts drop low-priority.
         assignments = []
         for d, g in plan_df.groupby("Date"):
-            ends = {}  # camera_id -> end time
             cams_available = 3 if d >= pd.Timestamp("2026-05-14") else 2
-            for _, ev in g.sort_values("TS").iterrows():
+            # Sort by priority desc, then start time asc
+            g_sorted = g.sort_values(["Priority", "TS"], ascending=[False, True])
+            ends = {}
+            for _, ev in g_sorted.iterrows():
                 slot = None
                 for cam in range(1, cams_available + 1):
                     if cam not in ends or ends[cam] <= ev["TS"]:
                         slot = cam
                         break
                 if slot is None:
-                    # overflow - new "virtual" camera (flag)
                     slot = max(ends.keys(), default=0) + 1
                 ends[slot] = ev["TE"]
                 assignments.append((ev.name, slot, slot > cams_available))
-        plan_df["Camera"] = pd.Series({i: s for i, s, _ in assignments})
+        plan_df["Camera"]   = pd.Series({i: s for i, s, _ in assignments})
         plan_df["Overflow"] = pd.Series({i: o for i, _, o in assignments})
 
         # Gantt: one row per camera per day → visual rows = "Day · Cam N"
@@ -413,13 +602,23 @@ with tab_plan:
                           legend=dict(orientation="h", y=1.05))
         st.plotly_chart(fig, use_container_width=True)
 
-        # Overflow warning
+        # Overflow recommendations
         overflows = plan_df[plan_df["Overflow"] == True]
         if not overflows.empty:
-            st.error(f"⚠ {len(overflows)} events overflow the available camera count for that day. "
-                     f"Manual prioritisation needed:")
-            st.dataframe(overflows[["Date","Time Start","Sport","Event","Phase","Athlete"]],
-                         hide_index=True, use_container_width=True)
+            st.error(
+                f"⚠ {len(overflows)} events overflow the available camera count. "
+                f"Lowest-priority events listed below — consider dropping or asking the coach to track manually."
+            )
+            ov_show = overflows[["Date","Time Start","Sport","Event","Phase","Athlete","SOTC","Priority"]].copy()
+            ov_show = ov_show.sort_values(["Date","Priority"], ascending=[True, True])
+            ov_show["Recommendation"] = ov_show.apply(
+                lambda r: "Drop / manual" if r["Priority"] < 60 else "Negotiate (close call)",
+                axis=1)
+            st.dataframe(ov_show, hide_index=True, use_container_width=True)
+            st.caption(
+                "Priority score = SOTC (+50) + Phase weight (Final=100, Semi=80, QF=60, Qual=20) "
+                "+ Target sport (Athletics/Swimming/Taekwondo/Karate, +10)."
+            )
 
         st.divider()
         st.subheader("Day-by-day schedule")
