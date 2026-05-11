@@ -116,8 +116,12 @@ def _participant_rows(comp: dict, sport: str) -> list[dict]:
     out: list[dict] = []
     for p in by_id.values():
         athlete = p.get("athlete") or {}
+        # Individual sports use `player_name` flat on the participant.
+        # Team sports use TEAM-XXXX id + noc_name. Try the most-specific
+        # field first and fall back through legacy shapes.
         athlete_name = (
-            athlete.get("english_name")
+            p.get("player_name")
+            or athlete.get("english_name")
             or p.get("english_name")
             or p.get("name")
             or (f"{p.get('noc_name', '')} (Team)" if p.get("id", "").startswith("TEAM-") else "")
