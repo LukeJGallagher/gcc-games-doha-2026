@@ -275,22 +275,10 @@ def load_shortlist(path: Path) -> tuple[dict, dict]:
 def enrich_row(out_row: dict, reg_lookup: dict,
                sotc_dob: dict | None = None, sotc_name: dict | None = None,
                time_lookup: dict | None = None) -> dict:
-    # Manual time override from Shortlist
-    if time_lookup is not None:
-        dob   = str(out_row.get("Date of Birth", "") or "")[:10]
-        date  = str(out_row.get("Date", "") or "")[:10]
-        phase = str(out_row.get("Phase", "") or "").strip().lower()
-        key   = (dob, date, phase)
-        manual = time_lookup.get(key)
-        if manual:
-            ts_m, te_m = manual
-            if ts_m: out_row["Time Start"] = ts_m
-            if te_m: out_row["Time End"]   = te_m
-            out_row["Time_Source"] = "Manual (Shortlist)"
-        else:
-            out_row["Time_Source"] = "API + estimate"
-    else:
-        out_row["Time_Source"] = "API + estimate"
+    # API times are now canonical (Shortlist manual times became stale once the
+    # organisers published proper times via the API). Time_Source flagged so we
+    # can re-enable the override later if needed.
+    out_row["Time_Source"] = "API + estimate"
 
 
     key = _name_key(out_row.get("Family Name"), out_row.get("Given Name"), out_row.get("Date of Birth"))
@@ -364,13 +352,21 @@ def find_matches(athlete_row, schedule_rows: list[dict]) -> list[dict]:
             matches.append(s)
 
     # ---- Fallback 1: pure team sports - Excel "Men's Team" with no other keywords
-    # match every Sport+Gender competition (handball, padel, basketball preliminaries)
+    # Match every Sport+Gender competition (handball, padel, basketball preliminaries).
+    # CRITICAL: only include matches where KSA is actually a participant —
+    # otherwise we'd attach 24 men's pool games to KSA when they only play 6 of them.
     if not matches and sport in TEAM_SPORTS and is_team_event:
+        ksa_upper = {c.upper() for c in KSA_CODES}
         for s in schedule_rows:
             if (s.get("Sport") or "").strip() != sport:
                 continue
             if target_gender and s["_gender"] and s["_gender"] != target_gender:
                 continue
+            entries = (s.get("Country_Entries") or "").upper()
+            if entries:
+                noc_list = {x.strip() for x in entries.split(",") if x.strip()}
+                if not (noc_list & ksa_upper):
+                    continue  # this match doesn't involve KSA — skip it
             matches.append(s)
 
     # ---- Fallback 2: Archery / Shooting - match on weapon/discipline keywords only
