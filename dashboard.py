@@ -198,17 +198,19 @@ def allocate_cameras_by_session(events_df: pd.DataFrame, cams_available: int) ->
 
 
 def allocate_cameras(events_df, cams_available: int) -> pd.Series:
-    """Time-ordered camera allocator with priority-based bumping.
+    """Time-ordered, load-balanced camera allocator with priority bumping.
 
-    1. Sort events by start time
-    2. For each event, free up any camera whose booking has ended
-    3. If a camera is free, take the lowest-numbered free one
-    4. If all cameras are busy, find the currently-running event with the
-       lowest priority. If new event's priority is higher, bump the lower one
-       to UNCOVERED and take its camera. Otherwise new event is UNCOVERED.
+    1. Sort events by start time.
+    2. Free any camera whose booking has ended.
+    3. If any camera is free, take the one with the LEAST total time used so far
+       (so 2-operator days spread load across Luke + Alanoud rather than dumping
+       everything on Cam 1).
+    4. If all cameras are busy, bump the lowest-priority running event to
+       UNCOVERED only if the new event is higher priority. Otherwise UNCOVERED.
 
     Returns: pd.Series of camera assignments (0 = UNCOVERED) indexed by row index.
     """
+    load = {cam: pd.Timedelta(0) for cam in range(1, cams_available + 1)}
     assignments: dict = {}
     active: list = []  # (cam_id, end_time, ev_index, priority)
     for _, ev in events_df.sort_values("TS").iterrows():
@@ -216,19 +218,22 @@ def allocate_cameras(events_df, cams_available: int) -> pd.Series:
         active = [a for a in active if a[1] > ev["TS"]]
         used = {a[0] for a in active}
         free = [c for c in range(1, cams_available + 1) if c not in used]
+        duration = ev["TE"] - ev["TS"]
 
         if free:
-            cam = min(free)
+            # Pick the free camera with the least load so far (tie → lowest id)
+            cam = min(free, key=lambda c: (load[c], c))
             assignments[ev.name] = cam
+            load[cam] += duration
             active.append((cam, ev["TE"], ev.name, ev["Priority"]))
         else:
             lowest = min(active, key=lambda a: a[3])
             if lowest[3] < ev["Priority"]:
-                # Bump the lower-priority event
                 assignments[lowest[2]] = 0
                 active.remove(lowest)
                 cam = lowest[0]
                 assignments[ev.name] = cam
+                load[cam] += duration
                 active.append((cam, ev["TE"], ev.name, ev["Priority"]))
             else:
                 assignments[ev.name] = 0
