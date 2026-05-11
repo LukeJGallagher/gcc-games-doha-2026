@@ -22,6 +22,8 @@ import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
 
+from ppt_export import build_pptx
+
 # ---------------------------------------------------------------------------
 # Team Saudi palette
 # ---------------------------------------------------------------------------
@@ -384,6 +386,24 @@ def file_age(folder: Path, pattern: str) -> str:
     return f"{mins // 1440} d ago"
 
 
+def ppt_download_button(label: str, deck_title: str, sections: list,
+                        subtitle: str = "", key: str = "ppt_dl"):
+    """Render a Streamlit download button that emits a PPT built from `sections`."""
+    logo = ASSETS_DIR / "ts_horizontal.png"
+    if st.button(f"📥 Export {label} to PowerPoint", key=key + "_btn"):
+        try:
+            data = build_pptx(deck_title, sections, subtitle=subtitle,
+                              logo_path=logo if logo.exists() else None)
+            st.download_button(
+                "⬇ Download PPT", data,
+                file_name=f"GCC2026_{label.replace(' ','_')}_{datetime.now():%Y%m%d_%H%M}.pptx",
+                mime="application/vnd.openxmlformats-officedocument.presentationml.presentation",
+                key=key + "_dl",
+            )
+        except Exception as e:
+            st.error(f"PPT build failed: {e}")
+
+
 def fmt_time(t: str | None) -> str:
     """Normalise '9:30:00' / '09:30:00' -> '09:30'. Tolerates blanks."""
     if not t:
@@ -525,6 +545,24 @@ def render_medal_card(row) -> str:
 # TAB 1: OVERVIEW
 # ===========================================================================
 with tab_overview:
+    # ---- PPT export ----
+    overview_sections = []
+    if not medals_df.empty:
+        overview_sections.append({"title": "Medal Table",
+                                  "kind": "metric",
+                                  "metrics": [("Gold", str(gold)), ("Silver", str(silver)),
+                                              ("Bronze", str(bronze)), ("Rank", f"#{ksa_rank}")]})
+        overview_sections.append({"title": "Medal Table — All Nations",
+                                  "kind": "table", "df": medals_df})
+    if not sched_df.empty:
+        unique_ath = sched_df.groupby(["Given Name","Family Name"]).first().reset_index()
+        by_sport_count = unique_ath.groupby("Sport").size().reset_index(name="Athletes").sort_values("Athletes", ascending=False)
+        overview_sections.append({"title": "KSA Athletes by Sport", "kind": "table", "df": by_sport_count})
+    ppt_download_button("Overview", "Team Saudi · Overview",
+                        overview_sections,
+                        subtitle=f"Live snapshot — {datetime.now():%a %d %b %Y · %H:%M}",
+                        key="ppt_ov")
+
     # Medal moments — KSA podium finishes (deduped: 1 medal per match, not per squad member)
     if not results_df.empty and "Medal" in results_df.columns:
         ksa_medals_rows = results_df[
@@ -698,18 +736,27 @@ with tab_daily:
             today_d = pd.Timestamp.today().date()
             default_d = today_d if min_d <= today_d <= max_d else min_d
 
-            sel_col, target_col = st.columns([1, 3])
-            with sel_col:
-                pick = st.date_input("Pick a day", value=default_d,
-                                     min_value=min_d, max_value=max_d, key="daily_pick")
-            with target_col:
+            # Horizontal date pill row — one button per competition day
+            date_options = [pd.Timestamp(d).date() for d in comp_dates]
+            date_labels  = [d.strftime("%a %d %b") for d in date_options]
+            default_idx  = date_options.index(default_d) if default_d in date_options else 0
+            pick_label = st.radio(
+                "Pick a day", date_labels, index=default_idx,
+                horizontal=True, key="daily_pick_radio",
+                label_visibility="visible",
+            )
+            pick = date_options[date_labels.index(pick_label)]
+
+            f1, f2 = st.columns([3, 1])
+            with f1:
                 daily_sports = st.multiselect(
                     "Sports filter",
                     options=sorted(sched_df["Sport"].unique()),
                     default=sorted(sched_df["Sport"].unique()),
                     key="daily_sports",
                 )
-            sotc_filter = st.checkbox("SOTC athletes only", value=False, key="daily_sotc")
+            with f2:
+                sotc_filter = st.checkbox("SOTC athletes only", value=False, key="daily_sotc")
 
             day_df = sched_df[
                 (sched_df["Date"].dt.date == pick)
@@ -721,6 +768,31 @@ with tab_daily:
             if day_df.empty:
                 st.info(f"No events on {fmt_date(pick)} matching the filters.")
             else:
+                # ---- PPT export for this day ----
+                daily_sections = []
+                team_matches_today = day_df[day_df["Match_Type"]=="team"].copy()
+                if not team_matches_today.empty:
+                    team_show = (team_matches_today
+                                 .groupby(["Sport","Event_ID","Phase","Discipline_API","Opponent","Venue","Time Start","Time End"])
+                                 .agg(Squad_Size=("Athlete","nunique"))
+                                 .reset_index())
+                    team_show["Match"] = "KSA vs " + team_show["Opponent"].replace("", "?")
+                    team_show["Time Start"] = team_show["Time Start"].apply(fmt_time)
+                    team_show["Time End"]   = team_show["Time End"].apply(fmt_time)
+                    daily_sections.append({"title": "Team Matches Today", "kind": "table",
+                                            "df": team_show[["Time Start","Time End","Sport","Match","Phase","Venue","Squad_Size"]]})
+                sched_show = day_df.sort_values(["Sport","Family Name","TS"])[
+                    ["Sport","Athlete","Gender","SOTC","Phase","Event","Time Start","Time End","Venue"]
+                ].copy()
+                sched_show["Time Start"] = sched_show["Time Start"].apply(fmt_time)
+                sched_show["Time End"]   = sched_show["Time End"].apply(fmt_time)
+                daily_sections.append({"title": f"Daily Athlete Schedule — {fmt_date(pick)}",
+                                        "kind": "table", "df": sched_show, "max_rows": 30})
+                ppt_download_button(f"Daily Plan {fmt_date(pick)}",
+                                    f"Team Saudi · Daily Plan · {fmt_date(pick)}",
+                                    daily_sections,
+                                    subtitle="Athletes, events and venues for this competition day",
+                                    key="ppt_daily")
                 day_df["TS"] = pd.to_datetime(day_df["Date"].dt.strftime("%Y-%m-%d") + " " + day_df["Time Start"], errors="coerce")
                 day_df["TE"] = pd.to_datetime(day_df["Date"].dt.strftime("%Y-%m-%d") + " " + day_df["Time End"],   errors="coerce")
                 miss = day_df["TE"].isna() & day_df["TS"].notna()
@@ -789,7 +861,7 @@ with tab_daily:
                 total_h = end_h - start_h
 
                 # Build the HTML table
-                hdr_cols = ["Sport","Athlete","Gender","SOTC","Phase","Event","Time","Schedule"]
+                hdr_cols = ["Sport","Athlete","Gender","SOTC","Phase","Event","Start","End","Schedule"]
                 rows_html = ['<table class="isg-schedule"><thead><tr>']
                 for c in hdr_cols:
                     rows_html.append(f'<th>{c}</th>')
@@ -835,6 +907,7 @@ with tab_daily:
                         f'<td>{r["Phase"]}</td>'
                         f'<td>{event_disp}</td>'
                         f'<td class="time-cell">{fmt_time(r["Time Start"])}</td>'
+                        f'<td class="time-cell">{fmt_time(r["Time End"])}</td>'
                         f'<td class="bar-cell">{bar_html}</td>'
                         f'</tr>'
                     )
@@ -849,7 +922,7 @@ with tab_daily:
                     tick_html += f'<span class="bar-tick" style="left:{pos:.1f}%;">{label}</span>'
                 tick_html += '</div>'
                 rows_html.append(
-                    f'<tr class="axis-row"><td colspan="7"></td>'
+                    f'<tr class="axis-row"><td colspan="8"></td>'
                     f'<td class="bar-cell">{tick_html}</td></tr>'
                 )
                 rows_html.append("</tbody></table>")
@@ -966,6 +1039,7 @@ with tab_plan:
     st.subheader("Performance Analysis — Coverage Plan")
     st.caption("Target: SOTC athletes in Athletics, Swimming, Taekwondo and Karate. "
                "Baseline 2 cameras (Luke + Alanoud); 3rd only when help is available.")
+    # PPT export (built once plan_df exists below — placeholder)
 
     # Settings row
     s1, s2, s3 = st.columns(3)
@@ -1110,6 +1184,28 @@ with tab_plan:
                 show["Camera"]     = show["Camera"].apply(lambda c: "UNCOVERED" if c == 0 else f"Cam {c}")
                 st.dataframe(show, hide_index=True, use_container_width=True)
 
+        # ---- PPT export for PA Plan ----
+        plan_sections = []
+        n_un_total = int((plan_df["Camera"]==0).sum()) if "Camera" in plan_df.columns else 0
+        plan_sections.append({"title": "Coverage Summary", "kind": "metric",
+                              "metrics": [("Athletes", str(n_athletes)),
+                                          ("Events", str(n_events)),
+                                          ("Days", str(n_days)),
+                                          ("Uncovered", str(n_un_total))]})
+        for d_grp, g_grp in plan_df.groupby("Date"):
+            show = g_grp.sort_values("TS")[
+                ["Time Start","Time End","Sport","Phase","Athlete","Venue","Camera"]
+            ].copy()
+            show["Time Start"] = show["Time Start"].apply(fmt_time)
+            show["Time End"]   = show["Time End"].apply(fmt_time)
+            show["Camera"]     = show["Camera"].apply(lambda c: "UNCOVERED" if c == 0 else f"Cam {c}")
+            plan_sections.append({"title": fmt_date(d_grp), "kind": "table", "df": show, "max_rows": 20})
+        ppt_download_button("PA Coverage Plan",
+                            "Team Saudi · PA Coverage Plan",
+                            plan_sections,
+                            subtitle=f"Cameras: {'2 throughout' if not use_3rd_cam else '2 → 3 from 14 May'} · SOTC priority",
+                            key="ppt_pa")
+
         st.divider()
         st.subheader("Athlete coverage matrix")
         # Sport + Athlete (rows) × Date (cols), sorted by sport then name
@@ -1133,6 +1229,23 @@ with tab_history:
 
     hist_table = load_history_medal_table()
     hist_ksa   = load_history_ksa_sport()
+
+    # PPT export
+    hist_sections = []
+    if not hist_table.empty:
+        hist_sections.append({"title": "GCC 2022 Medal Table — Reference",
+                              "kind": "table", "df": hist_table})
+    if not hist_ksa.empty:
+        hist_sections.append({"title": "KSA Medals by Sport — 2022",
+                              "kind": "table", "df": hist_ksa})
+    if not medals_df.empty:
+        hist_sections.append({"title": "GCC 2026 Live Medal Table",
+                              "kind": "table", "df": medals_df})
+    ppt_download_button("vs 2022 Comparison",
+                        "Team Saudi · 2022 vs 2026",
+                        hist_sections,
+                        subtitle="Reference baseline and live tracking",
+                        key="ppt_hist")
 
     # ---- TARGET TRACKER (linear extrapolation) ----
     games_start  = pd.Timestamp("2026-05-12").date()
