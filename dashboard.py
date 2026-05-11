@@ -495,6 +495,51 @@ ISG_CSS = f"""
 """
 
 
+def build_daily_gantt_fig(df: pd.DataFrame, title: str = ""):
+    """Plotly Gantt chart of one day's schedule, Sport+Athlete rows coloured by Phase.
+
+    Mirrors the ISG-style HTML table for PPT export (kaleido renders to PNG).
+    Collapses team-sport rows to 'KSA TEAM (vs OPP)' for consistency with the
+    on-screen table.
+    """
+    if df.empty:
+        return None
+    work = df.copy()
+    is_team = work["Match_Type"].astype(str).str.lower() == "team"
+    if is_team.any():
+        team_rows = work[is_team].drop_duplicates(
+            subset=["Sport", "Event_ID", "Phase", "Date"], keep="first").copy()
+        team_rows["Athlete"] = team_rows.apply(
+            lambda r: f"KSA TEAM (vs {r['Opponent']})" if r.get("Opponent") else "KSA TEAM",
+            axis=1)
+        team_rows["Family Name"] = "Team"; team_rows["Given Name"] = "KSA"
+        work = pd.concat([work[~is_team], team_rows], ignore_index=True)
+    work = work.sort_values(["Sport", "Family Name", "Given Name", "TS"])
+    work["Row"]   = work["Sport"] + " · " + work["Athlete"]
+    work["Label"] = work["Event"] + " (" + work["Phase"] + ")"
+
+    fig = px.timeline(
+        work, x_start="TS", x_end="TE", y="Row",
+        color="Phase",
+        color_discrete_map=PHASE_COLOURS,
+        text="Label",
+        hover_data={"Athlete": True, "Phase": True, "Venue": True,
+                    "Time Start": True, "Time End": True,
+                    "TS": False, "TE": False, "Row": False},
+    )
+    fig.update_yaxes(autorange="reversed", title="", tickfont=dict(size=11))
+    fig.update_xaxes(title="", tickformat="%H:%M", dtick=2*60*60*1000)
+    fig.update_traces(textposition="inside", textfont_size=10, insidetextanchor="start")
+    fig.update_layout(
+        title=title or None,
+        height=max(360, 24 * work["Row"].nunique() + 80),
+        margin=dict(t=40 if title else 10, b=10, l=10, r=10),
+        plot_bgcolor="white",
+        legend=dict(orientation="h", y=1.06, yanchor="bottom"),
+    )
+    return fig
+
+
 def render_isg_schedule(df: pd.DataFrame, include_camera: bool = False,
                         title: str | None = None):
     """Render an ISG-style HTML schedule for one day's events.
@@ -1032,6 +1077,38 @@ with tab_daily:
 
                 # ---- PPT export for this day ----
                 daily_sections = []
+                # Slide 1: Gantt of the daily athlete schedule
+                gantt_fig = build_daily_gantt_fig(day_df, title=f"Daily Athlete Schedule — {fmt_date(pick)}")
+                if gantt_fig is not None:
+                    daily_sections.append({"title": f"Schedule Gantt — {fmt_date(pick)}",
+                                            "kind": "chart", "fig": gantt_fig})
+
+                # Slide 2: venues map
+                venue_coords = load_venues()
+                vt_rows = []
+                for v in sorted(set(v.strip() for v in day_df["Venue"].dropna().astype(str) if v.strip())):
+                    coord = venue_coords.get(v) or next((vv for kk, vv in venue_coords.items() if kk.lower().strip()==v.lower().strip()), None)
+                    if coord:
+                        vt_rows.append({"Venue": v, "District": coord.get("district",""),
+                                        "lat": coord["lat"], "lon": coord["lon"],
+                                        "Events": int((day_df["Venue"]==v).sum())})
+                if vt_rows:
+                    vt_df = pd.DataFrame(vt_rows)
+                    venue_fig = px.scatter_mapbox(
+                        vt_df, lat="lat", lon="lon", hover_name="Venue",
+                        hover_data={"District": True, "Events": True, "lat": False, "lon": False},
+                        size="Events", size_max=28,
+                        color_discrete_sequence=[ELITE], zoom=10, height=500,
+                    )
+                    venue_fig.update_layout(mapbox_style="open-street-map",
+                                             title=f"Venues — {fmt_date(pick)}",
+                                             margin=dict(t=40, b=10, l=10, r=10))
+                    daily_sections.append({"title": f"Venues — {fmt_date(pick)}",
+                                            "kind": "chart", "fig": venue_fig})
+                    daily_sections.append({"title": "Venue summary", "kind": "table",
+                                            "df": vt_df[["Venue","District","Events"]]})
+
+                # Slide 3+: team matches (collapsed) and full athlete table
                 team_matches_today = day_df[day_df["Match_Type"]=="team"].copy()
                 if not team_matches_today.empty:
                     team_show = (team_matches_today
@@ -1048,7 +1125,7 @@ with tab_daily:
                 ].copy()
                 sched_show["Time Start"] = sched_show["Time Start"].apply(fmt_time)
                 sched_show["Time End"]   = sched_show["Time End"].apply(fmt_time)
-                daily_sections.append({"title": f"Daily Athlete Schedule — {fmt_date(pick)}",
+                daily_sections.append({"title": f"Daily Athlete Schedule (table) — {fmt_date(pick)}",
                                         "kind": "table", "df": sched_show, "max_rows": 30})
                 ppt_download_button(f"Daily Plan {fmt_date(pick)}",
                                     f"Team Saudi · Daily Plan · {fmt_date(pick)}",
@@ -1479,21 +1556,98 @@ with tab_history:
     hist_table = load_history_medal_table()
     hist_ksa   = load_history_ksa_sport()
 
-    # PPT export
+    # PPT export — each comparison section is its own slide
     hist_sections = []
-    if not hist_table.empty:
-        hist_sections.append({"title": "GCC 2022 Medal Table — Reference",
-                              "kind": "table", "df": hist_table})
-    if not hist_ksa.empty:
-        hist_sections.append({"title": "KSA Medals by Sport — 2022",
-                              "kind": "table", "df": hist_ksa})
+
+    # Slide: target-tracker tiles (computed below in this tab; build a snapshot now)
+    _g_live = silver_h = bronze_h = total_live_h = 0
+    if not medals_df.empty:
+        _kr = medals_df[medals_df["NOC"]=="KSA"]
+        if not _kr.empty:
+            _g_live = int(_kr.iloc[0]["Gold"]); silver_h = int(_kr.iloc[0]["Silver"])
+            bronze_h = int(_kr.iloc[0]["Bronze"]); total_live_h = _g_live + silver_h + bronze_h
+    target_h = int(hist_ksa[hist_ksa["In_2026"]!="no"]["Total"].sum()) if not hist_ksa.empty else 51
+    hist_sections.append({"title": "Target Tracker", "kind": "metric",
+                          "metrics": [("Live medals", str(total_live_h)),
+                                      ("2022 total",  "67"),
+                                      ("Like-for-like target", str(target_h)),
+                                      ("Gap to target",
+                                       f"{total_live_h - target_h:+d}")]})
+
+    # Slide: live medal table
     if not medals_df.empty:
         hist_sections.append({"title": "GCC 2026 Live Medal Table",
                               "kind": "table", "df": medals_df})
+
+    # Slide: 2022 medal table reference
+    if not hist_table.empty:
+        hist_sections.append({"title": "GCC 2022 Medal Table — Reference",
+                              "kind": "table", "df": hist_table})
+
+    # Slide: KSA donut comparison (chart)
+    if not hist_ksa.empty:
+        donut_fig = go.Figure()
+        donut_fig.add_trace(go.Pie(labels=["Gold","Silver","Bronze"],
+                                    values=[_g_live, silver_h, bronze_h], hole=0.55,
+                                    name="Live 2026", domain=dict(x=[0,0.48]),
+                                    marker=dict(colors=[MEDAL_COLOURS["G"], MEDAL_COLOURS["S"], MEDAL_COLOURS["B"]]),
+                                    sort=False, textinfo="label+value"))
+        donut_fig.add_trace(go.Pie(labels=["Gold","Silver","Bronze"],
+                                    values=[16, 22, 29], hole=0.55,
+                                    name="Kuwait 2022", domain=dict(x=[0.52,1.0]),
+                                    marker=dict(colors=[MEDAL_COLOURS["G"], MEDAL_COLOURS["S"], MEDAL_COLOURS["B"]]),
+                                    sort=False, textinfo="label+value"))
+        donut_fig.update_layout(title="KSA Medals — Live 2026 vs Kuwait 2022",
+                                annotations=[
+                                    dict(text=f"<b>{total_live_h}</b><br>2026", x=0.21, y=0.5, font_size=22, showarrow=False),
+                                    dict(text="<b>67</b><br>2022",                  x=0.79, y=0.5, font_size=22, showarrow=False),
+                                ],
+                                height=500, margin=dict(t=60, b=10, l=10, r=10),
+                                showlegend=False)
+        hist_sections.append({"title": "KSA Totals — 2026 vs 2022",
+                              "kind": "chart", "fig": donut_fig})
+
+    # Slide: KSA medals by sport in 2022 (chart)
+    if not hist_ksa.empty:
+        h = hist_ksa.sort_values("Total")
+        bar_fig = go.Figure()
+        bar_fig.add_trace(go.Bar(y=h["Sport"], x=h["Gold"],   name="Gold",
+                                  orientation="h", marker_color=MEDAL_COLOURS["G"],
+                                  text=h["Gold"], textposition="inside"))
+        bar_fig.add_trace(go.Bar(y=h["Sport"], x=h["Silver"], name="Silver",
+                                  orientation="h", marker_color=MEDAL_COLOURS["S"],
+                                  text=h["Silver"], textposition="inside"))
+        bar_fig.add_trace(go.Bar(y=h["Sport"], x=h["Bronze"], name="Bronze",
+                                  orientation="h", marker_color=MEDAL_COLOURS["B"],
+                                  text=h["Bronze"], textposition="inside"))
+        bar_fig.update_layout(title="KSA Medals by Sport — 2022 baseline",
+                              barmode="stack", height=500, margin=dict(t=60, b=10, l=10, r=10),
+                              plot_bgcolor="white", xaxis_title="Medals",
+                              legend=dict(orientation="h", y=1.1))
+        hist_sections.append({"title": "KSA Medals by Sport — 2022",
+                              "kind": "chart", "fig": bar_fig})
+
+    # Slide: 2022 by-sport table (data behind the chart)
+    if not hist_ksa.empty:
+        hist_sections.append({"title": "KSA Medals by Sport (table)",
+                              "kind": "table", "df": hist_ksa})
+
+    # Slide: sports flagged as not in 2026 + target note
+    if not hist_ksa.empty:
+        not_in_2026 = hist_ksa[hist_ksa["In_2026"]=="no"]
+        lost_total = int(not_in_2026["Total"].sum()) if not not_in_2026.empty else 0
+        body = (
+            f"At Kuwait 2022 KSA won {lost_total} medals in sports NOT on the 2026 programme:\n"
+            + ", ".join(f"{r['Sport']} ({r['Total']})" for _, r in not_in_2026.iterrows())
+            + f"\n\nLike-for-like 2026 target (sports in both games): {target_h} medals."
+        )
+        hist_sections.append({"title": "Sports off the 2026 programme",
+                              "kind": "text", "body": body})
+
     ppt_download_button("vs 2022 Comparison",
                         "Team Saudi · 2022 vs 2026",
                         hist_sections,
-                        subtitle="Reference baseline and live tracking",
+                        subtitle=f"Snapshot — {datetime.now():%a %d %b · %H:%M}",
                         key="ppt_hist")
 
     # ---- TARGET TRACKER (linear extrapolation) ----
