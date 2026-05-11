@@ -336,6 +336,17 @@ def load_results_ksa() -> pd.DataFrame:
     return df
 
 
+@st.cache_data(ttl=600)
+def load_venues() -> dict:
+    """Venue → {lat, lon, district} from venues.json."""
+    import json
+    f = HERE / "venues.json"
+    if not f.exists():
+        return {}
+    raw = json.loads(f.read_text(encoding="utf-8"))
+    return {k: v for k, v in raw.items() if not k.startswith("_")}
+
+
 @st.cache_data(ttl=60)
 def load_shortlist_raw() -> pd.DataFrame:
     """Master roster from BORNAN-derived Shortlist xlsx (athlete + SOTC + manual times)."""
@@ -740,10 +751,48 @@ with tab_daily:
                 )
                 st.plotly_chart(fig_ath, use_container_width=True)
 
-                # Venue list (side info, replacing the map we don't have coords for yet)
-                venues = sorted(set(v.strip() for v in ath_view["Venue"].dropna().astype(str) if v.strip()))
-                if venues:
-                    st.caption(f"📍 **Venues today:** {' · '.join(venues)}")
+                # ---- Venue map ----
+                venue_coords = load_venues()
+                venues_today = sorted(set(v.strip() for v in ath_view["Venue"].dropna().astype(str) if v.strip()))
+                event_count_by_venue = ath_view.groupby("Venue").size().to_dict()
+
+                map_rows = []
+                for v in venues_today:
+                    coord = venue_coords.get(v)
+                    if not coord:
+                        # try case-insensitive lookup
+                        for k, val in venue_coords.items():
+                            if k.lower().strip() == v.lower().strip():
+                                coord = val; break
+                    if coord:
+                        map_rows.append({
+                            "Venue": v, "District": coord.get("district", ""),
+                            "lat": coord["lat"], "lon": coord["lon"],
+                            "Events": int(event_count_by_venue.get(v, 0)),
+                        })
+
+                if map_rows:
+                    map_df = pd.DataFrame(map_rows)
+                    st.markdown("### Venues today")
+                    m_left, m_right = st.columns([2, 1])
+                    with m_left:
+                        fig_map = px.scatter_mapbox(
+                            map_df, lat="lat", lon="lon",
+                            hover_name="Venue",
+                            hover_data={"District": True, "Events": True, "lat": False, "lon": False},
+                            size="Events", size_max=28,
+                            color_discrete_sequence=[ELITE],
+                            zoom=10, height=380,
+                        )
+                        fig_map.update_layout(mapbox_style="open-street-map",
+                                               margin=dict(t=0, b=0, l=0, r=0))
+                        st.plotly_chart(fig_map, use_container_width=True)
+                    with m_right:
+                        show_venues = map_df[["Venue","District","Events"]].sort_values("Events", ascending=False)
+                        st.dataframe(show_venues, hide_index=True, use_container_width=True, height=380)
+                else:
+                    if venues_today:
+                        st.caption(f"📍 **Venues today:** {' · '.join(venues_today)} (no coordinates wired)")
 
                 # Per-sport summary table for this day
                 st.markdown("### Sport summary")
