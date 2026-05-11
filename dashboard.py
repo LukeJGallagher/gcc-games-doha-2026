@@ -120,6 +120,7 @@ DATA         = HERE / "data"
 RESULTS_DIR  = DATA / "results"
 SCHEDULE_DIR = DATA / "schedule"
 PHOTOS_DIR   = HERE / "photos"
+ASSETS_DIR   = HERE / "assets"
 
 st.set_page_config(
     page_title="GCC Games Doha 2026 — Team Saudi",
@@ -247,6 +248,28 @@ def file_age(folder: Path, pattern: str) -> str:
     return f"{mins // 1440} d ago"
 
 
+def fmt_time(t: str | None) -> str:
+    """Normalise '9:30:00' / '09:30:00' -> '09:30'. Tolerates blanks."""
+    if not t:
+        return ""
+    s = str(t).strip()
+    parts = s.split(":")
+    if len(parts) >= 2:
+        h, m = parts[0].zfill(2), parts[1][:2]
+        return f"{h}:{m}"
+    return s[:5]
+
+
+def fmt_date(d) -> str:
+    """Render any date-like value as 'Mon 12 May'."""
+    if d is None or (isinstance(d, float) and pd.isna(d)):
+        return ""
+    try:
+        return pd.Timestamp(d).strftime("%a %d %b")
+    except Exception:
+        return str(d)[:10]
+
+
 def gender_from_event(event: str) -> str:
     e = (event or "").lower()
     if "women" in e:    return "Female"
@@ -274,10 +297,27 @@ today_events = sched_df[sched_df["Date"] == today] if not sched_df.empty else pd
 # ---------------------------------------------------------------------------
 # Header
 # ---------------------------------------------------------------------------
+def _logo_b64() -> str:
+    import base64
+    p = ASSETS_DIR / "ts_horizontal.png"
+    if p.exists():
+        return "data:image/png;base64," + base64.b64encode(p.read_bytes()).decode()
+    return ""
+
+
+_logo = _logo_b64()
+_logo_html = (
+    f'<img src="{_logo}" style="height:60px;margin-right:1.2rem;">' if _logo else "🇸🇦"
+)
 st.markdown(f"""
-<div class="header-bar">
-  <h1>🇸🇦 GCC Games Doha 2026 — Team Saudi</h1>
-  <div style="opacity:0.9;margin-top:0.2rem;">Last data refresh: {file_age(RESULTS_DIR, 'KSA_ATHLETE_SCHEDULE_*.csv')}</div>
+<div class="header-bar" style="display:flex;align-items:center;gap:1rem;">
+  {_logo_html}
+  <div style="flex:1;">
+    <h1 style="margin:0;font-size:1.5rem;">GCC Games Doha 2026</h1>
+    <div style="opacity:0.9;font-size:0.85rem;margin-top:0.1rem;">
+      Team Saudi · Performance Analysis · Last data refresh: {file_age(RESULTS_DIR, 'KSA_ATHLETE_SCHEDULE_*.csv')}
+    </div>
+  </div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -400,6 +440,8 @@ with tab_overview:
             show = today_events.sort_values("Time Start")[
                 ["Time Start","Time End","Sport","Event","Phase","Athlete","Venue"]
             ].head(20).rename(columns={"Time Start":"Start","Time End":"End"})
+            show["Start"] = show["Start"].apply(fmt_time)
+            show["End"]   = show["End"].apply(fmt_time)
             st.dataframe(show, hide_index=True, use_container_width=True, height=260)
         else:
             nxt = sched_df[sched_df["Date"] >= today].sort_values(["Date","Time Start"])
@@ -561,11 +603,11 @@ with tab_plan:
         # Priority score per event (SOTC + phase + target sport)
         plan_df["Priority"] = plan_df.apply(event_priority, axis=1)
 
-        # Allocate cameras: high-priority events get slots first; conflicts drop low-priority.
+        # Allocate cameras: high-priority events get slots first;
+        # anything that can't fit becomes "Uncovered" (real shortage flag).
         assignments = []
         for d, g in plan_df.groupby("Date"):
             cams_available = 3 if d >= pd.Timestamp("2026-05-14") else 2
-            # Sort by priority desc, then start time asc
             g_sorted = g.sort_values(["Priority", "TS"], ascending=[False, True])
             ends = {}
             for _, ev in g_sorted.iterrows():
@@ -575,14 +617,21 @@ with tab_plan:
                         slot = cam
                         break
                 if slot is None:
-                    slot = max(ends.keys(), default=0) + 1
-                ends[slot] = ev["TE"]
-                assignments.append((ev.name, slot, slot > cams_available))
+                    # No real camera available → uncovered (do NOT invent a Cam 4)
+                    assignments.append((ev.name, 0, True))
+                else:
+                    ends[slot] = ev["TE"]
+                    assignments.append((ev.name, slot, False))
         plan_df["Camera"]   = pd.Series({i: s for i, s, _ in assignments})
         plan_df["Overflow"] = pd.Series({i: o for i, _, o in assignments})
 
-        # Gantt: one row per camera per day → visual rows = "Day · Cam N"
-        plan_df["GanttRow"] = plan_df["DayStr"] + " · Cam " + plan_df["Camera"].astype(str)
+        # Gantt: one row per camera per day. Uncovered events go to a clearly
+        # labelled "UNCOVERED" row so they stand out.
+        plan_df["GanttRow"] = plan_df.apply(
+            lambda r: f"{r['DayStr']} · UNCOVERED" if r["Camera"] == 0
+                      else f"{r['DayStr']} · Cam {r['Camera']}",
+            axis=1
+        )
 
         fig = px.timeline(
             plan_df,
@@ -602,22 +651,28 @@ with tab_plan:
                           legend=dict(orientation="h", y=1.05))
         st.plotly_chart(fig, use_container_width=True)
 
-        # Overflow recommendations
+        # Uncovered events — real shortage of cameras at that moment
         overflows = plan_df[plan_df["Overflow"] == True]
         if not overflows.empty:
             st.error(
-                f"⚠ {len(overflows)} events overflow the available camera count. "
-                f"Lowest-priority events listed below — consider dropping or asking the coach to track manually."
+                f"⚠ {len(overflows)} events **cannot be covered** with the available cameras "
+                f"(2 until 14 May, 3 from 14 May). Lowest-priority events listed first — "
+                f"these are candidates to skip or ask the coach to record manually on a phone."
             )
             ov_show = overflows[["Date","Time Start","Sport","Event","Phase","Athlete","SOTC","Priority"]].copy()
             ov_show = ov_show.sort_values(["Date","Priority"], ascending=[True, True])
             ov_show["Recommendation"] = ov_show.apply(
-                lambda r: "Drop / manual" if r["Priority"] < 60 else "Negotiate (close call)",
+                lambda r: "Drop / coach to film" if r["Priority"] < 60 else "Negotiate (close call)",
                 axis=1)
             st.dataframe(ov_show, hide_index=True, use_container_width=True)
             st.caption(
-                "Priority score = SOTC (+50) + Phase weight (Final=100, Semi=80, QF=60, Qual=20) "
+                "Priority = SOTC (+50) + Phase weight (Final=100, Semi=80, QF=60, Qual=20) "
                 "+ Target sport (Athletics/Swimming/Taekwondo/Karate, +10)."
+            )
+        else:
+            st.success(
+                f"✓ All {len(plan_df)} events fit within the available camera count "
+                f"({2 if plan_df['Date'].min() < pd.Timestamp('2026-05-14') else 3} → 3 from 14 May)."
             )
 
         st.divider()
@@ -625,17 +680,23 @@ with tab_plan:
         # Daily breakdown
         for d, g in plan_df.groupby("Date"):
             cams_today = 3 if d >= pd.Timestamp("2026-05-14") else 2
-            with st.expander(f"**{d.strftime('%a %d %b %Y')}** — {len(g)} events · {cams_today} cameras"):
-                show = g.sort_values("TS")[["Time Start","Time End","Sport","Phase","Athlete","Venue","Camera","SOTC"]]
+            with st.expander(f"**{fmt_date(d)}** — {len(g)} events · {cams_today} cameras"):
+                show = g.sort_values("TS")[["Time Start","Time End","Sport","Phase","Athlete","Venue","Camera","SOTC"]].copy()
+                show["Time Start"] = show["Time Start"].apply(fmt_time)
+                show["Time End"]   = show["Time End"].apply(fmt_time)
+                show["Camera"]     = show["Camera"].apply(lambda c: "UNCOVERED" if c == 0 else f"Cam {c}")
                 st.dataframe(show, hide_index=True, use_container_width=True)
 
         st.divider()
         st.subheader("Athlete coverage matrix")
-        # athlete × date count
-        mat = plan_df.groupby(["Athlete","Date"]).size().reset_index(name="n")
-        pv = mat.pivot(index="Athlete", columns="Date", values="n").fillna(0).astype(int)
+        # Sport + Athlete (rows) × Date (cols), sorted by sport then name
+        mat = plan_df.groupby(["Sport", "Athlete", "Date"]).size().reset_index(name="n")
+        pv = mat.pivot_table(index=["Sport", "Athlete"], columns="Date",
+                             values="n", fill_value=0).astype(int)
         pv.columns = [pd.Timestamp(c).strftime("%a %d") for c in pv.columns]
-        st.dataframe(pv, use_container_width=True)
+        pv = pv.reset_index().sort_values(["Sport", "Athlete"])
+        st.dataframe(pv, use_container_width=True, hide_index=True)
+        st.caption("Each cell = number of phases (e.g. 3 = Qual + Semi + Final on the same day).")
     else:
         st.info("Select at least one target sport to build the plan.")
 
