@@ -511,14 +511,28 @@ def render_medal_card(row) -> str:
 # TAB 1: OVERVIEW
 # ===========================================================================
 with tab_overview:
-    # Medal moments — KSA podium finishes
+    # Medal moments — KSA podium finishes (deduped: 1 medal per match, not per squad member)
     if not results_df.empty and "Medal" in results_df.columns:
         ksa_medals_rows = results_df[
             results_df["Medal"].astype(str).str.strip().str.upper().isin(["G","S","B","GOLD","SILVER","BRONZE"])
         ].copy()
         if not ksa_medals_rows.empty:
+            # Safety dedupe: 1 row per (Sport, Discipline/Event_ID, Medal) so a team gold
+            # never appears multiple times even if the source file has squad-level rows.
+            dedupe_key = ["Sport", "Discipline", "Medal"]
+            ksa_medals_rows = ksa_medals_rows.drop_duplicates(subset=dedupe_key, keep="first")
             ksa_medals_rows = ksa_medals_rows.sort_values("Date", ascending=False).head(6)
+
+            # Team vs individual breakdown — both come from the same API source
+            # (MEDALS_*.csv is the NOC-level total; this is just transparency)
+            is_team = ksa_medals_rows["Athlete"].astype(str).str.contains(r"\bTeam\b|Saudi Arabia", regex=True)
+            n_team = int(is_team.sum())
+            n_ind  = int((~is_team).sum())
+
             st.subheader("🏅 Medal Moments")
+            st.caption(f"Showing the most recent {len(ksa_medals_rows)} medals · "
+                       f"{n_team} team · {n_ind} individual. Counts come from the API's NOC-level "
+                       f"medal table (team medals count once, not per squad member).")
             cards_html = '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem;">'
             for _, r in ksa_medals_rows.iterrows():
                 cards_html += render_medal_card(r)
