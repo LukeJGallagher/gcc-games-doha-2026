@@ -1501,6 +1501,26 @@ with tab_fix:
             st.dataframe(missing_sotc[["Full Name","Date Of Birth","Sport"]],
                          hide_index=True, use_container_width=True)
 
+        # ---- C. Events on roster but missing from the API schedule ----
+        unm_files = sorted((RESULTS_DIR).glob("UNMATCHED_EVENTS_*.csv"))
+        if unm_files:
+            unm = pd.read_csv(unm_files[-1], encoding="utf-8-sig").fillna("")
+            if not unm.empty:
+                st.markdown(f"### C. KSA-entered events NOT on the GCC API schedule  ({len(unm)} rows)")
+                st.caption("These athletes are entered for an event that the organisers haven't loaded onto the GCC API. "
+                           "Either: (1) the event is genuinely not on the programme, or (2) BORNAN hasn't published it yet.")
+                # Group by (Sport, Event) to give counts
+                summary = unm.groupby(["Sport", "Event"]).agg(
+                    Athletes=("Family Name", "count"),
+                    Names=("Family Name", lambda s: ", ".join(sorted(set(f"{g} {f}".strip() for g, f in zip(unm.loc[s.index, "Given Name"], s)))[:5]))
+                ).reset_index()
+                st.dataframe(summary[["Sport", "Event", "Athletes", "Names"]],
+                             hide_index=True, use_container_width=True)
+                st.warning(
+                    "**Action**: ask team management to escalate these to BORNAN / Doha 2026 organisers. "
+                    "Most likely candidate is Men's Pole Vault (currently only Women's is on the API)."
+                )
+
         st.divider()
         st.markdown("### How to fix")
         st.markdown("""
