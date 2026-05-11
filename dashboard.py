@@ -1137,6 +1137,31 @@ with tab_daily:
                                     day_df[[c for c in day_df.columns if not c.startswith("_")]],
                                     key="csv_daily")
 
+                # ---- Full-Schedule PPT (one slide per competition day) ----
+                full_sections = []
+                # Apply the same target-sport / SOTC filters across all days
+                all_df = sched_df[sched_df["Sport"].isin(daily_sports)].copy()
+                if sotc_filter:
+                    all_df = all_df[all_df["SOTC"].astype(str).str.upper() == "YES"]
+                all_df["TS"] = pd.to_datetime(all_df["Date"].dt.strftime("%Y-%m-%d") + " " + all_df["Time Start"].apply(_pad_time), errors="coerce")
+                all_df["TE"] = pd.to_datetime(all_df["Date"].dt.strftime("%Y-%m-%d") + " " + all_df["Time End"].apply(_pad_time),   errors="coerce")
+                miss = all_df["TE"].isna() & all_df["TS"].notna()
+                all_df.loc[miss, "TE"] = all_df.loc[miss, "TS"] + pd.to_timedelta(all_df.loc[miss, "Duration_Min"], unit="min")
+                all_df = all_df.dropna(subset=["TS","TE"])
+
+                for d, gd in all_df.groupby("Date"):
+                    gd = gd.copy()
+                    g_fig = build_daily_gantt_fig(gd, title=f"{fmt_date(d)} — Team Saudi Schedule")
+                    if g_fig is not None:
+                        full_sections.append({"title": f"Schedule — {fmt_date(d)}",
+                                               "kind": "chart", "fig": g_fig})
+
+                ppt_download_button("Full Schedule (all days)",
+                                    "Team Saudi · GCC Doha 2026 · Schedule",
+                                    full_sections,
+                                    subtitle=f"One slide per competition day · {len(full_sections)} days",
+                                    key="ppt_full_sched")
+
                 day_df["Priority"] = day_df.apply(event_priority, axis=1)
 
                 # Tile row (athlete-focused, no camera concerns here)
