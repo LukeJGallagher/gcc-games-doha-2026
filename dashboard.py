@@ -619,6 +619,23 @@ def fmt_time(t: str | None) -> str:
     return s[:5]
 
 
+def _pad_time(t):
+    """Normalise time strings to 'HH:MM:SS' so mixed input formats parse uniformly.
+    Some rows arrive as 'HH:MM' (manual overrides), others as 'HH:MM:SS' (API).
+    Mixed columns cause pandas to lock the wrong format and emit NaT on misses."""
+    if t is None or (isinstance(t, float) and pd.isna(t)):
+        return ""
+    s = str(t).strip()
+    if not s:
+        return ""
+    parts = s.split(":")
+    if len(parts) == 2:
+        return f"{parts[0].zfill(2)}:{parts[1][:2]}:00"
+    if len(parts) >= 3:
+        return f"{parts[0].zfill(2)}:{parts[1][:2]}:{parts[2][:2]}"
+    return s
+
+
 def fmt_date(d) -> str:
     """Render any date-like value as 'Mon 12 May'."""
     if d is None or (isinstance(d, float) and pd.isna(d)):
@@ -970,8 +987,8 @@ with tab_daily:
                 st.info(f"No events on {fmt_date(pick)} matching the filters.")
             else:
                 # Compute time columns BEFORE building the PPT export sections
-                day_df["TS"] = pd.to_datetime(day_df["Date"].dt.strftime("%Y-%m-%d") + " " + day_df["Time Start"], errors="coerce")
-                day_df["TE"] = pd.to_datetime(day_df["Date"].dt.strftime("%Y-%m-%d") + " " + day_df["Time End"],   errors="coerce")
+                day_df["TS"] = pd.to_datetime(day_df["Date"].dt.strftime("%Y-%m-%d") + " " + day_df["Time Start"].apply(_pad_time), errors="coerce")
+                day_df["TE"] = pd.to_datetime(day_df["Date"].dt.strftime("%Y-%m-%d") + " " + day_df["Time End"].apply(_pad_time),   errors="coerce")
                 miss = day_df["TE"].isna() & day_df["TS"].notna()
                 day_df.loc[miss, "TE"] = day_df.loc[miss, "TS"] + pd.to_timedelta(day_df.loc[miss, "Duration_Min"], unit="min")
                 day_df = day_df.dropna(subset=["TS","TE"]).sort_values("TS")
@@ -1269,10 +1286,11 @@ with tab_plan:
         if sotc_only:
             plan_df = plan_df[plan_df["SOTC"].astype(str).str.upper() == "YES"]
 
-        # Time columns: prefer manual Shortlist times if available, fall back to API+duration
-        plan_df["TS"] = pd.to_datetime(plan_df["Date"].dt.strftime("%Y-%m-%d") + " " + plan_df["Time Start"],
+        # Time columns: prefer manual Shortlist times if available, fall back to API+duration.
+        # Apply _pad_time to normalise mixed HH:MM and HH:MM:SS formats before parsing.
+        plan_df["TS"] = pd.to_datetime(plan_df["Date"].dt.strftime("%Y-%m-%d") + " " + plan_df["Time Start"].apply(_pad_time),
                                        errors="coerce")
-        plan_df["TE"] = pd.to_datetime(plan_df["Date"].dt.strftime("%Y-%m-%d") + " " + plan_df["Time End"],
+        plan_df["TE"] = pd.to_datetime(plan_df["Date"].dt.strftime("%Y-%m-%d") + " " + plan_df["Time End"].apply(_pad_time),
                                        errors="coerce")
         # If Time End missing, fall back to start + Duration_Min
         miss = plan_df["TE"].isna() & plan_df["TS"].notna()
