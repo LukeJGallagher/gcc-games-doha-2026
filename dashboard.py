@@ -666,15 +666,7 @@ with tab_daily:
                     default=sorted(sched_df["Sport"].unique()),
                     key="daily_sports",
                 )
-            cfg1, cfg2 = st.columns([2, 1])
-            with cfg1:
-                sotc_filter = st.checkbox("SOTC athletes only", value=False, key="daily_sotc")
-            with cfg2:
-                cams_today = st.number_input(
-                    "Cameras available today (3rd only if help available)",
-                    min_value=1, max_value=3, value=2, step=1, key="daily_cams",
-                    help="Default 2: Luke + Alanoud. Set to 3 only when a coach/staff member can run the third camera.",
-                )
+            sotc_filter = st.checkbox("SOTC athletes only", value=False, key="daily_sotc")
 
             day_df = sched_df[
                 (sched_df["Date"].dt.date == pick)
@@ -694,19 +686,14 @@ with tab_daily:
 
                 day_df["Priority"] = day_df.apply(event_priority, axis=1)
 
-                # Session-aware allocator: one camera covers a whole session
-                # at the same venue, not one camera per individual event.
-                day_df["Camera"] = allocate_cameras_by_session(day_df, int(cams_today))
-                day_df["Lane"]   = day_df["Camera"].apply(lambda c: "UNCOVERED" if c == 0 else f"Cam {c}")
-
-                # Tile row
+                # Tile row (athlete-focused, no camera concerns here)
                 t1, t2, t3, t4 = st.columns(4)
                 t1.markdown(f"<div class='metric-card'><div class='label'>Date</div><div class='value' style='font-size:1.1rem;'>{fmt_date(pick)}</div></div>", unsafe_allow_html=True)
                 t2.markdown(f"<div class='metric-card'><div class='label'>Events</div><div class='value'>{len(day_df)}</div></div>", unsafe_allow_html=True)
-                n_un = int((day_df['Camera']==0).sum())
-                un_colour = "#c53030" if n_un else DISCIPLINE
-                t3.markdown(f"<div class='metric-card'><div class='label'>Cameras available</div><div class='value'>{cams_today}</div></div>", unsafe_allow_html=True)
-                t4.markdown(f"<div class='metric-card'><div class='label'>Uncovered</div><div class='value' style='color:{un_colour};'>{n_un}</div></div>", unsafe_allow_html=True)
+                n_athletes_today = day_df.groupby(["Given Name","Family Name"]).ngroups
+                t3.markdown(f"<div class='metric-card'><div class='label'>Athletes</div><div class='value'>{n_athletes_today}</div></div>", unsafe_allow_html=True)
+                n_sotc_today = day_df[day_df["SOTC"].astype(str).str.upper()=="YES"].groupby(["Given Name","Family Name"]).ngroups
+                t4.markdown(f"<div class='metric-card'><div class='label'>SOTC athletes</div><div class='value'>{n_sotc_today}</div></div>", unsafe_allow_html=True)
                 st.write("")
 
                 # ---- Athlete-grouped daily schedule (ISG style) ----
@@ -758,27 +745,6 @@ with tab_daily:
                 if venues:
                     st.caption(f"📍 **Venues today:** {' · '.join(venues)}")
 
-                # ---- Camera-lane Gantt (operational view) ----
-                st.markdown("### Camera plan")
-                # Gantt for this day
-                day_df["Label"] = day_df["Sport"] + " · " + day_df["Athlete"] + " (" + day_df["Phase"] + ")"
-                lane_order = [f"Cam {i}" for i in range(1, cams_today+1)] + (["UNCOVERED"] if n_un else [])
-                day_df["Lane"] = pd.Categorical(day_df["Lane"], categories=lane_order, ordered=True)
-                fig = px.timeline(
-                    day_df, x_start="TS", x_end="TE", y="Lane",
-                    color="Sport", color_discrete_map=SPORT_COLOURS, text="Label",
-                    hover_data={"Athlete": True, "Phase": True, "Venue": True,
-                                "Time Start": True, "Time End": True, "Time_Source": True,
-                                "TS": False, "TE": False, "Lane": False},
-                )
-                fig.update_yaxes(autorange="reversed", title="")
-                fig.update_xaxes(title="", tickformat="%H:%M")
-                fig.update_traces(textposition="inside", textfont_size=11)
-                fig.update_layout(height=max(280, 60 * len(lane_order)),
-                                  margin=dict(t=10, b=10, l=10, r=10), plot_bgcolor="white",
-                                  legend=dict(orientation="h", y=1.05))
-                st.plotly_chart(fig, use_container_width=True)
-
                 # Per-sport summary table for this day
                 st.markdown("### Sport summary")
                 summ = []
@@ -796,19 +762,6 @@ with tab_daily:
                     })
                 st.dataframe(pd.DataFrame(summ), hide_index=True, use_container_width=True)
 
-                # Per-camera coverage list
-                st.markdown("### Camera plan")
-                for lane in lane_order:
-                    g_lane = day_df[day_df["Lane"] == lane].sort_values("TS")
-                    if g_lane.empty:
-                        continue
-                    n = len(g_lane)
-                    head = lane if lane == "UNCOVERED" else f"{lane} · {n} event{'s' if n!=1 else ''}"
-                    with st.expander(f"**{head}**", expanded=(lane == "UNCOVERED")):
-                        show = g_lane[["Time Start","Time End","Sport","Athlete","Event","Phase","Venue","SOTC"]].copy()
-                        show["Time Start"] = show["Time Start"].apply(fmt_time)
-                        show["Time End"]   = show["Time End"].apply(fmt_time)
-                        st.dataframe(show, hide_index=True, use_container_width=True)
 
 
 # ===========================================================================
