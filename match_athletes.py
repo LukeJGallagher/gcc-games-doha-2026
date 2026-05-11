@@ -32,7 +32,7 @@ DEFAULT_ROSTER_GLOB = "KSA_GCC2026_Athletes_Events*.xlsx"
 
 OUTPUT_COLUMNS = [
     "Given Name", "Family Name", "Date of Birth",
-    "Sport", "Event", "Phase", "Date", "Time Start",
+    "Sport", "Event", "Phase", "Date", "Time Start", "Time End", "Duration_Min",
     "Discipline_API", "Event_ID", "Venue", "Gender",
     "Match_Type", "Source_URL",
 ]
@@ -230,6 +230,8 @@ def main():
                 "Phase":          s.get("Phase", ""),
                 "Date":           s.get("Date", ""),
                 "Time Start":     s.get("Time", ""),
+                "Time End":       s.get("Time_End", ""),
+                "Duration_Min":   s.get("Duration_Min", ""),
                 "Discipline_API": s.get("Discipline", ""),
                 "Event_ID":       s.get("Event_ID", ""),
                 "Venue":          s.get("Venue", ""),

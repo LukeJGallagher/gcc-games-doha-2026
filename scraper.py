@@ -34,6 +34,7 @@ from config import (
     RESULTS_DIR, SCHEDULE_DIR, LOGS_DIR,
     RESULTS_COLUMNS, SCHEDULE_COLUMNS,
 )
+from duration import estimate_duration_minutes, add_minutes
 
 ts = datetime.now().strftime("%Y%m%d_%H%M%S")
 logging.basicConfig(
@@ -140,13 +141,18 @@ def _schedule_row(comp: dict, sport: str, country_entries: list[str]) -> dict:
     title_en, title_ar = _split_bilingual(comp.get("title", ""))
     if not title_ar:
         title_ar = comp.get("title_ar", "")
+    phase    = comp.get("stage_name", "")
+    start    = comp.get("time", "")
+    duration = estimate_duration_minutes(sport, title_en, phase)
     return {
         "Date":            comp.get("date", ""),
-        "Time":            comp.get("time", ""),
+        "Time":            start,
+        "Time_End":        add_minutes(start, duration),
+        "Duration_Min":    duration,
         "Sport":           sport,
         "Discipline":      title_en,
         "Discipline_AR":   title_ar,
-        "Phase":           comp.get("stage_name", ""),
+        "Phase":           phase,
         "Gender":          comp.get("gender_category", ""),
         "Venue":           comp.get("venue", ""),
         "Country_Entries": ",".join(sorted(set(country_entries))),
