@@ -661,8 +661,11 @@ with tab_overview:
     st.divider()
 
     st.subheader("KSA Schedule — Sport × Date")
+    st.caption("Cell value = number of **distinct events** (matches/heats/finals) for KSA in that sport on that date. "
+               "Not athlete count — Handball with 1 match shows 1, not 16 squad members.")
     if not sched_df.empty:
-        grid = sched_df.groupby(["Sport","Date"]).size().reset_index(name="n")
+        grid = (sched_df.groupby(["Sport","Date"])["Event_ID"]
+                .nunique().reset_index(name="n"))
         dates = sorted(sched_df["Date"].dropna().unique())
         sports = sorted(sched_df["Sport"].unique())
         z = [[int(grid[(grid["Sport"]==s)&(grid["Date"]==d)]["n"].iloc[0])
@@ -672,7 +675,8 @@ with tab_overview:
             x=[pd.Timestamp(d).strftime("%a %d %b") for d in dates], y=sports,
             colorscale=[[0,"#f4f7f5"],[0.2,STAMINA],[0.6,ENABLER],[1,ELITE]], showscale=False,
             text=[[str(v) if v>0 else "" for v in row] for row in z],
-            texttemplate="%{text}", textfont={"color":"white","size":12}))
+            texttemplate="%{text}", textfont={"color":"white","size":12},
+            hovertemplate="<b>%{y}</b><br>%{x}<br>%{z} events<extra></extra>"))
         fig.update_layout(height=max(280, 28*len(sports)), margin=dict(t=10, b=10, l=10, r=10), xaxis_side="top")
         st.plotly_chart(fig, use_container_width=True)
 
