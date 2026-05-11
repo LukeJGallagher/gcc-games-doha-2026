@@ -22,7 +22,13 @@ import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
 
-from ppt_export import build_pptx
+# python-pptx is optional - dashboard still works if it isn't installed
+try:
+    from ppt_export import build_pptx
+    PPTX_OK = True
+except Exception:
+    build_pptx = None
+    PPTX_OK = False
 
 # ---------------------------------------------------------------------------
 # Team Saudi palette
@@ -389,6 +395,9 @@ def file_age(folder: Path, pattern: str) -> str:
 def ppt_download_button(label: str, deck_title: str, sections: list,
                         subtitle: str = "", key: str = "ppt_dl"):
     """Render a Streamlit download button that emits a PPT built from `sections`."""
+    if not PPTX_OK:
+        st.caption(f"📥 PPT export for **{label}** unavailable — `python-pptx` not installed yet.")
+        return
     logo = ASSETS_DIR / "ts_horizontal.png"
     if st.button(f"📥 Export {label} to PowerPoint", key=key + "_btn"):
         try:
