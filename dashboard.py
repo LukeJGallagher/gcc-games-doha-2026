@@ -1003,11 +1003,12 @@ with tab_daily:
             with f1:
                 _all_sports = sorted(sched_df["Sport"].unique())
                 _targets = [s for s in ["Athletics","Swimming","Taekwondo","Karate"] if s in _all_sports]
+                # key bumped so the new target-sport default replaces any cached selection
                 daily_sports = st.multiselect(
                     "Sports filter",
                     options=_all_sports,
                     default=_targets or _all_sports,
-                    key="daily_sports",
+                    key="daily_sports_v2",
                 )
             with f2:
                 sotc_filter = st.checkbox("SOTC athletes only", value=False, key="daily_sotc")
