@@ -753,55 +753,145 @@ with tab_daily:
                     st.dataframe(show_match, hide_index=True, use_container_width=True)
                     st.caption(f"{len(match_summary)} team match{'es' if len(match_summary)!=1 else ''} today — one row per match (medal counted once, not per squad member).")
 
-                # ---- Athlete-grouped daily schedule (ISG style) ----
+                # ---- Athlete-grouped daily schedule (ISG-style HTML table) ----
                 st.markdown("### Daily athlete schedule")
-                ath_view = day_df.copy()
-                # For team-sport rows, append the opponent so we know who they're playing
-                ath_view["Y_Label"] = ath_view.apply(
-                    lambda r: (f"{r['Sport']} · {r['Athlete']} (vs {r['Opponent']})"
-                               if r["Match_Type"] == "team" and r["Opponent"]
-                               else f"{r['Sport']} · {r['Athlete']}"),
-                    axis=1,
-                )
-                # Stable sort: Sport then Athlete name so rows group logically
-                ath_view = ath_view.sort_values(["Sport", "Family Name", "Given Name", "TS"])
-                # Color by Phase so heats/semis/finals visually distinguish
+
                 phase_colours = {
                     "Final": VICTORY,
                     "Semi Final": ENABLER,
                     "Quarter Final": "#76b6d8",
-                    "Qualification": ELITE,
-                    "Preliminary": ELITE,
-                    "Group Stage": STAMINA,
-                    "Round of 16": LAVENDER,
-                    "Round of 32": LAVENDER,
-                    "Round of 64": LAVENDER,
-                    "Knockout": LAVENDER,
-                    "Training": "#aaaaaa",
+                    "Qualification": "#d49595",  # salmon, like ISG
+                    "Preliminary":   "#d49595",
+                    "Heats":         "#d49595",
+                    "Heat":          "#d49595",
+                    "Group Stage":   STAMINA,
+                    "Group":         STAMINA,
+                    "Round of 16":   LAVENDER,
+                    "Round of 32":   LAVENDER,
+                    "Round of 64":   LAVENDER,
+                    "Knockout":      LAVENDER,
+                    "Training":      "#cccccc",
                 }
-                ath_view["Event Short"] = ath_view["Event"] + " (" + ath_view["Phase"] + ")"
-                fig_ath = px.timeline(
-                    ath_view, x_start="TS", x_end="TE",
-                    y="Y_Label", color="Phase",
-                    color_discrete_map=phase_colours,
-                    text="Event Short",
-                    hover_data={"Phase": True, "Event": True, "Venue": True,
-                                "SOTC": True, "Time Start": True, "Time End": True,
-                                "TS": False, "TE": False, "Y_Label": False,
-                                "Event Short": False, "Family Name": False, "Given Name": False},
+
+                ath_view = day_df.copy().sort_values(["Sport","Family Name","Given Name","TS"])
+                # Decide the time window for the day's bars
+                day_min = ath_view["TS"].min()
+                day_max = ath_view["TE"].max()
+                # Round to whole hours, with a 30-min pad
+                start_h = max(7,  int(day_min.hour))
+                end_h   = min(23, int(day_max.hour) + (1 if day_max.minute else 0))
+                if end_h - start_h < 6:
+                    end_h = start_h + 6   # always show at least a 6h span
+                total_h = end_h - start_h
+
+                # Build the HTML table
+                hdr_cols = ["Sport","Athlete","Gender","SOTC","Phase","Event","Time","Schedule"]
+                rows_html = ['<table class="isg-schedule"><thead><tr>']
+                for c in hdr_cols:
+                    rows_html.append(f'<th>{c}</th>')
+                rows_html.append('</tr></thead><tbody>')
+
+                prev_sport, prev_ath = None, None
+                for _, r in ath_view.iterrows():
+                    ts, te = r["TS"], r["TE"]
+                    if pd.isna(ts) or pd.isna(te):
+                        continue
+                    ts_h = ts.hour + ts.minute/60
+                    te_h = te.hour + te.minute/60
+                    left = max(0, min(100, (ts_h - start_h) / total_h * 100))
+                    width = max(0.8, (te_h - ts_h) / total_h * 100)
+                    colour = phase_colours.get(str(r["Phase"]).strip(), "#888")
+
+                    sport = r["Sport"] if r["Sport"] != prev_sport else ""
+                    sport_class = "sport-cell" if sport else "blank-cell"
+                    ath_name = r["Athlete"] or f"{r['Given Name']} {r['Family Name']}".strip()
+                    ath_disp = ath_name if (r["Sport"] != prev_sport or ath_name != prev_ath) else ""
+                    ath_disp = ath_disp.upper()
+                    # For team-sport rows, append (vs OPP) to event
+                    event_disp = r["Event"]
+                    if r["Match_Type"] == "team" and r["Opponent"]:
+                        event_disp = f"{r['Event']} (KSA vs {r['Opponent']})"
+                    sotc_disp = "SOTC" if str(r["SOTC"]).upper() == "YES" else ""
+                    bar_html = (
+                        f'<div class="bar-row">'
+                        f'<span class="bar-time">{fmt_time(r["Time Start"])}</span>'
+                        f'<div class="bar-track">'
+                        f'<div class="bar-fill" style="left:{left:.1f}%;width:{width:.1f}%;background:{colour};" '
+                        f'title="{r["Phase"]} · {event_disp} · {r.get("Venue","")}"></div>'
+                        f'</div></div>'
+                    )
+
+                    border_style = "border-top:2px solid #ccc;" if sport else ""
+                    rows_html.append(
+                        f'<tr style="{border_style}">'
+                        f'<td class="{sport_class}"><b>{sport}</b></td>'
+                        f'<td class="athlete-cell">{ath_disp}</td>'
+                        f'<td>{r.get("Gender","")}</td>'
+                        f'<td class="sotc-cell">{sotc_disp}</td>'
+                        f'<td>{r["Phase"]}</td>'
+                        f'<td>{event_disp}</td>'
+                        f'<td class="time-cell">{fmt_time(r["Time Start"])}</td>'
+                        f'<td class="bar-cell">{bar_html}</td>'
+                        f'</tr>'
+                    )
+                    prev_sport, prev_ath = r["Sport"], ath_name
+
+                # Time-axis footer row
+                hour_ticks = list(range(start_h, end_h + 1, 2))
+                tick_html = '<div class="bar-axis">'
+                for h in hour_ticks:
+                    pos = (h - start_h) / total_h * 100
+                    label = pd.Timestamp(f"2026-05-12 {h:02d}:00").strftime("%-I %p") if False else f"{h:02d}:00"
+                    tick_html += f'<span class="bar-tick" style="left:{pos:.1f}%;">{label}</span>'
+                tick_html += '</div>'
+                rows_html.append(
+                    f'<tr class="axis-row"><td colspan="7"></td>'
+                    f'<td class="bar-cell">{tick_html}</td></tr>'
                 )
-                fig_ath.update_yaxes(autorange="reversed", title="",
-                                     tickfont=dict(size=11))
-                fig_ath.update_xaxes(title="", tickformat="%H:%M",
-                                     dtick=2*60*60*1000)  # 2h ticks
-                fig_ath.update_traces(textposition="inside", textfont_size=10,
-                                      insidetextanchor="start")
-                fig_ath.update_layout(
-                    height=max(280, 28 * ath_view["Y_Label"].nunique() + 80),
-                    margin=dict(t=10, b=10, l=10, r=10), plot_bgcolor="white",
-                    legend=dict(orientation="h", y=1.06, yanchor="bottom"),
-                )
-                st.plotly_chart(fig_ath, use_container_width=True)
+                rows_html.append("</tbody></table>")
+
+                st.markdown(f"""
+                <style>
+                .isg-schedule {{
+                  border-collapse:collapse; width:100%; font-size:0.85rem; font-family:inherit;
+                }}
+                .isg-schedule th {{
+                  background:#f5f5f5; text-align:left; padding:6px 10px; font-weight:600;
+                  border-bottom:2px solid #ddd; color:{DISCIPLINE};
+                }}
+                .isg-schedule td {{
+                  padding:5px 10px; vertical-align:middle; border-bottom:1px solid #eee;
+                }}
+                .athlete-cell {{ font-weight:600; color:{DISCIPLINE}; }}
+                .sotc-cell {{ color:{ENABLER}; font-size:0.75rem; font-weight:700; }}
+                .time-cell {{ color:#555; font-variant-numeric:tabular-nums; }}
+                .bar-cell {{ width:45%; }}
+                .bar-row {{ position:relative; display:flex; align-items:center; height:22px; }}
+                .bar-track {{ position:relative; width:100%; height:14px; background:#fafafa; border-radius:3px; }}
+                .bar-fill {{ position:absolute; top:0; bottom:0; border-radius:3px; }}
+                .bar-time {{ display:none; }}
+                .bar-axis {{ position:relative; width:100%; height:18px; color:#666; font-size:0.7rem; }}
+                .bar-tick {{ position:absolute; transform:translateX(-50%); top:0; }}
+                .axis-row td {{ border-bottom:none; padding-top:0; }}
+                </style>
+                """ + "".join(rows_html), unsafe_allow_html=True)
+
+                # legend
+                legend_items = [
+                    ("Final", VICTORY),
+                    ("Semi Final", ENABLER),
+                    ("Quarter Final", "#76b6d8"),
+                    ("Qualification / Heats", "#d49595"),
+                    ("Group Stage", STAMINA),
+                    ("Knockout / R16/R32", LAVENDER),
+                    ("Training", "#cccccc"),
+                ]
+                leg_html = '<div style="display:flex;gap:1rem;font-size:0.8rem;color:#555;margin-top:0.4rem;">'
+                for name, col in legend_items:
+                    leg_html += (f'<span><span style="display:inline-block;width:14px;height:10px;'
+                                 f'background:{col};border-radius:2px;margin-right:4px;vertical-align:middle;"></span>{name}</span>')
+                leg_html += '</div>'
+                st.markdown(leg_html, unsafe_allow_html=True)
 
                 # ---- Venue map ----
                 venue_coords = load_venues()
