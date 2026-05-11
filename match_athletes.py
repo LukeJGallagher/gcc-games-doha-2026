@@ -172,6 +172,22 @@ def load_regrequest(path: Path) -> dict:
     return enriched
 
 
+def _coerce_dob(value) -> str:
+    """Excel sometimes stores DoB as a numeric serial. Coerce to YYYY-MM-DD."""
+    if value is None or pd.isna(value):
+        return ""
+    if isinstance(value, (int, float)):
+        try:
+            # Excel epoch is 1899-12-30 (yes, not 1900-01-01 - 1900 leap bug)
+            from datetime import datetime, timedelta
+            d = datetime(1899, 12, 30) + timedelta(days=float(value))
+            return d.strftime("%Y-%m-%d")
+        except Exception:
+            return ""
+    s = str(value)[:10]
+    return s
+
+
 def _tokenise_name(name: str) -> frozenset:
     """Lowercase tokens with non-alpha stripped. 'ALI, MOHAMED A' → {'ali','mohamed','a'}."""
     if not name:
@@ -194,7 +210,7 @@ def load_shortlist(path: Path) -> tuple[dict, dict]:
     by_name: dict = {}
     for _, row in ath.iterrows():
         sotc = "Yes" if str(row.get("SOTC", "")).strip().upper() == "YES" else "No"
-        dob  = str(row.get("Date Of Birth", "") or "")[:10]
+        dob  = _coerce_dob(row.get("Date Of Birth"))
         if dob and by_dob.get(dob) != "Yes":
             by_dob[dob] = sotc
         tokens = _tokenise_name(row.get("Full Name", ""))
