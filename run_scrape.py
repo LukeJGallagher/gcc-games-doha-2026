@@ -59,6 +59,7 @@ def main():
     run("daily_diff.py")
     run("enhance_rankings.py", "--ksa")
     run("ksa_filter.py")
+    run("download_photos.py", "--api-only")
     return 0
 
 
