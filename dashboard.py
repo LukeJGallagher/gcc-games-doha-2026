@@ -115,6 +115,44 @@ def event_priority(row) -> int:
     score += TARGET_SPORT_BONUS.get(row.get("Sport", ""), 0)
     return score
 
+
+def allocate_cameras(events_df, cams_available: int) -> pd.Series:
+    """Time-ordered camera allocator with priority-based bumping.
+
+    1. Sort events by start time
+    2. For each event, free up any camera whose booking has ended
+    3. If a camera is free, take the lowest-numbered free one
+    4. If all cameras are busy, find the currently-running event with the
+       lowest priority. If new event's priority is higher, bump the lower one
+       to UNCOVERED and take its camera. Otherwise new event is UNCOVERED.
+
+    Returns: pd.Series of camera assignments (0 = UNCOVERED) indexed by row index.
+    """
+    assignments: dict = {}
+    active: list = []  # (cam_id, end_time, ev_index, priority)
+    for _, ev in events_df.sort_values("TS").iterrows():
+        # Expire ended bookings
+        active = [a for a in active if a[1] > ev["TS"]]
+        used = {a[0] for a in active}
+        free = [c for c in range(1, cams_available + 1) if c not in used]
+
+        if free:
+            cam = min(free)
+            assignments[ev.name] = cam
+            active.append((cam, ev["TE"], ev.name, ev["Priority"]))
+        else:
+            lowest = min(active, key=lambda a: a[3])
+            if lowest[3] < ev["Priority"]:
+                # Bump the lower-priority event
+                assignments[lowest[2]] = 0
+                active.remove(lowest)
+                cam = lowest[0]
+                assignments[ev.name] = cam
+                active.append((cam, ev["TE"], ev.name, ev["Priority"]))
+            else:
+                assignments[ev.name] = 0
+    return pd.Series(assignments)
+
 HERE         = Path(__file__).parent
 DATA         = HERE / "data"
 RESULTS_DIR  = DATA / "results"
@@ -576,19 +614,8 @@ with tab_daily:
                 day_df["Priority"] = day_df.apply(event_priority, axis=1)
                 cams_today = 3 if pd.Timestamp(pick) >= pd.Timestamp("2026-05-14") else 2
 
-                # Allocate cameras for this day (priority desc)
-                ends = {}
-                cams = []
-                for _, ev in day_df.sort_values(["Priority","TS"], ascending=[False, True]).iterrows():
-                    slot = None
-                    for cam in range(1, cams_today + 1):
-                        if cam not in ends or ends[cam] <= ev["TS"]:
-                            slot = cam; break
-                    if slot is None:
-                        cams.append((ev.name, 0))
-                    else:
-                        ends[slot] = ev["TE"]; cams.append((ev.name, slot))
-                day_df["Camera"] = pd.Series(dict(cams))
+                # Time-ordered allocator with priority bumping on real overlaps
+                day_df["Camera"] = allocate_cameras(day_df, cams_today)
                 day_df["Lane"]   = day_df["Camera"].apply(lambda c: "UNCOVERED" if c == 0 else f"Cam {c}")
 
                 # Tile row
@@ -730,27 +757,13 @@ with tab_plan:
         # Priority score per event (SOTC + phase + target sport)
         plan_df["Priority"] = plan_df.apply(event_priority, axis=1)
 
-        # Allocate cameras: high-priority events get slots first;
-        # anything that can't fit becomes "Uncovered" (real shortage flag).
-        assignments = []
+        # Time-ordered allocator with priority bumping (per day, real shortage = UNCOVERED)
+        cam_series = pd.Series(dtype=int)
         for d, g in plan_df.groupby("Date"):
             cams_available = 3 if d >= pd.Timestamp("2026-05-14") else 2
-            g_sorted = g.sort_values(["Priority", "TS"], ascending=[False, True])
-            ends = {}
-            for _, ev in g_sorted.iterrows():
-                slot = None
-                for cam in range(1, cams_available + 1):
-                    if cam not in ends or ends[cam] <= ev["TS"]:
-                        slot = cam
-                        break
-                if slot is None:
-                    # No real camera available → uncovered (do NOT invent a Cam 4)
-                    assignments.append((ev.name, 0, True))
-                else:
-                    ends[slot] = ev["TE"]
-                    assignments.append((ev.name, slot, False))
-        plan_df["Camera"]   = pd.Series({i: s for i, s, _ in assignments})
-        plan_df["Overflow"] = pd.Series({i: o for i, _, o in assignments})
+            cam_series = pd.concat([cam_series, allocate_cameras(g, cams_available)])
+        plan_df["Camera"]   = cam_series
+        plan_df["Overflow"] = plan_df["Camera"] == 0
 
         # Gantt: one row per camera per day. Uncovered events go to a clearly
         # labelled "UNCOVERED" row so they stand out.
