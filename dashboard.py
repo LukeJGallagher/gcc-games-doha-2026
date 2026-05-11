@@ -707,10 +707,34 @@ with tab_daily:
                 t4.markdown(f"<div class='metric-card'><div class='label'>SOTC athletes</div><div class='value'>{n_sotc_today}</div></div>", unsafe_allow_html=True)
                 st.write("")
 
+                # ---- Team matches summary (1 row per match, not per squad member) ----
+                team_rows = day_df[day_df["Match_Type"] == "team"].copy()
+                if not team_rows.empty:
+                    st.markdown("### Team matches today")
+                    # Collapse: 1 row per (Sport, Event_ID, Phase) - the actual match
+                    match_summary = (team_rows
+                                     .groupby(["Sport", "Event_ID", "Phase", "Discipline_API",
+                                               "Time Start", "Time End", "Venue", "Opponent", "Date"])
+                                     .agg(Squad_Size=("Athlete", "nunique"))
+                                     .reset_index())
+                    match_summary["Match"] = "KSA vs " + match_summary["Opponent"].replace("", "?")
+                    match_summary["Time Start"] = match_summary["Time Start"].apply(fmt_time)
+                    match_summary["Time End"]   = match_summary["Time End"].apply(fmt_time)
+                    show_match = match_summary[["Time Start","Time End","Sport","Match","Phase","Discipline_API","Venue","Squad_Size"]]
+                    show_match = show_match.rename(columns={"Discipline_API":"Event"}).sort_values("Time Start")
+                    st.dataframe(show_match, hide_index=True, use_container_width=True)
+                    st.caption(f"{len(match_summary)} team match{'es' if len(match_summary)!=1 else ''} today — one row per match (medal counted once, not per squad member).")
+
                 # ---- Athlete-grouped daily schedule (ISG style) ----
                 st.markdown("### Daily athlete schedule")
                 ath_view = day_df.copy()
-                ath_view["Y_Label"] = ath_view["Sport"] + " · " + ath_view["Athlete"]
+                # For team-sport rows, append the opponent so we know who they're playing
+                ath_view["Y_Label"] = ath_view.apply(
+                    lambda r: (f"{r['Sport']} · {r['Athlete']} (vs {r['Opponent']})"
+                               if r["Match_Type"] == "team" and r["Opponent"]
+                               else f"{r['Sport']} · {r['Athlete']}"),
+                    axis=1,
+                )
                 # Stable sort: Sport then Athlete name so rows group logically
                 ath_view = ath_view.sort_values(["Sport", "Family Name", "Given Name", "TS"])
                 # Color by Phase so heats/semis/finals visually distinguish

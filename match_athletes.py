@@ -26,7 +26,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from config import RESULTS_DIR, SCHEDULE_DIR
+from config import RESULTS_DIR, SCHEDULE_DIR, KSA_CODES
 
 DEFAULT_ROSTER_GLOB     = "KSA_GCC2026_Athletes_Events*.xlsx"
 DEFAULT_REGREQUEST_GLOB = "GCC2026_REG_RegRequest_*.xlsx"
@@ -36,7 +36,7 @@ OUTPUT_COLUMNS = [
     "Given Name", "Family Name", "Date of Birth",
     "Sport", "Event", "Phase", "Date", "Time Start", "Time End", "Duration_Min",
     "Discipline_API", "Event_ID", "Venue", "Gender",
-    "Match_Type", "Source_URL",
+    "Match_Type", "Opponent", "Source_URL",
     # RegRequest enrichment
     "Person_Key", "Photo_URL", "Photo_Stale",
     "Reg_Disciplines", "Reg_Status", "Reg_Created", "Reg_In_Bornan",
@@ -449,6 +449,12 @@ def main():
             })
             continue
         for s in matches:
+            # Derive opponent for team matches: schedule has comma list of NOCs in Country_Entries.
+            country_entries = (s.get("Country_Entries") or "").strip()
+            ks_codes_upper = {c.upper() for c in KSA_CODES}
+            opponents = [c.strip() for c in country_entries.split(",")
+                         if c.strip() and c.strip().upper() not in ks_codes_upper]
+            opponent = ",".join(opponents) if opponents else ""
             out_rows.append(enrich_row({
                 "Given Name":     ath.get("Given Name", ""),
                 "Family Name":    ath.get("Family Name", ""),
@@ -465,6 +471,7 @@ def main():
                 "Venue":          s.get("Venue", ""),
                 "Gender":         s.get("Gender", ""),
                 "Match_Type":     "team" if "Team" in str(ath.get("Event","")) else "individual",
+                "Opponent":       opponent,
                 "Source_URL":     s.get("Source_URL", ""),
             }, reg_lookup, sotc_dob, sotc_name, time_lookup))
 
