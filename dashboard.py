@@ -593,7 +593,15 @@ with tab_daily:
                     default=sorted(sched_df["Sport"].unique()),
                     key="daily_sports",
                 )
-            sotc_filter = st.checkbox("SOTC athletes only", value=False, key="daily_sotc")
+            cfg1, cfg2 = st.columns([2, 1])
+            with cfg1:
+                sotc_filter = st.checkbox("SOTC athletes only", value=False, key="daily_sotc")
+            with cfg2:
+                cams_today = st.number_input(
+                    "Cameras available today (3rd only if help available)",
+                    min_value=1, max_value=3, value=2, step=1, key="daily_cams",
+                    help="Default 2: Luke + Alanoud. Set to 3 only when a coach/staff member can run the third camera.",
+                )
 
             day_df = sched_df[
                 (sched_df["Date"].dt.date == pick)
@@ -612,10 +620,9 @@ with tab_daily:
                 day_df = day_df.dropna(subset=["TS","TE"]).sort_values("TS")
 
                 day_df["Priority"] = day_df.apply(event_priority, axis=1)
-                cams_today = 3 if pd.Timestamp(pick) >= pd.Timestamp("2026-05-14") else 2
 
                 # Time-ordered allocator with priority bumping on real overlaps
-                day_df["Camera"] = allocate_cameras(day_df, cams_today)
+                day_df["Camera"] = allocate_cameras(day_df, int(cams_today))
                 day_df["Lane"]   = day_df["Camera"].apply(lambda c: "UNCOVERED" if c == 0 else f"Cam {c}")
 
                 # Tile row
@@ -685,7 +692,7 @@ with tab_daily:
 with tab_plan:
     st.subheader("Performance Analysis — Coverage Plan")
     st.caption("Target: SOTC athletes in Athletics, Swimming, Taekwondo and Karate. "
-               "Cameras: 2 fixed + 3rd camera arriving **2026-05-14**.")
+               "Baseline 2 cameras (Luke + Alanoud); 3rd only when help is available.")
 
     # Settings row
     s1, s2, s3 = st.columns(3)
@@ -696,7 +703,8 @@ with tab_plan:
                  if not sched_df.empty and s in sched_df["Sport"].unique()],
     )
     sotc_only = s2.checkbox("SOTC athletes only", value=True)
-    show_staff = s3.checkbox("Show staff allocation", value=True)
+    use_3rd_cam = s3.checkbox("Plan with 3rd camera (help available)", value=False,
+                              help="Off = 2 cameras every day. On = 2 cameras until 13 May, 3 from 14 May (when equipment + help land).")
 
     # Staff config
     staff = st.text_input(
@@ -760,7 +768,10 @@ with tab_plan:
         # Time-ordered allocator with priority bumping (per day, real shortage = UNCOVERED)
         cam_series = pd.Series(dtype=int)
         for d, g in plan_df.groupby("Date"):
-            cams_available = 3 if d >= pd.Timestamp("2026-05-14") else 2
+            if use_3rd_cam:
+                cams_available = 3 if d >= pd.Timestamp("2026-05-14") else 2
+            else:
+                cams_available = 2
             cam_series = pd.concat([cam_series, allocate_cameras(g, cams_available)])
         plan_df["Camera"]   = cam_series
         plan_df["Overflow"] = plan_df["Camera"] == 0
@@ -810,10 +821,8 @@ with tab_plan:
                 "+ Target sport (Athletics/Swimming/Taekwondo/Karate, +10)."
             )
         else:
-            st.success(
-                f"✓ All {len(plan_df)} events fit within the available camera count "
-                f"({2 if plan_df['Date'].min() < pd.Timestamp('2026-05-14') else 3} → 3 from 14 May)."
-            )
+            cam_summary = "2 throughout" if not use_3rd_cam else "2 until 13 May → 3 from 14 May"
+            st.success(f"✓ All {len(plan_df)} events fit within available cameras ({cam_summary}).")
 
         st.divider()
         st.subheader("Day-by-day schedule")
