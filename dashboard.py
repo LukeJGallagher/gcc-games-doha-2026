@@ -602,6 +602,19 @@ def render_isg_schedule(df: pd.DataFrame, include_camera: bool = False,
     st.markdown(ISG_CSS + "".join(rows_html), unsafe_allow_html=True)
 
 
+def csv_download_button(label: str, df: pd.DataFrame, key: str):
+    """Render a Streamlit download button that emits a CSV of `df`."""
+    if df is None or df.empty:
+        return
+    csv = df.to_csv(index=False).encode("utf-8-sig")
+    st.download_button(
+        f"⬇ Download {label} CSV", csv,
+        file_name=f"GCC2026_{label.replace(' ','_')}_{datetime.now():%Y%m%d_%H%M}.csv",
+        mime="text/csv",
+        key=key,
+    )
+
+
 def ppt_download_button(label: str, deck_title: str, sections: list,
                         subtitle: str = "", key: str = "ppt_dl"):
     """Render a Streamlit download button that emits a PPT built from `sections`."""
@@ -796,6 +809,11 @@ with tab_overview:
                         overview_sections,
                         subtitle=f"Live snapshot — {datetime.now():%a %d %b %Y · %H:%M}",
                         key="ppt_ov")
+    # Data downloads
+    dl1, dl2, dl3 = st.columns(3)
+    with dl1: csv_download_button("Medals",       medals_df,     key="csv_medals")
+    with dl2: csv_download_button("KSA Results",  results_df,    key="csv_ksa_results")
+    with dl3: csv_download_button("Full Schedule",sched_df,      key="csv_full_sched")
 
     # Medal moments — KSA podium finishes (deduped: 1 medal per match, not per squad member)
     if not results_df.empty and "Medal" in results_df.columns:
@@ -983,10 +1001,12 @@ with tab_daily:
 
             f1, f2 = st.columns([3, 1])
             with f1:
+                _all_sports = sorted(sched_df["Sport"].unique())
+                _targets = [s for s in ["Athletics","Swimming","Taekwondo","Karate"] if s in _all_sports]
                 daily_sports = st.multiselect(
                     "Sports filter",
-                    options=sorted(sched_df["Sport"].unique()),
-                    default=sorted(sched_df["Sport"].unique()),
+                    options=_all_sports,
+                    default=_targets or _all_sports,
                     key="daily_sports",
                 )
             with f2:
@@ -1034,6 +1054,10 @@ with tab_daily:
                                     daily_sections,
                                     subtitle="Athletes, events and venues for this competition day",
                                     key="ppt_daily")
+                # CSV download — the filtered day data including SOTC + Opponent
+                csv_download_button(f"Daily Plan {fmt_date(pick)}",
+                                    day_df[[c for c in day_df.columns if not c.startswith("_")]],
+                                    key="csv_daily")
 
                 day_df["Priority"] = day_df.apply(event_priority, axis=1)
 
@@ -1426,6 +1450,9 @@ with tab_plan:
                             plan_sections,
                             subtitle=f"Cameras: {'2 throughout' if not use_3rd_cam else '2 → 3 from 14 May'} · SOTC priority",
                             key="ppt_pa")
+        csv_download_button("PA Coverage Plan",
+                            plan_df[[c for c in plan_df.columns if not c.startswith("_")]],
+                            key="csv_pa_plan")
 
         st.divider()
         st.subheader("Athlete coverage matrix")
