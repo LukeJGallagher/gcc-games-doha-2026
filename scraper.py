@@ -113,12 +113,13 @@ def _participant_rows(comp: dict, sport: str) -> list[dict]:
         "Detection_Method": "GCC API",
         "Source_URL":       sport_url + "/" + comp.get("id", ""),
     }
+    # Pull team-level periods (basketball scores by quarter etc.) once per comp
+    rs = comp.get("results_summary") or {}
+    periods = rs.get("periods") or []
+
     out: list[dict] = []
     for p in by_id.values():
         athlete = p.get("athlete") or {}
-        # Individual sports use `player_name` flat on the participant.
-        # Team sports use TEAM-XXXX id + noc_name. Try the most-specific
-        # field first and fall back through legacy shapes.
         athlete_name = (
             p.get("player_name")
             or athlete.get("english_name")
@@ -130,13 +131,39 @@ def _participant_rows(comp: dict, sport: str) -> list[dict]:
         if result is None:
             result = p.get("result") or p.get("score") or p.get("time") or ""
         rank = p.get("pos") or p.get("rank") or p.get("position") or ""
+
+        # AYG-style optional columns. These fields aren't guaranteed in every
+        # BORNAN deployment — pull defensively so blanks are OK for now.
+        lane_heat = (
+            p.get("lane") or p.get("heat") or p.get("lane_no") or
+            p.get("track") or ""
+        )
+        rxn = p.get("reaction_time") or p.get("reaction") or ""
+        # Split / attempt / leg detail.  For team sports we use the periods
+        # array; for individuals fall back to a 'splits' / 'attempts' field.
+        split_parts: list[str] = []
+        if p.get("splits"):
+            split_parts.extend(f"{s.get('label','')}:{s.get('value','')}" for s in p.get("splits") or [])
+        elif p.get("attempts"):
+            split_parts.extend(f"Attempt {i+1}:{a}" for i, a in enumerate(p.get("attempts") or []))
+        elif periods and p.get("id"):
+            for prd in periods:
+                scores = prd.get("scores") or {}
+                v = scores.get(p["id"])
+                if v is not None:
+                    split_parts.append(f"{prd.get('period','')}:{v}")
+        splits = " | ".join(s for s in split_parts if s)
+
         out.append({
             **base,
-            "Athlete":  athlete_name,
-            "Country":  p.get("noc_code") or p.get("noc") or athlete.get("noc_code") or "",
-            "Rank":     str(rank) if rank != "" else "",
-            "Result":   str(result) if result != "" else "",
-            "Medal":    (p.get("medal") or "")[:1].upper(),
+            "Athlete":      athlete_name,
+            "Country":      p.get("noc_code") or p.get("noc") or athlete.get("noc_code") or "",
+            "Rank":         str(rank) if rank != "" else "",
+            "Result":       str(result) if result != "" else "",
+            "Medal":        (p.get("medal") or "")[:1].upper(),
+            "Lane_Heat":    str(lane_heat) if lane_heat != "" else "",
+            "Reaction_Time": str(rxn) if rxn != "" else "",
+            "Split_Times":  splits,
         })
     return out
 

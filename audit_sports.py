@@ -31,11 +31,13 @@ AUDIT_DIR.mkdir(parents=True, exist_ok=True)
 
 ksa_upper = {c.upper() for c in KSA_CODES}
 
-# Phases we recognise as legitimate; anything else is flagged
+# Phases we recognise as legitimate. Pulled from BORNAN deployments
+# (GCC 2026 + AYG 2025) — anything outside this set is flagged LOW.
 KNOWN_PHASES = {
     "Final", "Semi Final", "Semifinal", "Semi-Final",
     "Quarter Final", "Quarterfinal",
     "Round of 64", "Round of 32", "Round of 16",
+    "Round 1", "Round 2", "Round 3",
     "Qualification", "Preliminary", "Heats", "Heat",
     "Group Stage", "Group", "Group A", "Group B", "Pool A", "Pool B",
     "Knockout", "Training",

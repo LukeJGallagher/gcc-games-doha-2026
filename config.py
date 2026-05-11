@@ -82,8 +82,12 @@ SPORTS = [
 RESULTS_COLUMNS = [
     "Athlete", "Sport", "Date", "Competition", "Comp Set", "Class",
     "Discipline", "Discipline_AR", "Phase", "Gender", "Age",
-    "Rank", "Result", "Medal", "Wind", "Attempt", "Status",
-    "Country", "Detection_Method", "Source_URL",
+    "Rank", "Result", "Medal", "Wind", "Attempt",
+    # Match the AYG ENHANCED_RANKINGS schema so result rows are
+    # immediately compatible with the existing validator pipeline
+    # and any downstream Power BI / Tableau report built for AYG.
+    "Lane_Heat", "Reaction_Time", "Split_Times",
+    "Status", "Country", "Detection_Method", "Source_URL",
 ]
 
 SCHEDULE_COLUMNS = [

@@ -1,0 +1,461 @@
+﻿Date,Time,Time_End,Duration_Min,Sport,Discipline,Discipline_AR,Phase,Gender,Venue,Country_Entries,Event_ID,Source_URL
+2026-05-17,10:00:00,14:00:00,240,Archery,Official Training – Recurve & Compound,التدريب الرسمي - القوس الأولمبي والمركب,Training,Mixed,Lusail Shooting Range,,COM-2026-0437,https://gccgames.qa/frontend/schedule-competition
+2026-05-18,10:00:00,16:00:00,360,Archery,Individual Qualification – Recurve & Compound,الدور التأهيلي فردي - القوس الأولمبي والمركب,Qualification,Mixed,Lusail Shooting Range,,COM-2026-0438,https://gccgames.qa/frontend/schedule-competition
+2026-05-19,9:30:00,15:30:00,360,Archery,Team Qualification – Recurve & Compound,الدور التأهيلي فرق - القوس الأولمبي والمركب,Qualification,Mixed,Lusail Shooting Range,,COM-2026-0439,https://gccgames.qa/frontend/schedule-competition
+2026-05-19,11:30:00,17:30:00,360,Archery,Mixed Team Qualification – Recurve & Compound,الدور التأهيلي فرق مختلط - القوس الأولمبي والمركب,Qualification,Mixed,Lusail Shooting Range,,COM-2026-0440,https://gccgames.qa/frontend/schedule-competition
+2026-05-20,9:30:00,15:30:00,360,Archery,Individual Qualification – Recurve & Compound,الدور التأهيلي فردي - القوس الأولمبي والمركب,Qualification,Mixed,Lusail Shooting Range,,COM-2026-0441,https://gccgames.qa/frontend/schedule-competition
+2026-05-21,9:30:00,12:30:00,180,Archery,Compound Finals – Individual & Team,نهائيات القوس المركب فردي وفرق,Final,Mixed,Lusail Shooting Range,,COM-2026-0442,https://gccgames.qa/frontend/schedule-competition
+2026-05-21,14:00:00,17:00:00,180,Archery,Recurve Finals – Individual & Team,نهائيات القوس الأولمبي فردي وفرق,Final,Mixed,Lusail Shooting Range,,COM-2026-0443,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,8:30:00,08:55:00,25,Athletics,Men’s 5000m Race Walk,5000 متر مشي رجال,Final,Men,Qatar Sports Club,,COM-2026-0021,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,9:00:00,15:00:00,360,Athletics,Women’s Heptathlon,سباعي سيدات,Final,Women,Qatar Sports Club,,COM-2026-0022,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,10:15:00,16:15:00,360,Athletics,Women’s Heptathlon,سباعي سيدات,Final,Women,Qatar Sports Club,,COM-2026-0023,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,17:00:00,23:00:00,360,Athletics,Women’s Heptathlon,سباعي سيدات,Final,Women,Qatar Sports Club,,COM-2026-0024,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,17:10:00,18:46:00,96,Athletics,Women’s 100 Metres Hurdles,100 متر حواجز سيدات,Final,Women,Qatar Sports Club,,COM-2026-0025,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,17:15:00,18:45:00,90,Athletics,Women’s Long Jump,الوثب الطويل سيدات,Final,Women,Qatar Sports Club,,COM-2026-0026,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,17:20:00,18:50:00,90,Athletics,Women’s Discus Throw,قذف القرص سيدات,Final,Women,Qatar Sports Club,,COM-2026-0027,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,17:25:00,19:25:00,120,Athletics,Men’s 100 Metres,100 متر رجال,Qualification,Men,Qatar Sports Club,,COM-2026-0028,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,17:30:00,19:30:00,120,Athletics,Men’s High Jump,الوثب العالي رجال,Final,Men,Qatar Sports Club,,COM-2026-0029,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,17:35:00,19:35:00,120,Athletics,Women’s 100 Metres,100 متر سيدات,Qualification,Women,Qatar Sports Club,,COM-2026-0030,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,17:50:00,19:50:00,120,Athletics,Men’s 400 Metres,400 متر رجال,Qualification,Men,Qatar Sports Club,,COM-2026-0031,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,18:00:00,19:30:00,90,Athletics,Men’s Shot Put,دفع الجلة رجال,Final,Men,Qatar Sports Club,,COM-2026-0032,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,18:10:00,20:10:00,120,Athletics,Women’s 400 Metres,400 متر سيدات,Qualification,Women,Qatar Sports Club,,COM-2026-0033,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,18:30:00,20:06:00,96,Athletics,Men’s 800 Metres,800 متر رجال,Final,Men,Qatar Sports Club,,COM-2026-0034,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,18:40:00,20:16:00,96,Athletics,Women’s 800 Metres,800 متر سيدات,Final,Women,Qatar Sports Club,,COM-2026-0035,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,18:45:00,00:45:00,360,Athletics,Women’s Heptathlon,سباعي سيدات,Final,Women,Qatar Sports Club,,COM-2026-0036,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,19:00:00,19:20:00,20,Athletics,Men’s 3000m Steeplechase,3000 متر موانع رجال,Final,Men,Qatar Sports Club,,COM-2026-0037,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,19:30:00,20:10:00,40,Athletics,Women’s 10000 Metres,10000 متر سيدات,Final,Women,Qatar Sports Club,,COM-2026-0038,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,20:05:00,21:41:00,96,Athletics,Men’s 100 Metres,100 متر رجال,Final,Men,Qatar Sports Club,,COM-2026-0039,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,20:15:00,21:51:00,96,Athletics,Women’s 100 Metres,100 متر سيدات,Final,Women,Qatar Sports Club,,COM-2026-0040,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,9:00:00,15:00:00,360,Athletics,Women’s Heptathlon,سباعي سيدات,Final,Women,Qatar Sports Club,,COM-2026-0041,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,10:00:00,16:00:00,360,Athletics,Women’s Heptathlon,سباعي سيدات,Final,Women,Qatar Sports Club,,COM-2026-0042,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,17:00:00,20:00:00,180,Athletics,Women’s Pole Vault,القفز بالزانة سيدات,Final,Women,Qatar Sports Club,,COM-2026-0043,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,17:05:00,18:45:00,100,Athletics,Women’s Hammer Throw,إطاحة المطرقة سيدات,Final,Women,Qatar Sports Club,,COM-2026-0044,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,17:10:00,19:10:00,120,Athletics,Men’s 110 Metres Hurdles,110 متر حواجز رجال,Qualification,Men,Qatar Sports Club,,COM-2026-0045,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,17:15:00,18:45:00,90,Athletics,Men’s Long Jump,الوثب الطويل رجال,Final,Men,Qatar Sports Club,,COM-2026-0046,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,17:25:00,19:25:00,120,Athletics,Men’s 400 Metres Hurdles,400 متر حواجز رجال,Qualification,Men,Qatar Sports Club,,COM-2026-0047,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,17:40:00,19:40:00,120,Athletics,Women’s 400 Metres Hurdles,400 متر حواجز سيدات,Qualification,Women,Qatar Sports Club,,COM-2026-0048,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,17:55:00,19:31:00,96,Athletics,Men’s 400 Metres,400 متر رجال,Final,Men,Qatar Sports Club,,COM-2026-0049,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,18:10:00,19:46:00,96,Athletics,Women’s 400 Metres,400 متر سيدات,Final,Women,Qatar Sports Club,,COM-2026-0050,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,18:15:00,19:45:00,90,Athletics,Men’s Javelin Throw,رمي الرمح رجال,Final,Men,Qatar Sports Club,,COM-2026-0051,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,18:20:00,19:56:00,96,Athletics,Men’s 110 Metres Hurdles,110 متر حواجز رجال,Final,Men,Qatar Sports Club,,COM-2026-0052,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,18:25:00,00:25:00,360,Athletics,Women’s Heptathlon,سباعي سيدات,Final,Women,Qatar Sports Club,,COM-2026-0053,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,18:40:00,19:20:00,40,Athletics,Men’s 10000 Metres,10000 متر رجال,Final,Men,Qatar Sports Club,,COM-2026-0054,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,19:25:00,20:05:00,40,Athletics,Men’s 4x100 Metres Relay,4×100 متر تتابع رجال,Final,Men,Qatar Sports Club,,COM-2026-0055,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,19:45:00,20:25:00,40,Athletics,Women’s 4x100 Metres Relay,4×100 متر تتابع سيدات,Final,Women,Qatar Sports Club,,COM-2026-0056,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,9:00:00,17:00:00,480,Athletics,Men’s Decathlon,العشاري رجال,Final,Men,Qatar Sports Club,,COM-2026-0057,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,9:30:00,17:30:00,480,Athletics,Men’s Decathlon,العشاري رجال,Final,Men,Qatar Sports Club,,COM-2026-0058,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,10:45:00,18:45:00,480,Athletics,Men’s Decathlon,العشاري رجال,Final,Men,Qatar Sports Club,,COM-2026-0059,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,17:00:00,01:00:00,480,Athletics,Men’s Decathlon,العشاري رجال,Final,Men,Qatar Sports Club,,COM-2026-0060,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,17:05:00,18:35:00,90,Athletics,Women’s Triple Jump,الوثب الثلاثي سيدات,Final,Women,Qatar Sports Club,,COM-2026-0061,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,17:10:00,18:50:00,100,Athletics,Men’s Hammer Throw,إطاحة المطرقة رجال,Final,Men,Qatar Sports Club,,COM-2026-0062,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,17:15:00,18:51:00,96,Athletics,Men’s 400 Metres Hurdles,400 متر حواجز رجال,Final,Men,Qatar Sports Club,,COM-2026-0063,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,17:30:00,19:06:00,96,Athletics,Women’s 400 Metres Hurdles,400 متر حواجز سيدات,Final,Women,Qatar Sports Club,,COM-2026-0064,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,17:40:00,19:40:00,120,Athletics,Men’s 200 Metres,200 متر رجال,Qualification,Men,Qatar Sports Club,,COM-2026-0065,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,18:00:00,20:00:00,120,Athletics,Women’s 200 Metres,200 متر سيدات,Qualification,Women,Qatar Sports Club,,COM-2026-0066,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,18:15:00,18:40:00,25,Athletics,Women’s 5000m Race Walk,5000 متر مشي سيدات,Final,Women,Qatar Sports Club,,COM-2026-0067,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,18:30:00,02:30:00,480,Athletics,Men’s Decathlon,العشاري رجال,Final,Men,Qatar Sports Club,,COM-2026-0068,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,18:45:00,19:05:00,20,Athletics,Women’s 3000m Steeplechase,3000 متر موانع سيدات,Final,Women,Qatar Sports Club,,COM-2026-0069,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,18:50:00,20:20:00,90,Athletics,Men’s Triple Jump,الوثب الثلاثي رجال,Final,Men,Qatar Sports Club,,COM-2026-0070,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,18:55:00,20:25:00,90,Athletics,Women’s Javelin Throw,رمي الرمح سيدات,Final,Women,Qatar Sports Club,,COM-2026-0071,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,19:10:00,19:50:00,40,Athletics,Mixed 4x400 Metres Relay,4×400 متر تتابع مختلط,Final,Mixed,Qatar Sports Club,,COM-2026-0072,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,9:00:00,17:00:00,480,Athletics,Men’s Decathlon,العشاري رجال,Final,Men,Qatar Sports Club,,COM-2026-0073,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,9:45:00,17:45:00,480,Athletics,Men’s Decathlon,العشاري رجال,Final,Men,Qatar Sports Club,,COM-2026-0074,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,11:30:00,19:30:00,480,Athletics,Men’s Decathlon,العشاري رجال,Final,Men,Qatar Sports Club,,COM-2026-0075,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,17:00:00,01:00:00,480,Athletics,Men’s Decathlon,العشاري رجال,Final,Men,Qatar Sports Club,,COM-2026-0076,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,17:05:00,19:05:00,120,Athletics,Women’s High Jump,الوثب العالي سيدات,Final,Women,Qatar Sports Club,,COM-2026-0077,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,17:15:00,18:51:00,96,Athletics,Men’s 200 Metres,200 متر رجال,Final,Men,Qatar Sports Club,,COM-2026-0078,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,17:20:00,18:50:00,90,Athletics,Women’s Shot Put,دفع الجلة سيدات,Final,Women,Qatar Sports Club,,COM-2026-0079,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,17:30:00,19:06:00,96,Athletics,Women’s 200 Metres,200 متر سيدات,Final,Women,Qatar Sports Club,,COM-2026-0080,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,17:40:00,18:05:00,25,Athletics,Men’s 5000 Metres,5000 متر رجال,Final,Men,Qatar Sports Club,,COM-2026-0081,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,18:05:00,19:41:00,96,Athletics,Women’s 1500 Metres,1500 متر سيدات,Final,Women,Qatar Sports Club,,COM-2026-0082,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,18:20:00,19:56:00,96,Athletics,Men’s 1500 Metres,1500 متر رجال,Final,Men,Qatar Sports Club,,COM-2026-0083,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,18:25:00,19:55:00,90,Athletics,Men’s Discus Throw,قذف القرص رجال,Final,Men,Qatar Sports Club,,COM-2026-0084,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,18:30:00,02:30:00,480,Athletics,Men’s Decathlon,العشاري رجال,Final,Men,Qatar Sports Club,,COM-2026-0085,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,18:45:00,19:25:00,40,Athletics,Women’s 4x400 Metres Relay,4×400 متر تتابع سيدات,Final,Women,Qatar Sports Club,,COM-2026-0086,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,19:05:00,19:45:00,40,Athletics,Men’s 4x400 Metres Relay,4×400 متر تتابع رجال,Final,Men,Qatar Sports Club,,COM-2026-0087,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,14:30:00,15:10:00,40,Basketball 3x3,Women’s Pool A Game,سيدات - مباراة المجموعة A,Pool A,Women,Gharafa Sports Hall,"OMA,QAT",COM-2026-0470,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,14:55:00,15:35:00,40,Basketball 3x3,Women’s Pool B Game,سيدات - مباراة المجموعة B,Pool B,Women,Gharafa Sports Hall,"KSA,UAE",COM-2026-0471,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,15:20:00,16:00:00,40,Basketball 3x3,Men’s Pool A Game,رجال - مباراة المجموعة A,Pool A,Men,Gharafa Sports Hall,"KSA,KUW",COM-2026-0472,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,15:45:00,16:25:00,40,Basketball 3x3,Men’s Pool A Game,رجال - مباراة المجموعة A,Pool A,Men,Gharafa Sports Hall,"QAT,UAE",COM-2026-0473,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,16:10:00,16:50:00,40,Basketball 3x3,Men’s Pool A Game,رجال - مباراة المجموعة A,Pool A,Men,Gharafa Sports Hall,"BRN,KSA",COM-2026-0474,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,16:35:00,17:15:00,40,Basketball 3x3,Women’s Pool A Game,سيدات - مباراة المجموعة A,Pool A,Women,Gharafa Sports Hall,"KUW,OMA",COM-2026-0475,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,17:00:00,17:40:00,40,Basketball 3x3,Women’s Pool A Game,سيدات - مباراة المجموعة A,Pool A,Women,Gharafa Sports Hall,"KUW,QAT",COM-2026-0476,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,17:25:00,18:05:00,40,Basketball 3x3,Men’s Pool A Game,رجال - مباراة المجموعة A,Pool A,Men,Gharafa Sports Hall,"BRN,KUW",COM-2026-0477,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,17:50:00,18:30:00,40,Basketball 3x3,Men’s Pool A Game,رجال - مباراة المجموعة A,Pool A,Men,Gharafa Sports Hall,"KSA,UAE",COM-2026-0478,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,18:15:00,18:55:00,40,Basketball 3x3,Men’s Pool A Game,رجال - مباراة المجموعة A,Pool A,Men,Gharafa Sports Hall,"BRN,QAT",COM-2026-0479,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,18:40:00,19:20:00,40,Basketball 3x3,Women’s Pool B Game,سيدات - مباراة المجموعة B,Pool B,Women,Gharafa Sports Hall,"BRN,UAE",COM-2026-0480,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,19:05:00,19:45:00,40,Basketball 3x3,Women’s Pool B Game,سيدات - مباراة المجموعة B,Pool B,Women,Gharafa Sports Hall,"BRN,KSA",COM-2026-0481,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,19:30:00,20:10:00,40,Basketball 3x3,Men’s Pool A Game,رجال - مباراة المجموعة A,Pool A,Men,Gharafa Sports Hall,"KUW,QAT",COM-2026-0482,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,15:00:00,15:40:00,40,Basketball 3x3,Men’s Pool A Game,رجال - مباراة المجموعة A,Pool A,Men,Gharafa Sports Hall,"KUW,UAE",COM-2026-0483,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,15:25:00,16:05:00,40,Basketball 3x3,Men’s Pool A Game,رجال - مباراة المجموعة A,Pool A,Men,Gharafa Sports Hall,"KSA,QAT",COM-2026-0484,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,15:50:00,16:30:00,40,Basketball 3x3,Men’s Pool A Game,رجال - مباراة المجموعة A,Pool A,Men,Gharafa Sports Hall,"BRN,UAE",COM-2026-0485,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,16:15:00,16:55:00,40,Basketball 3x3,Women’s Semi-Final,سيدات - نصف النهائي,Semi-Final,Women,Gharafa Sports Hall,,COM-2026-0486,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,16:40:00,17:20:00,40,Basketball 3x3,Women’s Semi-Final,سيدات - نصف النهائي,Semi-Final,Women,Gharafa Sports Hall,,COM-2026-0487,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,17:05:00,17:45:00,40,Basketball 3x3,Men’s Semi-Final,رجال - نصف النهائي,Semi-Final,Men,Gharafa Sports Hall,,COM-2026-0488,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,17:30:00,18:10:00,40,Basketball 3x3,Men’s Semi-Final,رجال - نصف النهائي,Semi-Final,Men,Gharafa Sports Hall,,COM-2026-0489,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,17:55:00,18:35:00,40,Basketball 3x3,Women’s Bronze Medal Game,سيدات - مباراة الميدالية البرونزية,Bronze Medal Game,Women,Gharafa Sports Hall,,COM-2026-0490,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,18:20:00,19:00:00,40,Basketball 3x3,Men’s Bronze Medal Game,رجال - مباراة الميدالية البرونزية,Bronze Medal Game,Men,Gharafa Sports Hall,,COM-2026-0491,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,18:45:00,19:25:00,40,Basketball 3x3,Women’s Final,سيدات - النهائي,Final,Women,Gharafa Sports Hall,,COM-2026-0492,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,19:10:00,19:50:00,40,Basketball 3x3,Men’s Final,رجال - النهائي,Final,Men,Gharafa Sports Hall,,COM-2026-0493,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,10:00:00,11:00:00,60,Billiards,Men’s 10-Ball Singles,10 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0190,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,10:00:00,11:00:00,60,Billiards,Men’s 10-Ball Singles,10 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0191,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,10:00:00,11:00:00,60,Billiards,Men’s 10-Ball Singles,10 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0192,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,10:00:00,11:00:00,60,Billiards,Men’s 10-Ball Singles,10 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0193,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,11:30:00,12:30:00,60,Billiards,Men’s 10-Ball Singles,10 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0194,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,11:30:00,12:30:00,60,Billiards,Men’s 10-Ball Singles,10 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0195,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,11:30:00,12:30:00,60,Billiards,Men’s 10-Ball Singles,10 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0196,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,11:30:00,12:30:00,60,Billiards,Men’s 10-Ball Singles,10 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0197,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,13:00:00,14:00:00,60,Billiards,Men’s 10-Ball Singles,10 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0198,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,13:00:00,14:00:00,60,Billiards,Men’s 10-Ball Singles,10 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0199,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,13:00:00,14:00:00,60,Billiards,Men’s 10-Ball Singles,10 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0200,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,13:00:00,14:00:00,60,Billiards,Men’s 10-Ball Singles,10 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0201,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,14:30:00,15:30:00,60,Billiards,Men’s 10-Ball Singles,10 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0202,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,14:30:00,15:30:00,60,Billiards,Men’s 10-Ball Singles,10 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0203,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,14:30:00,15:30:00,60,Billiards,Men’s 10-Ball Singles,10 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0204,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,14:30:00,15:30:00,60,Billiards,Men’s 10-Ball Singles,10 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0205,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,16:00:00,17:00:00,60,Billiards,Men’s 10-Ball Singles,10 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0206,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,16:00:00,17:00:00,60,Billiards,Men’s 10-Ball Singles,10 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0207,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,10:00:00,11:00:00,60,Billiards,Men’s 10-Ball Singles,10 كرات فردي رجال,Semi Final,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0208,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,10:00:00,11:00:00,60,Billiards,Men’s 10-Ball Singles,10 كرات فردي رجال,Semi Final,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0209,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,12:00:00,13:00:00,60,Billiards,Men’s 10-Ball Singles,10 كرات فردي رجال,Final,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0210,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,15:00:00,16:30:00,90,Billiards,Men’s 10-Ball Doubles,10 كرات زوجي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0211,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,15:00:00,16:30:00,90,Billiards,Men’s 10-Ball Doubles,10 كرات زوجي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0212,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,17:00:00,18:30:00,90,Billiards,Men’s 10-Ball Doubles,10 كرات زوجي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0213,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,17:00:00,18:30:00,90,Billiards,Men’s 10-Ball Doubles,10 كرات زوجي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0214,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,19:00:00,20:30:00,90,Billiards,Men’s 10-Ball Doubles,10 كرات زوجي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0215,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,19:00:00,20:30:00,90,Billiards,Men’s 10-Ball Doubles,10 كرات زوجي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0216,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,10:00:00,11:30:00,90,Billiards,Men’s 10-Ball Doubles,10 كرات زوجي رجال,Semi Final,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0217,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,10:00:00,11:30:00,90,Billiards,Men’s 10-Ball Doubles,10 كرات زوجي رجال,Semi Final,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0218,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,13:00:00,14:30:00,90,Billiards,Men’s 10-Ball Doubles,10 كرات زوجي رجال,Final,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0219,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,15:00:00,16:00:00,60,Billiards,Men’s 9-Ball Singles,9 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0220,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,15:00:00,16:00:00,60,Billiards,Men’s 9-Ball Singles,9 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0221,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,15:00:00,16:00:00,60,Billiards,Men’s 9-Ball Singles,9 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0222,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,15:00:00,16:00:00,60,Billiards,Men’s 9-Ball Singles,9 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0223,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,16:30:00,17:30:00,60,Billiards,Men’s 9-Ball Singles,9 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0224,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,16:30:00,17:30:00,60,Billiards,Men’s 9-Ball Singles,9 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0225,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,16:30:00,17:30:00,60,Billiards,Men’s 9-Ball Singles,9 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0226,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,16:30:00,17:30:00,60,Billiards,Men’s 9-Ball Singles,9 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0227,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,18:00:00,19:00:00,60,Billiards,Men’s 9-Ball Singles,9 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0228,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,18:00:00,19:00:00,60,Billiards,Men’s 9-Ball Singles,9 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0229,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,18:00:00,19:00:00,60,Billiards,Men’s 9-Ball Singles,9 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0230,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,18:00:00,19:00:00,60,Billiards,Men’s 9-Ball Singles,9 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0231,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,13:00:00,14:00:00,60,Billiards,Men’s 9-Ball Singles,9 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0232,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,13:00:00,14:00:00,60,Billiards,Men’s 9-Ball Singles,9 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0233,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,13:00:00,14:00:00,60,Billiards,Men’s 9-Ball Singles,9 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0234,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,13:00:00,14:00:00,60,Billiards,Men’s 9-Ball Singles,9 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0235,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,14:30:00,15:30:00,60,Billiards,Men’s 9-Ball Singles,9 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0236,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,14:30:00,15:30:00,60,Billiards,Men’s 9-Ball Singles,9 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0237,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,16:00:00,17:00:00,60,Billiards,Men’s 9-Ball Singles,9 كرات فردي رجال,Semi Final,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0238,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,16:00:00,17:00:00,60,Billiards,Men’s 9-Ball Singles,9 كرات فردي رجال,Semi Final,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0239,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,18:00:00,19:00:00,60,Billiards,Men’s 9-Ball Singles,9 كرات فردي رجال,Final,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0240,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,12:00:00,14:00:00,120,Bowling,Men’s Singles – Group A,فردي رجال - المجموعة أ,Group A,Men,Qatar Bowling Federation Hall,,COM-2026-0425,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,16:00:00,18:00:00,120,Bowling,Men’s Singles – Group B,فردي رجال - المجموعة ب,Group B,Men,Qatar Bowling Federation Hall,,COM-2026-0426,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,12:00:00,14:00:00,120,Bowling,Men’s Doubles – Group A,زوجي رجال - المجموعة أ,Group A,Men,Qatar Bowling Federation Hall,,COM-2026-0427,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,16:00:00,18:00:00,120,Bowling,Men’s Doubles – Group B,زوجي رجال - المجموعة ب,Group B,Men,Qatar Bowling Federation Hall,,COM-2026-0428,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,10:00:00,12:00:00,120,Bowling,Men’s Trios – Preliminary,ثلاثي رجال - تمهيدي,Preliminary,Men,Qatar Bowling Federation Hall,,COM-2026-0429,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,16:00:00,17:36:00,96,Bowling,Men’s Trios Final,نهائي ثلاثي رجال,Final,Men,Qatar Bowling Federation Hall,,COM-2026-0430,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,16:00:00,18:00:00,120,Bowling,Men’s Team – Preliminary,فرق رجال - تمهيدي,Preliminary,Men,Qatar Bowling Federation Hall,,COM-2026-0431,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,16:00:00,17:36:00,96,Bowling,Men’s Team Final,نهائي فرق رجال,Final,Men,Qatar Bowling Federation Hall,,COM-2026-0432,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,10:00:00,12:00:00,120,Bowling,Men’s Masters – Preliminary,أساتذة رجال - تمهيدي,Preliminary,Men,Qatar Bowling Federation Hall,,COM-2026-0433,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,15:30:00,17:30:00,120,Bowling,Men’s Masters – Preliminary,أساتذة رجال - تمهيدي,Preliminary,Men,Qatar Bowling Federation Hall,,COM-2026-0434,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,18:30:00,19:42:00,72,Bowling,Men’s Masters – Semi Final,أساتذة رجال - نصف نهائي,Semi Final,Men,Qatar Bowling Federation Hall,,COM-2026-0435,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,19:00:00,20:36:00,96,Bowling,Men’s Masters Final,نهائي الأساتذة رجال,Final,Men,Qatar Bowling Federation Hall,,COM-2026-0436,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,17:00:00,18:30:00,90,Boxing,Men’s 55 kg,55 كجم رجال,Semi Final,Men,Aspire Dome,,COM-2026-0154,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,17:15:00,18:45:00,90,Boxing,Men’s 55 kg,55 كجم رجال,Semi Final,Men,Aspire Dome,,COM-2026-0155,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,17:30:00,19:00:00,90,Boxing,Men’s 60 kg,60 كجم رجال,Semi Final,Men,Aspire Dome,,COM-2026-0156,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,17:45:00,19:15:00,90,Boxing,Men’s 60 kg,60 كجم رجال,Semi Final,Men,Aspire Dome,,COM-2026-0157,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,18:00:00,19:30:00,90,Boxing,Men’s 75 kg,75 كجم رجال,Semi Final,Men,Aspire Dome,,COM-2026-0158,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,18:15:00,19:45:00,90,Boxing,Men’s 75 kg,75 كجم رجال,Semi Final,Men,Aspire Dome,,COM-2026-0159,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,18:30:00,20:00:00,90,Boxing,Men’s 80 kg,80 كجم رجال,Semi Final,Men,Aspire Dome,,COM-2026-0160,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,18:45:00,20:15:00,90,Boxing,Men’s 80 kg,80 كجم رجال,Semi Final,Men,Aspire Dome,,COM-2026-0161,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,17:00:00,18:30:00,90,Boxing,Men’s 55 kg,55 كجم رجال,Final,Men,Aspire Dome,,COM-2026-0162,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,17:15:00,18:45:00,90,Boxing,Men’s 60 kg,60 كجم رجال,Final,Men,Aspire Dome,,COM-2026-0163,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,17:45:00,19:15:00,90,Boxing,Men’s 75 kg,75 كجم رجال,Final,Men,Aspire Dome,,COM-2026-0164,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,18:00:00,19:30:00,90,Boxing,Men’s 80 kg,80 كجم رجال,Final,Men,Aspire Dome,,COM-2026-0165,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,17:00:00,21:00:00,240,Equestrian,Team Show Jumping,قفز الحواجز فرق,Qualification,Mixed,Qatar Equestrian Federation Grounds,,COM-2026-0088,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,19:00:00,23:00:00,240,Equestrian,Team Show Jumping,قفز الحواجز فرق,Semi Final,Mixed,Qatar Equestrian Federation Grounds,,COM-2026-0089,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,20:15:00,00:15:00,240,Equestrian,Team Show Jumping,قفز الحواجز فرق,Final,Mixed,Qatar Equestrian Federation Grounds,,COM-2026-0090,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,17:00:00,20:00:00,180,Equestrian,Individual Show Jumping,قفز الحواجز فردي,Qualification,Mixed,Qatar Equestrian Federation Grounds,,COM-2026-0091,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,19:00:00,22:00:00,180,Equestrian,Individual Show Jumping,قفز الحواجز فردي,Semi Final,Mixed,Qatar Equestrian Federation Grounds,,COM-2026-0092,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,20:15:00,23:15:00,180,Equestrian,Individual Show Jumping,قفز الحواجز فردي,Final,Mixed,Qatar Equestrian Federation Grounds,,COM-2026-0093,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,9:00:00,12:00:00,180,Fencing,Women’s Épée Individual – Group Stage,إيبيه فردي سيدات - دور المجموعات,Group Stage,Women,Aspire Dome,,COM-2026-0405,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,10:40:00,13:40:00,180,Fencing,Women’s Épée Individual – Knockout,إيبيه فردي سيدات - خروج المغلوب,Knockout,Women,Aspire Dome,,COM-2026-0406,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,13:45:00,16:45:00,180,Fencing,Men’s Foil Individual – Group Stage,فلوريه فردي رجال - دور المجموعات,Group Stage,Men,Aspire Dome,,COM-2026-0407,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,15:40:00,18:40:00,180,Fencing,Men’s Foil Individual – Knockout,فلوريه فردي رجال - خروج المغلوب,Knockout,Men,Aspire Dome,,COM-2026-0408,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,18:10:00,21:10:00,180,Fencing,Women’s Épée Individual Final,نهائي إيبيه فردي سيدات,Final,Women,Aspire Dome,,COM-2026-0409,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,18:40:00,21:40:00,180,Fencing,Men’s Foil Individual Final,نهائي فلوريه فردي رجال,Final,Men,Aspire Dome,,COM-2026-0410,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,9:00:00,12:00:00,180,Fencing,Men’s Épée Individual – Group Stage,إيبيه فردي رجال - دور المجموعات,Group Stage,Men,Aspire Dome,,COM-2026-0411,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,10:40:00,13:40:00,180,Fencing,Men’s Épée Individual – Knockout,إيبيه فردي رجال - خروج المغلوب,Knockout,Men,Aspire Dome,,COM-2026-0412,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,13:45:00,16:45:00,180,Fencing,Women’s Foil Individual – Group Stage,فلوريه فردي سيدات - دور المجموعات,Group Stage,Women,Aspire Dome,,COM-2026-0413,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,15:40:00,18:40:00,180,Fencing,Women’s Foil Individual – Knockout,فلوريه فردي سيدات - خروج المغلوب,Knockout,Women,Aspire Dome,,COM-2026-0414,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,18:10:00,21:10:00,180,Fencing,Men’s Épée Individual Final,نهائي إيبيه فردي رجال,Final,Men,Aspire Dome,,COM-2026-0415,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,18:40:00,21:40:00,180,Fencing,Women’s Foil Individual Final,نهائي فلوريه فردي سيدات,Final,Women,Aspire Dome,,COM-2026-0416,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,9:00:00,12:00:00,180,Fencing,Women’s Épée Team – Knockout,إيبيه فرق سيدات - خروج المغلوب,Knockout,Women,Aspire Dome,,COM-2026-0417,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,9:00:00,12:00:00,180,Fencing,Men’s Foil Team – Knockout,فلوريه فرق رجال - خروج المغلوب,Knockout,Men,Aspire Dome,,COM-2026-0418,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,11:40:00,14:40:00,180,Fencing,Women’s Épée Team Final,نهائي إيبيه فرق سيدات,Final,Women,Aspire Dome,,COM-2026-0421,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,12:50:00,15:50:00,180,Fencing,Men’s Épée Team – Knockout,إيبيه فرق رجال - خروج المغلوب,Knockout,Men,Aspire Dome,,COM-2026-0419,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,12:50:00,15:50:00,180,Fencing,Women’s Foil Team – Knockout,فلوريه فرق سيدات - خروج المغلوب,Knockout,Women,Aspire Dome,,COM-2026-0420,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,15:30:00,18:30:00,180,Fencing,Men’s Épée Team Final,نهائي إيبيه فرق رجال,Final,Men,Aspire Dome,,COM-2026-0422,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,15:30:00,18:30:00,180,Fencing,Women’s Foil Team Final,نهائي فلوريه فرق سيدات,Final,Women,Aspire Dome,,COM-2026-0423,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,16:40:00,19:40:00,180,Fencing,Men’s Foil Team Final,نهائي فلوريه فرق رجال,Final,Men,Aspire Dome,,COM-2026-0424,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,18:30:00,20:20:00,110,Handball,Men’s Qualification Match 1,كرة اليد رجال - مباراة التصفيات 1,Qualification,Men,Duhail Handball Hall,"QAT,UAE",COM-2026-0515,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,18:30:00,20:20:00,110,Handball,Men’s Qualification Match 2,كرة اليد رجال - مباراة التصفيات 2,Qualification,Men,Duhail Handball Hall,"BRN,KUW",COM-2026-0516,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,16:30:00,18:20:00,110,Handball,Men’s Qualification Match 3,كرة اليد رجال - مباراة التصفيات 3,Qualification,Men,Duhail Handball Hall,"KSA,UAE",COM-2026-0517,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,18:30:00,20:20:00,110,Handball,Men’s Qualification Match 4,كرة اليد رجال - مباراة التصفيات 4,Qualification,Men,Duhail Handball Hall,"KUW,QAT",COM-2026-0518,https://gccgames.qa/frontend/schedule-competition
+2026-05-18,16:30:00,18:20:00,110,Handball,Men’s Qualification Match 5,كرة اليد رجال - مباراة التصفيات 5,Qualification,Men,Duhail Handball Hall,"KUW,UAE",COM-2026-0519,https://gccgames.qa/frontend/schedule-competition
+2026-05-18,18:30:00,20:20:00,110,Handball,Men’s Qualification Match 6,كرة اليد رجال - مباراة التصفيات 6,Qualification,Men,Duhail Handball Hall,"BRN,KSA",COM-2026-0520,https://gccgames.qa/frontend/schedule-competition
+2026-05-19,16:30:00,18:20:00,110,Handball,Men’s Qualification Match 7,كرة اليد رجال - مباراة التصفيات 7,Qualification,Men,Duhail Handball Hall,"KSA,KUW",COM-2026-0521,https://gccgames.qa/frontend/schedule-competition
+2026-05-19,18:30:00,20:20:00,110,Handball,Men’s Qualification Match 8,كرة اليد رجال - مباراة التصفيات 8,Qualification,Men,Duhail Handball Hall,"BRN,QAT",COM-2026-0522,https://gccgames.qa/frontend/schedule-competition
+2026-05-21,18:30:00,20:20:00,110,Handball,Men’s Qualification Match 9,كرة اليد رجال - مباراة التصفيات 9,Qualification,Men,Duhail Handball Hall,"BRN,UAE",COM-2026-0523,https://gccgames.qa/frontend/schedule-competition
+2026-05-22,18:30:00,20:20:00,110,Handball,Men’s Qualification Match 10,كرة اليد رجال - مباراة التصفيات 10,Qualification,Men,Duhail Handball Hall,"KSA,QAT",COM-2026-0524,https://gccgames.qa/frontend/schedule-competition
+2026-05-21,11:00:00,12:30:00,90,Karate,Men’s Kumite -60 kg,كوميتيه رجال -60 كجم,Qualification,Men,Aspire Dome,,COM-2026-0144,https://gccgames.qa/frontend/schedule-competition
+2026-05-21,11:40:00,13:10:00,90,Karate,Men’s Kumite -67 kg,كوميتيه رجال -67 كجم,Qualification,Men,Aspire Dome,,COM-2026-0145,https://gccgames.qa/frontend/schedule-competition
+2026-05-21,15:30:00,17:00:00,90,Karate,Men’s Kumite -75 kg,كوميتيه رجال -75 كجم,Qualification,Men,Aspire Dome,,COM-2026-0146,https://gccgames.qa/frontend/schedule-competition
+2026-05-21,16:10:00,17:40:00,90,Karate,Men’s Kumite -84 kg,كوميتيه رجال -84 كجم,Qualification,Men,Aspire Dome,,COM-2026-0147,https://gccgames.qa/frontend/schedule-competition
+2026-05-21,16:50:00,18:20:00,90,Karate,Men’s Kumite +84 kg,كوميتيه رجال +84 كجم,Qualification,Men,Aspire Dome,,COM-2026-0148,https://gccgames.qa/frontend/schedule-competition
+2026-05-21,18:30:00,20:00:00,90,Karate,Men’s Kumite -60 kg,كوميتيه رجال -60 كجم,Final,Men,Aspire Dome,,COM-2026-0149,https://gccgames.qa/frontend/schedule-competition
+2026-05-21,18:35:00,20:05:00,90,Karate,Men’s Kumite -67 kg,كوميتيه رجال -67 كجم,Final,Men,Aspire Dome,,COM-2026-0150,https://gccgames.qa/frontend/schedule-competition
+2026-05-21,18:40:00,20:10:00,90,Karate,Men’s Kumite -75 kg,كوميتيه رجال -75 كجم,Final,Men,Aspire Dome,,COM-2026-0151,https://gccgames.qa/frontend/schedule-competition
+2026-05-21,18:45:00,20:15:00,90,Karate,Men’s Kumite -84 kg,كوميتيه رجال -84 كجم,Final,Men,Aspire Dome,,COM-2026-0152,https://gccgames.qa/frontend/schedule-competition
+2026-05-21,18:50:00,20:20:00,90,Karate,Men’s Kumite +84 kg,كوميتيه رجال +84 كجم,Final,Men,Aspire Dome,,COM-2026-0153,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,10:00:00,11:15:00,75,Padel,Women’s Preliminary Match,مباراة تمهيدية سيدات,Preliminary,Women,Aspire Dome,,COM-2026-0401,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,10:00:00,11:15:00,75,Padel,Women’s Preliminary Match,مباراة تمهيدية سيدات,Preliminary,Women,Aspire Dome,,COM-2026-0402,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,16:00:00,17:15:00,75,Padel,Men’s Preliminary Match,مباراة تمهيدية رجال,Preliminary,Men,Aspire Dome,,COM-2026-0403,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,16:00:00,17:15:00,75,Padel,Men’s Preliminary Match,مباراة تمهيدية رجال,Preliminary,Men,Aspire Dome,,COM-2026-0404,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,10:00:00,11:15:00,75,Padel,Women’s Preliminary Match,مباراة تمهيدية سيدات,Preliminary,Women,Aspire Dome,,COM-2026-0385,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,10:00:00,11:15:00,75,Padel,Women’s Preliminary Match,مباراة تمهيدية سيدات,Preliminary,Women,Aspire Dome,,COM-2026-0386,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,16:00:00,17:15:00,75,Padel,Men’s Preliminary Match,مباراة تمهيدية رجال,Preliminary,Men,Aspire Dome,,COM-2026-0387,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,16:00:00,17:15:00,75,Padel,Men’s Preliminary Match,مباراة تمهيدية رجال,Preliminary,Men,Aspire Dome,,COM-2026-0388,https://gccgames.qa/frontend/schedule-competition
+2026-05-18,10:00:00,11:15:00,75,Padel,Women’s Preliminary Match,مباراة تمهيدية سيدات,Preliminary,Women,Aspire Dome,,COM-2026-0389,https://gccgames.qa/frontend/schedule-competition
+2026-05-18,10:00:00,11:15:00,75,Padel,Women’s Preliminary Match,مباراة تمهيدية سيدات,Preliminary,Women,Aspire Dome,,COM-2026-0390,https://gccgames.qa/frontend/schedule-competition
+2026-05-18,16:00:00,17:15:00,75,Padel,Men’s Preliminary Match,مباراة تمهيدية رجال,Preliminary,Men,Aspire Dome,,COM-2026-0391,https://gccgames.qa/frontend/schedule-competition
+2026-05-18,16:00:00,17:15:00,75,Padel,Men’s Preliminary Match,مباراة تمهيدية رجال,Preliminary,Men,Aspire Dome,,COM-2026-0392,https://gccgames.qa/frontend/schedule-competition
+2026-05-19,10:00:00,11:15:00,75,Padel,Women’s Preliminary Match,مباراة تمهيدية سيدات,Preliminary,Women,Aspire Dome,,COM-2026-0393,https://gccgames.qa/frontend/schedule-competition
+2026-05-19,10:00:00,11:15:00,75,Padel,Women’s Preliminary Match,مباراة تمهيدية سيدات,Preliminary,Women,Aspire Dome,,COM-2026-0394,https://gccgames.qa/frontend/schedule-competition
+2026-05-19,16:00:00,17:15:00,75,Padel,Men’s Preliminary Match,مباراة تمهيدية رجال,Preliminary,Men,Aspire Dome,,COM-2026-0395,https://gccgames.qa/frontend/schedule-competition
+2026-05-19,16:00:00,17:15:00,75,Padel,Men’s Preliminary Match,مباراة تمهيدية رجال,Preliminary,Men,Aspire Dome,,COM-2026-0396,https://gccgames.qa/frontend/schedule-competition
+2026-05-20,10:00:00,11:15:00,75,Padel,Women’s Preliminary Match,مباراة تمهيدية سيدات,Preliminary,Women,Aspire Dome,,COM-2026-0397,https://gccgames.qa/frontend/schedule-competition
+2026-05-20,10:00:00,11:15:00,75,Padel,Women’s Preliminary Match,مباراة تمهيدية سيدات,Preliminary,Women,Aspire Dome,,COM-2026-0398,https://gccgames.qa/frontend/schedule-competition
+2026-05-20,16:00:00,17:15:00,75,Padel,Men’s Preliminary Match,مباراة تمهيدية رجال,Preliminary,Men,Aspire Dome,,COM-2026-0399,https://gccgames.qa/frontend/schedule-competition
+2026-05-20,16:00:00,17:15:00,75,Padel,Men’s Preliminary Match,مباراة تمهيدية رجال,Preliminary,Men,Aspire Dome,,COM-2026-0400,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,8:30:00,10:45:00,135,Shooting,Shotgun Official Training,التدريب الرسمي للشوزن,Training,Mixed,Lusail Shooting Range,,COM-2026-0444,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,8:30:00,10:30:00,120,Shooting,Men’s Skeet 75 Targets Qualification,سكيت 75 طبق فردي رجال - تمهيدي,Qualification,Men,Lusail Shooting Range,,COM-2026-0445,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,8:30:00,10:30:00,120,Shooting,Women’s Skeet 75 Targets Qualification,سكيت 75 طبق فردي سيدات - تمهيدي,Qualification,Women,Lusail Shooting Range,,COM-2026-0446,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,9:30:00,11:45:00,135,Shooting,10m Air Rifle Official Training,التدريب الرسمي بندقية 10م,Training,Mixed,Lusail Shooting Range,,COM-2026-0456,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,9:30:00,11:00:00,90,Shooting,Men’s 10m Air Rifle Qualification,البندقية 10م هوائي رجال - تصفيات,Qualification,Men,Lusail Shooting Range,,COM-2026-0457,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,11:30:00,13:00:00,90,Shooting,Women’s 10m Air Rifle Qualification,البندقية 10م هوائي سيدات - تصفيات,Qualification,Women,Lusail Shooting Range,,COM-2026-0458,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,12:15:00,13:15:00,60,Shooting,Men’s 10m Air Rifle Final,نهائي البندقية 10م هوائي رجال,Final,Men,Lusail Shooting Range,,COM-2026-0459,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,13:00:00,14:00:00,60,Shooting,Women’s Skeet Final,نهائي سكيت فردي سيدات,Final,Women,Lusail Shooting Range,,COM-2026-0447,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,14:15:00,15:15:00,60,Shooting,Men’s Skeet Final,نهائي سكيت فردي رجال,Final,Men,Lusail Shooting Range,,COM-2026-0448,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,14:15:00,15:15:00,60,Shooting,Women’s 10m Air Rifle Final,نهائي البندقية 10م هوائي سيدات,Final,Women,Lusail Shooting Range,,COM-2026-0460,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,9:30:00,11:00:00,90,Shooting,Mixed 10m Air Rifle Qualification,البندقية 10م هوائي مختلط - تصفيات,Qualification,Mixed,Lusail Shooting Range,,COM-2026-0461,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,11:45:00,12:45:00,60,Shooting,Mixed 10m Air Rifle Final,نهائي البندقية 10م هوائي مختلط,Final,Mixed,Lusail Shooting Range,,COM-2026-0462,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,12:45:00,13:45:00,60,Shooting,Mixed Skeet Team Final,نهائي سكيت فرق مختلط,Final,Mixed,Lusail Shooting Range,,COM-2026-0449,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,8:30:00,10:45:00,135,Shooting,Shotgun Official Training,تدريب رسمي للشوزن,Training,Mixed,Lusail Shooting Range,,COM-2026-0450,https://gccgames.qa/frontend/schedule-competition
+2026-05-18,8:30:00,10:30:00,120,Shooting,Men’s Trap 75 Targets Qualification,تراب 75 طبق فردي رجال - تمهيدي,Qualification,Men,Lusail Shooting Range,,COM-2026-0451,https://gccgames.qa/frontend/schedule-competition
+2026-05-18,8:30:00,10:30:00,120,Shooting,Women’s Trap 75 Targets Qualification,تراب 75 طبق فردي سيدات - تمهيدي,Qualification,Women,Lusail Shooting Range,,COM-2026-0452,https://gccgames.qa/frontend/schedule-competition
+2026-05-18,9:30:00,11:45:00,135,Shooting,10m Air Pistol Official Training,التدريب الرسمي مسدس 10م,Training,Mixed,Lusail Shooting Range,,COM-2026-0463,https://gccgames.qa/frontend/schedule-competition
+2026-05-19,9:30:00,11:00:00,90,Shooting,Men’s 10m Air Pistol Qualification,المسدس 10م هوائي رجال - تصفيات,Qualification,Men,Lusail Shooting Range,,COM-2026-0464,https://gccgames.qa/frontend/schedule-competition
+2026-05-19,11:30:00,13:00:00,90,Shooting,Women’s 10m Air Pistol Qualification,المسدس 10م هوائي سيدات - تصفيات,Qualification,Women,Lusail Shooting Range,,COM-2026-0465,https://gccgames.qa/frontend/schedule-competition
+2026-05-19,12:00:00,13:00:00,60,Shooting,Women’s Trap Final,نهائي تراب فردي سيدات,Final,Women,Lusail Shooting Range,,COM-2026-0453,https://gccgames.qa/frontend/schedule-competition
+2026-05-19,12:15:00,13:15:00,60,Shooting,Men’s 10m Air Pistol Final,نهائي المسدس 10م هوائي رجال,Final,Men,Lusail Shooting Range,,COM-2026-0466,https://gccgames.qa/frontend/schedule-competition
+2026-05-19,13:15:00,14:15:00,60,Shooting,Men’s Trap Final,نهائي تراب فردي رجال,Final,Men,Lusail Shooting Range,,COM-2026-0454,https://gccgames.qa/frontend/schedule-competition
+2026-05-19,14:15:00,15:15:00,60,Shooting,Women’s 10m Air Pistol Final,نهائي المسدس 10م هوائي سيدات,Final,Women,Lusail Shooting Range,,COM-2026-0467,https://gccgames.qa/frontend/schedule-competition
+2026-05-20,9:30:00,11:00:00,90,Shooting,Mixed 10m Air Pistol Qualification,المسدس 10م هوائي مختلط - تصفيات,Qualification,Mixed,Lusail Shooting Range,,COM-2026-0468,https://gccgames.qa/frontend/schedule-competition
+2026-05-20,11:45:00,12:45:00,60,Shooting,Mixed 10m Air Pistol Final,نهائي المسدس 10م هوائي مختلط,Final,Mixed,Lusail Shooting Range,,COM-2026-0469,https://gccgames.qa/frontend/schedule-competition
+2026-05-20,12:45:00,13:45:00,60,Shooting,Mixed Trap Team Final,نهائي تراب فرق مختلط,Final,Mixed,Lusail Shooting Range,,COM-2026-0455,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,13:00:00,15:00:00,120,Snooker,Men’s 6-Red Singles,6 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0241,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,13:00:00,15:00:00,120,Snooker,Men’s 6-Red Singles,6 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0242,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,13:00:00,15:00:00,120,Snooker,Men’s 6-Red Singles,6 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0243,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,13:00:00,15:00:00,120,Snooker,Men’s 6-Red Singles,6 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0244,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,15:00:00,17:00:00,120,Snooker,Men’s 6-Red Singles,6 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0245,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,15:00:00,17:00:00,120,Snooker,Men’s 6-Red Singles,6 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0246,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,15:00:00,17:00:00,120,Snooker,Men’s 6-Red Singles,6 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0247,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,15:00:00,17:00:00,120,Snooker,Men’s 6-Red Singles,6 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0248,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,17:00:00,19:00:00,120,Snooker,Men’s 6-Red Singles,6 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0249,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,17:00:00,19:00:00,120,Snooker,Men’s 6-Red Singles,6 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0250,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,17:00:00,19:00:00,120,Snooker,Men’s 6-Red Singles,6 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0251,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,17:00:00,19:00:00,120,Snooker,Men’s 6-Red Singles,6 كرات فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0252,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,10:00:00,12:00:00,120,Snooker,Men’s 6-Red Singles,6 كرات فردي رجال,Quarter Final,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0253,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,10:00:00,12:00:00,120,Snooker,Men’s 6-Red Singles,6 كرات فردي رجال,Quarter Final,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0254,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,10:00:00,12:00:00,120,Snooker,Men’s 6-Red Singles,6 كرات فردي رجال,Quarter Final,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0255,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,10:00:00,12:00:00,120,Snooker,Men’s 6-Red Singles,6 كرات فردي رجال,Quarter Final,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0256,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,13:00:00,15:00:00,120,Snooker,Men’s 6-Red Singles,6 كرات فردي رجال,Semi Final,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0257,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,13:00:00,15:00:00,120,Snooker,Men’s 6-Red Singles,6 كرات فردي رجال,Semi Final,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0258,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,17:00:00,19:00:00,120,Snooker,Men’s 6-Red Singles,6 كرات فردي رجال,Final,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0259,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,10:00:00,12:00:00,120,Snooker,Men’s Singles,فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0260,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,10:00:00,12:00:00,120,Snooker,Men’s Singles,فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0261,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,10:00:00,12:00:00,120,Snooker,Men’s Singles,فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0262,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,10:00:00,12:00:00,120,Snooker,Men’s Singles,فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0263,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,13:00:00,15:00:00,120,Snooker,Men’s Singles,فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0264,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,13:00:00,15:00:00,120,Snooker,Men’s Singles,فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0265,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,13:00:00,15:00:00,120,Snooker,Men’s Singles,فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0266,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,13:00:00,15:00:00,120,Snooker,Men’s Singles,فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0267,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,15:00:00,17:00:00,120,Snooker,Men’s Singles,فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0268,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,15:00:00,17:00:00,120,Snooker,Men’s Singles,فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0269,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,15:00:00,17:00:00,120,Snooker,Men’s Singles,فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0270,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,15:00:00,17:00:00,120,Snooker,Men’s Singles,فردي رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0271,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,18:00:00,20:00:00,120,Snooker,Men’s Singles,فردي رجال,Quarter Final,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0272,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,18:00:00,20:00:00,120,Snooker,Men’s Singles,فردي رجال,Quarter Final,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0273,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,18:00:00,20:00:00,120,Snooker,Men’s Singles,فردي رجال,Quarter Final,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0274,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,18:00:00,20:00:00,120,Snooker,Men’s Singles,فردي رجال,Quarter Final,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0275,https://gccgames.qa/frontend/schedule-competition
+2026-05-18,10:00:00,12:00:00,120,Snooker,Men’s Singles,فردي رجال,Semi Final,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0276,https://gccgames.qa/frontend/schedule-competition
+2026-05-18,10:00:00,12:00:00,120,Snooker,Men’s Singles,فردي رجال,Semi Final,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0277,https://gccgames.qa/frontend/schedule-competition
+2026-05-18,10:00:00,13:00:00,180,Snooker,Men’s Team,فرق رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0279,https://gccgames.qa/frontend/schedule-competition
+2026-05-18,10:00:00,13:00:00,180,Snooker,Men’s Team,فرق رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0280,https://gccgames.qa/frontend/schedule-competition
+2026-05-18,10:00:00,13:00:00,180,Snooker,Men’s Team,فرق رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0281,https://gccgames.qa/frontend/schedule-competition
+2026-05-18,10:00:00,13:00:00,180,Snooker,Men’s Team,فرق رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0282,https://gccgames.qa/frontend/schedule-competition
+2026-05-18,13:00:00,15:00:00,120,Snooker,Men’s Singles,فردي رجال,Final,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0278,https://gccgames.qa/frontend/schedule-competition
+2026-05-18,13:00:00,16:00:00,180,Snooker,Men’s Team,فرق رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0283,https://gccgames.qa/frontend/schedule-competition
+2026-05-18,13:00:00,16:00:00,180,Snooker,Men’s Team,فرق رجال,Qualification,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0284,https://gccgames.qa/frontend/schedule-competition
+2026-05-19,10:00:00,13:00:00,180,Snooker,Men’s Team,فرق رجال,Semi Final,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0285,https://gccgames.qa/frontend/schedule-competition
+2026-05-19,10:00:00,13:00:00,180,Snooker,Men’s Team,فرق رجال,Semi Final,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0286,https://gccgames.qa/frontend/schedule-competition
+2026-05-19,13:00:00,16:00:00,180,Snooker,Men’s Team,فرق رجال,Final,Men,Qatar Billiards & Snooker Federation Hall,,COM-2026-0287,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,9:00:00,09:25:00,25,Swimming,Boys 800m Freestyle Heat 1,سباحة 800م حرة بنين - الجولة 1,Heats,Men,Hamad Aquatics Centre,"BRN,KSA,OMA,QAT",COM-2026-0494,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,9:20:00,11:50:00,150,Swimming,Boys 200m Individual Medley Heat 1,سباحة 200م متنوع بنين - الجولة 1,Heats,Men,Hamad Aquatics Centre,"BRN,KSA,KUW,QAT",COM-2026-0495,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,9:40:00,12:10:00,150,Swimming,Boys 50m Freestyle Heat 1,سباحة 50م حرة بنين - الجولة 1,Heats,Men,Hamad Aquatics Centre,"BRN,KSA,KUW,OMA,QAT,UAE",COM-2026-0496,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,10:00:00,12:30:00,150,Swimming,Boys 100m Backstroke Heat 1,سباحة 100م ظهر بنين - الجولة 1,Heats,Men,Hamad Aquatics Centre,"BRN,KSA,KUW,OMA,QAT,UAE",COM-2026-0497,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,10:20:00,12:50:00,150,Swimming,Boys 200م Butterfly Heat 1,سباحة 200م فراشة بنين - الجولة 1,Heats,Men,Hamad Aquatics Centre,"BRN,KSA,KUW,QAT",COM-2026-0498,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,9:00:00,09:20:00,20,Swimming,Boys 400m Freestyle Heat 1,سباحة 400م حرة بنين - الجولة 1,Heats,Men,Hamad Aquatics Centre,"BRN,KSA,KUW,OMA,QAT",COM-2026-0499,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,9:20:00,11:50:00,150,Swimming,Boys 50m Breaststroke Heat 1,سباحة 50م صدر بنين - الجولة 1,Heats,Men,Hamad Aquatics Centre,"BRN,KSA,QAT,UAE",COM-2026-0500,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,9:40:00,12:10:00,150,Swimming,Boys 100m Freestyle Heat 1,سباحة 100م حرة بنين - الجولة 1,Heats,Men,Hamad Aquatics Centre,"BRN,KSA,KUW,OMA,QAT,UAE",COM-2026-0501,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,10:00:00,12:30:00,150,Swimming,Boys 200m Backstroke Heat 1,سباحة 200م ظهر بنين - الجولة 1,Heats,Men,Hamad Aquatics Centre,"BRN,KSA,KUW,QAT",COM-2026-0502,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,10:20:00,10:50:00,30,Swimming,Boys 400m Freestyle Relay Heat 1,تتابع 400م حرة بنين - الجولة 1,Heats,Men,Hamad Aquatics Centre,"BRN,KSA,KUW,QAT",COM-2026-0503,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,9:00:00,09:20:00,20,Swimming,Boys 400m Individual Medley Heat 1,سباحة 400م متنوع بنين - الجولة 1,Heats,Men,Hamad Aquatics Centre,"BRN,KSA,KUW,QAT",COM-2026-0504,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,9:20:00,11:50:00,150,Swimming,Boys 100m Breaststroke Heat 1,سباحة 100م صدر بنين - الجولة 1,Heats,Men,Hamad Aquatics Centre,"BRN,KSA,QAT",COM-2026-0505,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,9:40:00,12:10:00,150,Swimming,Boys 200m Freestyle Heat 1,سباحة 200م حرة بنين - الجولة 1,Heats,Men,Hamad Aquatics Centre,"BRN,KSA,KUW,QAT",COM-2026-0506,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,10:00:00,12:30:00,150,Swimming,Boys 50m Butterfly Heat 1,سباحة 50م فراشة بنين - الجولة 1,Heats,Men,Hamad Aquatics Centre,"BRN,KUW,OMA",COM-2026-0507,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,10:10:00,12:40:00,150,Swimming,Boys 50m Butterfly Heat 2,سباحة 50م فراشة بنين - الجولة 2,Heats,Men,Hamad Aquatics Centre,"BRN,KSA,QAT,UAE",COM-2026-0508,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,10:20:00,10:50:00,30,Swimming,Boys 800m Freestyle Relay Heat 1,تتابع 800م حرة بنين - الجولة 1,Heats,Men,Hamad Aquatics Centre,"BRN,KSA,KUW,QAT",COM-2026-0509,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,9:00:00,09:30:00,30,Swimming,Boys 1500m Freestyle Heat 1,سباحة 1500م حرة بنين - الجولة 1,Heats,Men,Hamad Aquatics Centre,"BRN,KSA,KUW,OMA,QAT",COM-2026-0510,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,9:30:00,12:00:00,150,Swimming,Boys 50m Backstroke Heat 1,سباحة 50م ظهر بنين - الجولة 1,Heats,Men,Hamad Aquatics Centre,"BRN,KSA,KUW,OMA,QAT,UAE",COM-2026-0511,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,10:00:00,12:30:00,150,Swimming,Boys 100m Butterfly Heat 1,سباحة 100م فراشة بنين - الجولة 1,Heats,Men,Hamad Aquatics Centre,"BRN,KSA,KUW,QAT,UAE",COM-2026-0512,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,10:20:00,12:50:00,150,Swimming,Boys 200m Breaststroke Heat 1,سباحة 200م صدر بنين - الجولة 1,Heats,Men,Hamad Aquatics Centre,"BRN,KSA,QAT",COM-2026-0513,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,10:40:00,11:10:00,30,Swimming,Boys 400m Medley Relay Heat 1,تتابع 400م متنوع بنين - الجولة 1,Heats,Men,Hamad Aquatics Centre,"BRN,KSA,KUW,QAT",COM-2026-0514,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,10:00:00,10:45:00,45,Table Tennis,Women’s Team Qualification,فرق سيدات,Qualification,Women,Aspire Dome,,COM-2026-0288,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,10:00:00,10:45:00,45,Table Tennis,Women’s Team Qualification,فرق سيدات,Qualification,Women,Aspire Dome,,COM-2026-0289,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,10:00:00,10:45:00,45,Table Tennis,Women’s Team Qualification,فرق سيدات,Qualification,Women,Aspire Dome,,COM-2026-0290,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,10:00:00,10:45:00,45,Table Tennis,Men’s Team Qualification,فرق رجال,Qualification,Men,Aspire Dome,,COM-2026-0291,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,10:00:00,10:45:00,45,Table Tennis,Men’s Team Qualification,فرق رجال,Qualification,Men,Aspire Dome,,COM-2026-0292,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,10:00:00,10:45:00,45,Table Tennis,Men’s Team Qualification,فرق رجال,Qualification,Men,Aspire Dome,,COM-2026-0293,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,15:00:00,15:45:00,45,Table Tennis,Women’s Team Qualification,فرق سيدات,Qualification,Women,Aspire Dome,,COM-2026-0294,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,15:00:00,15:45:00,45,Table Tennis,Women’s Team Qualification,فرق سيدات,Qualification,Women,Aspire Dome,,COM-2026-0295,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,15:00:00,15:45:00,45,Table Tennis,Women’s Team Qualification,فرق سيدات,Qualification,Women,Aspire Dome,,COM-2026-0296,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,15:00:00,15:45:00,45,Table Tennis,Men’s Team Qualification,فرق رجال,Qualification,Men,Aspire Dome,,COM-2026-0297,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,15:00:00,15:45:00,45,Table Tennis,Men’s Team Qualification,فرق رجال,Qualification,Men,Aspire Dome,,COM-2026-0298,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,15:00:00,15:45:00,45,Table Tennis,Men’s Team Qualification,فرق رجال,Qualification,Men,Aspire Dome,,COM-2026-0299,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,19:00:00,19:45:00,45,Table Tennis,Women’s Team Qualification,فرق سيدات,Qualification,Women,Aspire Dome,,COM-2026-0300,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,19:00:00,19:45:00,45,Table Tennis,Women’s Team Qualification,فرق سيدات,Qualification,Women,Aspire Dome,,COM-2026-0301,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,19:00:00,19:45:00,45,Table Tennis,Women’s Team Qualification,فرق سيدات,Qualification,Women,Aspire Dome,,COM-2026-0302,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,19:00:00,19:45:00,45,Table Tennis,Men’s Team Qualification,فرق رجال,Qualification,Men,Aspire Dome,,COM-2026-0303,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,19:00:00,19:45:00,45,Table Tennis,Men’s Team Qualification,فرق رجال,Qualification,Men,Aspire Dome,,COM-2026-0304,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,19:00:00,19:45:00,45,Table Tennis,Men’s Team Qualification,فرق رجال,Qualification,Men,Aspire Dome,,COM-2026-0305,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,10:00:00,10:45:00,45,Table Tennis,Mixed Doubles Round of 16,زوجي مختلط دور 16,Round of 16,Mixed,Aspire Dome,,COM-2026-0306,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,10:00:00,10:45:00,45,Table Tennis,Mixed Doubles Round of 16,زوجي مختلط دور 16,Round of 16,Mixed,Aspire Dome,,COM-2026-0307,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,10:00:00,10:45:00,45,Table Tennis,Mixed Doubles Round of 16,زوجي مختلط دور 16,Round of 16,Mixed,Aspire Dome,,COM-2026-0308,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,10:00:00,10:45:00,45,Table Tennis,Mixed Doubles Round of 16,زوجي مختلط دور 16,Round of 16,Mixed,Aspire Dome,,COM-2026-0309,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,10:50:00,11:35:00,45,Table Tennis,Women’s Doubles Round of 16,زوجي سيدات دور 16,Round of 16,Women,Aspire Dome,,COM-2026-0310,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,10:50:00,11:35:00,45,Table Tennis,Women’s Doubles Round of 16,زوجي سيدات دور 16,Round of 16,Women,Aspire Dome,,COM-2026-0311,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,10:50:00,11:35:00,45,Table Tennis,Women’s Doubles Round of 16,زوجي سيدات دور 16,Round of 16,Women,Aspire Dome,,COM-2026-0312,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,10:50:00,11:35:00,45,Table Tennis,Men’s Doubles Round of 16,زوجي رجال دور 16,Round of 16,Men,Aspire Dome,,COM-2026-0313,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,10:50:00,11:35:00,45,Table Tennis,Men’s Doubles Round of 16,زوجي رجال دور 16,Round of 16,Men,Aspire Dome,,COM-2026-0314,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,10:50:00,11:35:00,45,Table Tennis,Men’s Doubles Round of 16,زوجي رجال دور 16,Round of 16,Men,Aspire Dome,,COM-2026-0315,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,10:50:00,11:35:00,45,Table Tennis,Men’s Doubles Round of 16,زوجي رجال دور 16,Round of 16,Men,Aspire Dome,,COM-2026-0316,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,10:50:00,11:35:00,45,Table Tennis,Men’s Doubles Round of 16,زوجي رجال دور 16,Round of 16,Men,Aspire Dome,,COM-2026-0317,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,11:40:00,12:25:00,45,Table Tennis,Mixed Doubles Quarterfinal,زوجي مختلط ربع نهائي,Quarterfinal,Mixed,Aspire Dome,,COM-2026-0318,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,11:40:00,12:25:00,45,Table Tennis,Mixed Doubles Quarterfinal,زوجي مختلط ربع نهائي,Quarterfinal,Mixed,Aspire Dome,,COM-2026-0319,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,11:40:00,12:25:00,45,Table Tennis,Mixed Doubles Quarterfinal,زوجي مختلط ربع نهائي,Quarterfinal,Mixed,Aspire Dome,,COM-2026-0320,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,11:40:00,12:25:00,45,Table Tennis,Mixed Doubles Quarterfinal,زوجي مختلط ربع نهائي,Quarterfinal,Mixed,Aspire Dome,,COM-2026-0321,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,15:00:00,15:45:00,45,Table Tennis,Women’s Team Qualification,فرق سيدات,Qualification,Women,Aspire Dome,,COM-2026-0322,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,15:00:00,15:45:00,45,Table Tennis,Women’s Team Qualification,فرق سيدات,Qualification,Women,Aspire Dome,,COM-2026-0323,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,15:00:00,15:45:00,45,Table Tennis,Women’s Team Qualification,فرق سيدات,Qualification,Women,Aspire Dome,,COM-2026-0324,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,15:00:00,15:45:00,45,Table Tennis,Men’s Team Qualification,فرق رجال,Qualification,Men,Aspire Dome,,COM-2026-0325,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,15:00:00,15:45:00,45,Table Tennis,Men’s Team Qualification,فرق رجال,Qualification,Men,Aspire Dome,,COM-2026-0326,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,15:00:00,15:45:00,45,Table Tennis,Men’s Team Qualification,فرق رجال,Qualification,Men,Aspire Dome,,COM-2026-0327,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,19:00:00,19:45:00,45,Table Tennis,Women’s Team Qualification,فرق سيدات,Qualification,Women,Aspire Dome,,COM-2026-0328,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,19:00:00,19:45:00,45,Table Tennis,Women’s Team Qualification,فرق سيدات,Qualification,Women,Aspire Dome,,COM-2026-0329,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,19:00:00,19:45:00,45,Table Tennis,Women’s Team Qualification,فرق سيدات,Qualification,Women,Aspire Dome,,COM-2026-0330,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,19:00:00,19:45:00,45,Table Tennis,Men’s Team Qualification,فرق رجال,Qualification,Men,Aspire Dome,,COM-2026-0331,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,19:00:00,19:45:00,45,Table Tennis,Men’s Team Qualification,فرق رجال,Qualification,Men,Aspire Dome,,COM-2026-0332,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,19:00:00,19:45:00,45,Table Tennis,Men’s Team Qualification,فرق رجال,Qualification,Men,Aspire Dome,,COM-2026-0333,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,10:00:00,10:45:00,45,Table Tennis,Men’s Singles Round of 32,فردي رجال دور 32,Round of 32,Men,Aspire Dome,,COM-2026-0334,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,10:00:00,10:45:00,45,Table Tennis,Men’s Singles Round of 32,فردي رجال دور 32,Round of 32,Men,Aspire Dome,,COM-2026-0335,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,10:00:00,10:45:00,45,Table Tennis,Women’s Singles Round of 32,فردي سيدات دور 32,Round of 32,Women,Aspire Dome,,COM-2026-0336,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,10:00:00,10:45:00,45,Table Tennis,Women’s Singles Round of 32,فردي سيدات دور 32,Round of 32,Women,Aspire Dome,,COM-2026-0337,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,10:50:00,11:35:00,45,Table Tennis,Mixed Doubles Semifinal,زوجي مختلط نصف نهائي,Semifinal,Mixed,Aspire Dome,,COM-2026-0338,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,10:50:00,11:35:00,45,Table Tennis,Mixed Doubles Semifinal,زوجي مختلط نصف نهائي,Semifinal,Mixed,Aspire Dome,,COM-2026-0339,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,11:40:00,12:25:00,45,Table Tennis,Women’s Singles Round of 16,فردي سيدات دور 16,Round of 16,Women,Aspire Dome,,COM-2026-0340,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,11:40:00,12:25:00,45,Table Tennis,Women’s Singles Round of 16,فردي سيدات دور 16,Round of 16,Women,Aspire Dome,,COM-2026-0341,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,11:40:00,12:25:00,45,Table Tennis,Women’s Singles Round of 16,فردي سيدات دور 16,Round of 16,Women,Aspire Dome,,COM-2026-0342,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,11:40:00,12:25:00,45,Table Tennis,Women’s Singles Round of 16,فردي سيدات دور 16,Round of 16,Women,Aspire Dome,,COM-2026-0343,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,11:40:00,12:25:00,45,Table Tennis,Women’s Singles Round of 16,فردي سيدات دور 16,Round of 16,Women,Aspire Dome,,COM-2026-0344,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,11:40:00,12:25:00,45,Table Tennis,Women’s Singles Round of 16,فردي سيدات دور 16,Round of 16,Women,Aspire Dome,,COM-2026-0345,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,11:40:00,12:25:00,45,Table Tennis,Women’s Singles Round of 16,فردي سيدات دور 16,Round of 16,Women,Aspire Dome,,COM-2026-0346,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,11:40:00,12:25:00,45,Table Tennis,Women’s Singles Round of 16,فردي سيدات دور 16,Round of 16,Women,Aspire Dome,,COM-2026-0347,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,12:15:00,13:00:00,45,Table Tennis,Men’s Singles Round of 16,فردي رجال دور 16,Round of 16,Men,Aspire Dome,,COM-2026-0348,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,12:15:00,13:00:00,45,Table Tennis,Men’s Singles Round of 16,فردي رجال دور 16,Round of 16,Men,Aspire Dome,,COM-2026-0349,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,12:15:00,13:00:00,45,Table Tennis,Men’s Singles Round of 16,فردي رجال دور 16,Round of 16,Men,Aspire Dome,,COM-2026-0350,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,12:15:00,13:00:00,45,Table Tennis,Men’s Singles Round of 16,فردي رجال دور 16,Round of 16,Men,Aspire Dome,,COM-2026-0351,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,12:15:00,13:00:00,45,Table Tennis,Men’s Singles Round of 16,فردي رجال دور 16,Round of 16,Men,Aspire Dome,,COM-2026-0352,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,12:15:00,13:00:00,45,Table Tennis,Men’s Singles Round of 16,فردي رجال دور 16,Round of 16,Men,Aspire Dome,,COM-2026-0353,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,12:15:00,13:00:00,45,Table Tennis,Men’s Singles Round of 16,فردي رجال دور 16,Round of 16,Men,Aspire Dome,,COM-2026-0354,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,12:15:00,13:00:00,45,Table Tennis,Men’s Singles Round of 16,فردي رجال دور 16,Round of 16,Men,Aspire Dome,,COM-2026-0355,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,16:00:00,16:45:00,45,Table Tennis,Women’s Doubles Quarterfinal,زوجي سيدات ربع نهائي,Quarterfinal,Women,Aspire Dome,,COM-2026-0356,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,16:00:00,16:45:00,45,Table Tennis,Women’s Doubles Quarterfinal,زوجي سيدات ربع نهائي,Quarterfinal,Women,Aspire Dome,,COM-2026-0357,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,16:00:00,16:45:00,45,Table Tennis,Women’s Doubles Quarterfinal,زوجي سيدات ربع نهائي,Quarterfinal,Women,Aspire Dome,,COM-2026-0358,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,16:00:00,16:45:00,45,Table Tennis,Women’s Doubles Quarterfinal,زوجي سيدات ربع نهائي,Quarterfinal,Women,Aspire Dome,,COM-2026-0359,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,16:35:00,17:20:00,45,Table Tennis,Men’s Doubles Quarterfinal,زوجي رجال ربع نهائي,Quarterfinal,Men,Aspire Dome,,COM-2026-0360,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,16:35:00,17:20:00,45,Table Tennis,Men’s Doubles Quarterfinal,زوجي رجال ربع نهائي,Quarterfinal,Men,Aspire Dome,,COM-2026-0361,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,16:35:00,17:20:00,45,Table Tennis,Men’s Doubles Quarterfinal,زوجي رجال ربع نهائي,Quarterfinal,Men,Aspire Dome,,COM-2026-0362,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,16:35:00,17:20:00,45,Table Tennis,Men’s Doubles Quarterfinal,زوجي رجال ربع نهائي,Quarterfinal,Men,Aspire Dome,,COM-2026-0363,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,17:25:00,18:10:00,45,Table Tennis,Women’s Singles Quarterfinal,فردي سيدات ربع نهائي,Quarterfinal,Women,Aspire Dome,,COM-2026-0364,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,17:25:00,18:10:00,45,Table Tennis,Women’s Singles Quarterfinal,فردي سيدات ربع نهائي,Quarterfinal,Women,Aspire Dome,,COM-2026-0365,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,17:25:00,18:10:00,45,Table Tennis,Women’s Singles Quarterfinal,فردي سيدات ربع نهائي,Quarterfinal,Women,Aspire Dome,,COM-2026-0366,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,17:25:00,18:10:00,45,Table Tennis,Women’s Singles Quarterfinal,فردي سيدات ربع نهائي,Quarterfinal,Women,Aspire Dome,,COM-2026-0367,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,18:10:00,18:55:00,45,Table Tennis,Men’s Singles Quarterfinal,فردي رجال ربع نهائي,Quarterfinal,Men,Aspire Dome,,COM-2026-0368,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,18:10:00,18:55:00,45,Table Tennis,Men’s Singles Quarterfinal,فردي رجال ربع نهائي,Quarterfinal,Men,Aspire Dome,,COM-2026-0369,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,18:10:00,18:55:00,45,Table Tennis,Men’s Singles Quarterfinal,فردي رجال ربع نهائي,Quarterfinal,Men,Aspire Dome,,COM-2026-0370,https://gccgames.qa/frontend/schedule-competition
+2026-05-14,18:10:00,18:55:00,45,Table Tennis,Men’s Singles Quarterfinal,فردي رجال ربع نهائي,Quarterfinal,Men,Aspire Dome,,COM-2026-0371,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,15:00:00,15:45:00,45,Table Tennis,Women’s Doubles Semifinal,زوجي سيدات نصف نهائي,Semifinal,Women,Aspire Dome,,COM-2026-0372,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,15:00:00,15:45:00,45,Table Tennis,Women’s Doubles Semifinal,زوجي سيدات نصف نهائي,Semifinal,Women,Aspire Dome,,COM-2026-0373,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,15:45:00,16:30:00,45,Table Tennis,Men’s Doubles Semifinal,زوجي رجال نصف نهائي,Semifinal,Men,Aspire Dome,,COM-2026-0374,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,15:45:00,16:30:00,45,Table Tennis,Men’s Doubles Semifinal,زوجي رجال نصف نهائي,Semifinal,Men,Aspire Dome,,COM-2026-0375,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,17:00:00,17:45:00,45,Table Tennis,Women’s Singles Semifinal,فردي سيدات نصف نهائي,Semifinal,Women,Aspire Dome,,COM-2026-0376,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,17:00:00,17:45:00,45,Table Tennis,Women’s Singles Semifinal,فردي سيدات نصف نهائي,Semifinal,Women,Aspire Dome,,COM-2026-0377,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,17:45:00,18:30:00,45,Table Tennis,Men’s Singles Semifinal,فردي رجال نصف نهائي,Semifinal,Men,Aspire Dome,,COM-2026-0378,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,17:45:00,18:30:00,45,Table Tennis,Men’s Singles Semifinal,فردي رجال نصف نهائي,Semifinal,Men,Aspire Dome,,COM-2026-0379,https://gccgames.qa/frontend/schedule-competition
+2026-05-15,18:45:00,19:30:00,45,Table Tennis,Mixed Doubles Final,زوجي مختلط نهائي,Final,Mixed,Aspire Dome,,COM-2026-0380,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,15:00:00,15:45:00,45,Table Tennis,Women’s Doubles Final,زوجي سيدات نهائي,Final,Women,Aspire Dome,,COM-2026-0381,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,15:45:00,16:30:00,45,Table Tennis,Men’s Doubles Final,زوجي رجال نهائي,Final,Men,Aspire Dome,,COM-2026-0382,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,17:30:00,18:15:00,45,Table Tennis,Women’s Singles Final,فردي سيدات نهائي,Final,Women,Aspire Dome,,COM-2026-0383,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,18:30:00,19:15:00,45,Table Tennis,Men’s Singles Final,فردي رجال نهائي,Final,Men,Aspire Dome,,COM-2026-0384,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,10:00:00,12:00:00,120,Taekwondo,Men’s -58 kg,رجال -58 كجم,Qualification,Men,Aspire Women’s Sports Hall,,COM-2026-0166,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,10:30:00,12:30:00,120,Taekwondo,Men’s -80 kg,رجال -80 كجم,Qualification,Men,Aspire Women’s Sports Hall,,COM-2026-0167,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,11:00:00,13:00:00,120,Taekwondo,Women’s -49 kg,سيدات -49 كجم,Qualification,Women,Aspire Women’s Sports Hall,,COM-2026-0168,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,11:30:00,13:30:00,120,Taekwondo,Women’s -67 kg,سيدات -67 كجم,Qualification,Women,Aspire Women’s Sports Hall,,COM-2026-0169,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,13:00:00,15:00:00,120,Taekwondo,Men’s -58 kg,رجال -58 كجم,Semi Final,Men,Aspire Women’s Sports Hall,,COM-2026-0170,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,13:30:00,15:30:00,120,Taekwondo,Men’s -80 kg,رجال -80 كجم,Semi Final,Men,Aspire Women’s Sports Hall,,COM-2026-0171,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,14:00:00,16:00:00,120,Taekwondo,Women’s -49 kg,سيدات -49 كجم,Semi Final,Women,Aspire Women’s Sports Hall,,COM-2026-0172,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,14:30:00,16:30:00,120,Taekwondo,Women’s -67 kg,سيدات -67 كجم,Semi Final,Women,Aspire Women’s Sports Hall,,COM-2026-0173,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,15:00:00,17:00:00,120,Taekwondo,Men’s -58 kg,رجال -58 كجم,Final,Men,Aspire Women’s Sports Hall,,COM-2026-0174,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,15:30:00,17:30:00,120,Taekwondo,Men’s -80 kg,رجال -80 كجم,Final,Men,Aspire Women’s Sports Hall,,COM-2026-0175,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,16:00:00,18:00:00,120,Taekwondo,Women’s -49 kg,سيدات -49 كجم,Final,Women,Aspire Women’s Sports Hall,,COM-2026-0176,https://gccgames.qa/frontend/schedule-competition
+2026-05-12,16:30:00,18:30:00,120,Taekwondo,Women’s -67 kg,سيدات -67 كجم,Final,Women,Aspire Women’s Sports Hall,,COM-2026-0177,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,10:00:00,12:00:00,120,Taekwondo,Men’s -68 kg,رجال -68 كجم,Qualification,Men,Aspire Women’s Sports Hall,,COM-2026-0178,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,10:30:00,12:30:00,120,Taekwondo,Men’s +80 kg,رجال +80 كجم,Qualification,Men,Aspire Women’s Sports Hall,,COM-2026-0179,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,11:00:00,13:00:00,120,Taekwondo,Women’s -57 kg,سيدات -57 كجم,Qualification,Women,Aspire Women’s Sports Hall,,COM-2026-0180,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,11:30:00,13:30:00,120,Taekwondo,Women’s +67 kg,سيدات +67 كجم,Qualification,Women,Aspire Women’s Sports Hall,,COM-2026-0181,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,13:00:00,15:00:00,120,Taekwondo,Men’s -68 kg,رجال -68 كجم,Semi Final,Men,Aspire Women’s Sports Hall,,COM-2026-0182,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,13:30:00,15:30:00,120,Taekwondo,Men’s +80 kg,رجال +80 كجم,Semi Final,Men,Aspire Women’s Sports Hall,,COM-2026-0183,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,14:00:00,16:00:00,120,Taekwondo,Women’s -57 kg,سيدات -57 كجم,Semi Final,Women,Aspire Women’s Sports Hall,,COM-2026-0184,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,14:30:00,16:30:00,120,Taekwondo,Women’s +67 kg,سيدات +67 كجم,Semi Final,Women,Aspire Women’s Sports Hall,,COM-2026-0185,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,15:00:00,17:00:00,120,Taekwondo,Men’s -68 kg,رجال -68 كجم,Final,Men,Aspire Women’s Sports Hall,,COM-2026-0186,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,15:30:00,17:30:00,120,Taekwondo,Men’s +80 kg,رجال +80 كجم,Final,Men,Aspire Women’s Sports Hall,,COM-2026-0187,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,16:00:00,18:00:00,120,Taekwondo,Women’s -57 kg,سيدات -57 كجم,Final,Women,Aspire Women’s Sports Hall,,COM-2026-0188,https://gccgames.qa/frontend/schedule-competition
+2026-05-13,16:30:00,18:30:00,120,Taekwondo,Women’s +67 kg,سيدات +67 كجم,Final,Women,Aspire Women’s Sports Hall,,COM-2026-0189,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,16:00:00,17:45:00,105,Volleyball,Men’s Preliminary,Match 1 - رجال تمهيدي - المباراة 1,Qualification,Men,Aspire Women’s Sports Hall,"BRN,OMA",COM-2026-0104,https://gccgames.qa/frontend/schedule-competition
+2026-05-16,18:30:00,20:15:00,105,Volleyball,Men’s Preliminary,Match 2 - رجال تمهيدي - المباراة 2,Qualification,Men,Aspire Women’s Sports Hall,"QAT,UAE",COM-2026-0105,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,16:00:00,17:45:00,105,Volleyball,Men’s Preliminary,Match 3 - رجال تمهيدي - المباراة 3,Qualification,Men,Aspire Women’s Sports Hall,"BRN,UAE",COM-2026-0106,https://gccgames.qa/frontend/schedule-competition
+2026-05-17,18:30:00,20:15:00,105,Volleyball,Men’s Preliminary,Match 4 - رجال تمهيدي - المباراة 4,Qualification,Men,Aspire Women’s Sports Hall,"OMA,QAT",COM-2026-0107,https://gccgames.qa/frontend/schedule-competition
+2026-05-19,16:00:00,17:45:00,105,Volleyball,Men’s Preliminary,Match 5 - رجال تمهيدي - المباراة 5,Qualification,Men,Aspire Women’s Sports Hall,"OMA,UAE",COM-2026-0108,https://gccgames.qa/frontend/schedule-competition
+2026-05-19,18:30:00,20:15:00,105,Volleyball,Men’s Preliminary,Match 6 - رجال تمهيدي - المباراة 6,Qualification,Men,Aspire Women’s Sports Hall,"BRN,QAT",COM-2026-0109,https://gccgames.qa/frontend/schedule-competition
