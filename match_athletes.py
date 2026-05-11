@@ -28,13 +28,17 @@ import pandas as pd
 
 from config import RESULTS_DIR, SCHEDULE_DIR
 
-DEFAULT_ROSTER_GLOB = "KSA_GCC2026_Athletes_Events*.xlsx"
+DEFAULT_ROSTER_GLOB     = "KSA_GCC2026_Athletes_Events*.xlsx"
+DEFAULT_REGREQUEST_GLOB = "GCC2026_REG_RegRequest_*.xlsx"
 
 OUTPUT_COLUMNS = [
     "Given Name", "Family Name", "Date of Birth",
     "Sport", "Event", "Phase", "Date", "Time Start", "Time End", "Duration_Min",
     "Discipline_API", "Event_ID", "Venue", "Gender",
     "Match_Type", "Source_URL",
+    # RegRequest enrichment
+    "Person_Key", "Photo_URL", "Photo_Stale",
+    "Reg_Disciplines", "Reg_Status", "Reg_Created", "Reg_In_Bornan",
 ]
 
 # ---------------------------------------------------------------------------
@@ -102,6 +106,91 @@ def event_keywords(event: str) -> list[str]:
     n = re.sub(r"\b(men s|women s|men|women|mixed)\b", " ", n)
     n = _WS.sub(" ", n).strip()
     return [k for k in n.split() if len(k) > 1 and k not in NOISE_WORDS]
+
+
+# ---------------------------------------------------------------------------
+# RegRequest enrichment
+# ---------------------------------------------------------------------------
+# Discipline-code → readable sport name (from RegRequest 'discKeys' sheet)
+DISC_CODE_TO_SPORT = {
+    "GCC2026|ARC": "Archery",
+    "GCC2026|ATH": "Athletics",
+    "GCC2026|BK3": "Basketball 3x3",
+    "GCC2026|BKB": "Basketball 5x5",
+    "GCC2026|BLD": "Billiards",
+    "GCC2026|BOX": "Boxing",
+    "GCC2026|BWL": "Bowling",
+    "GCC2026|EQU": "Equestrian",
+    "GCC2026|FEN": "Fencing",
+    "GCC2026|HBL": "Handball",
+    "GCC2026|KTE": "Karate",
+    "GCC2026|PDL": "Padel",
+    "GCC2026|SHO": "Shooting",
+    "GCC2026|SNO": "Snooker",
+    "GCC2026|SWM": "Swimming",
+    "GCC2026|TKW": "Taekwondo",
+    "GCC2026|TTE": "Table Tennis",
+}
+
+
+def _name_key(family: str, given: str, dob: str) -> tuple[str, str, str]:
+    f = (family or "").strip().lower()
+    g = (given or "").strip().lower()
+    d = str(dob or "")[:10]
+    return f, g, d
+
+
+def load_regrequest(path: Path) -> dict:
+    """Return {(family,given,dob): {photo, person_key, status, disciplines, created}} keyed.
+
+    Multi-discipline athletes (e.g. Basketball 3x3 + 5x5) get their codes
+    aggregated into a single comma-joined Reg_Disciplines string.
+    """
+    df = pd.read_excel(path, sheet_name="RegRequest", skiprows=1)
+    enriched: dict = {}
+    for _, row in df.iterrows():
+        key = _name_key(row.get("familyName"), row.get("givenName"), row.get("dateOfBirth"))
+        existing = enriched.get(key)
+        disc_code = (row.get("discKeys[0]") or "").strip()
+        disc_name = DISC_CODE_TO_SPORT.get(disc_code, disc_code.split("|")[-1] if "|" in disc_code else disc_code)
+        if existing:
+            # aggregate disciplines for multi-event athletes
+            existing["Reg_Disciplines"] = ",".join(sorted(
+                set(existing["Reg_Disciplines"].split(",")) | {disc_name}
+            ))
+        else:
+            enriched[key] = {
+                "Person_Key":      str(row.get("personKey") or ""),
+                "Photo_URL":       str(row.get("photo") or ""),
+                "Reg_Status":      str(row.get("statusReg.desc.en.short") or ""),
+                "Reg_Disciplines": disc_name,
+                "Reg_Created":     str(row.get("__createdAt") or "")[:19],
+            }
+    return enriched
+
+
+def enrich_row(out_row: dict, reg_lookup: dict) -> dict:
+    key = _name_key(out_row.get("Family Name"), out_row.get("Given Name"), out_row.get("Date of Birth"))
+    info = reg_lookup.get(key)
+    if not info:
+        out_row.update({
+            "Person_Key": "", "Photo_URL": "", "Photo_Stale": "",
+            "Reg_Disciplines": "", "Reg_Status": "", "Reg_Created": "",
+            "Reg_In_Bornan": "False",
+        })
+        return out_row
+    photo = info["Photo_URL"]
+    out_row.update({
+        "Person_Key":      info["Person_Key"],
+        "Photo_URL":       photo,
+        # AWS-signed URLs have ~5min TTL. Flag for downstream.
+        "Photo_Stale":     "True" if "X-Amz-Expires=" in photo else "False",
+        "Reg_Disciplines": info["Reg_Disciplines"],
+        "Reg_Status":      info["Reg_Status"],
+        "Reg_Created":     info["Reg_Created"],
+        "Reg_In_Bornan":   "True",
+    })
+    return out_row
 
 
 # ---------------------------------------------------------------------------
@@ -186,6 +275,7 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument("--roster", help="Path to KSA athletes-events xlsx")
     p.add_argument("--schedule", help="Path to schedule csv")
+    p.add_argument("--regrequest", help="Path to BORNAN RegRequest xlsx (optional enricher)")
     args = p.parse_args()
 
     # Roster file
@@ -206,6 +296,17 @@ def main():
     schedule = load_schedule(sched_path)
     print(f"  {len(schedule)} scheduled competitions")
 
+    # RegRequest (BORNAN DB) - optional enricher
+    reg_path = Path(args.regrequest) if args.regrequest else next(
+        iter(sorted(Path(".").glob(DEFAULT_REGREQUEST_GLOB))), None)
+    reg_lookup: dict = {}
+    if reg_path:
+        print(f"[REGREQ]   {reg_path.name}")
+        reg_lookup = load_regrequest(reg_path)
+        print(f"  {len(reg_lookup)} unique athletes in BORNAN DB")
+    else:
+        print(f"[REGREQ]   no file matching {DEFAULT_REGREQUEST_GLOB} - skipping enrichment")
+
     # Match
     out_rows: list[dict] = []
     unmatched: list[dict] = []
@@ -221,7 +322,7 @@ def main():
             })
             continue
         for s in matches:
-            out_rows.append({
+            out_rows.append(enrich_row({
                 "Given Name":     ath.get("Given Name", ""),
                 "Family Name":    ath.get("Family Name", ""),
                 "Date of Birth":  str(ath.get("Date of Birth", "") or "")[:10],
@@ -238,7 +339,7 @@ def main():
                 "Gender":         s.get("Gender", ""),
                 "Match_Type":     "team" if "Team" in str(ath.get("Event","")) else "individual",
                 "Source_URL":     s.get("Source_URL", ""),
-            })
+            }, reg_lookup))
 
     # Write
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -268,6 +369,31 @@ def main():
     print(f"  {'TOTAL':18s}  {sum(m for m,_ in by_sport.values()):5d}    "
           f"{sum(u for _,u in by_sport.values()):5d}     "
           f"{sum(m+u for m,u in by_sport.values())}")
+
+    # ---- BORNAN coverage summary ----
+    if reg_lookup:
+        matched_keys = {
+            _name_key(r["Family Name"], r["Given Name"], r["Date of Birth"])
+            for r in out_rows
+        }
+        in_bornan    = matched_keys & set(reg_lookup.keys())
+        missing      = matched_keys - set(reg_lookup.keys())
+        orphan_in_bornan = set(reg_lookup.keys()) - matched_keys
+        print(f"\n[BORNAN coverage]")
+        print(f"  Roster athletes IN BORNAN:        {len(in_bornan)}/{len(matched_keys)}")
+        if missing:
+            print(f"  In events file but NOT in BORNAN: {len(missing)}")
+            for f,g,d in sorted(missing)[:10]:
+                print(f"     - {g.title()} {f.title()} (DOB {d})")
+            if len(missing) > 10:
+                print(f"     ...and {len(missing)-10} more")
+        if orphan_in_bornan:
+            print(f"  In BORNAN but NOT in events file: {len(orphan_in_bornan)}")
+            # Cross-check Basketball 5x5 orphans (event was dropped)
+            bkb_orphans = [k for k in orphan_in_bornan
+                           if "Basketball 5x5" in reg_lookup[k]["Reg_Disciplines"]]
+            if bkb_orphans:
+                print(f"     {len(bkb_orphans)} are Basketball 5x5 registrations (event was dropped from games)")
 
 
 if __name__ == "__main__":
