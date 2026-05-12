@@ -408,6 +408,17 @@ def load_results_ksa() -> pd.DataFrame:
     return df
 
 
+@st.cache_data(ttl=60)
+def load_results_all() -> pd.DataFrame:
+    """All-NOC result rows — needed to compute Win/Loss scores for matches
+    where we want to show KSA-vs-opponent (e.g. '22-16' for basketball)."""
+    f = _latest(RESULTS_DIR, "RESULTS_ALL_*.csv")
+    if not f: return pd.DataFrame()
+    df = pd.read_csv(f, encoding="utf-8-sig", dtype=str).fillna("")
+    df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
+    return df
+
+
 @st.cache_data(ttl=3600)
 def load_history_medal_table() -> pd.DataFrame:
     f = HERE / "data" / "history" / "gcc_2022_medal_table.csv"
@@ -784,8 +795,9 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-tab_overview, tab_daily, tab_plan, tab_history, tab_audit, tab_fix = st.tabs([
-    "📊 Overview", "📆 Daily Plan", "📅 PA Coverage Plan",
+tab_overview, tab_summary, tab_daily, tab_plan, tab_history, tab_audit, tab_fix = st.tabs([
+    "📊 Overview", "📰 Day Summary",
+    "📆 Daily Plan", "📅 PA Coverage Plan",
     "📈 vs 2022", "🔍 Audit", "🛠 Fix List",
 ])
 
@@ -1030,6 +1042,229 @@ with tab_overview:
             hovertemplate="<b>%{y}</b><br>%{x}<br>%{z} events<extra></extra>"))
         fig.update_layout(height=max(280, 28*len(sports)), margin=dict(t=10, b=10, l=10, r=10), xaxis_side="top")
         st.plotly_chart(fig, use_container_width=True)
+
+
+# ===========================================================================
+# TAB: DAY SUMMARY (Tableau-style "Daily Results" view)
+# ===========================================================================
+with tab_summary:
+    results_all_df = load_results_all()
+
+    if sched_df.empty:
+        st.info("No schedule data.")
+    else:
+        comp_dates = sorted(sched_df["Date"].dropna().unique())
+        if not comp_dates:
+            st.info("No competition dates available.")
+        else:
+            min_d, max_d = pd.Timestamp(comp_dates[0]).date(), pd.Timestamp(comp_dates[-1]).date()
+            today_d   = pd.Timestamp.today().date()
+            default_d = today_d if min_d <= today_d <= max_d else min_d
+            date_options = [pd.Timestamp(d).date() for d in comp_dates]
+            date_labels  = [d.strftime("%a %d %b") for d in date_options]
+            default_idx  = date_options.index(default_d) if default_d in date_options else 0
+            pick_label = st.radio(
+                "Pick a day", date_labels, index=default_idx,
+                horizontal=True, key="summary_day_radio",
+            )
+            pick_day = date_options[date_labels.index(pick_label)]
+            pick_dt  = pd.Timestamp(pick_day)
+            date_pretty = pick_dt.strftime("%A %d-%b-%y")
+
+            # Big title bar matching the example deck
+            st.markdown(f"""
+            <div style="background:#365a89; color:white; padding:0.8rem 1.2rem;
+                        font-size:1.4rem; font-weight:700; border-radius:6px;
+                        margin-top:0.5rem; margin-bottom:1rem;">
+                GCC 2026 Daily Results — {date_pretty}
+                <span style="float:right;font-size:0.9rem;font-weight:400;">
+                    <span style="background:#2da06a;padding:2px 8px;border-radius:3px;">Win</span>&nbsp;
+                    <span style="background:#c33;     padding:2px 8px;border-radius:3px;">Loss</span>
+                </span>
+            </div>
+            """, unsafe_allow_html=True)
+
+            # ---- Slice today's KSA results ----
+            day_results = results_df[results_df["Date"].dt.date == pick_day].copy() if not results_df.empty else pd.DataFrame()
+            # Build opponent-score lookup from RESULTS_ALL for this day
+            opp_scores: dict = {}
+            if not results_all_df.empty:
+                day_all = results_all_df[results_all_df["Date"].dt.date == pick_day]
+                for _, r in day_all.iterrows():
+                    eid = r.get("Source_URL", "").split("/")[-1] or r.get("Event_ID", "")
+                    opp_scores.setdefault(eid, []).append({
+                        "Country": r.get("Country", ""),
+                        "Result":  r.get("Result", ""),
+                        "Rank":    r.get("Rank", ""),
+                        "Medal":   r.get("Medal", ""),
+                    })
+
+            # Join with athlete-schedule for Age / SOTC / Opponent
+            sched_today = sched_df[sched_df["Date"].dt.date == pick_day]
+
+            # ---- Render results table + side panels ----
+            col_main, col_side = st.columns([2.7, 1.3])
+
+            with col_main:
+                # Group by Sport, then per-event
+                rendered_html = ['<table style="border-collapse:collapse;width:100%;font-size:0.85rem;">']
+                rendered_html.append(
+                    '<thead><tr style="background:#f5f5f5;border-bottom:2px solid #ddd;text-align:left;">'
+                    '<th style="padding:6px 10px;">Sport</th>'
+                    '<th style="padding:6px 10px;">Event</th>'
+                    '<th style="padding:6px 10px;">Gender</th>'
+                    '<th style="padding:6px 10px;">SOTC</th>'
+                    '<th style="padding:6px 10px;">Full Name</th>'
+                    '<th style="padding:6px 10px;">Age</th>'
+                    '<th style="padding:6px 10px;">Stage</th>'
+                    '<th style="padding:6px 10px;">Result</th>'
+                    '<th style="padding:6px 10px;">Medal</th>'
+                    '</tr></thead><tbody>'
+                )
+
+                # Build per-row from athlete-schedule rows on this day
+                day_rows_sched = sched_today.copy()
+                day_rows_sched = day_rows_sched.sort_values(["Sport","Family Name","TS"] if "TS" in day_rows_sched.columns
+                                                            else ["Sport","Family Name"])
+
+                # Merge in results by (Family Name + Sport + Discipline)
+                def find_result_row(ath_row):
+                    if day_results.empty:
+                        return None
+                    name_match = (day_results["Athlete"].str.contains(ath_row["Family Name"], case=False, na=False)
+                                  & day_results["Sport"].eq(ath_row["Sport"]))
+                    candidates = day_results[name_match]
+                    if candidates.empty:
+                        return None
+                    # Best match by event keyword overlap
+                    event_lower = ath_row.get("Event", "").lower()
+                    best = None
+                    best_score = -1
+                    for _, c in candidates.iterrows():
+                        disc = c.get("Discipline","").lower()
+                        score = sum(1 for w in event_lower.split() if w and w in disc)
+                        if score > best_score:
+                            best, best_score = c, score
+                    return best
+
+                prev_sport = ""
+                for _, r in day_rows_sched.iterrows():
+                    res = find_result_row(r)
+                    medal_raw = (res.get("Medal","") if res is not None else "").strip().upper()[:1]
+                    medal_tag = {"G":"Gold", "S":"Silver", "B":"Bronze"}.get(medal_raw, "")
+                    medal_colour = {"Gold":"#d4af37","Silver":"#bfbfbf","Bronze":"#cd7f32"}.get(medal_tag, "transparent")
+                    # Decide win/loss + score string
+                    result_str = (res.get("Result","") if res is not None else "").strip()
+                    rank_v     = (res.get("Rank","") if res is not None else "").strip()
+                    sport_kind = r["Sport"]
+                    is_match_sport = sport_kind in ("Basketball 3x3","Basketball 5x5","Handball","Padel","Volleyball",
+                                                     "Boxing","Taekwondo","Karate","Fencing","Table Tennis")
+                    cell_bg = "transparent"; cell_text = result_str
+                    if res is not None:
+                        # Win/Loss colour for match sports
+                        if is_match_sport and rank_v in ("1","2"):
+                            cell_bg = "#a5d99f" if rank_v == "1" else "#e8a3a3"  # green / red
+                            # Try to build "X-Y" using opp_scores lookup
+                            eid = res.get("Source_URL","").split("/")[-1]
+                            parts_here = opp_scores.get(eid, [])
+                            ksa_score = None; opp_score = None
+                            for p in parts_here:
+                                if p["Country"].upper() == "KSA":
+                                    ksa_score = p["Result"]
+                                elif p["Country"]:
+                                    opp_score = p["Result"]
+                            if ksa_score and opp_score:
+                                # cast to numeric for clean display
+                                try:
+                                    cell_text = f"{int(float(opp_score))}-{int(float(ksa_score))}"
+                                except Exception:
+                                    cell_text = f"{opp_score}-{ksa_score}"
+                            else:
+                                cell_text = result_str or ("Win" if rank_v=="1" else "Loss")
+                        elif medal_tag:
+                            cell_bg = medal_colour
+                            cell_text = result_str
+                    sport_disp = r["Sport"] if r["Sport"] != prev_sport else ""
+                    age_disp = r.get("Age","") or ""
+                    sotc_disp = "Yes" if str(r.get("SOTC","")).upper() == "YES" else "No"
+                    athlete_full = (r.get("Given Name","") + " " + r.get("Family Name","")).strip().upper()
+                    # Event description: use Opponent for team match to read "KSA vs OPP"
+                    event_label = r.get("Event","")
+                    if r.get("Match_Type") == "team" and r.get("Opponent"):
+                        event_label = f"{r['Event']} KSA vs {r['Opponent']}"
+                    rendered_html.append(
+                        '<tr style="border-bottom:1px solid #eee;">'
+                        f'<td style="padding:5px 10px;font-weight:600;color:#235036;">{sport_disp}</td>'
+                        f'<td style="padding:5px 10px;">{event_label}</td>'
+                        f'<td style="padding:5px 10px;">{r.get("Gender","")}</td>'
+                        f'<td style="padding:5px 10px;color:{ELITE if sotc_disp=="Yes" else "#888"};font-weight:{ "700" if sotc_disp=="Yes" else "400"};">{sotc_disp}</td>'
+                        f'<td style="padding:5px 10px;">{athlete_full}</td>'
+                        f'<td style="padding:5px 10px;">{age_disp}</td>'
+                        f'<td style="padding:5px 10px;">{r.get("Phase","")}</td>'
+                        f'<td style="padding:5px 10px;background:{cell_bg};">{cell_text}</td>'
+                        f'<td style="padding:5px 10px;background:{medal_colour};color:{"white" if medal_tag else "inherit"};font-weight:{"700" if medal_tag else "400"};">{medal_tag}</td>'
+                        '</tr>'
+                    )
+                    prev_sport = r["Sport"]
+                rendered_html.append("</tbody></table>")
+                st.markdown("".join(rendered_html), unsafe_allow_html=True)
+
+            with col_side:
+                # ---- Medals of the Day: stacked bar by sport ----
+                st.markdown(f"""
+                <div style="background:#365a89;color:white;padding:0.5rem 1rem;
+                            font-size:1rem;font-weight:700;border-radius:6px;margin-bottom:0.5rem;">
+                    Medals of the Day
+                </div>
+                """, unsafe_allow_html=True)
+                if not day_results.empty:
+                    dd = day_results[day_results["Medal"].str.upper().isin(["G","S","B"])].copy()
+                    # Dedupe team medals — one per match
+                    dd = dd.drop_duplicates(subset=["Sport","Discipline","Medal"])
+                    if not dd.empty:
+                        agg = dd.groupby(["Sport","Medal"]).size().unstack(fill_value=0).reindex(columns=["G","S","B"], fill_value=0)
+                        agg["Total"] = agg.sum(axis=1)
+                        agg = agg.sort_values("Total", ascending=True)
+                        fig = go.Figure()
+                        fig.add_trace(go.Bar(y=agg.index, x=agg["G"], name="Gold",   orientation="h", marker_color="#d4af37", text=agg["G"], textposition="inside"))
+                        fig.add_trace(go.Bar(y=agg.index, x=agg["S"], name="Silver", orientation="h", marker_color="#bfbfbf", text=agg["S"], textposition="inside"))
+                        fig.add_trace(go.Bar(y=agg.index, x=agg["B"], name="Bronze", orientation="h", marker_color="#cd7f32", text=agg["B"], textposition="inside"))
+                        fig.update_layout(barmode="stack", height=200,
+                                          margin=dict(t=10,b=10,l=10,r=10),
+                                          showlegend=False, plot_bgcolor="white",
+                                          xaxis_title="")
+                        st.plotly_chart(fig, use_container_width=True)
+                    else:
+                        st.caption("No medals today.")
+
+                # ---- Total medals donut ----
+                st.markdown(f"""
+                <div style="background:#365a89;color:white;padding:0.5rem 1rem;
+                            font-size:1rem;font-weight:700;border-radius:6px;margin:0.6rem 0 0.5rem 0;">
+                    Total Medals Today
+                </div>
+                """, unsafe_allow_html=True)
+                if not day_results.empty:
+                    dd = day_results[day_results["Medal"].str.upper().isin(["G","S","B"])].copy()
+                    dd = dd.drop_duplicates(subset=["Sport","Discipline","Medal"])
+                    if not dd.empty:
+                        gc = (dd["Medal"].str.upper() == "G").sum()
+                        sc = (dd["Medal"].str.upper() == "S").sum()
+                        bc = (dd["Medal"].str.upper() == "B").sum()
+                        total = gc + sc + bc
+                        fig = go.Figure(go.Pie(
+                            labels=["Gold","Silver","Bronze"],
+                            values=[gc, sc, bc],
+                            marker=dict(colors=["#d4af37","#bfbfbf","#cd7f32"]),
+                            hole=0.6, sort=False, textinfo="value+label",
+                        ))
+                        fig.update_layout(
+                            showlegend=False, height=240,
+                            margin=dict(t=10,b=10,l=10,r=10),
+                            annotations=[dict(text=f"<b>{total}</b><br>Medals",
+                                              x=0.5, y=0.5, font_size=20, showarrow=False)],
+                        )
+                        st.plotly_chart(fig, use_container_width=True)
 
 
 # ===========================================================================
