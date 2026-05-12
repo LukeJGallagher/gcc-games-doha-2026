@@ -86,7 +86,9 @@ def normalise(text: str) -> str:
     t = re.sub(r"\bmetres?\b", "m", t)
     t = re.sub(r"\bmeters?\b", "m", t)
     t = re.sub(r"\bkumite\b", "", t)
-    t = re.sub(r"(\d+)\s*kg", r"\1 kg", t)
+    # Weight class: drop the 'kg' suffix entirely so '55kg' and '-67 kg' both
+    # become just the number. New BORNAN Taekwondo titles don't include 'kg'.
+    t = re.sub(r"(\d+)\s*kg\b", r"\1", t)
     # "100 m" → "100m" so it matches Excel "100m"
     t = re.sub(r"(\d+)\s*m\b", r"\1m", t)
     # "4 x 100m" → "4x100m"
