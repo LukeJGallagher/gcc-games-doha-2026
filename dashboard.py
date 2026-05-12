@@ -846,19 +846,22 @@ def render_medal_card(row) -> str:
         else:
             avatar = f'<img src="{initials_svg(athlete, ELITE)}" style="width:72px;height:72px;border-radius:50%;border:3px solid {colour};"/>'
 
-    return f"""
-    <div style="background:white;border-radius:8px;padding:1rem;
-                box-shadow:0 2px 6px rgba(0,0,0,0.08);border-top:4px solid {colour};
-                display:flex;gap:0.9rem;align-items:center;height:100%;">
-        {avatar}
-        <div style="flex:1;min-width:0;">
-            <div style="font-size:0.75rem;font-weight:700;color:{colour};letter-spacing:1px;">{medal_name} · {date_str}</div>
-            <div style="font-size:1.05rem;font-weight:700;color:{DISCIPLINE};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{athlete}</div>
-            <div style="font-size:0.85rem;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{sport} — {event}</div>
-            <div style="font-size:0.9rem;color:{ELITE};font-weight:600;margin-top:0.2rem;">{result} <span style="color:#999;font-weight:400;font-size:0.8rem;">{phase}</span></div>
-        </div>
-    </div>
-    """
+    # IMPORTANT: no leading indentation on any line. Streamlit's markdown
+    # parser treats any HTML indented by 4+ spaces as a code block and shows
+    # it as literal text instead of rendering it.
+    return (
+        f'<div style="background:white;border-radius:8px;padding:1rem;'
+        f'box-shadow:0 2px 6px rgba(0,0,0,0.08);border-top:4px solid {colour};'
+        f'display:flex;gap:0.9rem;align-items:center;height:100%;">'
+        f'{avatar}'
+        f'<div style="flex:1;min-width:0;">'
+        f'<div style="font-size:0.75rem;font-weight:700;color:{colour};letter-spacing:1px;">{medal_name} · {date_str}</div>'
+        f'<div style="font-size:1.05rem;font-weight:700;color:{DISCIPLINE};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{athlete}</div>'
+        f'<div style="font-size:0.85rem;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{sport} — {event}</div>'
+        f'<div style="font-size:0.9rem;color:{ELITE};font-weight:600;margin-top:0.2rem;">{result} <span style="color:#999;font-weight:400;font-size:0.8rem;">{phase}</span></div>'
+        f'</div>'
+        f'</div>'
+    )
 
 
 # ===========================================================================
