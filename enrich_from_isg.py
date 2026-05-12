@@ -36,7 +36,11 @@ def name_key(name: str) -> str:
 
 def main():
     if not ISG_DIR.exists():
-        sys.exit(f"ISG 2025 folder not found at {ISG_DIR}")
+        # Cloud agents won't have the sibling ISG 2025 folder. The committed
+        # data/history/isg_2025_ksa.csv stays valid (ISG is historical) so
+        # this is a non-fatal no-op outside the local laptop.
+        print(f"[SKIP] ISG 2025 folder not found at {ISG_DIR} — using committed lookup file as-is")
+        return
 
     # 1. Athlete bios (age + gender + sport)
     sched_file = ISG_DIR / "KSA_DAILY_SCHEDULE_EXPANDED.csv"

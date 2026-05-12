@@ -55,6 +55,7 @@ def main():
         return rc
 
     # full pipeline tail
+    run("enrich_from_isg.py")    # rebuild ISG enrichment from sibling folder (no-op in cloud)
     run("match_athletes.py")
     run("daily_diff.py")
     run("enhance_rankings.py", "--ksa")
