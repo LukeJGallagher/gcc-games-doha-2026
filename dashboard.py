@@ -1074,6 +1074,33 @@ with tab_summary:
             pick_dt  = pd.Timestamp(pick_day)
             date_pretty = pick_dt.strftime("%A %d-%b-%y")
 
+            # ---- PPT export for Day Summary ----
+            day_summary_sections = []
+            _day_results = results_df[results_df["Date"].dt.date == pick_day] if not results_df.empty else pd.DataFrame()
+            _day_medals = _day_results[
+                _day_results["Medal"].astype(str).str.strip().str.upper().isin(["G","S","B","GOLD","SILVER","BRONZE"])
+            ] if not _day_results.empty and "Medal" in _day_results.columns else pd.DataFrame()
+            if not _day_medals.empty:
+                day_summary_sections.append({
+                    "title": f"KSA Medals — {pick_dt:%a %d %b}",
+                    "kind": "table",
+                    "df": _day_medals[["Sport","Discipline","Athlete","Medal","Result"]].rename(
+                        columns={"Discipline": "Event"}),
+                })
+            if not _day_results.empty:
+                day_summary_sections.append({
+                    "title": f"All KSA Results — {pick_dt:%a %d %b}",
+                    "kind": "table",
+                    "df": _day_results[["Sport","Discipline","Athlete","Phase","Result","Medal"]].rename(
+                        columns={"Discipline": "Event"}),
+                })
+            ppt_download_button(
+                f"Day Summary {pick_dt:%d %b}", f"Team Saudi · Day Summary — {date_pretty}",
+                day_summary_sections,
+                subtitle=f"4th GCC Games Doha 2026 · Updated {datetime.now():%H:%M}",
+                key=f"ppt_day_sum_{pick_dt:%Y%m%d}",
+            )
+
             # Big title bar matching the example deck
             st.markdown(f"""
             <div style="background:#365a89; color:white; padding:0.8rem 1.2rem;
@@ -1164,10 +1191,10 @@ with tab_summary:
                                                      "Boxing","Taekwondo","Karate","Fencing","Table Tennis")
                     cell_bg = "transparent"; cell_text = result_str
                     if res is not None:
-                        # Win/Loss colour for match sports
-                        if is_match_sport and rank_v in ("1","2"):
-                            cell_bg = "#a5d99f" if rank_v == "1" else "#e8a3a3"  # green / red
-                            # Try to build "X-Y" using opp_scores lookup
+                        # Win/Loss colour for match sports — compare KSA score vs opponent
+                        # (Rank from BORNAN API is NaN for match sports, so the previous
+                        # rank-based check never fired.)
+                        if is_match_sport:
                             eid = res.get("Source_URL","").split("/")[-1]
                             parts_here = opp_scores.get(eid, [])
                             ksa_score = None; opp_score = None
@@ -1176,15 +1203,25 @@ with tab_summary:
                                     ksa_score = p["Result"]
                                 elif p["Country"]:
                                     opp_score = p["Result"]
-                            if ksa_score and opp_score:
-                                # cast to numeric for clean display
-                                try:
-                                    cell_text = f"{int(float(opp_score))}-{int(float(ksa_score))}"
-                                except Exception:
-                                    cell_text = f"{opp_score}-{ksa_score}"
-                            else:
-                                cell_text = result_str or ("Win" if rank_v=="1" else "Loss")
-                        elif medal_tag:
+                            try:
+                                ksa_f = float(ksa_score) if ksa_score not in (None, "") else None
+                                opp_f = float(opp_score) if opp_score not in (None, "") else None
+                            except (TypeError, ValueError):
+                                ksa_f = opp_f = None
+                            if ksa_f is not None and opp_f is not None:
+                                if ksa_f > opp_f:
+                                    cell_bg = "#a5d99f"   # green = win
+                                    cell_text = f"{int(ksa_f)}-{int(opp_f)} W"
+                                elif ksa_f < opp_f:
+                                    cell_bg = "#e8a3a3"   # red = loss
+                                    cell_text = f"{int(ksa_f)}-{int(opp_f)} L"
+                                else:
+                                    cell_text = f"{int(ksa_f)}-{int(opp_f)}"
+                            elif ksa_f is not None and rank_v in ("1","2"):
+                                # Fallback: use rank when only KSA score is available
+                                cell_bg = "#a5d99f" if rank_v == "1" else "#e8a3a3"
+                                cell_text = "Win" if rank_v == "1" else "Loss"
+                        if medal_tag:
                             cell_bg = medal_colour
                             cell_text = result_str
                     sport_disp = r["Sport"] if r["Sport"] != prev_sport else ""
@@ -1310,6 +1347,49 @@ with tab_medals:
             sl[["join_name","Sport","Age","SOTC"]],
             on=["join_name","Sport"], how="left", suffixes=("","_sl"),
         )
+
+    # ---- PPT export for Medal Report ----
+    _medal_sections = []
+    gold_n   = int((ksa_medal_rows["MedalU"]=="G").sum()) if not ksa_medal_rows.empty else 0
+    silver_n = int((ksa_medal_rows["MedalU"]=="S").sum()) if not ksa_medal_rows.empty else 0
+    bronze_n = int((ksa_medal_rows["MedalU"]=="B").sum()) if not ksa_medal_rows.empty else 0
+    _h22_for_ppt = load_history_medal_table()
+    _ksa22 = _h22_for_ppt.query("NOC == 'KSA'") if not _h22_for_ppt.empty else pd.DataFrame()
+    if not _ksa22.empty:
+        g22, s22, b22 = int(_ksa22.iloc[0]["Gold"]), int(_ksa22.iloc[0]["Silver"]), int(_ksa22.iloc[0]["Bronze"])
+        t22 = g22 + s22 + b22
+    else:
+        g22 = s22 = b22 = t22 = 0
+    _medal_sections.append({
+        "title": "Medal Tally — Live",
+        "kind": "metric",
+        "metrics": [("Gold", str(gold_n)), ("Silver", str(silver_n)),
+                    ("Bronze", str(bronze_n)), ("Total", str(gold_n+silver_n+bronze_n))],
+    })
+    if not ksa_medal_rows.empty:
+        ppt_table = ksa_medal_rows.copy()
+        ppt_table["Medal"] = ppt_table["MedalU"].map({"G":"Gold","S":"Silver","B":"Bronze"})
+        cols_keep = [c for c in ["Sport","Discipline","Athlete","Age","SOTC","Medal","Result"] if c in ppt_table.columns]
+        _medal_sections.append({
+            "title": "KSA Medals — Detail",
+            "kind": "table",
+            "df": ppt_table[cols_keep].rename(columns={"Discipline": "Event"}),
+        })
+    if t22 > 0:
+        _medal_sections.append({
+            "title": "Benchmark vs GCC 2022",
+            "kind": "metric",
+            "metrics": [("2026 Gold", f"{gold_n} / {g22}"),
+                        ("2026 Silver", f"{silver_n} / {s22}"),
+                        ("2026 Bronze", f"{bronze_n} / {b22}"),
+                        ("2026 Total", f"{gold_n+silver_n+bronze_n} / {t22}")],
+        })
+    ppt_download_button(
+        "Medal Report", "Team Saudi · Medal Report",
+        _medal_sections,
+        subtitle=f"4th GCC Games Doha 2026 · Updated {datetime.now():%a %d %b %H:%M}",
+        key="ppt_medal_report",
+    )
 
     # ---- TOP ROW: 3 panels ----
     c1, c2, c3 = st.columns([2.0, 1.0, 0.9])
