@@ -1460,7 +1460,8 @@ with tab_medals:
         st.markdown("**Medal Target**")
         # Build 4-bar grouped chart: Gold, Silver, Bronze, Total
         # Bottom bar = current (filled), top bar (gray) = target = 2022 totals
-        ksa_22 = (load_history_medal_table().query("NOC == 'KSA'") if not hist_table.empty else pd.DataFrame())
+        _h22 = load_history_medal_table()
+        ksa_22 = _h22.query("NOC == 'KSA'") if not _h22.empty else pd.DataFrame()
         targets = {"Gold": 16, "Silver": 22, "Bronze": 29, "Total": 67}
         if not ksa_22.empty:
             targets = {
