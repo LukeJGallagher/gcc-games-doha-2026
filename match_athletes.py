@@ -91,12 +91,18 @@ def normalise(text: str) -> str:
     t = re.sub(r"(\d+)\s*m\b", r"\1m", t)
     # "4 x 100m" → "4x100m"
     t = re.sub(r"(\d+)\s*x\s*(\d+)", r"\1x\2", t)
-    # API uses "Boys"/"Girls" instead of "Men's"/"Women's" in some titles
-    # (most visible in Swimming). Treat the categories as equivalent.
+    # API uses "Boys"/"Girls" / "Male"/"Female" / "Seniors Male-A" instead of
+    # "Men's"/"Women's" in some titles. Treat the categories as equivalent.
     t = re.sub(r"\bboys?\b", "men", t)
     t = re.sub(r"\bgirls?\b", "women", t)
-    # Strip per-heat suffixes — "heat 1", "heat 2", "h1" — they're noise for matching
+    # Taekwondo: "Seniors Male-A" / "Seniors Female-A" — strip the "seniors X-A" prefix
+    t = re.sub(r"\bseniors?\s+male[\s\-]*a?\b", "men", t)
+    t = re.sub(r"\bseniors?\s+female[\s\-]*a?\b", "women", t)
+    t = re.sub(r"\bmale\b", "men", t)
+    t = re.sub(r"\bfemale\b", "women", t)
+    # Strip per-heat / per-match suffixes
     t = re.sub(r"\bheat\s*\d+\b", "", t)
+    t = re.sub(r"\bmatch\s*\d+\b", "", t)
     t = _WS.sub(" ", t).strip()
     return t
 
@@ -376,12 +382,68 @@ def load_schedule(path: Path) -> list[dict]:
     return rows
 
 
-def find_matches(athlete_row, schedule_rows: list[dict]) -> list[dict]:
+def load_api_participants() -> dict:
+    """Pull live API participants for each sport, indexed by Event_ID.
+
+    Returns: {Event_ID: [{player_name, noc_code, ...}, ...]}
+
+    This is the most robust match source: when BORNAN renames a sport's
+    event titles mid-tournament (e.g. Taekwondo 'Men's -58 kg' →
+    'Seniors Male-A -58 Match 101'), the keyword matcher breaks but the
+    participant player_name list still identifies which KSA athletes are
+    in which event.
+    """
+    from api_client import GccApi
+    api = GccApi()
+    out: dict = {}
+    try:
+        sports = [s["id"] for s in api.sports()]
+    except Exception:
+        return out
+    for sp in sports:
+        try:
+            comps = api.sport_results_summary(sport=sp)
+        except Exception:
+            continue
+        for c in comps:
+            eid = c.get("id", "")
+            if not eid: continue
+            parts = c.get("participants") or []
+            out[eid] = parts
+    return out
+
+
+def find_matches(athlete_row, schedule_rows: list[dict],
+                 api_participants: dict | None = None) -> list[dict]:
     sport  = alias_sport(athlete_row["Sport"])
     event  = (athlete_row["Event"] or "").strip()
     target_gender = gender_token(event)
     keywords = event_keywords(event)
     is_team_event = bool(re.search(r"\bteam\b", event, re.I))
+
+    # ---- PRIMARY: player_name match against live API participants ----
+    # Works even when BORNAN renames event titles (e.g. Taekwondo's
+    # mid-tournament shift to 'Seniors Male-A' naming).
+    if api_participants and not is_team_event:
+        athlete_full = f"{athlete_row.get('Given Name','')} {athlete_row.get('Family Name','')}".lower().strip()
+        ath_tokens = frozenset(w for w in athlete_full.replace(",", " ").split() if len(w) > 2)
+        if ath_tokens:
+            matched_ids = set()
+            for eid, parts in api_participants.items():
+                for p in parts:
+                    if (p.get("noc_code") or "").upper() not in {c.upper() for c in KSA_CODES}:
+                        continue
+                    pname = (p.get("player_name") or "").lower()
+                    p_tokens = frozenset(w for w in pname.replace(",", " ").split() if len(w) > 2)
+                    if p_tokens and (p_tokens.issubset(ath_tokens) or ath_tokens.issubset(p_tokens)):
+                        matched_ids.add(eid)
+            if matched_ids:
+                # Filter to only matching Sport, then return those schedule rows
+                hits = [s for s in schedule_rows
+                        if s.get("Event_ID") in matched_ids
+                        and (s.get("Sport") or "").strip() == sport]
+                if hits:
+                    return hits
 
     matches: list[dict] = []
     # Sports where API pools genders into Mixed (Archery does this for individual + team)
@@ -476,6 +538,13 @@ def main():
     schedule = load_schedule(sched_path)
     print(f"  {len(schedule)} scheduled competitions")
 
+    # Live API participants (player_name → Event_ID lookup, most robust
+    # match source when BORNAN renames event titles mid-tournament)
+    print("[API-PARTS] fetching live participants from API ...")
+    api_participants = load_api_participants()
+    total_parts = sum(len(v) for v in api_participants.values())
+    print(f"  {len(api_participants)} events, {total_parts} participants total")
+
     # RegRequest (BORNAN DB) - optional enricher
     reg_path = Path(args.regrequest) if args.regrequest else next(
         iter(sorted(Path(".").glob(DEFAULT_REGREQUEST_GLOB))), None)
@@ -509,7 +578,7 @@ def main():
     out_rows: list[dict] = []
     unmatched: list[dict] = []
     for _, ath in roster.iterrows():
-        matches = find_matches(ath, schedule)
+        matches = find_matches(ath, schedule, api_participants)
         if not matches:
             unmatched.append({
                 "Given Name":   ath.get("Given Name", ""),

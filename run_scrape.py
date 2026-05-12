@@ -44,6 +44,10 @@ def main():
     if args.clean and not args.full:   return run("ksa_filter.py")
     if args.match and not args.full:   return run("match_athletes.py")
 
+    # FIRST: check schedule freshness vs API (what's been added / dropped / shifted)
+    if args.full:
+        run("schedule_check.py")
+
     # scrape
     cmd = ["scraper.py"]
     if args.schedule_only:   cmd += ["--mode", "schedule"]
