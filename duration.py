@@ -87,8 +87,11 @@ SESSION_SPORTS = {
 # ---------------------------------------------------------------------------
 EVENT_OVERRIDES: list[tuple[str, list[str], int]] = [
     # Athletics specific
-    ("Athletics", ["decathlon"],          480),   # 2-day combined event, scheduled in chunks
-    ("Athletics", ["heptathlon"],         360),
+    # Decathlon/Heptathlon: API breaks the combined event into one row per
+    # sub-event AND duplicates the row 3-4× per session. So each "Decathlon"
+    # row is really one sub-event slot (~40-60 min), not the full 2-day event.
+    ("Athletics", ["decathlon"],           45),
+    ("Athletics", ["heptathlon"],          45),
     ("Athletics", ["10000"],               40),
     ("Athletics", ["5000"],                25),
     ("Athletics", ["3000m steeplechase"],  20),
@@ -171,52 +174,74 @@ def stagger_session_events(rows: list[dict]) -> list[dict]:
     (session-level scheduling rather than per-event), space them out by
     cumulative duration so the Gantt shows them sequentially.
 
-    Mutates the rows' 'Time' and 'Time_End' fields in place. Operates on
-    a list of schedule-row dicts (keys: Sport, Date, Time, Venue, Discipline,
-    Phase, Duration_Min).
+    Applies ONLY to Swimming-style ordered sessions: same Date+Sport+Time+Venue
+    across many different Disciplines, all with numbered "Event N" phases.
+    Sorted by phase ordinal and spaced by their per-event durations.
+
+    Same-time same-discipline clusters in match sports (Snooker singles on
+    multiple tables, Padel preliminary on parallel courts) are LEGITIMATE
+    parallel matches and are left alone — the API correctly reports them.
+
+    Mutates the rows' 'Time' and 'Time_End' fields in place.
     """
     from collections import defaultdict
-    buckets: dict = defaultdict(list)
-    for r in rows:
-        key = (r.get("Date"), r.get("Sport"), r.get("Time"), r.get("Venue"))
-        buckets[key].append(r)
+    import re as _re
 
-    for key, group in buckets.items():
+    session_buckets: dict = defaultdict(list)
+    for r in rows:
+        phase = r.get("Phase", "") or ""
+        disc  = r.get("Discipline", "") or ""
+        sport = r.get("Sport", "") or ""
+        # Trigger if Phase looks ordinal ("Event N"), OR Swimming with a
+        # "Heat N" pattern in the Discipline title, OR any session sport
+        # with multiple distinct disciplines listed at the same start time.
+        if (_re.search(r"\bevent\s*\d+\b", phase, _re.I)
+                or _re.fullmatch(r"\s*\d+\s*", phase)
+                or (sport == "Swimming" and _re.search(r"\bheat\s*\d+\b", disc, _re.I))):
+            skey = (r.get("Date"), r.get("Sport"), r.get("Time"), r.get("Venue"))
+            session_buckets[skey].append(r)
+
+    for key, group in session_buckets.items():
         if len(group) <= 1:
             continue
-        # Stagger by stage_name ordinal if available, else by list order.
-        # 'Event 1', 'Event 2' → use the trailing number.
         def order_key(r):
-            import re as _re
-            phase = r.get("Phase", "")
-            m = _re.search(r"\d+", phase)
-            return int(m.group(0)) if m else 0
-
-        # Only stagger if all events have order info (i.e. Swimming Event N)
-        # or all came from same session naming
-        if all(order_key(r) > 0 for r in group):
-            group_sorted = sorted(group, key=order_key)
-        else:
-            group_sorted = list(group)
-        # Apply cumulative offsets
-        start_hhmmss = group_sorted[0].get("Time", "")
-        if not start_hhmmss:
-            continue
-        try:
-            from datetime import datetime, timedelta
-            t = datetime.strptime(start_hhmmss[:8] if len(start_hhmmss) >= 8 else start_hhmmss + ":00",
-                                   "%H:%M:%S")
-        except Exception:
-            continue
-        cursor = t
-        for r in group_sorted:
-            dur = int(r.get("Duration_Min") or 10)
-            new_start = cursor
-            new_end   = cursor + timedelta(minutes=dur)
-            r["Time"]     = new_start.strftime("%H:%M:%S")
-            r["Time_End"] = new_end.strftime("%H:%M:%S")
-            cursor = new_end
+            # Order by (Heat ordinal if found, else Phase ordinal, else 0),
+            # then by Discipline to keep deterministic ordering.
+            phase = r.get("Phase", "") or ""
+            disc  = r.get("Discipline", "") or ""
+            mh = _re.search(r"\bheat\s*(\d+)\b", disc, _re.I)
+            mp = _re.search(r"\d+", phase)
+            ord_h = int(mh.group(1)) if mh else 0
+            ord_p = int(mp.group(0)) if mp else 0
+            return (ord_h or ord_p, disc)
+        group_sorted = sorted(group, key=order_key)
+        _apply_stagger(group_sorted)
     return rows
+
+
+def _apply_stagger(group_sorted: list[dict]) -> None:
+    """Walk a sorted group of same-time rows and apply cumulative time offsets."""
+    if not group_sorted:
+        return
+    start_hhmmss = group_sorted[0].get("Time", "")
+    if not start_hhmmss:
+        return
+    try:
+        t = datetime.strptime(
+            start_hhmmss[:8] if len(start_hhmmss) >= 8 else start_hhmmss + ":00",
+            "%H:%M:%S",
+        )
+    except Exception:
+        return
+    cap = datetime(1900, 1, 1, 23, 59, 0).replace(year=t.year, month=t.month, day=t.day)
+    cursor = t
+    for r in group_sorted:
+        dur = int(r.get("Duration_Min") or 10)
+        new_start = min(cursor, cap)
+        new_end   = min(cursor + timedelta(minutes=dur), cap)
+        r["Time"]     = new_start.strftime("%H:%M:%S")
+        r["Time_End"] = new_end.strftime("%H:%M:%S")
+        cursor = new_end
 
 
 # ---------------------------------------------------------------------------
@@ -227,7 +252,9 @@ _TIME_RE = re.compile(r"^\s*(\d{1,2}):(\d{2})(?::(\d{2}))?")
 
 def add_minutes(start_hms: str, minutes: int) -> str:
     """Given a 'HH:MM:SS' or 'HH:MM' string, return start + minutes as 'HH:MM:SS'.
-    Returns '' if start is empty/unparseable.
+    Capped at 23:59:00 — competition sessions never legitimately roll past
+    midnight, and a value like '01:00:00' from a 480-min decathlon estimate
+    confuses the dashboard Gantt. Returns '' if start is empty/unparseable.
     """
     if not start_hms:
         return ""
@@ -236,7 +263,11 @@ def add_minutes(start_hms: str, minutes: int) -> str:
         return ""
     h, mm = int(m.group(1)), int(m.group(2))
     s = int(m.group(3) or 0)
-    end = datetime(2000, 1, 1, h, mm, s) + timedelta(minutes=minutes)
+    start = datetime(2000, 1, 1, h, mm, s)
+    end = start + timedelta(minutes=minutes)
+    cap = datetime(2000, 1, 1, 23, 59, 0)
+    if end.day != start.day or end > cap:
+        end = cap
     return end.strftime("%H:%M:%S")
 
 

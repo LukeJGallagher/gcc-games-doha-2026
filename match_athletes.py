@@ -97,9 +97,10 @@ def normalise(text: str) -> str:
     # "Men's"/"Women's" in some titles. Treat the categories as equivalent.
     t = re.sub(r"\bboys?\b", "men", t)
     t = re.sub(r"\bgirls?\b", "women", t)
-    # Taekwondo: "Seniors Male-A" / "Seniors Female-A" — strip the "seniors X-A" prefix
-    t = re.sub(r"\bseniors?\s+male[\s\-]*a?\b", "men", t)
-    t = re.sub(r"\bseniors?\s+female[\s\-]*a?\b", "women", t)
+    # Taekwondo: "Seniors Male-A" / "Seniors Female-A" / "Seniors Men-A" / "Seniors Women-A"
+    # API renamed Male/Female → Men/Women mid-tournament. Handle both forms.
+    t = re.sub(r"\bseniors?\s+(?:male|men)[\s\-]*a?\b", "men", t)
+    t = re.sub(r"\bseniors?\s+(?:female|women)[\s\-]*a?\b", "women", t)
     t = re.sub(r"\bmale\b", "men", t)
     t = re.sub(r"\bfemale\b", "women", t)
     # Strip per-heat / per-match suffixes

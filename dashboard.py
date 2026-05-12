@@ -795,8 +795,8 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-tab_overview, tab_summary, tab_daily, tab_plan, tab_history, tab_audit, tab_fix = st.tabs([
-    "📊 Overview", "📰 Day Summary",
+tab_overview, tab_summary, tab_medals, tab_daily, tab_plan, tab_history, tab_audit, tab_fix = st.tabs([
+    "📊 Overview", "📰 Day Summary", "🏅 Medal Report",
     "📆 Daily Plan", "📅 PA Coverage Plan",
     "📈 vs 2022", "🔍 Audit", "🛠 Fix List",
 ])
@@ -1265,6 +1265,235 @@ with tab_summary:
                                               x=0.5, y=0.5, font_size=20, showarrow=False)],
                         )
                         st.plotly_chart(fig, use_container_width=True)
+
+
+# ===========================================================================
+# TAB: MEDAL REPORT (cumulative — all medals + benchmark vs 2022)
+# ===========================================================================
+with tab_medals:
+    # Tab colours used in the reference deck
+    HEADER_DARK = "#2b2b2b"
+    BENCH_GREEN = "#1f7b4d"
+    GOLD_DARK   = "#b8860b"
+    SILVER_GREY = "#bfbfbf"
+    BRONZE_BRN  = "#9a6731"
+    BLUE_TOT    = "#365a89"
+
+    def panel_header(title: str, accent: str = "#c98c40") -> str:
+        return f"""
+        <div style="background:{HEADER_DARK};color:white;padding:0.55rem 1rem;
+                    font-weight:700;border-radius:5px 5px 0 0;margin-bottom:0;">
+            <span>{title.split(' ',1)[0]}</span>
+            <span style="color:{accent};margin-left:0.4rem;">{title.split(' ',1)[1] if ' ' in title else ''}</span>
+        </div>
+        """
+
+    # ---- collect all KSA medals cumulatively ----
+    ksa_medal_rows = pd.DataFrame()
+    if not results_df.empty and "Medal" in results_df.columns:
+        m = results_df.copy()
+        m["MedalU"] = m["Medal"].astype(str).str.strip().str.upper().str[:1]
+        m = m[m["MedalU"].isin(["G","S","B"])]
+        # Dedupe team-sport medals: 1 per (Sport, Discipline, Medal)
+        ksa_medal_rows = m.drop_duplicates(subset=["Sport","Discipline","MedalU"])
+        ksa_medal_rows = ksa_medal_rows.sort_values(["Sport","Discipline"])
+
+    # Join with athlete-schedule for Age + SOTC + Gender
+    if not ksa_medal_rows.empty and not sched_df.empty:
+        sl = sched_df[["Given Name","Family Name","Age","SOTC","Sport","Event"]].drop_duplicates(subset=["Given Name","Family Name","Sport"])
+        sl["join_name"] = (sl["Given Name"] + " " + sl["Family Name"]).str.lower().str.strip()
+        ksa_medal_rows["join_name"] = ksa_medal_rows["Athlete"].str.lower().str.strip()
+        ksa_medal_rows = ksa_medal_rows.merge(
+            sl[["join_name","Sport","Age","SOTC"]],
+            on=["join_name","Sport"], how="left", suffixes=("","_sl"),
+        )
+
+    # ---- TOP ROW: 3 panels ----
+    c1, c2, c3 = st.columns([2.0, 1.0, 0.9])
+
+    # Panel 1 — Medals detail table
+    with c1:
+        st.markdown(panel_header("GCC 2026 Medals"), unsafe_allow_html=True)
+        if ksa_medal_rows.empty:
+            st.info("No KSA medals yet.")
+        else:
+            tbl = ['<table style="border-collapse:collapse;width:100%;font-size:0.85rem;background:white;border-radius:0 0 5px 5px;">']
+            tbl.append('<thead><tr style="background:#f5f5f5;border-bottom:2px solid #ddd;">'
+                       '<th style="text-align:left;padding:5px 10px;">Sport</th>'
+                       '<th style="text-align:left;padding:5px 10px;">Events</th>'
+                       '<th style="text-align:left;padding:5px 10px;">SOTC</th>'
+                       '<th style="text-align:left;padding:5px 10px;">Full Name</th>'
+                       '<th style="text-align:left;padding:5px 10px;">Gender</th>'
+                       '<th style="text-align:left;padding:5px 10px;">Age</th>'
+                       '<th style="text-align:center;padding:5px 10px;">Medal</th>'
+                       '</tr></thead><tbody>')
+            prev_sport = ""
+            colour = {"G":GOLD_DARK, "S":SILVER_GREY, "B":BRONZE_BRN}
+            label  = {"G":"Gold",    "S":"Silver",    "B":"Bronze"}
+            for _, r in ksa_medal_rows.iterrows():
+                sp_disp = r["Sport"] if r["Sport"] != prev_sport else ""
+                m_key   = r["MedalU"]
+                gender  = "Female" if "women" in str(r.get("Discipline","")).lower() else "Male"
+                athlete = str(r.get("Athlete","")).upper()
+                age     = str(r.get("Age","") or "")
+                sotc    = "Yes" if str(r.get("SOTC","")).upper() == "YES" else "No"
+                ev      = str(r.get("Discipline","") or r.get("Event","")).replace("Heat 1","").strip()
+                tbl.append(f'<tr style="border-bottom:1px solid #eee;">'
+                           f'<td style="padding:4px 10px;font-weight:600;">{sp_disp}</td>'
+                           f'<td style="padding:4px 10px;">{ev}</td>'
+                           f'<td style="padding:4px 10px;color:{ELITE if sotc=="Yes" else "#888"};font-weight:{"700" if sotc=="Yes" else "400"};">{sotc}</td>'
+                           f'<td style="padding:4px 10px;">{athlete}</td>'
+                           f'<td style="padding:4px 10px;">{gender}</td>'
+                           f'<td style="padding:4px 10px;">{age}</td>'
+                           f'<td style="padding:4px 10px;background:{colour[m_key]};color:white;font-weight:700;text-align:center;">{label[m_key]}</td>'
+                           f'</tr>')
+                prev_sport = r["Sport"]
+            tbl.append("</tbody></table>")
+            st.markdown("".join(tbl), unsafe_allow_html=True)
+
+    # Panel 2 — Medals by Sport (stacked bar)
+    with c2:
+        st.markdown(panel_header("GCC 2026 Medals by Sport"), unsafe_allow_html=True)
+        if not ksa_medal_rows.empty:
+            agg = ksa_medal_rows.groupby(["Sport","MedalU"]).size().unstack(fill_value=0).reindex(columns=["G","S","B"], fill_value=0)
+            agg["Total"] = agg.sum(axis=1)
+            agg = agg.sort_values("Total", ascending=True)
+            fig = go.Figure()
+            fig.add_trace(go.Bar(y=agg.index, x=agg["G"], name="Gold",   orientation="h", marker_color=GOLD_DARK,   text=agg["G"], textposition="inside"))
+            fig.add_trace(go.Bar(y=agg.index, x=agg["S"], name="Silver", orientation="h", marker_color=SILVER_GREY, text=agg["S"], textposition="inside"))
+            fig.add_trace(go.Bar(y=agg.index, x=agg["B"], name="Bronze", orientation="h", marker_color=BRONZE_BRN,  text=agg["B"], textposition="inside"))
+            # Total label at end of bar
+            for i, sp in enumerate(agg.index):
+                fig.add_annotation(x=agg.loc[sp,"Total"]+0.25, y=sp, text=str(agg.loc[sp,"Total"]),
+                                    showarrow=False, font=dict(size=11, color="#333"))
+            fig.update_layout(barmode="stack", height=220, showlegend=False,
+                              margin=dict(t=8, b=8, l=8, r=20),
+                              plot_bgcolor="white", xaxis_visible=False)
+            st.plotly_chart(fig, use_container_width=True)
+
+    # Panel 3 — Total Medals donut
+    with c3:
+        st.markdown(panel_header("GCC 2026 Total Medals"), unsafe_allow_html=True)
+        if not ksa_medal_rows.empty:
+            gc = int((ksa_medal_rows["MedalU"]=="G").sum())
+            sc = int((ksa_medal_rows["MedalU"]=="S").sum())
+            bc = int((ksa_medal_rows["MedalU"]=="B").sum())
+            total = gc + sc + bc
+            fig = go.Figure(go.Pie(
+                labels=["Gold","Silver","Bronze"],
+                values=[gc, sc, bc],
+                marker=dict(colors=[GOLD_DARK, SILVER_GREY, BRONZE_BRN]),
+                hole=0.62, sort=False, textinfo="value",
+                direction="clockwise",
+            ))
+            fig.update_layout(
+                showlegend=False, height=240,
+                margin=dict(t=8, b=8, l=8, r=8),
+                annotations=[dict(text=f"<b>{total}</b><br><span style='font-size:0.7em'>Medals</span>",
+                                  x=0.5, y=0.5, font_size=22, showarrow=False)],
+            )
+            st.plotly_chart(fig, use_container_width=True)
+
+    st.write("")
+
+    # ---- BENCHMARK BANNER ----
+    st.markdown(f"""
+    <div style="background:{BENCH_GREEN};color:white;padding:0.6rem 1rem;
+                font-size:1.1rem;font-weight:700;text-align:center;border-radius:5px;
+                margin-bottom:0.8rem;">
+        BENCHMARK GCC 2026 - 2022
+    </div>
+    """, unsafe_allow_html=True)
+
+    # ---- BOTTOM ROW: Medals by Sport (2026 vs 2022)  +  Medal Target ----
+    b1, b2 = st.columns([1.4, 1.6])
+
+    with b1:
+        st.markdown("**Medals by Sport**")
+        # 2026 stacked bar
+        a1, a2 = st.columns(2)
+        with a1:
+            if not ksa_medal_rows.empty:
+                agg = ksa_medal_rows.groupby(["Sport","MedalU"]).size().unstack(fill_value=0).reindex(columns=["G","S","B"], fill_value=0)
+                agg["Total"] = agg.sum(axis=1)
+                agg = agg.sort_values("Total", ascending=True)
+                fig = go.Figure()
+                fig.add_trace(go.Bar(y=agg.index, x=agg["G"], name="Gold",   orientation="h", marker_color=GOLD_DARK,   text=agg["G"], textposition="inside"))
+                fig.add_trace(go.Bar(y=agg.index, x=agg["S"], name="Silver", orientation="h", marker_color=SILVER_GREY, text=agg["S"], textposition="inside"))
+                fig.add_trace(go.Bar(y=agg.index, x=agg["B"], name="Bronze", orientation="h", marker_color=BRONZE_BRN,  text=agg["B"], textposition="inside"))
+                for sp in agg.index:
+                    fig.add_annotation(x=agg.loc[sp,"Total"]+0.25, y=sp, text=str(agg.loc[sp,"Total"]),
+                                        showarrow=False, font=dict(size=11, color="#333"))
+                fig.update_layout(barmode="stack", height=180, showlegend=False,
+                                  margin=dict(t=4,b=30,l=4,r=14), plot_bgcolor="white",
+                                  xaxis_visible=False, title=dict(text="GCC 2026", y=0.0, x=0.5,
+                                                                     font=dict(size=12)))
+                st.plotly_chart(fig, use_container_width=True)
+            else:
+                st.caption("(no medals yet)")
+        with a2:
+            # GCC 2022 — same sports filtered
+            hist_ksa_local = load_history_ksa_sport()
+            if not hist_ksa_local.empty:
+                # show only sports KSA has medalled in at 2026 (parity with left bar)
+                if not ksa_medal_rows.empty:
+                    sports_2026 = ksa_medal_rows["Sport"].unique()
+                    h = hist_ksa_local[hist_ksa_local["Sport"].isin(sports_2026)].copy()
+                else:
+                    h = hist_ksa_local.copy()
+                h["Total"] = h["Gold"] + h["Silver"] + h["Bronze"]
+                h = h.sort_values("Total", ascending=True)
+                fig = go.Figure()
+                fig.add_trace(go.Bar(y=h["Sport"], x=h["Gold"],   name="Gold",   orientation="h", marker_color=GOLD_DARK,   text=h["Gold"], textposition="inside"))
+                fig.add_trace(go.Bar(y=h["Sport"], x=h["Silver"], name="Silver", orientation="h", marker_color=SILVER_GREY, text=h["Silver"], textposition="inside"))
+                fig.add_trace(go.Bar(y=h["Sport"], x=h["Bronze"], name="Bronze", orientation="h", marker_color=BRONZE_BRN,  text=h["Bronze"], textposition="inside"))
+                for _, row in h.iterrows():
+                    fig.add_annotation(x=row["Total"]+0.25, y=row["Sport"], text=str(int(row["Total"])),
+                                        showarrow=False, font=dict(size=11, color="#333"))
+                fig.update_layout(barmode="stack", height=180, showlegend=False,
+                                  margin=dict(t=4,b=30,l=4,r=14), plot_bgcolor="white",
+                                  xaxis_visible=False, title=dict(text="GCC 2022", y=0.0, x=0.5,
+                                                                     font=dict(size=12)))
+                st.plotly_chart(fig, use_container_width=True)
+
+    with b2:
+        st.markdown("**Medal Target**")
+        # Build 4-bar grouped chart: Gold, Silver, Bronze, Total
+        # Bottom bar = current (filled), top bar (gray) = target = 2022 totals
+        ksa_22 = (load_history_medal_table().query("NOC == 'KSA'") if not hist_table.empty else pd.DataFrame())
+        targets = {"Gold": 16, "Silver": 22, "Bronze": 29, "Total": 67}
+        if not ksa_22.empty:
+            targets = {
+                "Gold":   int(ksa_22.iloc[0]["Gold"]),
+                "Silver": int(ksa_22.iloc[0]["Silver"]),
+                "Bronze": int(ksa_22.iloc[0]["Bronze"]),
+                "Total":  int(ksa_22.iloc[0]["Total"]),
+            }
+        gc = int((ksa_medal_rows["MedalU"]=="G").sum()) if not ksa_medal_rows.empty else 0
+        sc = int((ksa_medal_rows["MedalU"]=="S").sum()) if not ksa_medal_rows.empty else 0
+        bc = int((ksa_medal_rows["MedalU"]=="B").sum()) if not ksa_medal_rows.empty else 0
+        actuals = {"Gold": gc, "Silver": sc, "Bronze": bc, "Total": gc + sc + bc}
+        cols = ["Gold","Silver","Bronze","Total"]
+        col_colours = [GOLD_DARK, SILVER_GREY, BRONZE_BRN, BLUE_TOT]
+        # Target backdrop + actual on top
+        fig = go.Figure()
+        fig.add_trace(go.Bar(x=cols, y=[targets[c] for c in cols], name="2022 target",
+                              marker=dict(color="#e5e5e5", line=dict(color="#bbb", width=1)),
+                              text=[targets[c] for c in cols], textposition="outside",
+                              textfont=dict(size=14, color="#666"),
+                              hovertemplate="%{x}: target %{y}<extra></extra>"))
+        fig.add_trace(go.Bar(x=cols, y=[actuals[c] for c in cols], name="2026 actual",
+                              marker=dict(color=col_colours),
+                              text=[actuals[c] for c in cols], textposition="inside",
+                              textfont=dict(size=14, color="white"),
+                              hovertemplate="%{x}: actual %{y}<extra></extra>"))
+        fig.update_layout(barmode="overlay", height=320,
+                          showlegend=False, plot_bgcolor="white",
+                          margin=dict(t=18,b=10,l=10,r=10),
+                          yaxis=dict(visible=False))
+        st.plotly_chart(fig, use_container_width=True)
+
+    st.caption("Medal Report & GCC 2026-2022 benchmark and target")
 
 
 # ===========================================================================
