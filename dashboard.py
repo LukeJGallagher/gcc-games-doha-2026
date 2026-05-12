@@ -597,6 +597,10 @@ def render_isg_schedule(df: pd.DataFrame, include_camera: bool = False,
         ath_name = r["Athlete"] or f"{r['Given Name']} {r['Family Name']}".strip()
         ath_disp = ath_name if (r["Sport"] != prev_sport or ath_name != prev_ath) else ""
         ath_disp = ath_disp.upper()
+        # ⭐ for ISG 2025 medallists — spot them at a glance
+        isg_medals = str(r.get("ISG_2025_Medals", "")).strip()
+        if ath_disp and isg_medals:
+            ath_disp = f"⭐ {ath_disp}"
         event_disp = r["Event"]
         if r.get("Match_Type") == "team" and r.get("Opponent"):
             event_disp = f"{r['Event']} (KSA vs {r['Opponent']})"
@@ -1714,6 +1718,48 @@ with tab_history:
     tt3.markdown(f"<div class='metric-card'><div class='label'>Projected total at this pace</div><div class='value' style='color:{proj_colour};'>{projection}</div></div>", unsafe_allow_html=True)
     tt4.markdown(f"<div class='metric-card'><div class='label'>Like-for-like 2022 target</div><div class='value'>{target_2022_like_for_like}</div></div>", unsafe_allow_html=True)
     st.write("")
+
+    # ---- ISG 2025 medallists competing today ----
+    if not sched_df.empty and "ISG_2025_Medals" in sched_df.columns:
+        isg_today = sched_df[
+            (sched_df["Date"] == today)
+            & (sched_df["ISG_2025_Medals"].astype(str).str.strip() != "")
+        ]
+        isg_unique_today = isg_today.groupby(["Given Name", "Family Name"]).first().reset_index()
+        n_isg_today = len(isg_unique_today)
+        # Count gold/silver/bronze totals across these athletes' ISG history
+        g_sum = s_sum = b_sum = 0
+        for _, r in isg_unique_today.iterrows():
+            mstr = r.get("ISG_2025_Medals", "")
+            for tok in str(mstr).split("/"):
+                t = tok.strip().upper()
+                if t.endswith("G"): g_sum += int(t[:-1] or 0)
+                if t.endswith("S"): s_sum += int(t[:-1] or 0)
+                if t.endswith("B"): b_sum += int(t[:-1] or 0)
+
+        i1, i2 = st.columns([1, 2])
+        with i1:
+            st.markdown(f"""
+            <div class='metric-card' style='border-left:4px solid {VICTORY};'>
+                <div class='label'>⭐ ISG 2025 medallists competing today</div>
+                <div class='value'>{n_isg_today}</div>
+                <div style='font-size:0.85rem;color:#555;margin-top:0.3rem;'>
+                    Their ISG history: {g_sum}G · {s_sum}S · {b_sum}B
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+        with i2:
+            if n_isg_today > 0:
+                show = isg_unique_today[
+                    ["Given Name", "Family Name", "Sport", "Event", "ISG_2025_Medals", "ISG_2025_Sports"]
+                ].copy()
+                show["Athlete"] = (show["Given Name"] + " " + show["Family Name"]).str.strip()
+                show = show[["Athlete", "Sport", "Event", "ISG_2025_Medals", "ISG_2025_Sports"]]
+                show = show.rename(columns={"ISG_2025_Medals": "ISG '25", "ISG_2025_Sports": "ISG sport"})
+                st.dataframe(show, hide_index=True, use_container_width=True, height=240)
+            else:
+                st.caption("No ISG-2025 medallists in today's schedule. Check earlier or later days.")
+        st.write("")
 
     # ---- Medal table comparison ----
     if not medals_df.empty and not hist_table.empty:
