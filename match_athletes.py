@@ -34,7 +34,7 @@ DEFAULT_SHORTLIST_GLOB  = "Athletes Details*.xlsx"
 
 OUTPUT_COLUMNS = [
     "Given Name", "Family Name", "Date of Birth",
-    "Sport", "Event", "Phase", "Date", "Time Start", "Time End", "Duration_Min",
+    "Sport", "Event", "Phase", "Status", "Date", "Time Start", "Time End", "Duration_Min",
     "Discipline_API", "Event_ID", "Venue", "Gender",
     "Match_Type", "Opponent", "Source_URL",
     # RegRequest enrichment
@@ -533,6 +533,7 @@ def main():
                 "Sport":          alias_sport(ath.get("Sport", "")),
                 "Event":          ath.get("Event", ""),
                 "Phase":          s.get("Phase", ""),
+                "Status":         s.get("Status", ""),
                 "Date":           s.get("Date", ""),
                 "Time Start":     s.get("Time", ""),
                 "Time End":       s.get("Time_End", ""),

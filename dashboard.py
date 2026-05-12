@@ -601,6 +601,15 @@ def render_isg_schedule(df: pd.DataFrame, include_camera: bool = False,
         isg_medals = str(r.get("ISG_2025_Medals", "")).strip()
         if ath_disp and isg_medals:
             ath_disp = f"⭐ {ath_disp}"
+
+        # Cancellation / postponement override — strikethrough + red flag
+        is_cancelled = str(r.get("Status", "")).lower() in ("cancelled", "canceled")
+        is_postponed = str(r.get("Status", "")).lower() == "postponed"
+        row_style    = ""
+        if is_cancelled:
+            row_style = "opacity:0.55;text-decoration:line-through;color:#c53030;"
+        elif is_postponed:
+            row_style = "color:#d97706;font-style:italic;"
         event_disp = r["Event"]
         if r.get("Match_Type") == "team" and r.get("Opponent"):
             event_disp = f"{r['Event']} (KSA vs {r['Opponent']})"
@@ -618,6 +627,8 @@ def render_isg_schedule(df: pd.DataFrame, include_camera: bool = False,
             cam_html = f'<td class="{cam_class}">{cam_text}</td>'
 
         border_style = "border-top:2px solid #ccc;" if sport_disp else ""
+        if row_style:
+            border_style = f"{border_style}{row_style}"
         rows_html.append(
             f'<tr style="{border_style}">'
             f'<td><b>{sport_disp}</b></td>'

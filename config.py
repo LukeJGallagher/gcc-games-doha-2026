@@ -92,7 +92,7 @@ RESULTS_COLUMNS = [
 
 SCHEDULE_COLUMNS = [
     "Date", "Time", "Time_End", "Duration_Min",
-    "Sport", "Discipline", "Discipline_AR", "Phase", "Gender",
+    "Sport", "Discipline", "Discipline_AR", "Phase", "Status", "Gender",
     "Venue", "Country_Entries", "Event_ID", "Source_URL",
 ]
 

@@ -52,6 +52,30 @@ SCHEDULE_URL = "https://gccgames.qa/frontend/schedule-competition"
 SPORT_URL_TPL = "https://gccgames.qa/frontend/sport/{slug}"
 
 
+def _load_overrides() -> dict:
+    """Load manual cancellation / postponement overrides keyed by Event_ID.
+    The BORNAN API doesn't reliably mark cancellations, so PA staff can
+    flag them in data/manual_overrides.csv on the ground."""
+    import csv as _csv
+    f = SCHEDULE_DIR.parent / "manual_overrides.csv"
+    if not f.exists():
+        return {}
+    out = {}
+    for r in _csv.DictReader(f.open(encoding="utf-8-sig")):
+        eid = (r.get("Event_ID") or "").strip()
+        if eid:
+            out[eid] = {
+                "status": (r.get("Override_Status") or "").strip(),
+                "reason": (r.get("Override_Reason") or "").strip(),
+            }
+    return out
+
+
+_OVERRIDES = _load_overrides()
+if _OVERRIDES:
+    log.info("loaded %d manual overrides", len(_OVERRIDES))
+
+
 def _split_bilingual(text: str) -> tuple[str, str]:
     """API titles are 'English Name - Arabic Name'. Split into (en, ar).
 
@@ -109,7 +133,8 @@ def _participant_rows(comp: dict, sport: str) -> list[dict]:
         "Age":              "",
         "Wind":             "",
         "Attempt":          "",
-        "Status":           comp.get("status", ""),
+        "Status":           (_OVERRIDES.get(comp.get("id", "")) or {}).get("status")
+                            or comp.get("status", ""),
         "Detection_Method": "GCC API",
         "Source_URL":       sport_url + "/" + comp.get("id", ""),
     }
@@ -189,6 +214,15 @@ def _schedule_row(comp: dict, sport: str, country_entries: list[str]) -> dict:
     phase    = _normalise_phase(comp.get("stage_name", ""), comp.get("title", ""))
     start    = comp.get("time", "")
     duration = estimate_duration_minutes(sport, title_en, phase)
+    # Apply manual override if PA staff flagged this event
+    eid = comp.get("id", "")
+    override = _OVERRIDES.get(eid)
+    status_val = comp.get("status", "")
+    if override and override.get("status"):
+        status_val = override["status"]
+        # Surface the override in the discipline title for visibility
+        if status_val.lower() in ("cancelled", "canceled", "postponed"):
+            title_en = f"[{status_val.upper()}] {title_en}"
     return {
         "Date":            comp.get("date", ""),
         "Time":            start,
@@ -198,6 +232,7 @@ def _schedule_row(comp: dict, sport: str, country_entries: list[str]) -> dict:
         "Discipline":      title_en,
         "Discipline_AR":   title_ar,
         "Phase":           phase,
+        "Status":          status_val,
         "Gender":          comp.get("gender_category", ""),
         "Venue":           comp.get("venue", ""),
         "Country_Entries": ",".join(sorted(set(country_entries))),
