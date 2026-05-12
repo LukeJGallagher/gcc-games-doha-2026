@@ -1,0 +1,141 @@
+﻿Label,URL,Status,Size_KB,Content_Type,JSON_Keys,Notes
+frappe.get_list Athlete,https://gccgames.qa/api/method/frappe.client.get_list?doctype=Athlete&limit_page_length=3,403,,,,FORBIDDEN
+frappe.get_list Sport,https://gccgames.qa/api/method/frappe.client.get_list?doctype=Sport&limit_page_length=3,403,,,,FORBIDDEN
+frappe.get_list Competition,https://gccgames.qa/api/method/frappe.client.get_list?doctype=Competition&limit_page_length=3,403,,,,FORBIDDEN
+frappe.get_list Event,https://gccgames.qa/api/method/frappe.client.get_list?doctype=Event&limit_page_length=3,403,,,,FORBIDDEN
+frappe.get_list Match,https://gccgames.qa/api/method/frappe.client.get_list?doctype=Match&limit_page_length=3,403,,,,FORBIDDEN
+frappe.get_list Schedule,https://gccgames.qa/api/method/frappe.client.get_list?doctype=Schedule&limit_page_length=3,403,,,,FORBIDDEN
+frappe.get_list Medal Tally,https://gccgames.qa/api/method/frappe.client.get_list?doctype=Medal%20Tally&limit_page_length=3,403,,,,FORBIDDEN
+frappe.get_list Result,https://gccgames.qa/api/method/frappe.client.get_list?doctype=Result&limit_page_length=3,403,,,,FORBIDDEN
+frappe.get_list Country,https://gccgames.qa/api/method/frappe.client.get_list?doctype=Country&limit_page_length=3,403,,,,FORBIDDEN
+frappe.get_list Venue,https://gccgames.qa/api/method/frappe.client.get_list?doctype=Venue&limit_page_length=3,403,,,,FORBIDDEN
+frappe.get_list Discipline,https://gccgames.qa/api/method/frappe.client.get_list?doctype=Discipline&limit_page_length=3,403,,,,FORBIDDEN
+frappe.get_list Record,https://gccgames.qa/api/method/frappe.client.get_list?doctype=Record&limit_page_length=3,403,,,,FORBIDDEN
+frappe.get_list Heat,https://gccgames.qa/api/method/frappe.client.get_list?doctype=Heat&limit_page_length=3,403,,,,FORBIDDEN
+frappe.get_list GMS Athlete,https://gccgames.qa/api/method/frappe.client.get_list?doctype=GMS%20Athlete&limit_page_length=3,403,,,,FORBIDDEN
+frappe.get_list GMS Competition,https://gccgames.qa/api/method/frappe.client.get_list?doctype=GMS%20Competition&limit_page_length=3,403,,,,FORBIDDEN
+gms.api.athlete.athletes,https://gccgames.qa/api/method/gms.api.athlete.athletes,417,,,,EXPECTATION FAILED
+gms.api.athlete.athlete,https://gccgames.qa/api/method/gms.api.athlete.athlete,417,,,,EXPECTATION FAILED
+gms.api.athlete.get,https://gccgames.qa/api/method/gms.api.athlete.get,417,,,,EXPECTATION FAILED
+gms.api.athlete.detail,https://gccgames.qa/api/method/gms.api.athlete.detail,417,,,,EXPECTATION FAILED
+gms.api.athlete.profile,https://gccgames.qa/api/method/gms.api.athlete.profile,417,,,,EXPECTATION FAILED
+gms.api.athlete.bio,https://gccgames.qa/api/method/gms.api.athlete.bio,417,,,,EXPECTATION FAILED
+gms.api.athlete.list,https://gccgames.qa/api/method/gms.api.athlete.list,417,,,,EXPECTATION FAILED
+gms.api.athlete.by_noc,https://gccgames.qa/api/method/gms.api.athlete.by_noc,417,,,,EXPECTATION FAILED
+gms.api.athlete.by_sport,https://gccgames.qa/api/method/gms.api.athlete.by_sport,417,,,,EXPECTATION FAILED
+gms.api.athlete.by_event,https://gccgames.qa/api/method/gms.api.athlete.by_event,417,,,,EXPECTATION FAILED
+gms.api.competition.competition,https://gccgames.qa/api/method/gms.api.competition.competition,417,,,,EXPECTATION FAILED
+gms.api.competition.detail,https://gccgames.qa/api/method/gms.api.competition.detail,417,,,,EXPECTATION FAILED
+gms.api.competition.get,https://gccgames.qa/api/method/gms.api.competition.get,417,,,,EXPECTATION FAILED
+gms.api.competition.info,https://gccgames.qa/api/method/gms.api.competition.info,417,,,,EXPECTATION FAILED
+gms.api.competition.participants,https://gccgames.qa/api/method/gms.api.competition.participants,417,,,,EXPECTATION FAILED
+gms.api.competition.competition_participants,https://gccgames.qa/api/method/gms.api.competition.competition_participants,417,,,,EXPECTATION FAILED
+gms.api.competition.competition_detail,https://gccgames.qa/api/method/gms.api.competition.competition_detail,417,,,,EXPECTATION FAILED
+gms.api.results.results,https://gccgames.qa/api/method/gms.api.results.results,417,,,,EXPECTATION FAILED
+gms.api.results.result,https://gccgames.qa/api/method/gms.api.results.result,417,,,,EXPECTATION FAILED
+gms.api.results.competition_results,https://gccgames.qa/api/method/gms.api.results.competition_results,417,,,,EXPECTATION FAILED
+gms.api.results.detail,https://gccgames.qa/api/method/gms.api.results.detail,417,,,,EXPECTATION FAILED
+gms.api.results.by_competition,https://gccgames.qa/api/method/gms.api.results.by_competition,417,,,,EXPECTATION FAILED
+gms.api.results.by_athlete,https://gccgames.qa/api/method/gms.api.results.by_athlete,417,,,,EXPECTATION FAILED
+gms.api.results.by_country,https://gccgames.qa/api/method/gms.api.results.by_country,417,,,,EXPECTATION FAILED
+gms.api.record.records,https://gccgames.qa/api/method/gms.api.record.records,417,,,,EXPECTATION FAILED
+gms.api.record.record,https://gccgames.qa/api/method/gms.api.record.record,417,,,,EXPECTATION FAILED
+gms.api.record.by_event,https://gccgames.qa/api/method/gms.api.record.by_event,417,,,,EXPECTATION FAILED
+gms.api.record.by_athlete,https://gccgames.qa/api/method/gms.api.record.by_athlete,417,,,,EXPECTATION FAILED
+gms.api.record.by_sport,https://gccgames.qa/api/method/gms.api.record.by_sport,417,,,,EXPECTATION FAILED
+gms.api.record.history,https://gccgames.qa/api/method/gms.api.record.history,417,,,,EXPECTATION FAILED
+gms.api.record.personal_best,https://gccgames.qa/api/method/gms.api.record.personal_best,417,,,,EXPECTATION FAILED
+gms.api.live.stream,https://gccgames.qa/api/method/gms.api.live.stream,417,,,,EXPECTATION FAILED
+gms.api.live.status,https://gccgames.qa/api/method/gms.api.live.status,417,,,,EXPECTATION FAILED
+gms.api.live.current,https://gccgames.qa/api/method/gms.api.live.current,417,,,,EXPECTATION FAILED
+gms.api.live.now,https://gccgames.qa/api/method/gms.api.live.now,417,,,,EXPECTATION FAILED
+gms.api.live.live,https://gccgames.qa/api/method/gms.api.live.live,417,,,,EXPECTATION FAILED
+gms.api.noc.nocs,https://gccgames.qa/api/method/gms.api.noc.nocs,417,,,,EXPECTATION FAILED
+gms.api.noc.noc,https://gccgames.qa/api/method/gms.api.noc.noc,417,,,,EXPECTATION FAILED
+gms.api.noc.detail,https://gccgames.qa/api/method/gms.api.noc.detail,417,,,,EXPECTATION FAILED
+gms.api.noc.summary,https://gccgames.qa/api/method/gms.api.noc.summary,417,,,,EXPECTATION FAILED
+gms.api.noc.athletes,https://gccgames.qa/api/method/gms.api.noc.athletes,417,,,,EXPECTATION FAILED
+gms.api.noc.roster,https://gccgames.qa/api/method/gms.api.noc.roster,417,,,,EXPECTATION FAILED
+gms.api.noc.medals,https://gccgames.qa/api/method/gms.api.noc.medals,417,,,,EXPECTATION FAILED
+gms.api.discipline.disciplines,https://gccgames.qa/api/method/gms.api.discipline.disciplines,417,,,,EXPECTATION FAILED
+gms.api.discipline.list,https://gccgames.qa/api/method/gms.api.discipline.list,417,,,,EXPECTATION FAILED
+gms.api.discipline.events,https://gccgames.qa/api/method/gms.api.discipline.events,417,,,,EXPECTATION FAILED
+gms.api.discipline.by_sport,https://gccgames.qa/api/method/gms.api.discipline.by_sport,417,,,,EXPECTATION FAILED
+gms.api.venue.venues,https://gccgames.qa/api/method/gms.api.venue.venues,417,,,,EXPECTATION FAILED
+gms.api.venue.venue,https://gccgames.qa/api/method/gms.api.venue.venue,417,,,,EXPECTATION FAILED
+gms.api.venue.detail,https://gccgames.qa/api/method/gms.api.venue.detail,417,,,,EXPECTATION FAILED
+gms.api.venue.list,https://gccgames.qa/api/method/gms.api.venue.list,417,,,,EXPECTATION FAILED
+gms.api.country.countries,https://gccgames.qa/api/method/gms.api.country.countries,417,,,,EXPECTATION FAILED
+gms.api.country.country,https://gccgames.qa/api/method/gms.api.country.country,417,,,,EXPECTATION FAILED
+gms.api.country.athletes,https://gccgames.qa/api/method/gms.api.country.athletes,417,,,,EXPECTATION FAILED
+gms.api.country.results,https://gccgames.qa/api/method/gms.api.country.results,417,,,,EXPECTATION FAILED
+gms.api.event.events,https://gccgames.qa/api/method/gms.api.event.events,417,,,,EXPECTATION FAILED
+gms.api.event.event,https://gccgames.qa/api/method/gms.api.event.event,417,,,,EXPECTATION FAILED
+gms.api.event.detail,https://gccgames.qa/api/method/gms.api.event.detail,417,,,,EXPECTATION FAILED
+gms.api.event.get,https://gccgames.qa/api/method/gms.api.event.get,417,,,,EXPECTATION FAILED
+gms.api.event.list,https://gccgames.qa/api/method/gms.api.event.list,417,,,,EXPECTATION FAILED
+gms.api.match.matches,https://gccgames.qa/api/method/gms.api.match.matches,417,,,,EXPECTATION FAILED
+gms.api.match.match,https://gccgames.qa/api/method/gms.api.match.match,417,,,,EXPECTATION FAILED
+gms.api.match.detail,https://gccgames.qa/api/method/gms.api.match.detail,417,,,,EXPECTATION FAILED
+gms.api.match.get,https://gccgames.qa/api/method/gms.api.match.get,417,,,,EXPECTATION FAILED
+gms.api.schedule.schedule,https://gccgames.qa/api/method/gms.api.schedule.schedule,417,,,,EXPECTATION FAILED
+gms.api.schedule.all,https://gccgames.qa/api/method/gms.api.schedule.all,417,,,,EXPECTATION FAILED
+gms.api.schedule.by_date,https://gccgames.qa/api/method/gms.api.schedule.by_date,417,,,,EXPECTATION FAILED
+gms.api.media.photos,https://gccgames.qa/api/method/gms.api.media.photos,417,,,,EXPECTATION FAILED
+gms.api.media.videos,https://gccgames.qa/api/method/gms.api.media.videos,417,,,,EXPECTATION FAILED
+gms.api.media.highlights,https://gccgames.qa/api/method/gms.api.media.highlights,417,,,,EXPECTATION FAILED
+gms.api.competition.detail?id,https://gccgames.qa/api/method/gms.api.competition.detail?id=COM-2026-0494,417,,,,EXPECTATION FAILED
+gms.api.competition.get?id,https://gccgames.qa/api/method/gms.api.competition.get?id=COM-2026-0494,417,,,,EXPECTATION FAILED
+gms.api.competition.competition?id,https://gccgames.qa/api/method/gms.api.competition.competition?id=COM-2026-0494,417,,,,EXPECTATION FAILED
+gms.api.competition.participants?id,https://gccgames.qa/api/method/gms.api.competition.participants?id=COM-2026-0494,417,,,,EXPECTATION FAILED
+gms.api.results.competition?id,https://gccgames.qa/api/method/gms.api.results.competition?id=COM-2026-0494,417,,,,EXPECTATION FAILED
+gms.api.results.by_competition?id,https://gccgames.qa/api/method/gms.api.results.by_competition?id=COM-2026-0494,417,,,,EXPECTATION FAILED
+gms.api.results.detail?id,https://gccgames.qa/api/method/gms.api.results.detail?id=COM-2026-0494,417,,,,EXPECTATION FAILED
+gms.api.results.results_by_country?noc=KSA,https://gccgames.qa/api/method/gms.api.results.results_by_country?noc=KSA,417,,,,EXPECTATION FAILED
+gms.api.athlete.detail?id,https://gccgames.qa/api/method/gms.api.athlete.detail?id=16657421,417,,,,EXPECTATION FAILED
+gms.api.athlete.profile?id,https://gccgames.qa/api/method/gms.api.athlete.profile?id=16657421,417,,,,EXPECTATION FAILED
+gms.api.athlete.bio?id,https://gccgames.qa/api/method/gms.api.athlete.bio?id=16657421,417,,,,EXPECTATION FAILED
+gms.api.athlete.athletes_by_noc?noc=KSA,https://gccgames.qa/api/method/gms.api.athlete.athletes_by_noc?noc=KSA,417,,,,EXPECTATION FAILED
+gms.api.athlete.athletes_by_sport?sport=Swimming,https://gccgames.qa/api/method/gms.api.athlete.athletes_by_sport?sport=Swimming,417,,,,EXPECTATION FAILED
+gms.api.discipline.events?sport=Swimming,https://gccgames.qa/api/method/gms.api.discipline.events?sport=Swimming,417,,,,EXPECTATION FAILED
+gms.api.discipline.by_sport?sport=Swimming,https://gccgames.qa/api/method/gms.api.discipline.by_sport?sport=Swimming,417,,,,EXPECTATION FAILED
+gms.api.record.by_event,https://gccgames.qa/api/method/gms.api.record.by_event?event_id=COM-2026-0494,417,,,,EXPECTATION FAILED
+gms.api.record.records,https://gccgames.qa/api/method/gms.api.record.records,417,,,,EXPECTATION FAILED
+gms.api.noc.detail?noc=KSA,https://gccgames.qa/api/method/gms.api.noc.detail?noc=KSA,417,,,,EXPECTATION FAILED
+gms.api.noc.summary?noc=KSA,https://gccgames.qa/api/method/gms.api.noc.summary?noc=KSA,417,,,,EXPECTATION FAILED
+gms.api.noc.athletes?noc=KSA,https://gccgames.qa/api/method/gms.api.noc.athletes?noc=KSA,417,,,,EXPECTATION FAILED
+gms.api.noc.roster?noc=KSA,https://gccgames.qa/api/method/gms.api.noc.roster?noc=KSA,417,,,,EXPECTATION FAILED
+gms.api.country.athletes?noc=KSA,https://gccgames.qa/api/method/gms.api.country.athletes?noc=KSA,417,,,,EXPECTATION FAILED
+gms.api.country.results?noc=KSA,https://gccgames.qa/api/method/gms.api.country.results?noc=KSA,417,,,,EXPECTATION FAILED
+flag BRN,https://gccgames.qa/files/brn.png,200,7,image/png,,
+flag BRN.svg,https://gccgames.qa/files/brn.svg,404,,,,NOT FOUND
+flag KUW,https://gccgames.qa/files/kuw.png,200,5,image/png,,
+flag KUW.svg,https://gccgames.qa/files/kuw.svg,404,,,,NOT FOUND
+flag OMA,https://gccgames.qa/files/oma.png,404,,,,NOT FOUND
+flag OMA.svg,https://gccgames.qa/files/oma.svg,404,,,,NOT FOUND
+flag QAT,https://gccgames.qa/files/qat.png,404,,,,NOT FOUND
+flag QAT.svg,https://gccgames.qa/files/qat.svg,404,,,,NOT FOUND
+flag KSA,https://gccgames.qa/files/ksa.png,200,22,image/png,,
+flag KSA.svg,https://gccgames.qa/files/ksa.svg,404,,,,NOT FOUND
+flag UAE,https://gccgames.qa/files/uae.png,200,3,image/png,,
+flag UAE.svg,https://gccgames.qa/files/uae.svg,404,,,,NOT FOUND
+pictogram Archery,https://gccgames.qa/files/archery.svg,200,0,image/svg+xml,,
+pictogram Athletics,https://gccgames.qa/files/athletics.svg,200,1,image/svg+xml,,
+pictogram Basketball 3x3,https://gccgames.qa/files/basketball3x3.svg,404,,,,NOT FOUND
+pictogram Basketball 5x5,https://gccgames.qa/files/basketball5x5.svg,404,,,,NOT FOUND
+pictogram Billiards,https://gccgames.qa/files/billiards.svg,404,,,,NOT FOUND
+pictogram Bowling,https://gccgames.qa/files/bowling.svg,404,,,,NOT FOUND
+pictogram Boxing,https://gccgames.qa/files/boxing.svg,200,1,image/svg+xml,,
+pictogram Equestrian,https://gccgames.qa/files/equestrian.svg,404,,,,NOT FOUND
+pictogram Fencing,https://gccgames.qa/files/fencing.svg,200,1,image/svg+xml,,
+pictogram Handball,https://gccgames.qa/files/handball.svg,200,1,image/svg+xml,,
+pictogram Karate,https://gccgames.qa/files/karate.svg,200,2,image/svg+xml,,
+pictogram Padel,https://gccgames.qa/files/padel.svg,200,22,image/svg+xml,,
+pictogram Shooting,https://gccgames.qa/files/shooting.svg,200,0,image/svg+xml,,
+pictogram Snooker,https://gccgames.qa/files/snooker.svg,404,,,,NOT FOUND
+pictogram Swimming,https://gccgames.qa/files/swimming.svg,200,1,image/svg+xml,,
+pictogram Table Tennis,https://gccgames.qa/files/tabletennis.svg,404,,,,NOT FOUND
+pictogram Taekwondo,https://gccgames.qa/files/taekwondo.svg,404,,,,NOT FOUND
+pictogram Volleyball,https://gccgames.qa/files/volleyball.svg,200,1,image/svg+xml,,
+event logo png,https://gccgames.qa/files/event-logo.png,404,,,,NOT FOUND
+event logo svg,https://gccgames.qa/files/event-logo.svg,404,,,,NOT FOUND

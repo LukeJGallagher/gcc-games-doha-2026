@@ -60,6 +60,7 @@ def main():
     run("enhance_rankings.py", "--ksa")
     run("ksa_filter.py")
     run("download_photos.py", "--api-only")
+    run("download_assets.py")
     return 0
 
 
