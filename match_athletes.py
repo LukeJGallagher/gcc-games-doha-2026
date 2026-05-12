@@ -424,8 +424,10 @@ def find_matches(athlete_row, schedule_rows: list[dict],
     is_team_event = bool(re.search(r"\bteam\b", event, re.I))
 
     # ---- PRIMARY: player_name match against live API participants ----
-    # Works even when BORNAN renames event titles (e.g. Taekwondo's
-    # mid-tournament shift to 'Seniors Male-A' naming).
+    # Find API events that contain BOTH the athlete's name AND match the
+    # Excel event keywords. Without the keyword filter, an athlete entered
+    # in 3 swimming events would get the same single API event attached
+    # to all 3 Excel rows because player_name matches once.
     if api_participants and not is_team_event:
         athlete_full = f"{athlete_row.get('Given Name','')} {athlete_row.get('Family Name','')}".lower().strip()
         ath_tokens = frozenset(w for w in athlete_full.replace(",", " ").split() if len(w) > 2)
@@ -440,10 +442,16 @@ def find_matches(athlete_row, schedule_rows: list[dict],
                     if p_tokens and (p_tokens.issubset(ath_tokens) or ath_tokens.issubset(p_tokens)):
                         matched_ids.add(eid)
             if matched_ids:
-                # Filter to only matching Sport, then return those schedule rows
-                hits = [s for s in schedule_rows
-                        if s.get("Event_ID") in matched_ids
-                        and (s.get("Sport") or "").strip() == sport]
+                # Filter to schedule rows where: matching Sport AND event_ID
+                # is one we found AND the event keyword(s) match the Excel
+                # event (so 100m Backstroke doesn't grab the 200m Backstroke heat).
+                hits = []
+                for s in schedule_rows:
+                    if s.get("Event_ID") not in matched_ids: continue
+                    if (s.get("Sport") or "").strip() != sport: continue
+                    disc = s["_norm_disc"]
+                    if all(k in disc for k in keywords):
+                        hits.append(s)
                 if hits:
                     return hits
 
