@@ -1,0 +1,146 @@
+﻿Type,Event_ID,Sport,Before,After
+- dropped,COM-2026-0561,Taekwondo,15:30:00,
+~ time,COM-2026-0191,Billiards,11:00:00,10:00
+~ time,COM-2026-0193,Billiards,12:30:00,11:30
+~ time,COM-2026-0194,Billiards,13:30:00,11:30
+~ time,COM-2026-0195,Billiards,14:30:00,11:30
+~ time,COM-2026-0197,Billiards,14:00:00,13:00
+~ time,COM-2026-0198,Billiards,15:00:00,13:00
+~ time,COM-2026-0199,Billiards,16:00:00,13:00
+~ time,COM-2026-0202,Billiards,17:00:00,16:00
+~ time,COM-2026-0204,Billiards,19:00:00,18:00
+~ time,COM-2026-0209,Billiards,11:00:00,10:00
+~ time,COM-2026-0213,Billiards,18:30:00,17:00
+~ time,COM-2026-0218,Billiards,11:30:00,10:00
+~ time,COM-2026-0221,Billiards,16:00:00,15:00
+~ time,COM-2026-0223,Billiards,18:00:00,17:00
+~ time,COM-2026-0224,Billiards,19:00:00,17:00
+~ time,COM-2026-0225,Billiards,20:00:00,17:00
+~ time,COM-2026-0227,Billiards,20:00:00,19:00
+~ time,COM-2026-0228,Billiards,21:00:00,19:00
+~ time,COM-2026-0229,Billiards,22:00:00,19:00
+~ time,COM-2026-0233,Billiards,14:00:00,13:00
+~ time,COM-2026-0235,Billiards,16:00:00,15:00
+~ time,COM-2026-0237,Billiards,18:00:00,17:00
+~ time,COM-2026-0242,Snooker,15:00:00,13:00
+~ time,COM-2026-0243,Snooker,17:00:00,13:00
+~ time,COM-2026-0244,Snooker,19:00:00,13:00
+~ time,COM-2026-0246,Snooker,17:00:00,15:00
+~ time,COM-2026-0247,Snooker,19:00:00,15:00
+~ time,COM-2026-0248,Snooker,21:00:00,15:00
+~ time,COM-2026-0250,Snooker,19:00:00,17:00
+~ time,COM-2026-0251,Snooker,21:00:00,17:00
+~ time,COM-2026-0252,Snooker,23:00:00,17:00
+~ time,COM-2026-0261,Snooker,12:00:00,10:00
+~ time,COM-2026-0262,Snooker,14:00:00,10:00
+~ time,COM-2026-0263,Snooker,16:00:00,10:00
+~ time,COM-2026-0265,Snooker,15:00:00,13:00
+~ time,COM-2026-0266,Snooker,17:00:00,13:00
+~ time,COM-2026-0267,Snooker,19:00:00,13:00
+~ time,COM-2026-0269,Snooker,17:00:00,15:00
+~ time,COM-2026-0270,Snooker,19:00:00,15:00
+~ time,COM-2026-0271,Snooker,21:00:00,15:00
+~ time,COM-2026-0273,Snooker,20:00:00,18:00
+~ time,COM-2026-0274,Snooker,22:00:00,18:00
+~ time,COM-2026-0275,Snooker,00:00:00,18:00
+~ time,COM-2026-0277,Snooker,12:00:00,10:00
+~ time,COM-2026-0280,Snooker,19:00:00,16:00
+~ time,COM-2026-0282,Snooker,21:30:00,18:30
+~ time,COM-2026-0284,Snooker,16:00:00,13:00
+~ time,COM-2026-0286,Snooker,13:00:00,10:00
+~ time,COM-2026-0315,Table Tennis,10:45:00,10:00
+~ time,COM-2026-0317,Table Tennis,11:15:00,10:30
+~ time,COM-2026-0339,Table Tennis,19:30:00,18:45
+~ time,COM-2026-0341,Table Tennis,11:45:00,11:00
+~ time,COM-2026-0365,Table Tennis,17:15:00,16:30
+~ time,COM-2026-0375,Table Tennis,17:45:00,17:00
+~ time,COM-2026-0386,Padel,11:15:00,10:00
+~ time,COM-2026-0388,Padel,17:15:00,16:00
+~ time,COM-2026-0390,Padel,11:15:00,10:00
+~ time,COM-2026-0392,Padel,17:15:00,16:00
+~ time,COM-2026-0394,Padel,11:15:00,10:00
+~ time,COM-2026-0396,Padel,17:15:00,16:00
+~ time,COM-2026-0398,Padel,11:15:00,10:00
+~ time,COM-2026-0400,Padel,17:15:00,16:00
+~ time,COM-2026-0402,Padel,11:15:00,10:00
+~ time,COM-2026-0404,Padel,17:15:00,16:00
+~ time,COM-2026-0420,Fencing,15:50:00,12:50
+~ time,COM-2026-0423,Fencing,18:30:00,15:30
+~ time,COM-2026-0460,Shooting,15:15:00,14:15
+~ time,COM-2026-0480,Basketball 3x3,18:40:00,17:00
+~ time,COM-2026-0495,Swimming,17:12:00,17:00
+~ time,COM-2026-0496,Swimming,17:24:00,17:00
+~ time,COM-2026-0497,Swimming,17:36:00,17:00
+~ time,COM-2026-0498,Swimming,17:48:00,17:00
+~ time,COM-2026-0500,Swimming,17:12:00,17:00
+~ time,COM-2026-0501,Swimming,17:24:00,17:00
+~ time,COM-2026-0502,Swimming,17:36:00,17:00
+~ time,COM-2026-0503,Swimming,17:48:00,17:00
+~ time,COM-2026-0505,Swimming,17:12:00,17:00
+~ time,COM-2026-0506,Swimming,17:24:00,17:00
+~ time,COM-2026-0507,Swimming,17:36:00,17:00
+~ time,COM-2026-0508,Swimming,17:48:00,17:00
+~ time,COM-2026-0509,Swimming,18:00:00,17:00
+~ time,COM-2026-0511,Swimming,17:12:00,17:00
+~ time,COM-2026-0512,Swimming,17:24:00,17:00
+~ time,COM-2026-0513,Swimming,17:36:00,17:00
+~ time,COM-2026-0514,Swimming,17:48:00,17:00
+~ time,COM-2026-0526,Table Tennis,17:15:00,16:30
+~ time,COM-2026-0528,Table Tennis,12:15:00,11:30
+~ time,COM-2026-0529,Table Tennis,13:00:00,11:30
+~ time,COM-2026-0531,Table Tennis,12:45:00,12:00
+~ time,COM-2026-0533,Table Tennis,17:45:00,17:00
+~ time,COM-2026-0534,Table Tennis,18:30:00,17:00
+~ time,COM-2026-0536,Table Tennis,18:15:00,17:30
+~ time,COM-2026-0537,Table Tennis,19:00:00,17:30
+~ time,COM-2026-0539,Table Tennis,17:45:00,17:00
+~ time,COM-2026-0541,Table Tennis,18:15:00,17:30
+~ time,COM-2026-0542,Table Tennis,19:00:00,17:30
+~ time,COM-2026-0543,Table Tennis,13:45:00,11:30
+~ time,COM-2026-0545,Table Tennis,12:15:00,11:30
+~ time,COM-2026-0547,Table Tennis,13:00:00,12:15
+~ time,COM-2026-0549,Table Tennis,18:45:00,18:00
+~ time,COM-2026-0550,Table Tennis,13:30:00,12:00
+~ time,COM-2026-0551,Table Tennis,18:30:00,17:00
+~ time,COM-2026-0553,Table Tennis,17:45:00,17:00
+~ time,COM-2026-0555,Table Tennis,10:45:00,10:00
+~ time,COM-2026-0557,Table Tennis,17:45:00,17:00
+~ time,COM-2026-0558,Table Tennis,11:45:00,11:00
+~ time,COM-2026-0562,Taekwondo,17:30:00,15:30
+~ time,COM-2026-0564,Taekwondo,19:30:00,15:30
+~ time,COM-2026-0570,Taekwondo,17:15:00,15:15
+~ time,COM-2026-0574,Taekwondo,17:45:00,15:45
+~ time,COM-2026-0582,Taekwondo,18:15:00,16:15
+~ phase,COM-2026-0494,Swimming,Heats,Event 1
+~ phase,COM-2026-0495,Swimming,Heats,Event 2
+~ phase,COM-2026-0496,Swimming,Heats,Event 3
+~ phase,COM-2026-0497,Swimming,Heats,Event 4
+~ phase,COM-2026-0498,Swimming,Heats,Event 5
+~ phase,COM-2026-0499,Swimming,Heats,Event 6
+~ phase,COM-2026-0500,Swimming,Heats,Event 7
+~ phase,COM-2026-0501,Swimming,Heats,Event 8
+~ phase,COM-2026-0502,Swimming,Heats,Event 9
+~ phase,COM-2026-0503,Swimming,Heats,Event 10
+~ phase,COM-2026-0504,Swimming,Heats,Event 11
+~ phase,COM-2026-0505,Swimming,Heats,Event 12
+~ phase,COM-2026-0506,Swimming,Heats,Event 13
+~ phase,COM-2026-0507,Swimming,Heats,Event 14
+~ phase,COM-2026-0508,Swimming,Heats,Event 14
+~ phase,COM-2026-0509,Swimming,Heats,Event 15
+~ phase,COM-2026-0510,Swimming,Heats,Event 16
+~ phase,COM-2026-0511,Swimming,Heats,Event 17
+~ phase,COM-2026-0512,Swimming,Heats,Event 18
+~ phase,COM-2026-0513,Swimming,Heats,Event 19
+~ phase,COM-2026-0514,Swimming,Heats,Event 20
+~ status,COM-2026-0474,Basketball 3x3,Scheduled,Official
+~ status,COM-2026-0475,Basketball 3x3,Scheduled,Official
+~ status,COM-2026-0480,Basketball 3x3,Scheduled,Official
+~ status,COM-2026-0494,Swimming,Scheduled,Official
+~ status,COM-2026-0562,Taekwondo,Scheduled,Official
+~ status,COM-2026-0564,Taekwondo,Scheduled,Official
+~ status,COM-2026-0570,Taekwondo,Scheduled,Official
+~ status,COM-2026-0572,Taekwondo,Scheduled,Official
+~ status,COM-2026-0574,Taekwondo,Scheduled,Official
+~ title,COM-2026-0475,Basketball 3x3,Women’s Pool A Game,Women’s Pool A Game 2
+~ title,COM-2026-0480,Basketball 3x3,Women’s Pool B Game,Women’s Pool B Game 2
+~ title,COM-2026-0494,Swimming,men 800m Freestyle Heat 1,Men 800m Freestyle Heat 1
