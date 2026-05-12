@@ -104,11 +104,17 @@ EVENT_OVERRIDES: list[tuple[str, list[str], int]] = [
     ("Athletics", ["4x100", "relay"],      40),
     ("Athletics", ["4x400", "relay"],      40),
 
-    # Swimming — individual sessions are short; relays slightly longer
-    ("Swimming", ["relay"],                30),
-    ("Swimming", ["1500m"],                30),
-    ("Swimming", ["800m"],                 25),
-    ("Swimming", ["400m"],                 20),
+    # Swimming — API treats each heat as its own row but shares the session
+    # start time. Each heat slot is really ~10-15 min; the 150-min session
+    # default would overlap every heat together. Per-heat overrides:
+    ("Swimming", ["heat"],                 12),
+    ("Swimming", ["relay"],                20),
+    ("Swimming", ["1500m"],                25),
+    ("Swimming", ["800m"],                 18),
+    ("Swimming", ["400m"],                 15),
+    ("Swimming", ["200m"],                 12),
+    ("Swimming", ["100m"],                  8),
+    ("Swimming", ["50m"],                   6),
 
     # Shooting — qualification windows
     ("Shooting", ["qualification", "75 targets"], 120),
@@ -156,7 +162,61 @@ def estimate_duration_minutes(sport: str, discipline: str = "", phase: str = "")
 
     base = DEFAULT_DURATION.get(sport, 60)
     mult = PHASE_MULT.get(phase, 1.0) if sport in SESSION_SPORTS else 1.0
-    return max(15, int(round(base * mult)))
+    # Tighter minimum than the old 15 — swimming heats can be 5 min
+    return max(5, int(round(base * mult)))
+
+
+def stagger_session_events(rows: list[dict]) -> list[dict]:
+    """When the API returns multiple events at the same start time + venue
+    (session-level scheduling rather than per-event), space them out by
+    cumulative duration so the Gantt shows them sequentially.
+
+    Mutates the rows' 'Time' and 'Time_End' fields in place. Operates on
+    a list of schedule-row dicts (keys: Sport, Date, Time, Venue, Discipline,
+    Phase, Duration_Min).
+    """
+    from collections import defaultdict
+    buckets: dict = defaultdict(list)
+    for r in rows:
+        key = (r.get("Date"), r.get("Sport"), r.get("Time"), r.get("Venue"))
+        buckets[key].append(r)
+
+    for key, group in buckets.items():
+        if len(group) <= 1:
+            continue
+        # Stagger by stage_name ordinal if available, else by list order.
+        # 'Event 1', 'Event 2' → use the trailing number.
+        def order_key(r):
+            import re as _re
+            phase = r.get("Phase", "")
+            m = _re.search(r"\d+", phase)
+            return int(m.group(0)) if m else 0
+
+        # Only stagger if all events have order info (i.e. Swimming Event N)
+        # or all came from same session naming
+        if all(order_key(r) > 0 for r in group):
+            group_sorted = sorted(group, key=order_key)
+        else:
+            group_sorted = list(group)
+        # Apply cumulative offsets
+        start_hhmmss = group_sorted[0].get("Time", "")
+        if not start_hhmmss:
+            continue
+        try:
+            from datetime import datetime, timedelta
+            t = datetime.strptime(start_hhmmss[:8] if len(start_hhmmss) >= 8 else start_hhmmss + ":00",
+                                   "%H:%M:%S")
+        except Exception:
+            continue
+        cursor = t
+        for r in group_sorted:
+            dur = int(r.get("Duration_Min") or 10)
+            new_start = cursor
+            new_end   = cursor + timedelta(minutes=dur)
+            r["Time"]     = new_start.strftime("%H:%M:%S")
+            r["Time_End"] = new_end.strftime("%H:%M:%S")
+            cursor = new_end
+    return rows
 
 
 # ---------------------------------------------------------------------------

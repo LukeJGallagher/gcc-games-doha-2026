@@ -34,7 +34,7 @@ from config import (
     RESULTS_DIR, SCHEDULE_DIR, LOGS_DIR,
     RESULTS_COLUMNS, SCHEDULE_COLUMNS,
 )
-from duration import estimate_duration_minutes, add_minutes
+from duration import estimate_duration_minutes, add_minutes, stagger_session_events
 
 ts = datetime.now().strftime("%Y%m%d_%H%M%S")
 logging.basicConfig(
@@ -271,6 +271,9 @@ def pull_per_sport(sports: list[str]) -> tuple[list[dict], list[dict], dict]:
 
 
 def write_schedule(rows: list[dict]) -> Path:
+    # Stagger events that share a session-level start time (e.g. Swimming
+    # heats all listed at 17:00 by the API) so they show sequentially.
+    rows = stagger_session_events(rows)
     out = SCHEDULE_DIR / f"SCHEDULE_{ts}.csv"
     with out.open("w", newline="", encoding="utf-8-sig") as f:
         w = csv.DictWriter(f, fieldnames=SCHEDULE_COLUMNS)
