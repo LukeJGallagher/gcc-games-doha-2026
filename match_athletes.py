@@ -42,6 +42,8 @@ OUTPUT_COLUMNS = [
     "Reg_Disciplines", "Reg_Status", "Reg_Created", "Reg_In_Bornan",
     # Shortlist enrichment
     "SOTC", "Time_Source",
+    # ISG 2025 enrichment (Riyadh, Nov 2025)
+    "Age", "ISG_2025_Medals", "ISG_2025_Sports",
 ]
 
 # ---------------------------------------------------------------------------
@@ -218,6 +220,39 @@ def _tokenise_name(name: str) -> frozenset:
     return frozenset(w for w in t.split() if len(w) > 1)
 
 
+def load_isg_enrichment() -> dict:
+    """Load ISG 2025 athlete bio + medal history. Key = sorted-token name."""
+    f = HERE / "data" / "history" / "isg_2025_ksa.csv" if False else \
+        Path(__file__).parent / "data" / "history" / "isg_2025_ksa.csv"
+    if not f.exists():
+        return {}
+    out = {}
+    for r in csv.DictReader(f.open(encoding="utf-8-sig")):
+        key = r["Athlete_Name_Lower"]
+        g = int(r.get("ISG_Medal_G") or 0)
+        s = int(r.get("ISG_Medal_S") or 0)
+        b = int(r.get("ISG_Medal_B") or 0)
+        medal_summary = ""
+        if g + s + b > 0:
+            parts = []
+            if g: parts.append(f"{g}G")
+            if s: parts.append(f"{s}S")
+            if b: parts.append(f"{b}B")
+            medal_summary = "/".join(parts)
+        out[key] = {
+            "Age":              r.get("Age", ""),
+            "ISG_2025_Medals":  medal_summary,
+            "ISG_2025_Sports":  r.get("ISG_Sports", ""),
+        }
+    return out
+
+
+def isg_name_key(given: str, family: str) -> str:
+    """Same normalisation as enrich_from_isg.py — sorted-token lowercase."""
+    parts = sorted(w for w in (f"{given} {family}").lower().replace(",", " ").split() if w.isalpha())
+    return " ".join(parts)
+
+
 def load_shortlist_times(path: Path) -> dict:
     """Return {(dob, date_iso, phase_lower): (start, end)} from the Shortlist.
 
@@ -274,7 +309,19 @@ def load_shortlist(path: Path) -> tuple[dict, dict]:
 
 def enrich_row(out_row: dict, reg_lookup: dict,
                sotc_dob: dict | None = None, sotc_name: dict | None = None,
-               time_lookup: dict | None = None) -> dict:
+               time_lookup: dict | None = None,
+               isg_lookup: dict | None = None) -> dict:
+    # ---- ISG 2025 enrichment (age + medal history) ----
+    if isg_lookup is not None:
+        k = isg_name_key(out_row.get("Given Name", ""), out_row.get("Family Name", ""))
+        info = isg_lookup.get(k, {})
+        out_row["Age"]             = info.get("Age", "")
+        out_row["ISG_2025_Medals"] = info.get("ISG_2025_Medals", "")
+        out_row["ISG_2025_Sports"] = info.get("ISG_2025_Sports", "")
+    else:
+        out_row.setdefault("Age", "")
+        out_row.setdefault("ISG_2025_Medals", "")
+        out_row.setdefault("ISG_2025_Sports", "")
     # API times are now canonical (Shortlist manual times became stale once the
     # organisers published proper times via the API). Time_Source flagged so we
     # can re-enable the override later if needed.
@@ -452,6 +499,12 @@ def main():
         n_sotc = sum(1 for v in sotc_dob.values() if v == "Yes")
         print(f"  {len(sotc_dob)} athletes, {n_sotc} flagged SOTC, {len(time_lookup)} manual time entries")
 
+    # ISG 2025 enrichment (age + medal history)
+    isg_lookup = load_isg_enrichment()
+    if isg_lookup:
+        with_medals = sum(1 for v in isg_lookup.values() if v.get("ISG_2025_Medals"))
+        print(f"[ISG 2025] {len(isg_lookup)} athletes, {with_medals} with ISG medals")
+
     # Match
     out_rows: list[dict] = []
     unmatched: list[dict] = []
@@ -491,7 +544,7 @@ def main():
                 "Match_Type":     "team" if "Team" in str(ath.get("Event","")) else "individual",
                 "Opponent":       opponent,
                 "Source_URL":     s.get("Source_URL", ""),
-            }, reg_lookup, sotc_dob, sotc_name, time_lookup))
+            }, reg_lookup, sotc_dob, sotc_name, time_lookup, isg_lookup))
 
     # Write
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
