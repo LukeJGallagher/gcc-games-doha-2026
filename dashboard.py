@@ -1157,7 +1157,7 @@ with tab_summary:
                 day_rows_sched = day_rows_sched.sort_values(["Sport","Family Name","TS"] if "TS" in day_rows_sched.columns
                                                             else ["Sport","Family Name"])
 
-                # Merge in results by (Family Name + Sport + Discipline)
+                # Merge in results by (Family Name + Sport + Discipline + Phase)
                 def find_result_row(ath_row):
                     if day_results.empty:
                         return None
@@ -1166,13 +1166,23 @@ with tab_summary:
                     candidates = day_results[name_match]
                     if candidates.empty:
                         return None
-                    # Best match by event keyword overlap
+                    # Match by Event_ID when available — most reliable for
+                    # disambiguating QF / SF / Final for the same athlete.
+                    eid = (ath_row.get("Event_ID") or "").strip()
+                    if eid:
+                        eid_hit = candidates[candidates["Source_URL"].str.endswith(eid, na=False)]
+                        if not eid_hit.empty:
+                            return eid_hit.iloc[0]
+                    target_phase = (ath_row.get("Phase") or "").strip().lower()
                     event_lower = ath_row.get("Event", "").lower()
                     best = None
                     best_score = -1
                     for _, c in candidates.iterrows():
-                        disc = c.get("Discipline","").lower()
+                        disc  = (c.get("Discipline","") or "").lower()
+                        phase = (c.get("Phase","") or "").strip().lower()
                         score = sum(1 for w in event_lower.split() if w and w in disc)
+                        if target_phase and phase == target_phase:
+                            score += 10  # heavy weight on phase agreement
                         if score > best_score:
                             best, best_score = c, score
                     return best
@@ -1208,19 +1218,27 @@ with tab_summary:
                                 opp_f = float(opp_score) if opp_score not in (None, "") else None
                             except (TypeError, ValueError):
                                 ksa_f = opp_f = None
-                            if ksa_f is not None and opp_f is not None:
+                            if ksa_f is not None and opp_f is not None and ksa_f != opp_f:
                                 if ksa_f > opp_f:
                                     cell_bg = "#a5d99f"   # green = win
                                     cell_text = f"{int(ksa_f)}-{int(opp_f)} W"
-                                elif ksa_f < opp_f:
+                                else:
                                     cell_bg = "#e8a3a3"   # red = loss
                                     cell_text = f"{int(ksa_f)}-{int(opp_f)} L"
-                                else:
-                                    cell_text = f"{int(ksa_f)}-{int(opp_f)}"
-                            elif ksa_f is not None and rank_v in ("1","2"):
-                                # Fallback: use rank when only KSA score is available
-                                cell_bg = "#a5d99f" if rank_v == "1" else "#e8a3a3"
-                                cell_text = "Win" if rank_v == "1" else "Loss"
+                            else:
+                                # Scores tied (BORNAN often reports 0-0 for losing
+                                # rounds of a knockout final) or only one side
+                                # known. Decide via the Medal column:
+                                #   G in Final = Win, S/B in Final = Loss.
+                                if medal_raw == "G":
+                                    cell_bg = "#a5d99f"
+                                    cell_text = "Win"
+                                elif medal_raw in ("S", "B"):
+                                    cell_bg = "#e8a3a3"
+                                    cell_text = "Loss"
+                                elif ksa_f is not None and rank_v in ("1","2"):
+                                    cell_bg = "#a5d99f" if rank_v == "1" else "#e8a3a3"
+                                    cell_text = "Win" if rank_v == "1" else "Loss"
                         if medal_tag:
                             cell_bg = medal_colour
                             cell_text = result_str

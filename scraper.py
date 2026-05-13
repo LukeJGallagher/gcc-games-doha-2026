@@ -207,6 +207,24 @@ def _normalise_phase(stage_name: str, title: str) -> str:
     return s
 
 
+def _derive_gender(title: str, api_gender: str) -> str:
+    """API's gender_category lies for some sports (Taekwondo reports 'M' on
+    Women's events too). Trust the discipline title first; fall back to API.
+    """
+    t = (title or "").lower()
+    if any(k in t for k in ("women", "girls", "female", "ladies", "wom-")):
+        return "Women"
+    if "mixed" in t:
+        return "Mixed"
+    if any(k in t for k in ("men-", "men ", " men", "boys", "male")):
+        return "Men"
+    g = (api_gender or "").strip().lower()
+    if g in ("m", "men", "male"):  return "Men"
+    if g in ("w", "f", "women", "female"): return "Women"
+    if g == "mixed": return "Mixed"
+    return api_gender or ""
+
+
 def _schedule_row(comp: dict, sport: str, country_entries: list[str]) -> dict:
     title_en, title_ar = _split_bilingual(comp.get("title", ""))
     if not title_ar:
@@ -214,6 +232,7 @@ def _schedule_row(comp: dict, sport: str, country_entries: list[str]) -> dict:
     phase    = _normalise_phase(comp.get("stage_name", ""), comp.get("title", ""))
     start    = comp.get("time", "")
     duration = estimate_duration_minutes(sport, title_en, phase)
+    gender   = _derive_gender(title_en, comp.get("gender_category", ""))
     # Apply manual override if PA staff flagged this event
     eid = comp.get("id", "")
     override = _OVERRIDES.get(eid)
@@ -233,7 +252,7 @@ def _schedule_row(comp: dict, sport: str, country_entries: list[str]) -> dict:
         "Discipline_AR":   title_ar,
         "Phase":           phase,
         "Status":          status_val,
-        "Gender":          comp.get("gender_category", ""),
+        "Gender":          gender,
         "Venue":           comp.get("venue", ""),
         "Country_Entries": ",".join(sorted(set(country_entries))),
         "Event_ID":        comp.get("id", ""),
@@ -256,11 +275,22 @@ def pull_per_sport(sports: list[str]) -> tuple[list[dict], list[dict], dict]:
         raw_dump[sport] = comps
         n_athletes = 0
         for comp in comps:
+            # API's participants[] is empty for some competitions (e.g.
+            # Taekwondo finals where only the result is published, not
+            # the entry list). Fall back to results_summary.participants[]
+            # which still carries the NOC codes for medallists/finalists.
             entries = [
                 p.get("noc_code", "")
                 for p in (comp.get("participants") or [])
                 if p.get("noc_code")
             ]
+            if not entries:
+                rs = (comp.get("results_summary") or {})
+                entries = [
+                    p.get("noc_code", "")
+                    for p in (rs.get("participants") or [])
+                    if p.get("noc_code")
+                ]
             schedule_rows.append(_schedule_row(comp, sport, entries))
             rows = _participant_rows(comp, sport)
             n_athletes += len(rows)

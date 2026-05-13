@@ -411,7 +411,19 @@ def load_api_participants() -> dict:
         for c in comps:
             eid = c.get("id", "")
             if not eid: continue
-            parts = c.get("participants") or []
+            parts = list(c.get("participants") or [])
+            # Augment with results_summary.participants — for Taekwondo finals
+            # and other events where the entry list is empty but the medallists
+            # are available under results_summary. Each result-participant
+            # carries player_name + noc_code in the same shape.
+            rs = (c.get("results_summary") or {})
+            for rp in (rs.get("participants") or []):
+                # Try to copy player_name from the nested athlete dict when
+                # absent at the top level (matches the live JSON shape).
+                if not rp.get("player_name"):
+                    ath = rp.get("athlete") or {}
+                    rp["player_name"] = ath.get("english_name") or ath.get("name") or ""
+                parts.append(rp)
             out[eid] = parts
     return out
 
