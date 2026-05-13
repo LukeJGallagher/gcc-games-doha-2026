@@ -1341,6 +1341,85 @@ with tab_summary:
                         )
                         st.plotly_chart(fig, use_container_width=True)
 
+            # ---- ALL KSA RESULTS (medal + non-medal) — times, scores, ranks ----
+            st.markdown(f"""
+            <div style="background:#235036;color:white;padding:0.55rem 1rem;
+                        font-size:1rem;font-weight:700;border-radius:6px;
+                        margin-top:1.2rem;margin-bottom:0.5rem;">
+                All KSA Results — {date_pretty}
+            </div>
+            <div style="color:#666;font-size:0.78rem;margin-bottom:0.5rem;">
+                Every KSA athlete result the API published today —
+                times, pinfall, scores, ranks. Non-medal placings included.
+            </div>
+            """, unsafe_allow_html=True)
+            if not day_results.empty:
+                ksa_day = day_results.copy()
+                ksa_day["MedalU"] = ksa_day["Medal"].astype(str).str.strip().str.upper().str[:1]
+                # Dedupe team rows so a 4-fencer team match is one line, not four
+                ksa_day["IsTeam"] = ksa_day["Athlete"].astype(str).str.contains("Team|Saudi Arabia", regex=True, na=False)
+                ksa_day = ksa_day.drop_duplicates(subset=["Sport","Discipline","Phase","Athlete"])
+                # Numeric rank for sort
+                ksa_day["Rank_num"] = pd.to_numeric(ksa_day["Rank"], errors="coerce")
+                # Sort: by medal (G→S→B→none), then sport, then rank, then discipline
+                medal_order = {"G":0, "S":1, "B":2}
+                ksa_day["MedalRank"] = ksa_day["MedalU"].map(medal_order).fillna(9).astype(int)
+                ksa_day = ksa_day.sort_values(
+                    ["MedalRank","Sport","Discipline","Rank_num","Athlete"],
+                    na_position="last"
+                )
+                show_cols = []
+                for c in ["Sport","Discipline","Phase","Athlete","Result","Rank","Medal","Lane_Heat","Split_Times"]:
+                    if c in ksa_day.columns:
+                        show_cols.append(c)
+                # Custom rendering so medal rows can highlight
+                rows_html = ['<table style="border-collapse:collapse;width:100%;font-size:0.85rem;">']
+                rows_html.append(
+                    '<thead><tr style="background:#f5f5f5;border-bottom:2px solid #ddd;text-align:left;">'
+                    '<th style="padding:6px 10px;">Sport</th>'
+                    '<th style="padding:6px 10px;">Event</th>'
+                    '<th style="padding:6px 10px;">Phase</th>'
+                    '<th style="padding:6px 10px;">Athlete</th>'
+                    '<th style="padding:6px 10px;text-align:right;">Result</th>'
+                    '<th style="padding:6px 10px;text-align:center;">Rank</th>'
+                    '<th style="padding:6px 10px;text-align:center;">Medal</th>'
+                    '</tr></thead><tbody>'
+                )
+                medal_colour_map = {"G":"#d4af37","S":"#bfbfbf","B":"#cd7f32"}
+                medal_name_map   = {"G":"Gold","S":"Silver","B":"Bronze"}
+                for _, rr in ksa_day.iterrows():
+                    mu = rr["MedalU"]
+                    mc = medal_colour_map.get(mu, "transparent")
+                    mn = medal_name_map.get(mu, "")
+                    fg = "white" if mu in medal_colour_map else "#222"
+                    row_bg = "#fbf9ee" if mu == "G" else ("#f8f8f8" if mu in ("S","B") else "white")
+                    rk_disp = ""
+                    if pd.notna(rr.get("Rank_num")):
+                        rk_disp = str(int(rr["Rank_num"]))
+                    elif rr.get("Rank") and str(rr["Rank"]).strip().lower() != "nan":
+                        rk_disp = str(rr["Rank"])
+                    res_disp = str(rr.get("Result","") or "").strip()
+                    if res_disp.endswith(".0") and res_disp.replace(".0","").isdigit():
+                        res_disp = res_disp[:-2]
+                    rows_html.append(
+                        f'<tr style="border-bottom:1px solid #eee;background:{row_bg};">'
+                        f'<td style="padding:5px 10px;font-weight:600;color:#235036;">{rr.get("Sport","")}</td>'
+                        f'<td style="padding:5px 10px;">{rr.get("Discipline","")}</td>'
+                        f'<td style="padding:5px 10px;color:#666;">{rr.get("Phase","")}</td>'
+                        f'<td style="padding:5px 10px;">{rr.get("Athlete","")}</td>'
+                        f'<td style="padding:5px 10px;text-align:right;font-weight:600;">{res_disp or "—"}</td>'
+                        f'<td style="padding:5px 10px;text-align:center;color:#555;">{rk_disp or "—"}</td>'
+                        f'<td style="padding:5px 10px;text-align:center;background:{mc};color:{fg};font-weight:700;">{mn}</td>'
+                        f'</tr>'
+                    )
+                rows_html.append("</tbody></table>")
+                st.markdown("".join(rows_html), unsafe_allow_html=True)
+                st.caption(f"{len(ksa_day)} KSA result rows on {date_pretty} — "
+                           f"{int((ksa_day['MedalU'].isin(['G','S','B'])).sum())} medals, "
+                           f"{int((~ksa_day['MedalU'].isin(['G','S','B'])).sum())} non-medal placings.")
+            else:
+                st.caption("No KSA result rows for this day yet.")
+
             # ---- ALL DAILY MEDALS — every NOC, full event-by-event ----
             st.markdown(f"""
             <div style="background:#235036;color:white;padding:0.55rem 1rem;
