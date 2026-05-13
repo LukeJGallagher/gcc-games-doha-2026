@@ -150,7 +150,7 @@ def _participant_rows(comp: dict, sport: str) -> list[dict]:
             or athlete.get("english_name")
             or p.get("english_name")
             or p.get("name")
-            or (f"{p.get('noc_name', '')} (Team)" if p.get("id", "").startswith("TEAM-") else "")
+            or (f"{p.get('noc_name', '')} (Team)" if (p.get("id") or "").startswith("TEAM-") else "")
         )
         result = p.get("final_result")
         if result is None:
