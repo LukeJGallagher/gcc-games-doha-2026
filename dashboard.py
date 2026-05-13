@@ -834,8 +834,8 @@ def render_medal_card(row) -> str:
 
     is_team = "Team" in athlete or "Saudi" in athlete
     if is_team:
-        # large flag emoji
-        avatar = "<div style='font-size:62px;line-height:1;'>🇸🇦</div>"
+        # KSA flag emoji for team medals
+        avatar = f"<div style='width:72px;height:72px;border-radius:50%;border:3px solid {colour};display:flex;align-items:center;justify-content:center;font-size:46px;background:white;'>🇸🇦</div>"
     else:
         pk = lookup_person_key(athlete)
         photo = athlete_photo_path(pk)
@@ -844,7 +844,9 @@ def render_medal_card(row) -> str:
             data = base64.b64encode(photo.read_bytes()).decode()
             avatar = f'<img src="data:image/jpeg;base64,{data}" style="width:72px;height:72px;border-radius:50%;object-fit:cover;border:3px solid {colour};"/>'
         else:
-            avatar = f'<img src="{initials_svg(athlete, ELITE)}" style="width:72px;height:72px;border-radius:50%;border:3px solid {colour};"/>'
+            # Fall back to the KSA flag rather than blank initials so the
+            # card still reads as "Saudi athlete" at a glance.
+            avatar = f"<div style='width:72px;height:72px;border-radius:50%;border:3px solid {colour};display:flex;align-items:center;justify-content:center;font-size:42px;background:white;'>🇸🇦</div>"
 
     # IMPORTANT: no leading indentation on any line. Streamlit's markdown
     # parser treats any HTML indented by 4+ spaces as a code block and shows
@@ -1338,6 +1340,56 @@ with tab_summary:
                                               x=0.5, y=0.5, font_size=20, showarrow=False)],
                         )
                         st.plotly_chart(fig, use_container_width=True)
+
+            # ---- ALL DAILY MEDALS — every NOC, full event-by-event ----
+            st.markdown(f"""
+            <div style="background:#235036;color:white;padding:0.55rem 1rem;
+                        font-size:1rem;font-weight:700;border-radius:6px;
+                        margin-top:1.2rem;margin-bottom:0.5rem;">
+                All Medals — {date_pretty} (every NOC)
+            </div>
+            """, unsafe_allow_html=True)
+            if not results_all_df.empty:
+                day_all = results_all_df[results_all_df["Date"].dt.date == pick_day].copy()
+                day_all_med = day_all[day_all["Medal"].astype(str).str.strip().str.upper().isin(
+                    ["G","S","B","GOLD","SILVER","BRONZE"]
+                )].copy()
+                if day_all_med.empty:
+                    st.caption("No medals recorded yet for this day.")
+                else:
+                    day_all_med["MedalU"] = day_all_med["Medal"].astype(str).str.strip().str.upper().str[:1]
+                    # Dedupe team medals (one row per Sport/Discipline/Country/Medal)
+                    day_all_med = day_all_med.drop_duplicates(
+                        subset=["Sport","Discipline","Country","MedalU"]
+                    )
+                    # Top tiles: total medals per NOC for this day
+                    by_noc = (day_all_med.groupby(["Country","MedalU"]).size()
+                              .unstack(fill_value=0)
+                              .reindex(columns=["G","S","B"], fill_value=0))
+                    by_noc["Total"] = by_noc.sum(axis=1)
+                    by_noc = by_noc.sort_values(["G","Total"], ascending=False)
+                    cols = st.columns(len(by_noc))
+                    for i, (noc, r) in enumerate(by_noc.iterrows()):
+                        is_ksa = noc.upper() == "KSA"
+                        bg = "#235036" if is_ksa else "#f5f5f5"
+                        fg = "white"  if is_ksa else "#333"
+                        cols[i].markdown(
+                            f"<div style='background:{bg};color:{fg};border-radius:6px;"
+                            f"padding:0.6rem 0.4rem;text-align:center;font-weight:600;'>"
+                            f"<div style='font-size:0.85rem;'>{noc}</div>"
+                            f"<div style='font-size:1.4rem;line-height:1.1;margin:0.15rem 0;'>{int(r['Total'])}</div>"
+                            f"<div style='font-size:0.7rem;letter-spacing:0.5px;'>"
+                            f"🥇 {int(r['G'])} · 🥈 {int(r['S'])} · 🥉 {int(r['B'])}"
+                            f"</div></div>",
+                            unsafe_allow_html=True,
+                        )
+                    st.write("")
+                    # Detail table
+                    show = day_all_med.sort_values(["MedalU","Sport","Discipline","Country"]).copy()
+                    show["Medal"] = show["MedalU"].map({"G":"Gold","S":"Silver","B":"Bronze"})
+                    keep_cols = [c for c in ["Sport","Discipline","Phase","Country","Athlete","Medal","Result"] if c in show.columns]
+                    st.dataframe(show[keep_cols].rename(columns={"Discipline":"Event"}),
+                                 hide_index=True, use_container_width=True)
 
 
 # ===========================================================================
