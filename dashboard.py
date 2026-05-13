@@ -1152,8 +1152,23 @@ with tab_summary:
                     '</tr></thead><tbody>'
                 )
 
-                # Build per-row from athlete-schedule rows on this day
+                # Build per-row from athlete-schedule rows on this day.
+                # Collapse team events to one row per match — otherwise a
+                # 4-fencer Men's Team Foil shows up as 4 duplicate rows here.
                 day_rows_sched = sched_today.copy()
+                if not day_rows_sched.empty and "Match_Type" in day_rows_sched.columns:
+                    _is_team = day_rows_sched["Match_Type"].astype(str).str.lower() == "team"
+                    _ind = day_rows_sched[~_is_team]
+                    _team = day_rows_sched[_is_team]
+                    if not _team.empty:
+                        _team_collapsed = []
+                        for (_eid, _phase), g in _team.groupby(["Event_ID","Phase"], dropna=False):
+                            rep = g.iloc[0].copy()
+                            opp = str(rep.get("Opponent") or "").strip()
+                            rep["Given Name"]  = "KSA"
+                            rep["Family Name"] = f"Team vs {opp}" if opp else "Team"
+                            _team_collapsed.append(rep)
+                        day_rows_sched = pd.concat([_ind, pd.DataFrame(_team_collapsed)], ignore_index=True)
                 day_rows_sched = day_rows_sched.sort_values(["Sport","Family Name","TS"] if "TS" in day_rows_sched.columns
                                                             else ["Sport","Family Name"])
 
@@ -1657,10 +1672,37 @@ with tab_daily:
                 day_df.loc[miss, "TE"] = day_df.loc[miss, "TS"] + pd.to_timedelta(day_df.loc[miss, "Duration_Min"], unit="min")
                 day_df = day_df.dropna(subset=["TS","TE"]).sort_values("TS")
 
+                # Build the de-duplicated view used by the per-athlete table
+                # AND the Gantt: collapse team events (one row per match
+                # rather than per squad member) so 4 fencers in a Men's
+                # Team Foil match no longer appear as 4 separate rows.
+                def collapse_team_rows(df: pd.DataFrame) -> pd.DataFrame:
+                    if df.empty:
+                        return df
+                    is_team = df["Match_Type"].astype(str).str.lower() == "team"
+                    ind_rows = df[~is_team]
+                    team_rows = df[is_team]
+                    if team_rows.empty:
+                        return ind_rows
+                    # One row per (Event_ID, Phase) — keep first row's metadata
+                    # and replace the athlete with "KSA (Team) vs OPP"
+                    grouped = []
+                    for (_eid, _phase), g in team_rows.groupby(["Event_ID","Phase"], dropna=False):
+                        rep = g.iloc[0].copy()
+                        opp = str(rep.get("Opponent") or "").strip()
+                        rep["Athlete"] = f"KSA (Team) vs {opp}" if opp else "KSA (Team)"
+                        rep["Given Name"] = "KSA"
+                        rep["Family Name"] = "Team"
+                        grouped.append(rep)
+                    team_collapsed = pd.DataFrame(grouped)
+                    return pd.concat([ind_rows, team_collapsed], ignore_index=True).sort_values("TS")
+
+                day_df_dedup = collapse_team_rows(day_df)
+
                 # ---- PPT export for this day ----
                 daily_sections = []
                 # Slide 1: Gantt of the daily athlete schedule
-                gantt_fig = build_daily_gantt_fig(day_df, title=f"Daily Athlete Schedule — {fmt_date(pick)}")
+                gantt_fig = build_daily_gantt_fig(day_df_dedup, title=f"Daily Athlete Schedule — {fmt_date(pick)}")
                 if gantt_fig is not None:
                     daily_sections.append({"title": f"Schedule Gantt — {fmt_date(pick)}",
                                             "kind": "chart", "fig": gantt_fig})
@@ -1794,7 +1836,11 @@ with tab_daily:
                     "Training":      "#cccccc",
                 }
 
-                ath_view = day_df.copy().sort_values(["Sport","Family Name","Given Name","TS"])
+                # Per-athlete schedule shows individual events + 1 row per team
+                # match. The "Team matches today" panel above already covers
+                # team events, but keeping them in this view too is useful for
+                # the per-day Gantt visualisation. Each team match = 1 row.
+                ath_view = day_df_dedup.copy().sort_values(["Sport","Family Name","Given Name","TS"])
                 # Decide the time window for the day's bars
                 day_min = ath_view["TS"].min()
                 day_max = ath_view["TE"].max()
