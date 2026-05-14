@@ -1,0 +1,164 @@
+﻿Type,Event_ID,Sport,Before,After
++ added,COM-2026-0716,Athletics,,18:30
++ added,COM-2026-0717,Athletics,,18:35
++ added,COM-2026-0718,Athletics,,18:40
++ added,COM-2026-0719,Athletics,,18:45
++ added,COM-2026-0720,Athletics,,18:50
++ added,COM-2026-0721,Athletics,,18:55
++ added,COM-2026-0722,Athletics,,19:00
++ added,COM-2026-0723,Athletics,,19:05
++ added,COM-2026-0724,Athletics,,19:15
++ added,COM-2026-0725,Athletics,,19:20
++ added,COM-2026-0726,Athletics,,19:40
++ added,COM-2026-0727,Athletics,,19:55
++ added,COM-2026-0728,Athletics,,20:10
++ added,COM-2026-0729,Athletics,,8:00:
++ added,COM-2026-0730,Athletics,,9:00:
++ added,COM-2026-0731,Athletics,,18:30
++ added,COM-2026-0732,Athletics,,18:35
++ added,COM-2026-0733,Athletics,,18:40
++ added,COM-2026-0734,Athletics,,18:45
++ added,COM-2026-0735,Athletics,,19:00
++ added,COM-2026-0736,Athletics,,19:10
++ added,COM-2026-0737,Athletics,,19:15
++ added,COM-2026-0738,Athletics,,19:20
++ added,COM-2026-0739,Athletics,,20:25
++ added,COM-2026-0740,Athletics,,20:40
++ added,COM-2026-0741,Athletics,,8:00:
++ added,COM-2026-0742,Athletics,,8:30:
++ added,COM-2026-0743,Athletics,,9:15:
++ added,COM-2026-0744,Athletics,,18:30
++ added,COM-2026-0745,Athletics,,18:35
++ added,COM-2026-0746,Athletics,,18:40
++ added,COM-2026-0747,Athletics,,18:45
++ added,COM-2026-0748,Athletics,,18:55
++ added,COM-2026-0749,Athletics,,19:10
++ added,COM-2026-0750,Athletics,,19:20
++ added,COM-2026-0751,Athletics,,19:30
++ added,COM-2026-0752,Athletics,,19:50
++ added,COM-2026-0753,Athletics,,20:10
++ added,COM-2026-0754,Athletics,,8:00:
++ added,COM-2026-0755,Athletics,,8:30:
++ added,COM-2026-0756,Athletics,,9:30:
++ added,COM-2026-0757,Athletics,,18:30
++ added,COM-2026-0758,Athletics,,18:35
++ added,COM-2026-0759,Athletics,,18:40
++ added,COM-2026-0760,Athletics,,18:45
++ added,COM-2026-0761,Athletics,,18:50
++ added,COM-2026-0762,Athletics,,19:00
++ added,COM-2026-0763,Athletics,,19:20
++ added,COM-2026-0764,Athletics,,19:25
++ added,COM-2026-0765,Athletics,,19:40
++ added,COM-2026-0766,Athletics,,19:55
++ added,COM-2026-0767,Athletics,,20:10
++ added,COM-2026-0768,Athletics,,20:25
+- dropped,COM-2026-0022,Athletics,9:00:00,
+- dropped,COM-2026-0023,Athletics,10:15:00,
+- dropped,COM-2026-0024,Athletics,17:00:00,
+- dropped,COM-2026-0026,Athletics,17:15:00,
+- dropped,COM-2026-0027,Athletics,17:20:00,
+- dropped,COM-2026-0028,Athletics,17:25:00,
+- dropped,COM-2026-0029,Athletics,17:30:00,
+- dropped,COM-2026-0030,Athletics,17:35:00,
+- dropped,COM-2026-0031,Athletics,17:50:00,
+- dropped,COM-2026-0032,Athletics,18:00:00,
+- dropped,COM-2026-0033,Athletics,18:10:00,
+- dropped,COM-2026-0034,Athletics,18:30:00,
+- dropped,COM-2026-0035,Athletics,18:40:00,
+- dropped,COM-2026-0036,Athletics,18:45:00,
+- dropped,COM-2026-0037,Athletics,19:00:00,
+- dropped,COM-2026-0038,Athletics,19:30:00,
+- dropped,COM-2026-0039,Athletics,20:05:00,
+- dropped,COM-2026-0040,Athletics,20:15:00,
+- dropped,COM-2026-0041,Athletics,9:00:00,
+- dropped,COM-2026-0042,Athletics,10:00:00,
+- dropped,COM-2026-0043,Athletics,17:00:00,
+- dropped,COM-2026-0044,Athletics,17:05:00,
+- dropped,COM-2026-0045,Athletics,17:10:00,
+- dropped,COM-2026-0046,Athletics,17:15:00,
+- dropped,COM-2026-0047,Athletics,17:25:00,
+- dropped,COM-2026-0048,Athletics,17:40:00,
+- dropped,COM-2026-0049,Athletics,17:55:00,
+- dropped,COM-2026-0050,Athletics,18:10:00,
+- dropped,COM-2026-0051,Athletics,18:15:00,
+- dropped,COM-2026-0052,Athletics,18:20:00,
+- dropped,COM-2026-0053,Athletics,18:25:00,
+- dropped,COM-2026-0054,Athletics,18:40:00,
+- dropped,COM-2026-0055,Athletics,19:25:00,
+- dropped,COM-2026-0056,Athletics,19:45:00,
+- dropped,COM-2026-0057,Athletics,9:00:00,
+- dropped,COM-2026-0058,Athletics,9:30:00,
+- dropped,COM-2026-0059,Athletics,10:45:00,
+- dropped,COM-2026-0060,Athletics,17:00:00,
+- dropped,COM-2026-0061,Athletics,17:05:00,
+- dropped,COM-2026-0062,Athletics,17:10:00,
+- dropped,COM-2026-0063,Athletics,17:15:00,
+- dropped,COM-2026-0064,Athletics,17:30:00,
+- dropped,COM-2026-0065,Athletics,17:40:00,
+- dropped,COM-2026-0066,Athletics,18:00:00,
+- dropped,COM-2026-0067,Athletics,18:15:00,
+- dropped,COM-2026-0068,Athletics,18:30:00,
+- dropped,COM-2026-0069,Athletics,18:45:00,
+- dropped,COM-2026-0070,Athletics,18:50:00,
+- dropped,COM-2026-0071,Athletics,18:55:00,
+- dropped,COM-2026-0072,Athletics,19:10:00,
+- dropped,COM-2026-0073,Athletics,9:00:00,
+- dropped,COM-2026-0074,Athletics,9:45:00,
+- dropped,COM-2026-0075,Athletics,11:30:00,
+- dropped,COM-2026-0076,Athletics,17:00:00,
+- dropped,COM-2026-0078,Athletics,17:15:00,
+- dropped,COM-2026-0079,Athletics,17:20:00,
+- dropped,COM-2026-0080,Athletics,17:30:00,
+- dropped,COM-2026-0081,Athletics,17:40:00,
+- dropped,COM-2026-0082,Athletics,18:05:00,
+- dropped,COM-2026-0083,Athletics,18:20:00,
+- dropped,COM-2026-0084,Athletics,18:25:00,
+- dropped,COM-2026-0085,Athletics,18:30:00,
+- dropped,COM-2026-0086,Athletics,18:45:00,
+- dropped,COM-2026-0087,Athletics,19:05:00,
+~ time,COM-2026-0021,Athletics,8:30:00,7:00:
+~ time,COM-2026-0025,Athletics,17:10:00,8:00:
+~ time,COM-2026-0077,Athletics,17:05:00,8:30:
+~ time,COM-2026-0494,Swimming,17:48:00,17:00
+~ time,COM-2026-0495,Swimming,17:12:00,17:00
+~ time,COM-2026-0496,Swimming,17:36:00,17:00
+~ time,COM-2026-0498,Swimming,17:24:00,17:00
+~ time,COM-2026-0499,Swimming,17:24:00,17:00
+~ time,COM-2026-0500,Swimming,17:48:00,17:00
+~ time,COM-2026-0502,Swimming,17:12:00,17:00
+~ time,COM-2026-0503,Swimming,17:36:00,17:00
+~ time,COM-2026-0504,Swimming,17:24:00,17:00
+~ time,COM-2026-0506,Swimming,17:12:00,17:00
+~ time,COM-2026-0507,Swimming,17:36:00,17:00
+~ time,COM-2026-0508,Swimming,18:00:00,17:00
+~ time,COM-2026-0509,Swimming,17:48:00,17:00
+~ time,COM-2026-0510,Swimming,17:12:00,17:00
+~ time,COM-2026-0511,Swimming,17:48:00,17:00
+~ time,COM-2026-0513,Swimming,17:24:00,17:00
+~ time,COM-2026-0514,Swimming,17:36:00,17:00
+~ phase,COM-2026-0025,Athletics,Final,Heptathlon
+~ phase,COM-2026-0077,Athletics,Final,Heptathlon
+~ phase,COM-2026-0494,Swimming,Heats,Event 1
+~ phase,COM-2026-0495,Swimming,Heats,Event 2
+~ phase,COM-2026-0496,Swimming,Heats,Event 3
+~ phase,COM-2026-0497,Swimming,Heats,Event 4
+~ phase,COM-2026-0498,Swimming,Heats,Event 5
+~ phase,COM-2026-0499,Swimming,Heats,Event 6
+~ phase,COM-2026-0500,Swimming,Heats,Event 7
+~ phase,COM-2026-0501,Swimming,Heats,Event 8
+~ phase,COM-2026-0502,Swimming,Heats,Event 9
+~ phase,COM-2026-0503,Swimming,Heats,Event 10
+~ phase,COM-2026-0504,Swimming,Heats,Event 11
+~ phase,COM-2026-0505,Swimming,Heats,Event 12
+~ phase,COM-2026-0506,Swimming,Heats,Event 13
+~ phase,COM-2026-0507,Swimming,Heats,Event 14
+~ phase,COM-2026-0508,Swimming,Heats,Event 14
+~ phase,COM-2026-0509,Swimming,Heats,Event 15
+~ phase,COM-2026-0510,Swimming,Heats,Event 16
+~ phase,COM-2026-0511,Swimming,Heats,Event 17
+~ phase,COM-2026-0512,Swimming,Heats,Event 18
+~ phase,COM-2026-0513,Swimming,Heats,Event 19
+~ phase,COM-2026-0514,Swimming,Heats,Event 20
+~ status,COM-2026-0021,Athletics,Scheduled,Official
+~ status,COM-2026-0025,Athletics,Scheduled,Official
+~ status,COM-2026-0077,Athletics,Scheduled,Official
