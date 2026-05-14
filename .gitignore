@@ -16,3 +16,31 @@ data/schedule/RAW_*.json
 .DS_Store
 Thumbs.db
 nul
+
+# Secrets — NEVER commit these
+.env
+.env.*
+!.env.example
+*.env
+secrets.*
+credentials.*
+*credentials*.json
+service-account*.json
+client_secret*.json
+*.pem
+*.key
+id_rsa
+id_rsa.*
+id_ed25519
+id_ed25519.*
+
+# Login cookies / session jars for scrapers
+cookies.txt
+*.cookies
+cookies/
+.session
+*_session.json
+
+# Scraper auth state
+.auth/
+auth_state.json
