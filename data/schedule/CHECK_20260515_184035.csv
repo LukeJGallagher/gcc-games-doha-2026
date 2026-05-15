@@ -1,0 +1,150 @@
+﻿Type,Event_ID,Sport,Before,After
++ added,COM-2026-0792,Athletics,,19:40
++ added,COM-2026-0793,Padel,,10:00
++ added,COM-2026-0794,Padel,,10:00
++ added,COM-2026-0795,Padel,,15:00
++ added,COM-2026-0796,Padel,,15:00
++ added,COM-2026-0797,Padel,,10:00
++ added,COM-2026-0798,Padel,,10:00
++ added,COM-2026-0799,Padel,,15:00
++ added,COM-2026-0800,Padel,,15:00
++ added,COM-2026-0801,Padel,,10:00
++ added,COM-2026-0802,Padel,,10:00
++ added,COM-2026-0803,Padel,,15:00
++ added,COM-2026-0804,Padel,,15:00
++ added,COM-2026-0805,Padel,,10:00
++ added,COM-2026-0806,Padel,,10:00
++ added,COM-2026-0807,Padel,,15:00
++ added,COM-2026-0808,Padel,,15:00
++ added,COM-2026-0809,Padel,,10:00
++ added,COM-2026-0810,Padel,,10:00
++ added,COM-2026-0811,Padel,,15:00
++ added,COM-2026-0812,Padel,,15:00
++ added,COM-2026-0813,Padel,,20:00
++ added,COM-2026-0814,Padel,,20:15
+- dropped,COM-2026-0774,Fencing,9:00:00,
+- dropped,COM-2026-0776,Fencing,9:00:00,
+- dropped,COM-2026-0777,Fencing,10:20:00,
+- dropped,COM-2026-0778,Fencing,10:20:00,
+- dropped,COM-2026-0780,Fencing,13:00:00,
+- dropped,COM-2026-0781,Fencing,13:00:00,
+- dropped,COM-2026-0782,Fencing,14:20:00,
+- dropped,COM-2026-0783,Fencing,14:20:00,
+- dropped,COM-2026-0785,Fencing,13:00:00,
+- dropped,COM-2026-0786,Fencing,13:00:00,
+~ time,COM-2026-0494,Swimming,17:48:00,17:00
+~ time,COM-2026-0495,Swimming,17:12:00,17:00
+~ time,COM-2026-0496,Swimming,17:36:00,17:00
+~ time,COM-2026-0498,Swimming,17:24:00,17:00
+~ time,COM-2026-0499,Swimming,17:24:00,17:00
+~ time,COM-2026-0500,Swimming,17:48:00,17:00
+~ time,COM-2026-0502,Swimming,17:12:00,17:00
+~ time,COM-2026-0503,Swimming,17:36:00,17:00
+~ time,COM-2026-0504,Swimming,17:36:00,17:00
+~ time,COM-2026-0506,Swimming,17:12:00,17:00
+~ time,COM-2026-0507,Swimming,17:48:00,17:00
+~ time,COM-2026-0508,Swimming,18:00:00,17:00
+~ time,COM-2026-0509,Swimming,17:24:00,17:00
+~ time,COM-2026-0510,Swimming,17:12:00,17:00
+~ time,COM-2026-0511,Swimming,17:48:00,17:00
+~ time,COM-2026-0513,Swimming,17:24:00,17:00
+~ time,COM-2026-0514,Swimming,17:36:00,17:00
+~ phase,COM-2026-0236,Billiards,Qualification,Semi Final
+~ phase,COM-2026-0237,Billiards,Qualification,Semi Final
+~ phase,COM-2026-0238,Billiards,Semi Final,Final
+~ phase,COM-2026-0494,Swimming,Heats,Event 1
+~ phase,COM-2026-0495,Swimming,Heats,Event 2
+~ phase,COM-2026-0496,Swimming,Heats,Event 3
+~ phase,COM-2026-0497,Swimming,Heats,Event 4
+~ phase,COM-2026-0498,Swimming,Heats,Event 5
+~ phase,COM-2026-0499,Swimming,Heats,Event 6
+~ phase,COM-2026-0500,Swimming,Heats,Event 7
+~ phase,COM-2026-0501,Swimming,Heats,Event 8
+~ phase,COM-2026-0502,Swimming,Heats,Event 9
+~ phase,COM-2026-0503,Swimming,Heats,Event 10
+~ phase,COM-2026-0504,Swimming,Heats,Event 11
+~ phase,COM-2026-0505,Swimming,Heats,Event 12
+~ phase,COM-2026-0506,Swimming,Heats,Event 13
+~ phase,COM-2026-0507,Swimming,Heats,Event 14
+~ phase,COM-2026-0508,Swimming,Heats,Event 14
+~ phase,COM-2026-0509,Swimming,Heats,Event 15
+~ phase,COM-2026-0510,Swimming,Heats,Event 16
+~ phase,COM-2026-0511,Swimming,Heats,Event 17
+~ phase,COM-2026-0512,Swimming,Heats,Event 18
+~ phase,COM-2026-0513,Swimming,Heats,Event 19
+~ phase,COM-2026-0514,Swimming,Heats,Event 20
+~ status,COM-2026-0088,Equestrian,Scheduled,Official
+~ status,COM-2026-0093,Equestrian,Scheduled,Official
+~ status,COM-2026-0154,Boxing,Scheduled,Official
+~ status,COM-2026-0156,Boxing,Scheduled,Official
+~ status,COM-2026-0157,Boxing,Scheduled,Official
+~ status,COM-2026-0158,Boxing,Scheduled,Official
+~ status,COM-2026-0159,Boxing,Scheduled,Official
+~ status,COM-2026-0160,Boxing,Scheduled,Official
+~ status,COM-2026-0162,Boxing,Scheduled,Official
+~ status,COM-2026-0163,Boxing,Scheduled,Official
+~ status,COM-2026-0164,Boxing,Scheduled,Official
+~ status,COM-2026-0165,Boxing,Scheduled,Official
+~ status,COM-2026-0211,Billiards,Scheduled,Official
+~ status,COM-2026-0212,Billiards,Scheduled,Official
+~ status,COM-2026-0213,Billiards,Scheduled,Official
+~ status,COM-2026-0214,Billiards,Scheduled,Official
+~ status,COM-2026-0236,Billiards,Scheduled,Official
+~ status,COM-2026-0237,Billiards,Scheduled,Official
+~ status,COM-2026-0238,Billiards,Scheduled,Official
+~ status,COM-2026-0447,Shooting,Scheduled,Official
+~ status,COM-2026-0493,Basketball 3x3,Scheduled,Official
+~ status,COM-2026-0495,Swimming,Scheduled,Official
+~ status,COM-2026-0496,Swimming,Scheduled,Official
+~ status,COM-2026-0498,Swimming,Scheduled,Official
+~ status,COM-2026-0500,Swimming,Scheduled,Official
+~ status,COM-2026-0501,Swimming,Scheduled,Official
+~ status,COM-2026-0502,Swimming,Scheduled,Official
+~ status,COM-2026-0509,Swimming,Scheduled,Official
+~ status,COM-2026-0510,Swimming,Scheduled,Official
+~ status,COM-2026-0576,Taekwondo,Scheduled,Official
+~ status,COM-2026-0589,Bowling,Scheduled,Official
+~ status,COM-2026-0607,Fencing,Scheduled,Official
+~ status,COM-2026-0608,Fencing,Scheduled,Official
+~ status,COM-2026-0609,Fencing,Scheduled,Official
+~ status,COM-2026-0610,Fencing,Scheduled,Official
+~ status,COM-2026-0611,Fencing,Scheduled,Official
+~ status,COM-2026-0612,Fencing,Scheduled,Official
+~ status,COM-2026-0613,Fencing,Scheduled,Official
+~ status,COM-2026-0614,Fencing,Scheduled,Official
+~ status,COM-2026-0615,Fencing,Scheduled,Official
+~ status,COM-2026-0616,Fencing,Scheduled,Official
+~ status,COM-2026-0617,Fencing,Scheduled,Official
+~ status,COM-2026-0618,Fencing,Scheduled,Official
+~ status,COM-2026-0619,Fencing,Scheduled,Official
+~ status,COM-2026-0620,Fencing,Scheduled,Official
+~ status,COM-2026-0621,Fencing,Scheduled,Official
+~ status,COM-2026-0622,Fencing,Scheduled,Official
+~ status,COM-2026-0623,Fencing,Scheduled,Official
+~ status,COM-2026-0624,Fencing,Scheduled,Official
+~ status,COM-2026-0625,Fencing,Scheduled,Official
+~ status,COM-2026-0626,Fencing,Scheduled,Official
+~ status,COM-2026-0714,Fencing,Scheduled,Official
+~ status,COM-2026-0715,Fencing,Scheduled,Official
+~ status,COM-2026-0717,Athletics,Scheduled,Official
+~ status,COM-2026-0718,Athletics,Scheduled,Official
+~ status,COM-2026-0719,Athletics,Scheduled,Official
+~ status,COM-2026-0720,Athletics,Scheduled,Official
+~ status,COM-2026-0721,Athletics,Scheduled,Official
+~ status,COM-2026-0722,Athletics,Scheduled,Official
+~ status,COM-2026-0723,Athletics,Scheduled,Official
+~ status,COM-2026-0724,Athletics,Scheduled,Official
+~ status,COM-2026-0725,Athletics,Scheduled,Official
+~ status,COM-2026-0728,Athletics,Scheduled,Official
+~ status,COM-2026-0731,Athletics,Scheduled,Official
+~ status,COM-2026-0732,Athletics,Scheduled,Official
+~ status,COM-2026-0733,Athletics,Scheduled,Official
+~ status,COM-2026-0734,Athletics,Scheduled,Official
+~ status,COM-2026-0735,Athletics,Scheduled,Official
+~ status,COM-2026-0736,Athletics,Scheduled,Official
+~ status,COM-2026-0737,Athletics,Scheduled,Official
+~ status,COM-2026-0739,Athletics,Scheduled,Official
+~ status,COM-2026-0740,Athletics,Scheduled,Official
+~ status,COM-2026-0790,Athletics,Scheduled,Official
+~ status,COM-2026-0791,Shooting,Scheduled,Official
+~ title,COM-2026-0790,Athletics,HEPTATHLON WOMEN,HEPTATHLON WOMEN (Combined)
