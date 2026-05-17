@@ -1,0 +1,85 @@
+﻿Type,Event_ID,Sport,Before,After
+- dropped,COM-2026-0461,Shooting,9:30:00,
+- dropped,COM-2026-0749,Athletics,19:10:00,
+- dropped,COM-2026-0816,Shooting,8:30:00,
+~ time,COM-2026-0494,Swimming,17:48:00,17:00
+~ time,COM-2026-0495,Swimming,17:12:00,17:00
+~ time,COM-2026-0496,Swimming,17:36:00,17:00
+~ time,COM-2026-0498,Swimming,17:24:00,17:00
+~ time,COM-2026-0499,Swimming,17:24:00,17:00
+~ time,COM-2026-0500,Swimming,17:48:00,17:00
+~ time,COM-2026-0502,Swimming,17:12:00,17:00
+~ time,COM-2026-0503,Swimming,17:36:00,17:00
+~ time,COM-2026-0504,Swimming,17:36:00,17:00
+~ time,COM-2026-0506,Swimming,17:12:00,17:00
+~ time,COM-2026-0507,Swimming,17:48:00,17:00
+~ time,COM-2026-0508,Swimming,18:00:00,17:00
+~ time,COM-2026-0509,Swimming,17:24:00,17:00
+~ time,COM-2026-0510,Swimming,17:12:00,17:00
+~ time,COM-2026-0511,Swimming,17:48:00,17:00
+~ time,COM-2026-0513,Swimming,17:24:00,17:00
+~ time,COM-2026-0514,Swimming,17:36:00,17:00
+~ phase,COM-2026-0494,Swimming,Heats,Event 1
+~ phase,COM-2026-0495,Swimming,Heats,Event 2
+~ phase,COM-2026-0496,Swimming,Heats,Event 3
+~ phase,COM-2026-0497,Swimming,Heats,Event 4
+~ phase,COM-2026-0498,Swimming,Heats,Event 5
+~ phase,COM-2026-0499,Swimming,Heats,Event 6
+~ phase,COM-2026-0500,Swimming,Heats,Event 7
+~ phase,COM-2026-0501,Swimming,Heats,Event 8
+~ phase,COM-2026-0502,Swimming,Heats,Event 9
+~ phase,COM-2026-0503,Swimming,Heats,Event 10
+~ phase,COM-2026-0504,Swimming,Heats,Event 11
+~ phase,COM-2026-0505,Swimming,Heats,Event 12
+~ phase,COM-2026-0506,Swimming,Heats,Event 13
+~ phase,COM-2026-0507,Swimming,Heats,Event 14
+~ phase,COM-2026-0508,Swimming,Heats,Event 14
+~ phase,COM-2026-0509,Swimming,Heats,Event 15
+~ phase,COM-2026-0510,Swimming,Heats,Event 16
+~ phase,COM-2026-0511,Swimming,Heats,Event 17
+~ phase,COM-2026-0512,Swimming,Heats,Event 18
+~ phase,COM-2026-0513,Swimming,Heats,Event 19
+~ phase,COM-2026-0514,Swimming,Heats,Event 20
+~ status,COM-2026-0382,Table Tennis,Scheduled,Official
+~ status,COM-2026-0462,Shooting,Scheduled,Official
+~ status,COM-2026-0517,Handball,Scheduled,Official
+~ status,COM-2026-0518,Handball,Scheduled,Official
+~ status,COM-2026-0741,Athletics,Scheduled,Official
+~ status,COM-2026-0742,Athletics,Scheduled,Official
+~ status,COM-2026-0743,Athletics,Scheduled,Official
+~ status,COM-2026-0744,Athletics,Scheduled,Official
+~ status,COM-2026-0745,Athletics,Scheduled,Official
+~ status,COM-2026-0746,Athletics,Scheduled,Official
+~ status,COM-2026-0747,Athletics,Scheduled,Official
+~ status,COM-2026-0748,Athletics,Scheduled,Official
+~ status,COM-2026-0750,Athletics,Scheduled,Official
+~ status,COM-2026-0751,Athletics,Scheduled,Official
+~ status,COM-2026-0752,Athletics,Scheduled,Official
+~ status,COM-2026-0753,Athletics,Scheduled,Official
+~ status,COM-2026-0754,Athletics,Scheduled,Official
+~ status,COM-2026-0755,Athletics,Scheduled,Official
+~ status,COM-2026-0756,Athletics,Scheduled,Official
+~ status,COM-2026-0757,Athletics,Scheduled,Official
+~ status,COM-2026-0758,Athletics,Scheduled,Official
+~ status,COM-2026-0759,Athletics,Scheduled,Official
+~ status,COM-2026-0760,Athletics,Scheduled,Official
+~ status,COM-2026-0761,Athletics,Scheduled,Official
+~ status,COM-2026-0762,Athletics,Scheduled,Official
+~ status,COM-2026-0763,Athletics,Scheduled,Official
+~ status,COM-2026-0764,Athletics,Scheduled,Official
+~ status,COM-2026-0765,Athletics,Scheduled,Official
+~ status,COM-2026-0766,Athletics,Scheduled,Official
+~ status,COM-2026-0767,Athletics,Scheduled,Official
+~ status,COM-2026-0768,Athletics,Scheduled,Official
+~ status,COM-2026-0797,Padel,Scheduled,Official
+~ status,COM-2026-0798,Padel,Scheduled,Official
+~ status,COM-2026-0799,Padel,Scheduled,Official
+~ status,COM-2026-0800,Padel,Scheduled,Official
+~ status,COM-2026-0817,Shooting,Scheduled,Official
+~ status,COM-2026-0829,Table Tennis,Scheduled,Official
+~ status,COM-2026-0830,Table Tennis,Scheduled,Official
+~ status,COM-2026-0831,Table Tennis,Scheduled,Official
+~ status,COM-2026-0832,Table Tennis,Scheduled,Official
+~ status,COM-2026-0833,Table Tennis,Scheduled,Official
+~ title,COM-2026-0462,Shooting,Mixed 10m Air Rifle Final,Mixed Team 10m Air Rifle Final
+~ title,COM-2026-0817,Shooting,Women’s Skeet 75 Targets Final,Mixed Skeet 75 Targets Final
