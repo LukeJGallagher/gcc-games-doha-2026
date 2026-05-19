@@ -86,6 +86,44 @@ def athlete_photo_path(person_key: str | None) -> Path | None:
     return p if p.exists() else None
 
 
+# Cached country-flag data URIs. Browsers/Windows often render the 🇸🇦 emoji
+# as the two letters "SA" instead of an actual flag; using the PNG asset that
+# download_assets.py pulls keeps the fallback looking branded everywhere.
+_FLAG_CACHE: dict[str, str] = {}
+
+
+def country_flag_data_uri(noc: str = "KSA") -> str | None:
+    """Return a base64 data URI for the country flag, or None if no asset."""
+    key = (noc or "KSA").upper()
+    if key in _FLAG_CACHE:
+        return _FLAG_CACHE[key] or None
+    flag_dir = HERE / "assets" / "flags"
+    for ext, mime in (("png", "image/png"), ("svg", "image/svg+xml")):
+        p = flag_dir / f"{key.lower()}.{ext}"
+        if p.exists():
+            import base64
+            data = base64.b64encode(p.read_bytes()).decode()
+            uri = f"data:{mime};base64,{data}"
+            _FLAG_CACHE[key] = uri
+            return uri
+    _FLAG_CACHE[key] = ""
+    return None
+
+
+def flag_avatar_html(size: int, border_colour: str, noc: str = "KSA") -> str:
+    """Return an HTML circle showing the country flag (or emoji fallback)."""
+    uri = country_flag_data_uri(noc)
+    if uri:
+        return (f'<img src="{uri}" alt="{noc}" '
+                f'style="width:{size}px;height:{size}px;border-radius:50%;'
+                f'object-fit:cover;border:3px solid {border_colour};'
+                f'background:white;"/>')
+    # Last-resort emoji (still better than nothing)
+    return (f"<div style='width:{size}px;height:{size}px;border-radius:50%;"
+            f"border:3px solid {border_colour};display:flex;align-items:center;"
+            f"justify-content:center;font-size:{int(size*0.6)}px;background:white;'>🇸🇦</div>")
+
+
 def initials_svg(name: str, bg: str = ELITE) -> str:
     """Return inline SVG showing initials in a coloured circle (data URI)."""
     parts = [p for p in (name or "").split() if p]
@@ -835,8 +873,9 @@ def render_medal_card(row) -> str:
 
     is_team = "Team" in athlete or "Saudi" in athlete
     if is_team:
-        # KSA flag emoji for team medals
-        avatar = f"<div style='width:72px;height:72px;border-radius:50%;border:3px solid {colour};display:flex;align-items:center;justify-content:center;font-size:46px;background:white;'>🇸🇦</div>"
+        # KSA flag PNG for team medals (emoji renders as "SA" letters in some
+        # browsers / on Windows — the PNG asset always reads as a flag).
+        avatar = flag_avatar_html(72, colour, "KSA")
     else:
         pk = lookup_person_key(athlete)
         photo = athlete_photo_path(pk)
@@ -845,9 +884,9 @@ def render_medal_card(row) -> str:
             data = base64.b64encode(photo.read_bytes()).decode()
             avatar = f'<img src="data:image/jpeg;base64,{data}" style="width:72px;height:72px;border-radius:50%;object-fit:cover;border:3px solid {colour};"/>'
         else:
-            # Fall back to the KSA flag rather than blank initials so the
-            # card still reads as "Saudi athlete" at a glance.
-            avatar = f"<div style='width:72px;height:72px;border-radius:50%;border:3px solid {colour};display:flex;align-items:center;justify-content:center;font-size:42px;background:white;'>🇸🇦</div>"
+            # Fall back to the KSA flag (PNG, not emoji) so the card still
+            # reads as "Saudi athlete" at a glance on every browser.
+            avatar = flag_avatar_html(72, colour, "KSA")
 
     # IMPORTANT: no leading indentation on any line. Streamlit's markdown
     # parser treats any HTML indented by 4+ spaces as a code block and shows
@@ -1156,22 +1195,69 @@ with tab_summary:
                 )
 
                 # Build per-row from athlete-schedule rows on this day.
-                # Collapse team events to one row per match — otherwise a
-                # 4-fencer Men's Team Foil shows up as 4 duplicate rows here.
+                # Collapse team / doubles / pairs / relay rows to one row per
+                # (Event_ID, Phase). Match_Type alone isn't enough — doubles
+                # partners come through as Match_Type=Individual with the word
+                # "Doubles" in the Event name, so we OR both signals.
                 day_rows_sched = sched_today.copy()
-                if not day_rows_sched.empty and "Match_Type" in day_rows_sched.columns:
-                    _is_team = day_rows_sched["Match_Type"].astype(str).str.lower() == "team"
-                    _ind = day_rows_sched[~_is_team]
-                    _team = day_rows_sched[_is_team]
-                    if not _team.empty:
-                        _team_collapsed = []
-                        for (_eid, _phase), g in _team.groupby(["Event_ID","Phase"], dropna=False):
+                if not day_rows_sched.empty:
+                    mt = (day_rows_sched["Match_Type"].astype(str).str.lower()
+                          if "Match_Type" in day_rows_sched.columns
+                          else pd.Series([""] * len(day_rows_sched), index=day_rows_sched.index))
+                    ev = (day_rows_sched["Event"].astype(str).str.lower()
+                          if "Event" in day_rows_sched.columns
+                          else pd.Series([""] * len(day_rows_sched), index=day_rows_sched.index))
+                    combined_re = r"\b(team|doubles|pairs|relay|mixed)\b"
+                    is_combined = mt.eq("team") | ev.str.contains(combined_re, regex=True, na=False)
+                    _ind = day_rows_sched[~is_combined]
+                    _multi = day_rows_sched[is_combined]
+                    if not _multi.empty:
+                        _multi_collapsed = []
+                        for (_eid, _phase), g in _multi.groupby(["Event_ID", "Phase"], dropna=False):
                             rep = g.iloc[0].copy()
-                            opp = str(rep.get("Opponent") or "").strip()
-                            rep["Given Name"]  = "KSA"
-                            rep["Family Name"] = f"Team vs {opp}" if opp else "Team"
-                            _team_collapsed.append(rep)
-                        day_rows_sched = pd.concat([_ind, pd.DataFrame(_team_collapsed)], ignore_index=True)
+                            # Combine partner names with " / " — preserves who
+                            # actually plays without spamming the table.
+                            partners = []
+                            for _, p in g.iterrows():
+                                gn = str(p.get("Given Name", "") or "").strip()
+                                fn = str(p.get("Family Name", "") or "").strip()
+                                full = (gn + " " + fn).strip()
+                                if full and full not in partners:
+                                    partners.append(full)
+                            ev_lower = str(rep.get("Event", "") or "").lower()
+                            is_team_event = (str(rep.get("Match_Type", "") or "").lower() == "team"
+                                             or "team" in ev_lower or "relay" in ev_lower)
+                            if is_team_event:
+                                opp = str(rep.get("Opponent") or "").strip()
+                                rep["Given Name"] = "KSA"
+                                rep["Family Name"] = f"Team vs {opp}" if opp else "Team"
+                            elif len(partners) > 1:
+                                rep["Given Name"] = ""
+                                rep["Family Name"] = " / ".join(partners)
+                            _multi_collapsed.append(rep)
+                        day_rows_sched = pd.concat([_ind, pd.DataFrame(_multi_collapsed)], ignore_index=True)
+
+                # Dedupe singles repeats. Snooker / Table Tennis qualifying
+                # rounds publish one schedule row per match, all with the same
+                # Phase ("Qualification"). For the day-summary table the user
+                # wants one row per (athlete, event, phase) — keep the row with
+                # the most informative Result if there is one.
+                if not day_rows_sched.empty:
+                    dedupe_cols = [c for c in ["Sport", "Event", "Family Name", "Phase"]
+                                   if c in day_rows_sched.columns]
+                    if dedupe_cols:
+                        # Prefer rows whose Result is non-empty so the kept row
+                        # isn't a blank stub when other rows in the group have data.
+                        result_col = day_rows_sched.get("Result")
+                        if result_col is not None:
+                            day_rows_sched = day_rows_sched.assign(
+                                _has_result=result_col.astype(str).str.strip().ne("").astype(int)
+                            ).sort_values("_has_result", ascending=False, kind="stable")
+                            day_rows_sched = day_rows_sched.drop_duplicates(subset=dedupe_cols, keep="first")
+                            day_rows_sched = day_rows_sched.drop(columns=["_has_result"])
+                        else:
+                            day_rows_sched = day_rows_sched.drop_duplicates(subset=dedupe_cols, keep="first")
+
                 day_rows_sched = day_rows_sched.sort_values(["Sport","Family Name","TS"] if "TS" in day_rows_sched.columns
                                                             else ["Sport","Family Name"])
 
