@@ -50,9 +50,12 @@ before pointing the dashboard at the new file.
 - The API value is wrong and the federation has issued a correction.
 - The competition ID got renumbered and the original row was dropped (we've seen this with heptathlon Day 2 events).
 
-## How conflicts are handled
+## How conflicts are handled — two modes
 
-Track-both-flag-conflicts. Manual never silently overwrites the scraper.
+### Default mode (track-both-flag-conflicts)
+
+Set `Override` blank or `n` in the manual row. Manual never silently overwrites
+the scraper:
 
 | Scraper has | Manual has | Result |
 |---|---|---|
@@ -61,22 +64,45 @@ Track-both-flag-conflicts. Manual never silently overwrites the scraper.
 | Value A | Value B (≠ A) | Scraper stays in `Rank/Result/Medal`; manual goes into `Rank_Manual/Result_Manual/Medal_Manual`; `Conflict_Flag = "y"`; row appears in the audit report under **⚠️ Conflicts** |
 | No matching row | Anything | Manual row appended with `Detection_Method = "Manual"` |
 
-After reviewing a conflict, decide which value is correct and either:
-- Update the manual row in `manual_results.csv` to match the scraper (if the
-  scraper was right), then re-run the merger.
-- Leave the manual row as-is (if manual is right). The dashboard reads
-  `Rank/Result/Medal` so the scraper value will show; you'll need to swap them
-  manually if the manual value should be primary — that's a deliberate gate so
-  you never overwrite a federation-published value by accident.
+After reviewing a conflict in the audit Markdown, you can either:
+- Update the manual row to match the scraper (if the scraper was right), then re-run.
+- Promote the manual row to an **override** (see below) if your value is authoritative.
+
+### Override mode (manual value wins)
+
+Set `Override = y` in the manual row. The merger treats your value as
+authoritative — overwrites the scraper value with no conflict flagging:
+
+| Scraper has | Manual has + `Override=y` | Result |
+|---|---|---|
+| Anything | Value | Manual value wins; previous scraper value preserved in `*_Manual` column for audit; `Detection_Method += " + Manual Override"`; `Conflict_Flag = "n"` |
+| Anything | Empty (e.g. blank Medal but Override=y) | Field is left untouched (override only kicks in when a value is provided) |
+
+**When to use Override**:
+- A medal was published in news / press release / ceremony but the gccgames.qa
+  API hasn't tagged the row (or never will — happens for Bowling Men's Singles,
+  some team finals, retroactive corrections etc.)
+- The scraper has stale data and the official source has issued a correction.
+- You manually verified a result against a printed sheet at the venue.
+
+**What still happens with Override**:
+- The previous scraper value is preserved in `Rank_Manual` / `Result_Manual` /
+  `Medal_Manual` so the override is auditable — you can always see what the
+  scraper said before you intervened.
+- `Detection_Method` is appended with `" + Manual Override"` so dashboards can
+  visually mark overridden rows differently.
+
+**To revert an override**: delete the manual row (or set `Override=n` to flip
+back to track-both mode), then re-run the merger.
 
 ## manual_results.csv schema
 
-Same first 17 columns as the ENHANCED file plus 4 provenance columns:
+Same first 17 columns as the ENHANCED file plus 5 provenance columns:
 
 ```
 Athlete, Sport, Date, Competition, Comp Set, Class, Discipline, Phase,
 Gender, Age, Rank, Result, Medal, Wind, Attempt, Status, Country,
-Entered_By, Entered_At, Entry_Source, Notes
+Entered_By, Entered_At, Entry_Source, Override, Notes
 ```
 
 Required for a usable row: **Athlete, Sport, Date, Discipline**. Everything

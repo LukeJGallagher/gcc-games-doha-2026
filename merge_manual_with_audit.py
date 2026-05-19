@@ -61,6 +61,10 @@ def normalise_discipline(s: str) -> str:
     # athletics PDFs) don't. Strip so the merge key lines up across sources.
     s = re.sub(r"\s+Final\s+Results?\s*$", "", s, flags=re.I)
     s = re.sub(r"\s+Final\s*$", "", s, flags=re.I)
+    # FTL labels team events with a trailing " Team" suffix ("Men's Épée Team")
+    # while gccgames.qa uses bare "Men's Épée" + Phase=Final to denote the team
+    # event. Strip so the merge key lines up across sources.
+    s = re.sub(r"\s+Team\s*$", "", s, flags=re.I)
     return re.sub(r"\s+", " ", s).strip().lower()
 
 
@@ -156,13 +160,43 @@ def merge(rows: list[dict], manual: list[dict]) -> tuple[list[dict], list[dict],
         m_rank = (m.get("Rank") or "").strip()
         m_result = (m.get("Result") or "").strip()
         m_medal = (m.get("Medal") or "").strip()
+        # Override='y' means PA staff have manually verified this row and the
+        # manual values are authoritative. No conflict flag, no track-both —
+        # the manual values overwrite whatever the scraper has, even if the
+        # scraper later publishes a different value.
+        override = (m.get("Override") or "").strip().lower() in ("y", "yes", "true", "1")
 
         # Provenance always recorded
         target["Manual_Source"] = m.get("Entry_Source", "manual")
         target["Manual_Entered_By"] = m.get("Entered_By", "")
 
+        if override:
+            # Authoritative manual values — overwrite without flagging conflict.
+            # Preserve scraper value in *_Manual columns flipped: keep what was
+            # there before, so the override is auditable.
+            if m_rank:
+                if scraper_rank and scraper_rank != m_rank:
+                    target["Rank_Manual"] = scraper_rank  # preserve scraper value
+                target["Rank"] = m_rank
+                target["Rank_Original"] = m_rank
+            if m_result:
+                if scraper_result and scraper_result != m_result:
+                    target["Result_Manual"] = scraper_result
+                target["Result"] = m_result
+            if m_medal:
+                if scraper_medal and scraper_medal != m_medal:
+                    target["Medal_Manual"] = scraper_medal
+                target["Medal"] = m_medal
+            # Bump the Status to Podium if a medal was applied
+            if m_medal and not (target.get("Status") or "").lower().startswith("pod"):
+                target["Status"] = "Podium"
+            target["Detection_Method"] = (target.get("Detection_Method") or "") + " + Manual Override"
+            target["Conflict_Flag"] = "n"  # explicit — manual override resolves conflicts
+            target["Rank_Std"] = standardise_rank(target)
+            continue  # done with this row
+
         conflict_fields = []
-        # Fill where scraper is blank
+        # Fill where scraper is blank (default behavior — no override)
         if not scraper_rank and m_rank:
             target["Rank"] = m_rank
             target["Rank_Original"] = m_rank
