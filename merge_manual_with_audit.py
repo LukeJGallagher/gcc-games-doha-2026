@@ -237,8 +237,164 @@ def diff_against_previous(latest_path: Path, prev_path: Path | None) -> dict:
     }
 
 
+# Expected-events templates per sport. Each entry: (required-keywords, note).
+# The check needs ALL keywords to appear (in any order) in at least one
+# Discipline string for the sport. Robust to the various naming styles the
+# API uses ("Men's Team Recurve" vs "Recurve Men Team" etc.). Use lowercase.
+# "men" matches both "men" and "men's"; we strip apostrophes before checking.
+EXPECTED_EVENTS: dict[str, list[tuple[tuple[str, ...], str]]] = {
+    "Archery": [
+        (("recurve", "men", "individual"),    "Recurve Men's Individual"),
+        (("recurve", "women", "individual"),  "Recurve Women's Individual"),
+        (("recurve", "men", "team"),          "Recurve Men's Team (3 athletes)"),
+        (("recurve", "women", "team"),        "Recurve Women's Team (3 athletes)"),
+        (("recurve", "mixed", "team"),        "Recurve Mixed Team (1M + 1W)"),
+        (("compound", "men", "individual"),   "Compound Men's Individual"),
+        (("compound", "women", "individual"), "Compound Women's Individual"),
+        (("compound", "men", "team"),         "Compound Men's Team (3 athletes)"),
+        (("compound", "women", "team"),       "Compound Women's Team (3 athletes)"),
+        (("compound", "mixed", "team"),       "Compound Mixed Team (1M + 1W)"),
+    ],
+    # Other sports can be templated here as we learn them. Kept conservative —
+    # we only flag missing for sports KSA actually entered.
+}
+
+
+def _norm_disc(s: str) -> str:
+    """Lowercase + strip apostrophes for keyword matching."""
+    return (s or "").lower().replace("’", "").replace("'", "")
+
+
+def load_schedule_disciplines() -> dict[str, set[str]]:
+    """Per-sport set of Discipline strings from the latest KSA_ATHLETE_SCHEDULE_*.csv.
+
+    The schedule covers ALL events KSA entered — including events with no
+    results yet (like archery early in the meet) — so it's a more complete
+    source than the ENHANCED file for the structural-completeness check.
+    """
+    files = sorted(RESULTS_DIR.glob("KSA_ATHLETE_SCHEDULE_*.csv"))
+    if not files:
+        return {}
+    out: dict[str, set[str]] = {}
+    with open(files[-1], encoding="utf-8-sig") as f:
+        for r in csv.DictReader(f):
+            sport = (r.get("Sport") or "").strip()
+            # Schedule uses "Event" as the column, results use "Discipline"
+            disc = (r.get("Discipline") or r.get("Event") or "").strip().replace("’", "'")
+            if sport and disc:
+                out.setdefault(sport, set()).add(disc.lower())
+    return out
+
+
+def expected_events_check(coverage: dict | None,
+                           sched_disciplines: dict | None = None) -> dict[str, list[tuple[str, str]]]:
+    """For each templated sport, return missing-event tuples (event, note).
+
+    Only fires for sports that already have at least one row in the coverage
+    snapshot — we don't want to nag about sports KSA didn't enter at all.
+    """
+    coverage = coverage or {}
+    sched_disciplines = sched_disciplines or {}
+    gaps: dict[str, list[tuple[str, str]]] = {}
+    for sport, expected in EXPECTED_EVENTS.items():
+        # Union of disciplines seen in results + schedule. Schedule is the
+        # source of truth for events the federation listed KSA in, even if
+        # results haven't been published yet.
+        from_results = coverage.get(sport, {}).get("disciplines", set())
+        from_sched = sched_disciplines.get(sport, set())
+        present = [_norm_disc(d) for d in (from_results | from_sched)]
+        if not present:
+            continue  # KSA didn't enter this sport at all
+        missing = []
+        for keywords, note in expected:
+            # Match if ANY discipline contains ALL keywords (in any order)
+            matched = any(all(kw in d for kw in keywords) for d in present)
+            if not matched:
+                missing.append((note,
+                                f"no Discipline contains all of {list(keywords)}"))
+        if missing:
+            gaps[sport] = missing
+    return gaps
+
+
+def coverage_audit(rows: list[dict]) -> dict:
+    """Find per-sport gaps: empty Official rows, likely-medal candidates not
+    tagged, and total counts. Helps surface where row-level data is missing
+    even though the API has marked entries Official.
+
+    Returns dict keyed by sport with:
+      - total / official / with_result / with_medal counts
+      - empty_official: rows where Status=Official but Rank+Result both blank
+      - likely_medals: rows with Rank in {1,2,3} in Final/Knockout-like phase
+        but no Medal column populated
+    """
+    by_sport: dict[str, dict] = {}
+    for r in rows:
+        if (r.get("Country") or "KSA").strip().upper() != "KSA":
+            continue
+        sp = (r.get("Sport") or "?").strip() or "?"
+        s = by_sport.setdefault(sp, {
+            "total": 0, "official": 0, "with_result": 0, "with_medal": 0,
+            "empty_official": [], "likely_medals": [],
+            "disciplines": set(),
+        })
+        s["total"] += 1
+        disc = (r.get("Discipline") or "").strip().replace("’", "'")
+        if disc:
+            s["disciplines"].add(disc.lower())
+        status = (r.get("Status") or "").strip().lower()
+        rank = (r.get("Rank") or "").strip()
+        result = (r.get("Result") or "").strip()
+        medal = (r.get("Medal") or "").strip().upper()[:1]
+        has_data = bool(rank) or bool(result)
+        if status.startswith("offic"):
+            s["official"] += 1
+        if has_data:
+            s["with_result"] += 1
+        if medal in {"G", "S", "B"}:
+            s["with_medal"] += 1
+
+        if status.startswith("offic") and not has_data:
+            s["empty_official"].append(r)
+
+        phase = (r.get("Phase") or "").strip().lower()
+        looks_terminal = any(t in phase for t in
+                             ("final", "medal", "knockout", "gold", "bronze", "podium"))
+        # "Semi-final" exception: only treat as a medal slot for the bronze loser
+        if rank in {"1", "2", "3"} and looks_terminal and medal not in {"G", "S", "B"}:
+            s["likely_medals"].append(r)
+    return by_sport
+
+
+def load_medal_totals() -> dict[str, dict[str, int]]:
+    """Read the latest MEDALS_*.csv (NOC-level totals) so we can cross-check."""
+    files = sorted(RESULTS_DIR.glob("MEDALS_*.csv"))
+    if not files:
+        return {}
+    with open(files[-1], encoding="utf-8-sig") as f:
+        out: dict[str, dict[str, int]] = {}
+        for r in csv.DictReader(f):
+            noc = (r.get("NOC") or "").strip().upper()
+            if not noc:
+                continue
+            def _i(k):
+                try:
+                    return int(r.get(k, 0) or 0)
+                except ValueError:
+                    return 0
+            out[noc] = {
+                "Gold":   _i("Gold"),
+                "Silver": _i("Silver"),
+                "Bronze": _i("Bronze"),
+                "Total":  _i("Total"),
+            }
+    return out
+
+
 def write_audit_md(out: Path, *, latest_path: Path, prev_path: Path | None,
-                    conflicts: list[dict], appended: list[dict], diff: dict) -> None:
+                    conflicts: list[dict], appended: list[dict], diff: dict,
+                    coverage: dict | None = None,
+                    medal_totals: dict | None = None) -> None:
     lines: list[str] = []
     lines.append(f"# GCC Games audit — {datetime.now().strftime('%Y-%m-%d %H:%M')}")
     lines.append("")
@@ -333,10 +489,112 @@ def write_audit_md(out: Path, *, latest_path: Path, prev_path: Path | None,
                          f"{r.get('Result','')} | {r.get('Manual_Entered_By','')} |")
         lines.append("")
 
-    if not conflicts and not diff["new"] and not diff["status"] and not appended:
+    # ---- Per-sport coverage gap section ----
+    if coverage:
+        # Headline: official NOC totals vs row-level medals
+        my_medal_total = sum(s["with_medal"] for s in coverage.values())
+        ksa_official = (medal_totals or {}).get("KSA", {})
+        official_total = ksa_official.get("Total", 0)
+        if official_total > my_medal_total:
+            gap = official_total - my_medal_total
+            lines.append(f"## 🚨 Coverage gap — {gap} medals not tagged at row level")
+            lines.append("")
+            lines.append(f"- Official NOC table (KSA): **{ksa_official.get('Gold', 0)}G "
+                         f"/ {ksa_official.get('Silver', 0)}S "
+                         f"/ {ksa_official.get('Bronze', 0)}B = "
+                         f"{official_total} medals**")
+            lines.append(f"- Row-level data has Medal populated on **{my_medal_total} rows**")
+            lines.append(f"- **Gap: {gap}** — the API publishes the NOC-level total but doesn't")
+            lines.append(f"  tag the Medal column on individual rows for some team / match sports.")
+            lines.append("")
+
+        # Per-sport breakdown
+        lines.append("## 📋 Per-sport coverage")
+        lines.append("")
+        lines.append("| Sport | Rows | Official | Result populated | Medals tagged | Likely medals | Empty Official |")
+        lines.append("|---|---:|---:|---:|---:|---:|---:|")
+        for sport, s in sorted(coverage.items(), key=lambda x: -x[1]["total"]):
+            flag = ""
+            if s["likely_medals"] or s["empty_official"]:
+                flag = " ⚠️"
+            lines.append(f"| {sport}{flag} | {s['total']} | {s['official']} | "
+                         f"{s['with_result']} | {s['with_medal']} | "
+                         f"{len(s['likely_medals'])} | {len(s['empty_official'])} |")
+        lines.append("")
+
+        # Likely-medal candidates per sport
+        candidates = [(sp, s) for sp, s in coverage.items() if s["likely_medals"]]
+        if candidates:
+            lines.append("### 🎯 Likely medals not tagged")
+            lines.append("")
+            lines.append("Rows where `Rank` is 1/2/3 in a final/knockout phase but the `Medal`")
+            lines.append("column is empty. Almost certainly podiums the API never tagged.")
+            lines.append("Review and add to `manual_results.csv` with the correct medal letter.")
+            lines.append("")
+            lines.append("| Sport | Athlete | Discipline | Phase | Rank | Result |")
+            lines.append("|---|---|---|---|---:|---|")
+            for sport, s in sorted(candidates, key=lambda x: -len(x[1]["likely_medals"])):
+                for r in s["likely_medals"][:8]:
+                    disc = str(r.get("Discipline", "")).replace("’", "'")
+                    lines.append(f"| {sport} | {r.get('Athlete', '')} | {disc} | "
+                                 f"{r.get('Phase', '')} | {r.get('Rank', '')} | "
+                                 f"{r.get('Result', '') or '—'} |")
+                if len(s["likely_medals"]) > 8:
+                    lines.append(f"| {sport} | _…and {len(s['likely_medals']) - 8} more_ | | | | |")
+            lines.append("")
+
+        # Empty Official rows — Status=Official but no Rank or Result
+        gaps = [(sp, s) for sp, s in coverage.items() if s["empty_official"]]
+        if gaps:
+            total_empty = sum(len(s["empty_official"]) for _, s in gaps)
+            lines.append(f"### 📭 Empty Official rows ({total_empty})")
+            lines.append("")
+            lines.append("Rows the API marked `Status=Official` but with both `Rank` and")
+            lines.append("`Result` blank. Either the result was withdrawn / not yet published,")
+            lines.append("or the API only updated the status flag. Top 30:")
+            lines.append("")
+            lines.append("| Sport | Date | Athlete | Discipline | Phase |")
+            lines.append("|---|---|---|---|---|")
+            flat = []
+            for sport, s in gaps:
+                for r in s["empty_official"]:
+                    flat.append((sport, r))
+            for sport, r in flat[:30]:
+                disc = str(r.get("Discipline", "")).replace("’", "'")
+                lines.append(f"| {sport} | {r.get('Date', '')} | {r.get('Athlete', '')} | "
+                             f"{disc} | {r.get('Phase', '')} |")
+            if total_empty > 30:
+                lines.append(f"\n_…and {total_empty - 30} more empty Official rows_")
+            lines.append("")
+
+    # ---- Expected-events structural check ----
+    # The schedule covers events that haven't generated results yet (e.g.
+    # archery), so we union it with the row-data disciplines.
+    expected_gaps = expected_events_check(coverage, load_schedule_disciplines())
+    if expected_gaps:
+        total_missing = sum(len(v) for v in expected_gaps.values())
+        lines.append(f"## 🧩 Missing expected events ({total_missing})")
+        lines.append("")
+        lines.append("Sports with a fixed competition structure (Archery: 3 individual +")
+        lines.append("3 team disciplines × 2 genders; Swimming: 4×100m + 4×400m relays;")
+        lines.append("etc.) that are missing standard events in the data. Add via the")
+        lines.append("manual_results.csv if KSA actually entered the event.")
+        lines.append("")
+        lines.append("| Sport | Missing event | Notes |")
+        lines.append("|---|---|---|")
+        for sport, items in expected_gaps.items():
+            for evt, note in items:
+                lines.append(f"| {sport} | {evt} | {note} |")
+        lines.append("")
+
+    if (not conflicts and not diff["new"] and not diff["status"] and not appended
+            and not (coverage and any(s["likely_medals"] or s["empty_official"]
+                                       for s in coverage.values()))
+            and not expected_gaps):
         lines.append("## ✅ Nothing to audit")
         lines.append("")
-        lines.append("No conflicts, no diff against previous pull, no manual entries to merge.")
+        lines.append("No conflicts, no diff against previous pull, no manual entries to merge,")
+        lines.append("no coverage gaps detected.")
 
     out.write_text("\n".join(lines), encoding="utf-8")
 
@@ -400,10 +658,25 @@ def main() -> int:
             w.writerows(conflicts)
         print(f"[SAVE] {conf_csv.name}")
 
+    # Coverage audit over the merged output (drives gap + expected-events sections)
+    coverage = coverage_audit(merged_rows)
+    medal_totals = load_medal_totals()
+    gap_total = sum(s["with_medal"] for s in coverage.values())
+    official_total = medal_totals.get("KSA", {}).get("Total", 0)
+    if official_total and gap_total < official_total:
+        print(f"[COVERAGE] {official_total - gap_total} medal(s) untagged at row level "
+              f"(official KSA: {official_total}, row data: {gap_total})")
+    empty_total = sum(len(s["empty_official"]) for s in coverage.values())
+    likely_total = sum(len(s["likely_medals"]) for s in coverage.values())
+    if empty_total or likely_total:
+        print(f"[COVERAGE] {empty_total} empty Official rows, "
+              f"{likely_total} likely-medal candidates needing review")
+
     # Markdown audit
     md = AUDIT_DIR / f"CHANGES_{ts}.md"
     write_audit_md(md, latest_path=latest_path, prev_path=prev_path,
-                   conflicts=conflicts, appended=appended, diff=diff)
+                   conflicts=conflicts, appended=appended, diff=diff,
+                   coverage=coverage, medal_totals=medal_totals)
     print(f"[SAVE] {md.name}")
 
     return 0
