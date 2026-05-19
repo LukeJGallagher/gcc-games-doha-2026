@@ -795,8 +795,9 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-tab_overview, tab_summary, tab_medals, tab_daily, tab_plan, tab_history, tab_audit, tab_fix = st.tabs([
-    "📊 Overview", "📰 Day Summary", "🏅 Medal Report",
+(tab_overview, tab_summary, tab_medals, tab_moments, tab_daily,
+ tab_plan, tab_history, tab_audit, tab_fix) = st.tabs([
+    "📊 Overview", "📰 Day Summary", "🏅 Medal Report", "🎉 Medal Moments",
     "📆 Daily Plan", "📅 PA Coverage Plan",
     "📈 vs 2022", "🔍 Audit", "🛠 Fix List",
 ])
@@ -1742,6 +1743,109 @@ with tab_medals:
         st.plotly_chart(fig, use_container_width=True)
 
     st.caption("Medal Report & GCC 2026-2022 benchmark and target")
+
+
+# ===========================================================================
+# TAB: MEDAL MOMENTS
+# Every KSA medalist, sectioned Gold → Silver → Bronze, chronological within
+# each colour. Uses render_medal_card() which falls back to the KSA flag when
+# no athlete photo is available.
+# ===========================================================================
+with tab_moments:
+    if results_df.empty or "Medal" not in results_df.columns:
+        st.info("No medal data yet. Run the scrape pipeline to populate.")
+    else:
+        m_all = results_df.copy()
+        m_all["MedalU"] = (m_all["Medal"].astype(str)
+                           .str.strip().str.upper().str[:1])
+        m_all = m_all[m_all["MedalU"].isin(["G", "S", "B"])]
+
+        # Dedupe: 1 row per (Sport, Discipline, Medal) so squad-level entries
+        # don't print the same team medal three times.
+        m_all = m_all.drop_duplicates(subset=["Sport", "Discipline", "MedalU"])
+        # Chronological order — earliest medal of each colour first
+        m_all = m_all.sort_values("Date", ascending=True, na_position="last")
+
+        gold_rows   = m_all[m_all["MedalU"] == "G"]
+        silver_rows = m_all[m_all["MedalU"] == "S"]
+        bronze_rows = m_all[m_all["MedalU"] == "B"]
+        total = len(gold_rows) + len(silver_rows) + len(bronze_rows)
+
+        # Header strip
+        st.markdown(f"""
+        <div style="background:linear-gradient(135deg,{ELITE},{DISCIPLINE});
+                    color:white;padding:1.2rem 1.5rem;border-radius:8px;
+                    margin-bottom:1.25rem;display:flex;align-items:center;
+                    gap:1.5rem;">
+            <div style="font-size:2.4rem;">🇸🇦</div>
+            <div style="flex:1;">
+                <div style="font-size:1.5rem;font-weight:700;">Team Saudi · Medal Moments</div>
+                <div style="opacity:0.85;font-size:0.95rem;margin-top:0.15rem;">
+                    Every KSA medal at the 4th GCC Games Doha 2026, sorted by colour and chronology.
+                </div>
+            </div>
+            <div style="text-align:right;font-weight:700;font-size:1.1rem;">
+                🥇 {len(gold_rows)} &nbsp; 🥈 {len(silver_rows)} &nbsp; 🥉 {len(bronze_rows)}
+                <div style="font-size:0.8rem;opacity:0.85;font-weight:400;margin-top:0.2rem;">
+                    {total} medal{'s' if total != 1 else ''} total
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        # ---- PPT export for this tab ----
+        moments_sections = [{
+            "title": "Medal Moments — Tally",
+            "kind": "metric",
+            "metrics": [
+                ("Gold",   str(len(gold_rows))),
+                ("Silver", str(len(silver_rows))),
+                ("Bronze", str(len(bronze_rows))),
+                ("Total",  str(total)),
+            ],
+        }]
+        if total:
+            tbl = m_all.copy()
+            tbl["Medal"] = tbl["MedalU"].map({"G": "Gold", "S": "Silver", "B": "Bronze"})
+            cols_keep = [c for c in ["Date", "Sport", "Discipline", "Athlete", "Medal", "Result"]
+                         if c in tbl.columns]
+            moments_sections.append({
+                "title": "Medal Moments — All Medals",
+                "kind": "table",
+                "df": tbl[cols_keep].rename(columns={"Discipline": "Event"}),
+            })
+        ppt_download_button(
+            "Medal Moments", "Team Saudi · Medal Moments",
+            moments_sections,
+            subtitle=f"4th GCC Games Doha 2026 · Updated {datetime.now():%a %d %b %H:%M}",
+            key="ppt_medal_moments",
+        )
+
+        SECTION_META = [
+            ("🥇 Gold",   "#b8860b", gold_rows),
+            ("🥈 Silver", "#bfbfbf", silver_rows),
+            ("🥉 Bronze", "#9a6731", bronze_rows),
+        ]
+        for label, colour, group in SECTION_META:
+            count = len(group)
+            st.markdown(f"""
+            <div style="margin:1.5rem 0 0.75rem;display:flex;align-items:center;
+                        gap:0.75rem;border-bottom:3px solid {colour};
+                        padding-bottom:0.5rem;">
+                <div style="font-size:1.35rem;font-weight:700;color:{DISCIPLINE};">{label}</div>
+                <div style="background:{colour};color:white;font-weight:700;
+                            padding:0.15rem 0.7rem;border-radius:999px;
+                            font-size:0.85rem;">{count}</div>
+            </div>
+            """, unsafe_allow_html=True)
+            if count == 0:
+                st.caption("No medals in this colour yet.")
+                continue
+            cards = '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;">'
+            for _, r in group.iterrows():
+                cards += render_medal_card(r)
+            cards += "</div>"
+            st.markdown(cards, unsafe_allow_html=True)
 
 
 # ===========================================================================
