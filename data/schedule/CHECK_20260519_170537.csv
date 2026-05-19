@@ -1,0 +1,45 @@
+﻿Type,Event_ID,Sport,Before,After
+- dropped,COM-2026-0285,Snooker,10:00:00,
+- dropped,COM-2026-0286,Snooker,10:00:00,
+- dropped,COM-2026-0454,Shooting,13:15:00,
+- dropped,COM-2026-0465,Shooting,11:30:00,
+- dropped,COM-2026-0840,Shooting,12:00:00,
+~ time,COM-2026-0494,Swimming,17:48:00,17:00
+~ time,COM-2026-0495,Swimming,17:12:00,17:00
+~ time,COM-2026-0496,Swimming,17:36:00,17:00
+~ time,COM-2026-0498,Swimming,17:24:00,17:00
+~ time,COM-2026-0499,Swimming,17:24:00,17:00
+~ time,COM-2026-0500,Swimming,17:48:00,17:00
+~ time,COM-2026-0502,Swimming,17:12:00,17:00
+~ time,COM-2026-0503,Swimming,17:36:00,17:00
+~ time,COM-2026-0504,Swimming,17:36:00,17:00
+~ time,COM-2026-0506,Swimming,17:12:00,17:00
+~ time,COM-2026-0507,Swimming,17:48:00,17:00
+~ time,COM-2026-0508,Swimming,18:00:00,17:00
+~ time,COM-2026-0509,Swimming,17:24:00,17:00
+~ time,COM-2026-0510,Swimming,17:12:00,17:00
+~ time,COM-2026-0511,Swimming,17:48:00,17:00
+~ time,COM-2026-0513,Swimming,17:24:00,17:00
+~ time,COM-2026-0514,Swimming,17:36:00,17:00
+~ phase,COM-2026-0494,Swimming,Heats,Event 1
+~ phase,COM-2026-0495,Swimming,Heats,Event 2
+~ phase,COM-2026-0496,Swimming,Heats,Event 3
+~ phase,COM-2026-0497,Swimming,Heats,Event 4
+~ phase,COM-2026-0498,Swimming,Heats,Event 5
+~ phase,COM-2026-0499,Swimming,Heats,Event 6
+~ phase,COM-2026-0500,Swimming,Heats,Event 7
+~ phase,COM-2026-0501,Swimming,Heats,Event 8
+~ phase,COM-2026-0502,Swimming,Heats,Event 9
+~ phase,COM-2026-0503,Swimming,Heats,Event 10
+~ phase,COM-2026-0504,Swimming,Heats,Event 11
+~ phase,COM-2026-0505,Swimming,Heats,Event 12
+~ phase,COM-2026-0506,Swimming,Heats,Event 13
+~ phase,COM-2026-0507,Swimming,Heats,Event 14
+~ phase,COM-2026-0508,Swimming,Heats,Event 14
+~ phase,COM-2026-0509,Swimming,Heats,Event 15
+~ phase,COM-2026-0510,Swimming,Heats,Event 16
+~ phase,COM-2026-0511,Swimming,Heats,Event 17
+~ phase,COM-2026-0512,Swimming,Heats,Event 18
+~ phase,COM-2026-0513,Swimming,Heats,Event 19
+~ phase,COM-2026-0514,Swimming,Heats,Event 20
+~ status,COM-2026-0108,Volleyball,Scheduled,Official
