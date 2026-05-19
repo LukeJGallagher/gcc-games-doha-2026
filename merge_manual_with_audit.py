@@ -56,6 +56,11 @@ def normalise_discipline(s: str) -> str:
     s = re.sub(r"\s+Metres\b", "m", s, flags=re.I)
     s = re.sub(r"(\d)\s*M\b", r"\1m", s)
     s = re.sub(r"\s+Throw\b", "", s, flags=re.I)
+    # gccgames.qa adds " Final Results" / " Final" suffixes to the discipline
+    # for ranking-table comps; other sources (FTL fencing, Ianseo archery, the
+    # athletics PDFs) don't. Strip so the merge key lines up across sources.
+    s = re.sub(r"\s+Final\s+Results?\s*$", "", s, flags=re.I)
+    s = re.sub(r"\s+Final\s*$", "", s, flags=re.I)
     return re.sub(r"\s+", " ", s).strip().lower()
 
 

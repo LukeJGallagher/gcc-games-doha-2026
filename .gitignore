@@ -38,6 +38,10 @@ id_ed25519.*
 cookies.txt
 *.cookies
 cookies/
+cookies*.json
+data/cookies*.json
+data/ftl_raw/
+data/.ftl_cookies.txt
 .session
 *_session.json
 
